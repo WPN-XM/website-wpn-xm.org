@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'WPNXMicoRegular';
+    src: url('wpnxmfont-webfont.eot');
+    src: url('wpnxmfont-webfont.eot?#iefix') format('embedded-opentype'),
+         url('wpnxmfont-webfont.woff') format('woff'),
+         url('wpnxmfont-webfont.ttf') format('truetype'),
+         url('wpnxmfont-webfont.svg#WPNXMicoRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
