@@ -12,7 +12,7 @@
 #
 
 # pull master branch from github
-wget https://github.com/jakoch/WPN-XM/zipball/master --no-check-certificate -O wpnxm-github-master.zip
+wget https://github.com/WPN-XM/WPN-XM/zipball/master --no-check-certificate -O wpnxm-github-master.zip
 
 # guess what...
 unzip wpnxm-github-master.zip
