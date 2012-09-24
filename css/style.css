@@ -132,7 +132,7 @@ a#git:before {
 }
 
 #windows-icon:before {
-    content: "2 ";
+    content: "2";
     font-family: 'WPNXMicoRegular';
     font-size: 25px;
 }
