@@ -1,5 +1,5 @@
 /* ==========================================================
- * bootstrap-carousel.js v2.2.3
+ * bootstrap-carousel.js v2.3.0
  * http://twitter.github.com/bootstrap/javascript.html#carousel
  * ==========================================================
  * Copyright 2012 Twitter, Inc.
@@ -39,6 +39,7 @@
 
     cycle: function (e) {
       if (!e) this.paused = false
+      if (this.interval) clearInterval(this.interval);
       this.options.interval
         && !this.paused
         && (this.interval = setInterval($.proxy(this.next, this), this.options.interval))
@@ -97,7 +98,6 @@
         , isCycling = this.interval
         , direction = type == 'next' ? 'left' : 'right'
         , fallback  = type == 'next' ? 'first' : 'last'
-        , $nextIndicator
         , that = this
         , e
 
@@ -109,6 +109,7 @@
 
       e = $.Event('slide', {
         relatedTarget: $next[0]
+      , direction: direction
       })
 
       if ($next.hasClass('active')) return
@@ -116,7 +117,7 @@
       if (this.$indicators.length) {
         this.$indicators.find('.active').removeClass('active')
         this.$element.one('slid', function () {
-          $nextIndicator = $(that.$indicators.children()[that.getActiveIndex()])
+          var $nextIndicator = $(that.$indicators.children()[that.getActiveIndex()])
           $nextIndicator && $nextIndicator.addClass('active')
         })
       }
@@ -165,7 +166,7 @@
       if (!data) $this.data('carousel', (data = new Carousel(this, options)))
       if (typeof option == 'number') data.to(option)
       else if (action) data[action]()
-      else if (options.interval) data.cycle()
+      else if (options.interval) data.pause().cycle()
     })
   }
 
@@ -188,11 +189,18 @@
  /* CAROUSEL DATA-API
   * ================= */
 
-  $(document).on('click.carousel.data-api', '[data-slide]', function (e) {
+  $(document).on('click.carousel.data-api', '[data-slide], [data-slide-to]', function (e) {
     var $this = $(this), href
       , $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) //strip for ie7
       , options = $.extend({}, $target.data(), $this.data())
+      , slideIndex
+
     $target.carousel(options)
+
+    if (slideIndex = $this.attr('data-slide-to')) {
+      $target.data('carousel').pause().to(slideIndex).cycle()
+    }
+
     e.preventDefault()
   })
 
