@@ -356,6 +356,30 @@ a {
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+.slider-wrapper {
+  padding: 9px;
+  background-color: #FAFAFA;
+  border: 1px solid rgba(70, 70, 70, 0.3);
+  border-radius: 5px 5px 5px 5px;
+  margin-bottom: 1.5em;
+  box-shadow: 1px 1px 15px #DDD;
+}
+
+.slider-background {
+    z-index: 7;
+    /*position: absolute;*/
+    top: 0px;
+    left: 0px;
+    /*width: 780px;*/
+    height: 300px;
+    overflow: hidden;
+    border: 1px solid #AAA;
+}
+
+
+/* Twitter Bootstrap Carousel */
+
 .carousel {
   position: relative;
   margin-bottom: 18px;
@@ -365,20 +389,15 @@ a {
   overflow: hidden;
   width: 100%;
   position: relative;
+  text-align: center;
 }
 .carousel .item {
   display: none;
   position: relative;
-  -webkit-transition: 0.6s ease-in-out left;
-  -moz-transition: 0.6s ease-in-out left;
-  -ms-transition: 0.6s ease-in-out left;
-  -o-transition: 0.6s ease-in-out left;
-  transition: 0.6s ease-in-out left;
+  opacity: 0.8;
+
 }
-.carousel .item > img {
-  display: block;
-  line-height: 1;
-}
+
 .carousel .active,
 .carousel .next,
 .carousel .prev {
@@ -411,7 +430,7 @@ a {
 }
 .carousel-control {
   position: absolute;
-  top: 40%;
+  top: 250px; /* 40% */
   left: 15px;
   width: 40px;
   height: 40px;
@@ -453,4 +472,99 @@ a {
   color: #ffffff;
   margin: 0px;
   padding: 5px;
+}
+
+/* Carousel Indicator Dots */
+
+.carousel-indicators {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 5;
+  margin: 0;
+  list-style: none;
+}
+
+.carousel-indicators  li {
+    display: block;
+    float: left;
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    text-indent: -999px;
+    background-color: #ccc;
+    background-color: rgba(180,180,180,.25);
+    border-radius: 10px;
+    border: 1px solid #999999;
+}
+
+.carousel-indicators  .active {
+    background-color: #fff;
+}
+
+/* Carousel Transitions */
+
+/* Carousel Transition - Fade */
+
+.carousel.carousel-fade .item {
+  -webkit-transition: opacity 2s ease-in-out;
+  -moz-transition: opacity 2s ease-in-out;
+  -ms-transition: opacity 2s ease-in-out;
+  -o-transition: opacity 2s ease-in-out;
+  transition: opacity 2s ease-in-out;
+}
+.carousel.carousel-fade .active.left,
+.carousel.carousel-fade .active.right {
+  left: 0;
+  z-index: 2;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.carousel.carousel-fade .next,
+.carousel.carousel-fade .prev {
+  left: 0;
+  z-index: 1;
+}
+
+.carousel.carousel-fade .carousel-control {
+  z-index: 3;
+}
+
+/* Carousel Transition - Ken Burns */
+.carousel.carousel-kenburns .item {
+  -o-transition-duration: 1.75s;
+  -ms-transition-duration: 1.75s;
+  -moz-transition-duration: 1.75s;
+  -webkit-transition-duration: 1.75s;
+  -o-transform: scale(1.0);
+  -ms-transform: scale(1.0);
+  -moz-transform: scale(1.0);
+  -webkit-transform: scale(1.0);
+}
+
+.carousel.carousel-kenburns .carousel-inner .active {
+  -o-transition-duration: 2s;
+  -ms-transition-duration: 2s;
+  -moz-transition-duration: 2s;
+  -webkit-transition-duration: 2s;
+
+  -webkit-transform: scale(0.91) translateY(-40%) translateX(-5%);
+     -moz-transform: scale(0.91) translateY(-40%) translateX(-5%);
+      -ms-transform: scale(0.91) translateY(-40%) translateX(-5%);
+       -o-transform: scale(0.91) translateY(-40%) translateX(-5%);
+          transform: scale(0.91) translateY(-40%) translateX(-5%);
+
+  -webkit-transform-origin: bottom left;
+     -moz-transform-origin: bottom left;
+      -ms-transform-origin: bottom left;
+       -o-transform-origin: bottom left;
+          transform-origin: bottom left;
+}
+
+.carousel.carousel-kenburns .carousel-inner :nth-child(3n) { /* every 2nd img */
+  -webkit-transform-origin: bottom center;
+     -moz-transform-origin: bottom center;
+      -ms-transform-origin: bottom center;
+       -o-transform-origin: bottom center;
+          transform-origin: bottom center;
 }
