@@ -375,6 +375,7 @@ a {
     height: 300px;
     overflow: hidden;
     border: 1px solid #AAA;
+    background: repeat scroll 0 0 #ECECEC;
 }
 
 
@@ -504,33 +505,8 @@ a {
 
 /* Carousel Transitions */
 
-/* Carousel Transition - Fade */
-
-.carousel.carousel-fade .item {
-  -webkit-transition: opacity 2s ease-in-out;
-  -moz-transition: opacity 2s ease-in-out;
-  -ms-transition: opacity 2s ease-in-out;
-  -o-transition: opacity 2s ease-in-out;
-  transition: opacity 2s ease-in-out;
-}
-.carousel.carousel-fade .active.left,
-.carousel.carousel-fade .active.right {
-  left: 0;
-  z-index: 2;
-  opacity: 0;
-  filter: alpha(opacity=0);
-}
-.carousel.carousel-fade .next,
-.carousel.carousel-fade .prev {
-  left: 0;
-  z-index: 1;
-}
-
-.carousel.carousel-fade .carousel-control {
-  z-index: 3;
-}
-
 /* Carousel Transition - Ken Burns */
+
 .carousel.carousel-kenburns .item {
   -o-transition-duration: 1.75s;
   -ms-transition-duration: 1.75s;
@@ -548,23 +524,15 @@ a {
   -moz-transition-duration: 2s;
   -webkit-transition-duration: 2s;
 
-  -webkit-transform: scale(0.91) translateY(-40%) translateX(-5%);
-     -moz-transform: scale(0.91) translateY(-40%) translateX(-5%);
-      -ms-transform: scale(0.91) translateY(-40%) translateX(-5%);
-       -o-transform: scale(0.91) translateY(-40%) translateX(-5%);
-          transform: scale(0.91) translateY(-40%) translateX(-5%);
+  -webkit-transform: scale(0.91) translateY(-40%);
+     -moz-transform: scale(0.91) translateY(-40%);
+      -ms-transform: scale(0.91) translateY(-40%);
+       -o-transform: scale(0.91) translateY(-40%);
+          transform: scale(0.91) translateY(-40%);
 
   -webkit-transform-origin: bottom left;
      -moz-transform-origin: bottom left;
       -ms-transform-origin: bottom left;
        -o-transform-origin: bottom left;
           transform-origin: bottom left;
-}
-
-.carousel.carousel-kenburns .carousel-inner :nth-child(3n) { /* every 2nd img */
-  -webkit-transform-origin: bottom center;
-     -moz-transform-origin: bottom center;
-      -ms-transform-origin: bottom center;
-       -o-transform-origin: bottom center;
-          transform-origin: bottom center;
 }
