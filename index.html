@@ -38,6 +38,23 @@
   <script src="js/jquery-1.9.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 
+  <script type="application/ld+json">
+  // JavaScript Object Notation for Linking Data
+  {
+    "@context" : "schema.org",
+    "@type" : "SoftwareApplication",
+    "name" : "WPИ-XM",
+    "image" : "http://wpn-xm.org/images/wpnxm-logo.png",
+    "url" : "http://wpn-xm.org/index.html",
+    "author" : "Jens-André Koch",
+    "datePublished" : "2013-02-20",
+    "applicationCategory" : "web server stack, PHP development, Windows platform",
+    "downloadUrl" : [ "http://wpn-xm.org/downloads/WPNXM-0.5.3-Webinstaller-Setup.exe", "http://wpn-xm.org/downloads/WPNXM-0.5.3-AllInOne-Setup.exe", "https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3" ],
+    "operatingSystem" : "Windows",
+    "softwareVersion" : "0.5.3"
+  }
+  </script>
+
   <title>WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform.</title>
 </head>
 
@@ -48,12 +65,12 @@
 <img width="149" height="149" alt="Fork WPN-XM on GitHub" src="images/fork-me-on-github.png" class="github-ribbon" />
 </a>
 
-<div class="container showgrids">
+<div class="container showgrids" itemscope itemtype="http://schema.org/SoftwareApplication">
 
   <nav role="navigation" id="main-nav" class="span-21 toolbar black">
     <ul>
       <li class="vcard">
-          <a rel="home" href="index.html" class="fn org url uid">Home</a>
+          <a itemprop="url" rel="home" href="index.html" class="fn org url uid">Home</a>
       </li>
       <li>
           <a rel="about" href="#about">About</a>
@@ -81,7 +98,7 @@
 
   <div class="span-21 header">
     <h1 id="logo">WPИ-XM</h1>
-    <h2><strong>WPИ-XM</strong> is a free and open-source <em>web server solution stack for professional PHP development on the Windows platform</em>.</h2>
+    <h2><strong itemprop="name">WPИ-XM</strong> is a free and open-source <em>web server solution stack for professional PHP development on the Windows platform</em>.</h2>
   </div>
 
   <!-- @feature-flag -->
@@ -167,7 +184,7 @@
   <div class="span-6 rounded inset-panel centered mc-is">
     <h3 id="components" >Components</h3>
     <ul id="components-list" class="unstyled-list big-and-bold">
-      <li style="color: #999999;"><span id="windows-icon"> Windows </span><small>w32</small></li>
+      <li style="color: #999999;"><span id="windows-icon" itemprop="operatingSystem"> Windows </span><small>w32</small></li>
       <li><a href="http://php.net/">PHP <small>5.4.14</small></a></li>
       <li><a href="http://nginx.org/">Nginx <small>1.4.0</small></a></li>
       <li><a href="http://xdebug.org/">XDebug <small>2.2.1</small></a></li>
@@ -200,25 +217,25 @@
       <div class="centered pad">
         The latest WPN-XM release is
         <div id="current-release">
-          <div id="version">WPN-XM 0.5.3</div>
+          <div id="version">WPN-XM <span itemprop="softwareVersion">0.5.3</span></div>
         </div>
       </div>
     </div>
 
       <div class="centered">
         <!-- download the full package via the download icon -->
-        <a onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.5.3-AllInOne-Setup.exe']);"
+        <a itemprop="downloadUrl" onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.5.3-AllInOne-Setup.exe']);"
            href="http://wpn-xm.org/downloads/WPNXM-0.5.3-AllInOne-Setup.exe">
            <div class="download-icon"></div>
         </a>
-        <a onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.5.3-Webinstaller-Setup.exe']);"
+        <a itemprop="downloadUrl" onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.5.3-Webinstaller-Setup.exe']);"
            href="http://wpn-xm.org/downloads/WPNXM-0.5.3-Webinstaller-Setup.exe" class="bold">
            Webinstaller (~1 MB)</a><br/>
-        <a onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.5.3-AllInOne-Setup.exe']);"
+        <a itemprop="downloadUrl" onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.5.3-AllInOne-Setup.exe']);"
            href="http://wpn-xm.org/downloads/WPNXM-0.5.3-AllInOne-Setup.exe" class="bold">
            All-In-One Installer (~60 MB)</a><br/><br/>
         <a class="bold" href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3">Release Notes</a><br/>
-           <small>(20.Feb.2013)</small><br/>
+           <small>(<span itemprop="datePublished" content="2013-02-20">20.Feb.2013</span>)</small><br/>
         <a class="bold" href="https://raw.github.com/WPN-XM/WPN-XM/master/changelog.txt">Changelog<br/></a>
         <a id="git" href="https://github.com/WPN-XM/WPN-XM/"> Source Repository</a>
       </div>
@@ -401,7 +418,9 @@
 
     <div class="span-7 last rounded inset-panel">
       <h4>Kontakt</h4>
-      <p>Adresse: <br/>Jens-André Koch <br/> Jahnstraße 36 <br/> 17033 Neubrandenburg <br/> Bundesrepublik Deutschland</p>
+      <p>Adresse:
+         <br/><span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jens-André Koch</span> </span>
+         <br/> Jahnstraße 36 <br/> 17033 Neubrandenburg <br/> Bundesrepublik Deutschland</p>
       <p>Telefon: (DE) 0172 - 966-0273 <br/>
         <small>(Der Anruf ins Funknetz ist kostenpflichtig. Es entfallen Verbindungsentgelte gemäß der jeweiligen Gebührentabelle der verwendeten Telefongesellschaft.)</small></p>
       <p> Email: jakoch[at]web.de</p>
