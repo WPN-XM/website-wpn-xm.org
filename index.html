@@ -191,7 +191,7 @@
     <ul id="components-list" class="unstyled-list big-and-bold">
       <li style="color: #999999;"><span id="windows-icon" itemprop="operatingSystem"> Windows </span><small>w32</small></li>
       <li><a href="http://php.net/">PHP <small>5.4.16</small></a></li>
-      <li><a href="http://nginx.org/">Nginx <small>1.5.1</small></a></li>
+      <li><a href="http://nginx.org/">Nginx <small>1.5.2</small></a></li>
       <li><a href="http://xdebug.org/">XDebug <small>2.2.1</small></a></li>
       <li><a href="http://mariadb.org/">MariaDB <small>5.5.31</small></a></li>
       <li><a href="http://adminer.org/">Adminer <small>3.7.0</small></a></li>
@@ -318,15 +318,19 @@
       <h3 id="getinvolved">Get involved</h3>
       <p> Feel free to contact us and get involved in the development of WPN-XM. Our repository is located over at <a href="https://github.com/WPN-XM/WPN-XM/">GitHub</a>.</p>
       <p>We use Jordan Russel's <a href="http://www.jrsoftware.org/isinfo.php">Inno Setup</a> for the installer of WPN-XM. Skills required: InnoSetup, Pascal, PHP.</p>
-      <p>Using WPN-XM?</p>
-      <p><strong>Let us know how you're using WPN-XM and we might feature you or your company as an example!</strong><br/>
-      <a href="mailto:jakoch@wpn-xm.org?subject=I'm%20using%20WPN-XM">Get in touch</a> →</p>
+      <p>Please open a user account over at Github in order to work with us on WPN-XM.</p>
     </div>
 
      <div class="span-6 rounded inset-panel mc-is">
-    <h3 id="using">Using WPN-XM?</h3>
-    <p><strong>Let us know how you're using WPN-XM and we might feature you or your company as an example!</strong><br/>
-    <a href="mailto:jakoch@wpn-xm.org?subject=I'm%20using%20WPN-XM">Get in touch</a> →</p>
+      <h3 id="contributors">Contributors</h3>
+      <ul class="unstyled-list">
+        <li>Jens-André Koch (lead)</li>
+        <li>Yann Le Moigne</li>
+        <li>Tobias Fichtner</li>
+        <li>Daniel Winterfeldt</li>
+        <li>&nbsp;</li>
+        <li><p><strong>You? Get involved..</strong></p></li>
+      </ul>      
   </div>
 
   <!--
@@ -342,19 +346,13 @@
 
   </div>
   <div class="span-5">
-
     <div class="span-5 rounded inset-panel mc-is">
-      <h3 id="contributors">Contributors</h3>
-      <ul class="unstyled-list">
-        <li>Jens-André Koch (lead)</li>
-        <li>Yann Le Moigne</li>
-        <li>Tobias Fichtner</li>
-        <li>Daniel Winterfeldt</li>
-        <li><strong>You? Get involved..</strong></li>
-      </ul>
+       <h3 id="using">Using WPN-XM?</h3>
+       <p><strong>Let us know how you're using WPN-XM and we might feature you or your company as an example!</strong><br/>
+       <a href="mailto:jakoch@wpn-xm.org?subject=I'm%20using%20WPN-XM">Get in touch</a> →</p>
     </div>
 
-        <div class="span-5 rounded inset-panel mc-is">
+    <div class="span-5 rounded inset-panel mc-is">
       <h3 id="wiki">Wiki</h3>
       <p>Many common questions are answered at the  <a href="https://github.com/WPN-XM/WPN-XM/wiki/">WPN-XM Wiki</a>.</p>
     </div>
@@ -377,7 +375,9 @@
 
       <div class="span-7 rounded inset-panel right mc-is">
     <h3 id="twitter">Twitter</h3>
-    <div id="widget-twitter"></div>
+        <!-- Twitter Profile Widget -->
+        <a class="twitter-timeline"  href="https://twitter.com/WPNXM"  data-widget-id="352661237504557056">Tweets von @WPNXM</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </div>
 
   <!--
@@ -456,38 +456,5 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
-</script>
-
-<!-- Twitter Profile Widget -->
-<script src="http://widgets.twimg.com/j/2/widget.js"></script>
-<script type="text/javascript">
-  new TWTR.Widget({
-    id: 'widget-twitter',
-    version: 2,
-    type: 'profile',
-    rpp: 4,
-    interval: 30000,
-    width: 270,
-    height: 300,
-    theme: {
-      shell: {
-        background: '#444444',
-        color: '#eeeeee'
-      },
-      tweets: {
-        background: '#dbdbdb',
-        color: '#222222',
-        links: '#FB292D'
-      }
-    },
-    features: {
-      scrollbar: false,
-      loop: false,
-      live: false,
-      avatars: false,
-      fullscreen: false,
-      behavior: 'all'
-    }
-  }).render().setUser('wpnxm').start();
 </script>
 </body></html>
