@@ -391,6 +391,7 @@ a {
   width: 100%;
   position: relative;
   text-align: center;
+  height: 100%;
 }
 .carousel .item {
   display: none;
