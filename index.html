@@ -467,4 +467,29 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
 </script>
+<script type="text/javascript">
+$.ajax({
+  type : "GET",
+  url : "http://wpn-xm.org/updatecheck.php?s=all",
+  success: function(data){
+    populateComponentList(data);
+  }
+}); 
+function populateComponentList(data) {
+  var elem = $('#components-list');  
+  var items = [];
+  
+  $.each(data, function (id, option) {
+    /* skip clansuite */
+    if(option.name == 'Clansuite') {
+        return true;
+    }
+
+    items.push('<li><a href="' + option.website + '">' + option.name + '</a> <small>' + option.latest.version + '</small></li>');
+  });  
+
+  elem.html('<li style="color: #999999;"><span id="windows-icon" itemprop="operatingSystem"> Windows </span><small>w32</small></li>');
+  elem.append(items.join(''));
+};
+</script>
 </body></html>
