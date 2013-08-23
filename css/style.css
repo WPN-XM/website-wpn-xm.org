@@ -232,7 +232,7 @@ table#authors tr td { font-size: 120%; }
     list-style-image: none;
     list-style-type: none;
     margin: 0 0.25em 0.25em 0;
-    padding-left: 0.9em;
+    padding-left: 10px;
 }
 
 big-and-bold a:focus, a:hover {
@@ -249,7 +249,7 @@ big-and-bold a {
 }*/
 
 .big-and-bold {
-    font-size: 1.7em;
+    font-size: 1.4em;
     font-weight: bold;
     text-align: left;
 }
