@@ -66,9 +66,8 @@ foreach (glob("./downloads/*.exe") as $filename) {
 
     // platform
     if (preg_match("#(w32|w64)#", $file, $matches)) {
-        $platform = $matches[0];
+        $details['platform'] = $matches[0];
     }
-    $details['platform'] = $platform;
 
     // md5 hash
     $details['md5'] = md5($filename);
@@ -104,9 +103,7 @@ foreach (glob("./downloads/*.exe") as $filename) {
 
 // ----- Gather some general data for the downloads list
 // order downloads - latest version first
-usort($downloads, function($a, $b) {
-    return $a['file'] - $b['file'];
-});
+arsort($downloads);
 
 // add "latest" as array key, referring to the latest version of WPN-XM
 $downloads['latest_version'] = $downloads[0]['version'];
@@ -258,36 +255,36 @@ if (!empty($type) && ($type === 'json')) {
                         if ($version != $download['version']) {
                             $version = $download['version'];
 
-                            echo '<tr><td colspan="100%"><h3>';
+                            echo '<tr><td width="35%" style="vertical-align: bottom;"><h3>';
                             echo 'WPN-XM v' . $version . '&nbsp;&nbsp;&nbsp;';
                             echo '<small>' . $new_date = date('d M Y', strtotime($download['date'])) . '</small>';
-                            echo '</h3></td></tr>';
+                            echo '</h3></td>';
                             
                             // print release notes, changelog, github tag once per version
-                            echo '<tr>';                       
-                            echo '<td colspan=1>&nbsp;</td>';
-                            echo '<td style="vertical-align: middle;">';
+                            echo '<td>';
                             echo $download['release_notes'] . '&nbsp;';
                             echo $download['changelog']. '&nbsp;';
                             echo $download['github_tag'];
-                            echo '</tr>';
+                            echo '</td></tr>';
 
                             // activate platform rendering after version number change
                             $onlyOneW32 = $onlyOneW64 = true;
                         }
 
                         // platform w32/w64
-                        if ($download['platform'] === 'w32' && $onlyOneW32 === true) {
-                            echo '<tr><td colspan=3>w32</td></tr>';
-                            $onlyOneW32 = false;
-                        }
-                        if ($download['platform'] === 'w64' && $onlyOneW64 === true) {
-                            echo '<tr><td colspan=3>w64</td></tr>';
-                            $onlyOneW64 = false;
+                        if(isset($download['platform']) === true) { // old releases don't have a platform set
+                            if ($download['platform'] === 'w32' && $onlyOneW32 === true) {
+                                echo '<tr><td colspan=3>w32</td></tr>';
+                                $onlyOneW32 = false;
+                            }
+                            if ($download['platform'] === 'w64' && $onlyOneW64 === true) {
+                                echo '<tr><td colspan=3>w64</td></tr>';
+                                $onlyOneW64 = false;
+                            }
                         }
 
                         // download details
-                        echo '<td/><td>';
+                        echo '<td colspan="2">';
                         
                         echo '<table border=1>';
                         echo '<th rowspan=3>';
@@ -295,7 +292,7 @@ if (!empty($type) && ($type === 'json')) {
                                 $download['download_url'] .'>' .
                                 $download['file'] . '</a></th>';
                         
-                        echo '<tr><td width=38%>Size: ' . $download['size'] . '</td></tr>';
+                        echo '<tr><td width="38%">Size: <span class="bold">' . $download['size'] . '</span></td></tr>';
                         echo '<tr><td>MD5: ' . $download['md5'] . '</td></tr>';
                         echo '<tr><td>Components</td></tr>';
                          
