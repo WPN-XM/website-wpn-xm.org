@@ -537,3 +537,11 @@ a {
        -o-transform-origin: bottom left;
           transform-origin: bottom left;
 }
+
+/* table */
+thead th {
+    background: none repeat scroll 0 0 #E5E5E5;
+}
+tbody tr:nth-child(2n) td, tbody tr.even td {
+    background: none repeat scroll 0 0 #E5E5E0;
+}
