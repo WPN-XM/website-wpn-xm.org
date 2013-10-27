@@ -119,8 +119,8 @@ foreach (glob("./downloads/*.exe") as $filename) {
     }
 
     // md5 & sha1 hashes / checksums
-    $details['md5'] = md5_checksum($filename);
-    $details['sha1'] = sha1_checksum($filename);
+    $details['md5'] = md5_checksum(substr($filename, 3));
+    $details['sha1'] = sha1_checksum(substr($filename, 3));
 
     // download URL
     $details['download_url'] = $website . '/downloads/' . $file;
