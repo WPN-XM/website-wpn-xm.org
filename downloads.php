@@ -131,14 +131,54 @@ if (!empty($type) && ($type === 'json')) {
 
 // send html page
 ?>
-<html>
-    <head>
-        <title></title>
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows&reg; platform.</title>
+  <meta http-equiv="x-ua-compatible" content="IE=EmulateIE7" />
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="OxwcTMUNiYu78EIEA2kq-vg_CoTyhGL-YVKXieCObDw" />
+  <meta name="Googlebot" content="index,follow">
+  <meta name="Author" content="Jens-Andre Koch" />
+  <meta name="Copyright" content="(c) 2011-onwards Jens-Andre Koch." />
+  <meta name="Publisher" content="Koch Softwaresystemtechnik" />
+  <meta name="Rating" content="general" />
+  <meta name="page-type" content="Homepage, Website" />
+  <meta name="robots" content="index, follow, all, noodp" />
+  <meta name="Description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
+  <meta name="keywords" content="WPN-XM, free, open-source, server, NGINX, PHP, Windows, WAMP, WIMP, WAMPP, APC, memcached, xhprof, XDebug" />
+  <!-- DC -->
+  <meta name="DC.Title" content="WPN-XM" />
+  <meta name="DC.Creator" content="Jens-Andre Koch" />
+  <meta name="DC.Publisher" content="Koch Softwaresystemtechnik" />
+  <meta name="DC.Type" content="Service" />
+  <meta name="DC.Format" content="text/html" />
+  <meta name="DC.Language" content="en" />
+  <!-- Geo -->
+  <meta name="geo.region" content="DE-MV" />
+  <meta name="geo.placename" content="Neubrandenburg" />
+  <meta name="geo.position" content="53.560348;13.249941" />
+  <meta name="ICBM" content="53.560348, 13.249941" />
 
-        <link media="screen, projection" type="text/css" href="http://wpn-xm.org/css/blueprint/screen.css" rel="stylesheet">
-        <link media="print" type="text/css" href="http://wpn-xm.org/css/blueprint/print.css" rel="stylesheet">
-        <link media="screen, projection" type="text/css" href="http://wpn-xm.org/css/style.css" rel="stylesheet">
-        <style type="text/css">
+  <link href="favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+      <script src="http://wpn-xm.org/js/html5shiv.js"></script>
+  <![endif]-->
+
+  <!-- Blueprint CSS Framework -->
+  <link rel="stylesheet" href="http://wpn-xm.org/css/blueprint/screen.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="http://wpn-xm.org/css/blueprint/print.css" type="text/css" media="print" />
+  <!--[if IE]><link rel="stylesheet" href="css/blueprint/blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+
+  <link rel="stylesheet" href="http://wpn-xm.org/css/style.css" type="text/css" media="screen, projection" />
+
+  <script src="http://wpn-xm.org/js/jquery-1.9.1.min.js"></script>
+  <script src="http://wpn-xm.org/js/bootstrap.min.js"></script>
+  
+  <style type="text/css">
             h1 { color:red; font-size:24px; }
             /* Buttons */
             .btn {
@@ -288,13 +328,16 @@ if (!empty($type) && ($type === 'json')) {
                         
                         echo '<table border=1>';
                         echo '<th rowspan=3>';
+                        
                         echo '<a class="btn btn-success btn-large"' .
                                 $download['download_url'] .'>' .
                                 $download['file'] . '</a></th>';
                         
                         echo '<tr><td width="38%">Size: <span class="bold">' . $download['size'] . '</span></td></tr>';
                         echo '<tr><td>MD5: ' . $download['md5'] . '</td></tr>';
-                        echo '<tr><td>Components</td></tr>';
+                        
+                        // Components
+                        echo '<tr><td colspan="2">Components</td></tr>';
                          
                         //echo '<tr><td>' . $download['link'] . '</td></tr>';  
                         //echo '<tr><td>Released: ' . $download['date'] . '</td></tr>';
