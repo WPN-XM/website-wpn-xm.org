@@ -56,8 +56,12 @@ function filesize_formatted($file) {
 function md5_checksum($filename)
 {
     $md5 = '';
-    $md5ChecksumFile = __DIR__ . DIRECTORY_SEPARATOR . $filename . '.md5';
     
+    $path = pathinfo($filename);
+    $dir = __DIR__ . '/' . $path['dirname'] . '/checksums/';
+    if(is_dir($dir) === false) { mkdir($dir); }
+    $md5ChecksumFile = $dir . $path['filename'] . '.md5';
+
     if(is_file($md5ChecksumFile) === true) {
          return file_get_contents($md5ChecksumFile);
     } else {
@@ -77,8 +81,12 @@ function md5_checksum($filename)
 function sha1_checksum($filename)
 {
     $sha1 = '';
-    $sha1ChecksumFile = __DIR__ . DIRECTORY_SEPARATOR . $filename . '.sha1';
-    
+
+    $path = pathinfo($filename);
+    $dir = __DIR__ . '/' . $path['dirname'] . '/checksums/';
+    if(is_dir($dir) === false) { mkdir($dir); }
+    $sha1ChecksumFile = $dir . $path['filename'] . '.sha1';
+
     if(is_file($sha1ChecksumFile) === true) {
          $sha1 = file_get_contents($sha1ChecksumFile);
     } else {
@@ -119,8 +127,8 @@ foreach (glob("./downloads/*.exe") as $filename) {
     }
 
     // md5 & sha1 hashes / checksums
-    $details['md5'] = md5_checksum(substr($filename, 3));
-    $details['sha1'] = sha1_checksum(substr($filename, 3));
+    $details['md5'] = md5_checksum(substr($filename, 2));
+    $details['sha1'] = sha1_checksum(substr($filename, 2));
 
     // download URL
     $details['download_url'] = $website . '/downloads/' . $file;
@@ -390,7 +398,7 @@ th, td, caption {
                         echo '<tr><td>SHA-1 checksum:<br/>' . $download['sha1'] . '</td></tr>';
                         
                         // Components
-                        //echo '<tr><td colspan="2">Components</td></tr>';
+                        echo '<tr><td colspan="2">Components</td></tr>';
                          
                         //echo '<tr><td>' . $download['link'] . '</td></tr>';  
                         //echo '<tr><td>Released: ' . $download['date'] . '</td></tr>';
