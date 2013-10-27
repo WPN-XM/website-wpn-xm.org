@@ -33,11 +33,60 @@
  * The script provides helper methods to generate a dynamic download list
  * based on files found in a specific downloads folder. 
  */
-function filesize_formatted($path) {
-    $size = filesize($path);
+
+/**
+ * Formats filesize in human readable way.
+ * 
+ * @param file $file
+ * @return string Formatted Filesize.
+ */
+function filesize_formatted($file) {
+    $size = filesize($file);
     $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
     $power = $size > 0 ? floor(log($size, 1024)) : 0;
     return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
+}
+
+/**
+ * Builds a md5 checksum for a file and writes it to a file for later reuse.
+ * 
+ * @param string $filename
+ * @return string md5 file checksum
+ */
+function md5_checksum($filename)
+{
+    $md5 = '';
+    $md5ChecksumFile = __DIR__ . DIRECTORY_SEPARATOR . $filename . '.md5';
+    
+    if(is_file($md5ChecksumFile) === true) {
+         return file_get_contents($md5ChecksumFile);
+    } else {
+         $md5 = md5_file($filename);
+         file_put_contents($md5ChecksumFile, $md5);    
+    }
+    
+    return $md5;
+}
+
+/**
+ * Builds a sha1 checksum for a file and writes it to a file for later reuse.
+ * 
+ * @param string $filename
+ * @return string sha1 file checksum
+ */
+function sha1_checksum($filename)
+{
+    $sha1 = '';
+    $sha1ChecksumFile = __DIR__ . DIRECTORY_SEPARATOR . $filename . '.sha1';
+    
+    if(is_file($sha1ChecksumFile) === true) {
+         $sha1 = file_get_contents($sha1ChecksumFile);
+    } else {
+         $sha1 = sha1_file($filename);
+         file_put_contents($sha1ChecksumFile, $sha1);
+    }
+    
+    return $sha1;
 }
 
 # constants
@@ -70,8 +119,8 @@ foreach (glob("./downloads/*.exe") as $filename) {
     }
 
     // md5 & sha1 hashes / checksums
-    $details['md5'] = md5_file($filename);
-    $details['sha1'] = sha1_file($filename);
+    $details['md5'] = md5_checksum($filename);
+    $details['sha1'] = sha1_checksum($filename);
 
     // download URL
     $details['download_url'] = $website . '/downloads/' . $file;
@@ -337,11 +386,11 @@ th, td, caption {
                                 $download['file'] . '</a></th>';
                         
                         echo '<tr><td width="38%">Size: <span class="bold">' . $download['size'] . '</span></td></tr>';
-                        echo '<tr><td>MD5 checksum: ' . $download['md5'] . '</td></tr>';
-                        echo '<tr><td>SHA-1 checksum: ' . $download['sha1'] . '</td></tr>';
+                        echo '<tr><td>MD5 checksum:<br/>' . $download['md5'] . '</td></tr>';
+                        echo '<tr><td>SHA-1 checksum:<br/>' . $download['sha1'] . '</td></tr>';
                         
                         // Components
-                        echo '<tr><td colspan="2">Components</td></tr>';
+                        //echo '<tr><td colspan="2">Components</td></tr>';
                          
                         //echo '<tr><td>' . $download['link'] . '</td></tr>';  
                         //echo '<tr><td>Released: ' . $download['date'] . '</td></tr>';
