@@ -69,8 +69,9 @@ foreach (glob("./downloads/*.exe") as $filename) {
         $details['platform'] = $matches[0];
     }
 
-    // md5 hash
-    $details['md5'] = md5($filename);
+    // md5 & sha1 hashes / checksums
+    $details['md5'] = md5_file($filename);
+    $details['sha1'] = sha1_file($filename);
 
     // download URL
     $details['download_url'] = $website . '/downloads/' . $file;
@@ -79,16 +80,16 @@ foreach (glob("./downloads/*.exe") as $filename) {
     $details['link'] = '<a href="' . $details['download_url'] . '">' . $file . '</a>';
 
     // release notes, e.g. https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3
-    $details['release_notes'] = '<a class="btn btn-mini btn-info"'
+    $details['release_notes'] = '<a class="btn btn-large btn-info"'
             . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v' . $version . '">Release Notes</a>';
 
     // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/0.5.2/changelog.txt
-    $details['changelog'] = '<a class="btn btn-mini btn-info"'
+    $details['changelog'] = '<a class="btn btn-large btn-info"'
             . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $version . '/changelog.txt">Changelog</a>';
 
     // component list with version numbers
     // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
-    $details['github_tag'] = '<a class="btn btn-mini btn-info"'
+    $details['github_tag'] = '<a class="btn btn-large btn-info"'
             . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $version . '">Github Tag</a>';
 
     // date
@@ -232,6 +233,9 @@ if (!empty($type) && ($type === 'json')) {
     font-size: 9.75px;
     padding: 1px 6px;
 }
+th, td, caption {
+    padding: 4px 10px 4px 15px;
+}
         </style>
     </head>
     <body>
@@ -274,9 +278,8 @@ if (!empty($type) && ($type === 'json')) {
 
             <div class="span-21">
                 <div class="slider-wrapper">
-                    <div class="slider-background" style="height: auto;">
-
-                        <h3 id="download">Download</h3>   
+                    <div class="slider-background rounded inset-panel mc-is" style="height: auto;">
+                        <h3 id="download">Downloads</h3>   
                    
                        <!----//
                        Latest Version: <b><?= $downloads['latest_version']; ?></b>
@@ -295,10 +298,10 @@ if (!empty($type) && ($type === 'json')) {
                         if ($version != $download['version']) {
                             $version = $download['version'];
 
-                            echo '<tr><td width="35%" style="vertical-align: bottom;"><h3>';
+                            echo '<tr><td width="50%" style="vertical-align: bottom;"><h2>';
                             echo 'WPN-XM v' . $version . '&nbsp;&nbsp;&nbsp;';
                             echo '<small>' . $new_date = date('d M Y', strtotime($download['date'])) . '</small>';
-                            echo '</h3></td>';
+                            echo '</h2></td>';
                             
                             // print release notes, changelog, github tag once per version
                             echo '<td>';
@@ -327,14 +330,15 @@ if (!empty($type) && ($type === 'json')) {
                         echo '<td colspan="2">';
                         
                         echo '<table border=1>';
-                        echo '<th rowspan=3>';
+                        echo '<th rowspan="4" width="50%">';
                         
                         echo '<a class="btn btn-success btn-large"' .
                                 $download['download_url'] .'>' .
                                 $download['file'] . '</a></th>';
                         
                         echo '<tr><td width="38%">Size: <span class="bold">' . $download['size'] . '</span></td></tr>';
-                        echo '<tr><td>MD5: ' . $download['md5'] . '</td></tr>';
+                        echo '<tr><td>MD5 checksum: ' . $download['md5'] . '</td></tr>';
+                        echo '<tr><td>SHA-1 checksum: ' . $download['sha1'] . '</td></tr>';
                         
                         // Components
                         echo '<tr><td colspan="2">Components</td></tr>';
