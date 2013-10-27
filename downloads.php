@@ -387,15 +387,15 @@ th, td, caption {
                         echo '<td colspan="2">';
                         
                         echo '<table border=1>';
-                        echo '<th rowspan="4" width="50%">';
+                        echo '<th rowspan="4" width="85%">';
                         
                         echo '<a class="btn btn-success btn-large"' .
                                 $download['download_url'] .'>' .
                                 $download['file'] . '</a></th>';
                         
-                        echo '<tr><td width="38%">Size: <span class="bold">' . $download['size'] . '</span></td></tr>';
-                        echo '<tr><td>MD5 checksum:<br/>' . $download['md5'] . '</td></tr>';
-                        echo '<tr><td>SHA-1 checksum:<br/>' . $download['sha1'] . '</td></tr>';
+                        echo '<tr><td width="15%">Size</td><td><span class="bold">' . $download['size'] . '</span></td></tr>';
+                        echo '<tr><td>MD5</td><td>' . $download['md5'] . '</td></tr>';
+                        echo '<tr><td>SHA-1</td><td>' . $download['sha1'] . '</td></tr>';
                         
                         // Components
                         echo '<tr><td colspan="2">Components</td></tr>';
