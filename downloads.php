@@ -387,7 +387,7 @@ th, td, caption {
                         echo '<td colspan="2">';
                         
                         echo '<table border=1>';
-                        echo '<th rowspan="4" width="85%">';
+                        echo '<th rowspan="4" width="100%">';
                         
                         echo '<a class="btn btn-success btn-large"' .
                                 $download['download_url'] .'>' .
