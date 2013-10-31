@@ -40,10 +40,12 @@
  * @param file $file
  * @return string Formatted Filesize.
  */
-function filesize_formatted($file) {
+function filesize_formatted($file)
+{
     $size = filesize($file);
     $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
     $power = $size > 0 ? floor(log($size, 1024)) : 0;
+
     return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
 }
 
@@ -59,10 +61,10 @@ function md5_checksum($filename)
 
     $path = pathinfo($filename);
     $dir = __DIR__ . '/' . $path['dirname'] . '/checksums/';
-    if(is_dir($dir) === false) { mkdir($dir); }
+    if (is_dir($dir) === false) { mkdir($dir); }
     $md5ChecksumFile = $dir . $path['filename'] . '.md5';
 
-    if(is_file($md5ChecksumFile) === true) {
+    if (is_file($md5ChecksumFile) === true) {
          return file_get_contents($md5ChecksumFile);
     } else {
          $md5 = md5_file($filename);
@@ -84,10 +86,10 @@ function sha1_checksum($filename)
 
     $path = pathinfo($filename);
     $dir = __DIR__ . '/' . $path['dirname'] . '/checksums/';
-    if(is_dir($dir) === false) { mkdir($dir); }
+    if (is_dir($dir) === false) { mkdir($dir); }
     $sha1ChecksumFile = $dir . $path['filename'] . '.sha1';
 
-    if(is_file($sha1ChecksumFile) === true) {
+    if (is_file($sha1ChecksumFile) === true) {
          $sha1 = file_get_contents($sha1ChecksumFile);
     } else {
          $sha1 = sha1_file($filename);
@@ -372,7 +374,7 @@ th, td, caption {
                         }
 
                         // platform w32/w64
-                        if(isset($download['platform']) === true) { // old releases don't have a platform set
+                        if (isset($download['platform']) === true) { // old releases don't have a platform set
                             if ($download['platform'] === 'w32' && $onlyOneW32 === true) {
                                 echo '<tr><td colspan=3>w32</td></tr>';
                                 $onlyOneW32 = false;
@@ -396,7 +398,7 @@ th, td, caption {
                         echo '<tr><td colspan="3">Components</td></tr>';
                         echo '<tr><td colspan="3">';
                         $registry_file = __DIR__ . '/wpnxm-software-registry-' . $version . '.csv';
-                        if(is_file($registry_file) === true) {
+                        if (is_file($registry_file) === true) {
                             $csvData = file_get_contents($registry_file);
                             $lines = explode("\n", $csvData);
                             array_pop($lines);
@@ -405,11 +407,11 @@ th, td, caption {
                                 $csvArray[] = str_getcsv($line);
                             }
                         }
-                        if(isset($csvArray) === true) {
+                        if (isset($csvArray) === true) {
                             $c = count($csvArray)-1;
-                            foreach($csvAarray as $i => $component) {
+                            foreach ($csvAarray as $i => $component) {
                                 echo '<span style="font-weight:bold;">' . ucfirst($component[0]) . '</span> ' . $component[3];
-                                if($c != $i) { echo ', '; }
+                                if ($c != $i) { echo ', '; }
                             }
                         }
                         echo '</td></tr>';
