@@ -31,12 +31,12 @@
  * Downloads Listing Script for wpn-xm.org
  * ---------------------------------------
  * The script provides helper methods to generate a dynamic download list
- * based on files found in a specific downloads folder. 
+ * based on files found in a specific downloads folder.
  */
 
 /**
  * Formats filesize in human readable way.
- * 
+ *
  * @param file $file
  * @return string Formatted Filesize.
  */
@@ -49,14 +49,14 @@ function filesize_formatted($file) {
 
 /**
  * Builds a md5 checksum for a file and writes it to a file for later reuse.
- * 
+ *
  * @param string $filename
  * @return string md5 file checksum
  */
 function md5_checksum($filename)
 {
     $md5 = '';
-    
+
     $path = pathinfo($filename);
     $dir = __DIR__ . '/' . $path['dirname'] . '/checksums/';
     if(is_dir($dir) === false) { mkdir($dir); }
@@ -66,15 +66,15 @@ function md5_checksum($filename)
          return file_get_contents($md5ChecksumFile);
     } else {
          $md5 = md5_file($filename);
-         file_put_contents($md5ChecksumFile, $md5);    
+         file_put_contents($md5ChecksumFile, $md5);
     }
-    
+
     return $md5;
 }
 
 /**
  * Builds a sha1 checksum for a file and writes it to a file for later reuse.
- * 
+ *
  * @param string $filename
  * @return string sha1 file checksum
  */
@@ -93,12 +93,12 @@ function sha1_checksum($filename)
          $sha1 = sha1_file($filename);
          file_put_contents($sha1ChecksumFile, $sha1);
     }
-    
+
     return $sha1;
 }
 
-# constants
-$website = 'http://wpn-xm.org';
+# http website and base path for downloads
+$website = 'http://wpn-xm.org/';
 
 // ----- Gather details for all available files
 
@@ -131,7 +131,7 @@ foreach (glob("./downloads/*.exe") as $filename) {
     $details['sha1'] = sha1_checksum(substr($filename, 2));
 
     // download URL
-    $details['download_url'] = $website . '/downloads/' . $file;
+    $details['download_url'] = $website . 'downloads/' . $file;
 
     // download link
     $details['link'] = '<a href="' . $details['download_url'] . '">' . $file . '</a>';
@@ -235,7 +235,7 @@ if (!empty($type) && ($type === 'json')) {
 
   <script src="http://wpn-xm.org/js/jquery-1.9.1.min.js"></script>
   <script src="http://wpn-xm.org/js/bootstrap.min.js"></script>
-  
+
   <style type="text/css">
             h1 { color:red; font-size:24px; }
             /* Buttons */
@@ -336,8 +336,8 @@ th, td, caption {
             <div class="span-21">
                 <div class="slider-wrapper">
                     <div class="slider-background rounded inset-panel mc-is" style="height: auto;">
-                        <h3 id="download">Downloads</h3>   
-                   
+                        <h3 id="download">Downloads</h3>
+
                        <!----//
                        Latest Version: <b><?= $downloads['latest_version']; ?></b>
                        Released: <b><?= $downloads[0]['date']; ?></b>
@@ -359,7 +359,7 @@ th, td, caption {
                             echo 'WPN-XM v' . $version . '&nbsp;&nbsp;&nbsp;';
                             echo '<small>' . $new_date = date('d M Y', strtotime($download['date'])) . '</small>';
                             echo '</h2></td>';
-                            
+
                             // print release notes, changelog, github tag once per version
                             echo '<td>';
                             echo $download['release_notes'] . '&nbsp;';
@@ -385,22 +385,36 @@ th, td, caption {
 
                         // download details
                         echo '<td colspan="2">';
-                        
                         echo '<table border=1>';
                         echo '<th rowspan="4" width="100%">';
-                        
-                        echo '<a class="btn btn-success btn-large"' .
-                                $download['download_url'] .'>' .
-                                $download['file'] . '</a></th>';
-                        
+                        echo '<a class="btn btn-success btn-large"' . $download['download_url'] .'>' . $download['file'] . '</a></th>';
                         echo '<tr><td width="15%">Size</td><td><span class="bold">' . $download['size'] . '</span></td></tr>';
                         echo '<tr><td>MD5</td><td>' . $download['md5'] . '</td></tr>';
                         echo '<tr><td>SHA-1</td><td>' . $download['sha1'] . '</td></tr>';
-                        
+
                         // Components
-                        echo '<tr><td colspan="2">Components</td></tr>';
-                         
-                        //echo '<tr><td>' . $download['link'] . '</td></tr>';  
+                        echo '<tr><td colspan="3">Components</td></tr>';
+                        echo '<tr><td colspan="3">';
+                        $registry_file = __DIR__ . '/wpnxm-software-registry-' . $version . '.csv';
+                        if(is_file($registry_file) === true) {
+                            $csvData = file_get_contents($registry_file);
+                            $lines = explode("\n", $csvData);
+                            array_pop($lines);
+                            $csvArray = array();
+                            foreach ($lines as $line) {
+                                $csvArray[] = str_getcsv($line);
+                            }
+                        }
+                        if(isset($csvArray) === true) {
+                            $c = count($csvArray)-1;
+                            foreach($csvAarray as $i => $component) {
+                                echo '<span style="font-weight:bold;">' . ucfirst($component[0]) . '</span> ' . $component[3];
+                                if($c != $i) { echo ', '; }
+                            }
+                        }
+                        echo '</td></tr>';
+
+                        //echo '<tr><td>' . $download['link'] . '</td></tr>';
                         //echo '<tr><td>Released: ' . $download['date'] . '</td></tr>';
                         //echo '<tr><td>' . $download['file'] . '</td></tr>';
                         //echo '<tr><td>v' . $download['version'] . '</td></tr>';
