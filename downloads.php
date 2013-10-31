@@ -409,7 +409,7 @@ th, td, caption {
                         }
                         if (isset($csvArray) === true) {
                             $c = count($csvArray)-1;
-                            foreach ($csvAarray as $i => $component) {
+                            foreach ($csvArray as $i => $component) {
                                 echo '<span style="font-weight:bold;">' . ucfirst($component[0]) . '</span> ' . $component[3];
                                 if ($c != $i) { echo ', '; }
                             }
