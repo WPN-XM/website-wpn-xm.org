@@ -389,7 +389,7 @@ th, td, caption {
                         echo '<td colspan="2">';
                         echo '<table border=1>';
                         echo '<th rowspan="4" width="100%">';
-                        echo '<a class="btn btn-success btn-large"' . $download['download_url'] .'>' . $download['file'] . '</a></th>';
+                        echo '<a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
                         echo '<tr><td width="15%">Size</td><td><span class="bold">' . $download['size'] . '</span></td></tr>';
                         echo '<tr><td>MD5</td><td>' . $download['md5'] . '</td></tr>';
                         echo '<tr><td>SHA-1</td><td>' . $download['sha1'] . '</td></tr>';
