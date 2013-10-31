@@ -376,11 +376,11 @@ th, td, caption {
                         // platform w32/w64
                         if (isset($download['platform']) === true) { // old releases don't have a platform set
                             if ($download['platform'] === 'w32' && $onlyOneW32 === true) {
-                                echo '<tr><td colspan=3>w32</td></tr>';
+                                echo '<tr><td colspan=3>Windows 32-bit</td></tr>';
                                 $onlyOneW32 = false;
                             }
                             if ($download['platform'] === 'w64' && $onlyOneW64 === true) {
-                                echo '<tr><td colspan=3>w64</td></tr>';
+                                echo '<tr><td colspan=3>Windows 64-bit</td></tr>';
                                 $onlyOneW64 = false;
                             }
                         }
