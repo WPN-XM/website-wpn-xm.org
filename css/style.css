@@ -6,6 +6,8 @@
     font-size: 12px;
 }
 
+.container {width:850px;margin:0 auto;}
+
 @font-face {
     font-family: 'WPNXMicoRegular';
     src: url('../fonts/wpnxmfont-webfont.eot');
