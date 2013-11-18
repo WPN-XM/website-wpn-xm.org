@@ -308,14 +308,14 @@
   <div class="span-20 rounded inset-panel mc-is">
     <h3 id="ads2">Ads</h3>
     <div style="margin: auto; height: 90px; width: 728px;">
-      <script type="text/javascript"><!--
-      google_ad_client = "ca-pub-8272564713803494";
-      /* WPN-XM Leaderboard, 728x90px, created 8.11.11 */
-      google_ad_slot = "1380654938";
-      google_ad_width = 728;
-      google_ad_height = 90;
-      //--></script>
-      <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- WPN-XM Leaderboard, 728x90, Erstellt 8.11.11 -->
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:728px;height:90px"
+           data-ad-client="ca-pub-8272564713803494"
+           data-ad-slot="1380654938"></ins>
+      <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
     </div>
   </div>
@@ -474,11 +474,11 @@ $.ajax({
   success: function(data){
     populateComponentList(data);
   }
-}); 
+});
 function populateComponentList(data) {
-  var elem = $('#components-list');  
+  var elem = $('#components-list');
   var items = [];
-  
+
   $.each(data, function (id, option) {
     /* skip clansuite */
     if(option.name == 'Clansuite') {
@@ -486,7 +486,7 @@ function populateComponentList(data) {
     }
 
     items.push('<li><a href="' + option.website + '">' + option.name + '</a> <small>' + option.latest.version + '</small></li>');
-  });  
+  });
 
   elem.html('<li style="color: #999999;"><span id="windows-icon" itemprop="operatingSystem"> Windows </span><small>w32</small></li>');
   elem.append(items.join(''));
