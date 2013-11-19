@@ -190,10 +190,10 @@ if (!empty($type) && ($type === 'json')) {
 } else {
   // send html page
 
-  <!----
+  /*
      // Latest Version: <b><?= $downloads['latest_version']; </b>
      // Released: <b><?= $downloads[0]['date']; </b>
-  ---->
+  */
 
     unset($downloads['versions'], $downloads['latest_version']);
     $version = '0.0.0';
