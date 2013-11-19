@@ -300,8 +300,8 @@
             <option value="CZK">CZK</option>
             <option value="ILS">ILS</option>
             <option value="MXN">MXN</option>
-        </select>
-      </div>
+          </select>
+        </div>
 
         <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
                name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
@@ -310,15 +310,14 @@
       </form>
     </div>
 
-      <div class="right" style="margin-right: 10em">
-     <h4>Donate via Bitcoin</h4>
+    <div class="right" style="margin-right: 10em">
+      <h4>Donate via Bitcoin</h4>
       <a href="bitcoin:12BfFmg1WaSTdoRAEm2fGP6E3PU8JhxHPL?label=Donation%20for%20WPN-XM%20Server%20Stack%20-%20http%3A%2F%2Fwpn-xm.org%2F">
         <i>12BfFmg1WaSTdoRAEm2fGP6E3PU8JhxHPL</i>
       </a>
       <br/>
       <img alt="Donate with Bitcoin" src="images/bitcoin-donate-qr-code.png">
     </div>
-
 
   </div>
 
@@ -350,7 +349,7 @@
       <p>Please open a user account over at Github in order to work with us on WPN-XM.</p>
     </div>
 
-     <div class="span-6 rounded inset-panel mc-is">
+    <div class="span-6 rounded inset-panel mc-is">
       <h3 id="contributors">Contributors</h3>
       <ul class="unstyled-list">
         <li>Jens-André Koch (lead)</li>
@@ -360,20 +359,20 @@
         <li>&nbsp;</li>
         <li><p><strong>You? Get involved..</strong></p></li>
       </ul>
+    </div>
+
+    <!--
+    <div class="span-6 rounded inset-panel mc-is">
+      <h3 id="usedby">WPN-XM Users</h3>
+      <ul class="unstyled-list">
+        <li><a href="http://----.org/">K SST</a></li>
+        <li><a href="http://----.org/">A</a></li>
+        <li><a href="http://----.org/">B</a></li>
+      </ul>
+    </div>
+    -->
   </div>
 
-  <!--
-  <div class="span-6 rounded inset-panel mc-is">
-    <h3 id="usedby">WPN-XM Users</h3>
-    <ul class="unstyled-list">
-      <li><a href="http://----.org/">K SST</a></li>
-      <li><a href="http://----.org/">A</a></li>
-      <li><a href="http://----.org/">B</a></li>
-    </ul>
-  </div>
-  -->
-
-  </div>
   <div class="span-5">
     <div class="span-5 rounded inset-panel mc-is">
        <h3 id="using">Using WPN-XM?</h3>
@@ -402,11 +401,31 @@
 
   </div>
 
-      <div class="span-7 last rounded inset-panel right mc-is">
+  <div class="span-7 last rounded inset-panel right mc-is">
     <h3 id="twitter">Twitter</h3>
         <!-- Twitter Profile Widget -->
         <a class="twitter-timeline"  href="https://twitter.com/WPNXM"  data-widget-id="352661237504557056">Tweets von @WPNXM</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <script>
+          !function(d,s,id){
+            var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+            if(!d.getElementById(id)){
+              js=d.createElement(s); js.id=id; js.src=p+"://platform.twitter.com/widgets.js";
+              fjs.parentNode.insertBefore(js,fjs);
+            }
+          }(document,"script","twitter-wjs");
+        </script>
+  </div>
+
+  <hr>
+
+  <div class="span-21">
+    <div class="slider-wrapper">
+      <div class="slider-background rounded inset-panel mc-is" style="height: auto;">
+        <h3>Downloads</h3>
+        <!-- Downloads List-->
+        <div id="downloads-list"></div>
+      </div>
+    </div>
   </div>
 
   <!--
@@ -494,6 +513,18 @@ $.ajax({
     populateComponentList(data);
   }
 });
+$.ajax({
+  type : "GET",
+  url : "http://wpn-xm.org/downloads.php",
+  success: function(data){
+    populateDownloadList(data);
+  }
+});
+
+function populateDownloadList(data) {
+  $('#downloads-list').append(data);
+}
+
 function populateComponentList(data) {
   var elem = $('#components-list');
   var items = [];

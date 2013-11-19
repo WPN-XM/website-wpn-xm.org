@@ -187,250 +187,100 @@ $type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
 if (!empty($type) && ($type === 'json')) {
     header('Content-Type: application/json');
     echo json_encode($downloads);
-}
+} else {
+  // send html page
 
-// send html page
+  <!----
+     // Latest Version: <b><?= $downloads['latest_version']; </b>
+     // Released: <b><?= $downloads[0]['date']; </b>
+  ---->
+
+    unset($downloads['versions'], $downloads['latest_version']);
+    $version = '0.0.0';
+    $onlyOneW32 = $onlyOneW64 = true;
+
+    $html = '<table border="1" style="width:98%;">';
+
+    foreach ($downloads as $download) {
+
+        // print version only once for all files of that version
+        if ($version != $download['version']) {
+            $version = $download['version'];
+
+            $html .= '<tr><td width="50%" style="vertical-align: bottom;"><h2>';
+            $html .= 'WPN-XM v' . $version . '&nbsp;&nbsp;&nbsp;';
+            $html .= '<small>' . $new_date = date('d M Y', strtotime($download['date'])) . '</small>';
+            $html .= '</h2></td>';
+
+            // print release notes, changelog, github tag once per version
+            $html .= '<td>';
+            $html .= $download['release_notes'] . '&nbsp;';
+            $html .= $download['changelog']. '&nbsp;';
+            $html .= $download['github_tag'];
+            $html .= '</td></tr>';
+
+            // activate platform rendering after version number change
+            $onlyOneW32 = $onlyOneW64 = true;
+        }
+
+        // platform w32/w64
+        if (isset($download['platform']) === true) { // old releases don't have a platform set
+            if ($download['platform'] === 'w32' && $onlyOneW32 === true) {
+                $html .= '<tr><td colspan=3>Windows 32-bit</td></tr>';
+                $onlyOneW32 = false;
+            }
+            if ($download['platform'] === 'w64' && $onlyOneW64 === true) {
+                $html .= '<tr><td colspan=3>Windows 64-bit</td></tr>';
+                $onlyOneW64 = false;
+            }
+        }
+
+        // download details
+        $html .= '<td colspan="2">';
+        $html .= '<table border=1>';
+        $html .= '<th rowspan="4" width="100%">';
+        $html .= '<a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
+        $html .= '<tr><td width="15%">Size</td><td><span class="bold">' . $download['size'] . '</span></td></tr>';
+        $html .= '<tr><td>MD5</td><td>' . $download['md5'] . '</td></tr>';
+        $html .= '<tr><td>SHA-1</td><td>' . $download['sha1'] . '</td></tr>';
+
+        // Components
+        $html .= '<tr><td colspan="3">Components</td></tr>';
+        $html .= '<tr><td colspan="3">';
+        $registry_file = __DIR__ . '/wpnxm-software-registry-' . $version . '.csv';
+        if (is_file($registry_file) === true) {
+            $csvData = file_get_contents($registry_file);
+            $lines = explode("\n", $csvData);
+            array_pop($lines);
+            $csvArray = array();
+            foreach ($lines as $line) {
+                $csvArray[] = str_getcsv($line);
+            }
+        }
+        if (isset($csvArray) === true) {
+            $c = count($csvArray)-1;
+            foreach ($csvArray as $i => $component) {
+                $html .= '<span style="font-weight:bold;">' . ucfirst($component[0]) . '</span> ' . $component[3];
+                if ($c != $i) { $html .= ', '; }
+            }
+        }
+        $html .= '</td></tr>';
+
+        //$html .= '<tr><td>' . $download['link'] . '</td></tr>';
+        //$html .= '<tr><td>Released: ' . $download['date'] . '</td></tr>';
+        //$html .= '<tr><td>' . $download['file'] . '</td></tr>';
+        //$html .= '<tr><td>v' . $download['version'] . '</td></tr>';
+        //$html .= '<tr><td>' . $download['platform'] . '</td></tr>';
+        //$html .= '<tr><td>' . $download['download_url'] . '</td></tr>';
+        //$html .= '<tr><td>' . $download['release_notes'] . '</td></tr>';
+        //$html .= '<tr><td>' . $download['changelog'] . '</td></tr>';
+        //$html .= '<tr><td>' . $download['github_tag'] . '</td></tr>';
+        $html .= '</table>';
+        $html .= '</td></tr>';
+    }
+    $html .= '</table><br/>';
+
+    header('Content-Type: text/html; charset=utf-8');
+    echo $html;
+}
 ?>
-<!DOCTYPE html>
-<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta charset="utf-8" />
-  <title>WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows&reg; platform.</title>
-  <meta http-equiv="x-ua-compatible" content="IE=EmulateIE7" />
-  <!-- Google Site Verification -->
-  <meta name="google-site-verification" content="OxwcTMUNiYu78EIEA2kq-vg_CoTyhGL-YVKXieCObDw" />
-  <meta name="Googlebot" content="index,follow">
-  <meta name="Author" content="Jens-Andre Koch" />
-  <meta name="Copyright" content="(c) 2011-onwards Jens-Andre Koch." />
-  <meta name="Publisher" content="Koch Softwaresystemtechnik" />
-  <meta name="Rating" content="general" />
-  <meta name="page-type" content="Homepage, Website" />
-  <meta name="robots" content="index, follow, all, noodp" />
-  <meta name="Description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
-  <meta name="keywords" content="WPN-XM, free, open-source, server, NGINX, PHP, Windows, WAMP, WIMP, WAMPP, APC, memcached, xhprof, XDebug" />
-  <!-- DC -->
-  <meta name="DC.Title" content="WPN-XM" />
-  <meta name="DC.Creator" content="Jens-Andre Koch" />
-  <meta name="DC.Publisher" content="Koch Softwaresystemtechnik" />
-  <meta name="DC.Type" content="Service" />
-  <meta name="DC.Format" content="text/html" />
-  <meta name="DC.Language" content="en" />
-  <!-- Geo -->
-  <meta name="geo.region" content="DE-MV" />
-  <meta name="geo.placename" content="Neubrandenburg" />
-  <meta name="geo.position" content="53.560348;13.249941" />
-  <meta name="ICBM" content="53.560348, 13.249941" />
-
-  <link href="favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-
-  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-  <!--[if lt IE 9]>
-      <script src="http://wpn-xm.org/js/html5shiv.js"></script>
-  <![endif]-->
-
-  <!-- Blueprint CSS Framework -->
-  <link rel="stylesheet" href="http://wpn-xm.org/css/blueprint/screen.css" type="text/css" media="screen, projection" />
-  <link rel="stylesheet" href="http://wpn-xm.org/css/blueprint/print.css" type="text/css" media="print" />
-  <!--[if IE]><link rel="stylesheet" href="css/blueprint/blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
-
-  <link rel="stylesheet" href="http://wpn-xm.org/css/style.css" type="text/css" media="screen, projection" />
-
-  <script src="http://wpn-xm.org/js/jquery-1.9.1.min.js"></script>
-  <script src="http://wpn-xm.org/js/bootstrap.min.js"></script>
-
-  <style type="text/css">
-            h1 { color:red; font-size:24px; }
-            /* Buttons */
-            .btn {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background-color: #F5F5F5;
-    background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6);
-    background-repeat: repeat-x;
-    border-color: #BBBBBB #BBBBBB #A2A2A2;
-    border-image: none;
-    border-radius: 4px 4px 4px 4px;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
-    color: #333333;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 13px;
-    line-height: 18px;
-    margin-bottom: 0;
-    padding: 4px 12px;
-    text-align: center;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
-    vertical-align: middle;
-}
-.btn-info {
-    background-color: #49AFCD;
-    background-image: linear-gradient(to bottom, #5BC0DE, #2F96B4);
-    background-repeat: repeat-x;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    color: #FFFFFF;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-}
-.btn-success {
-    background-color: #5BB75B;
-    background-image: linear-gradient(to bottom, #62C462, #51A351);
-    background-repeat: repeat-x;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    color: #FFFFFF;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-}
-.btn-large {
-    border-radius: 6px 6px 6px 6px;
-    font-size: 16.25px;
-    padding: 9px 14px;
-}
-.btn-mini {
-    border-radius: 3px 3px 3px 3px;
-    font-size: 9.75px;
-    padding: 1px 6px;
-}
-th, td, caption {
-    padding: 4px 10px 4px 15px;
-}
-        </style>
-    </head>
-    <body>
-        <a href="https://github.com/WPN-XM/WPN-XM">
-            <img width="149" height="149" class="github-ribbon" src="images/fork-me-on-github.png" alt="Fork WPN-XM on GitHub">
-        </a>
-        <div class="container showgrids" itemtype="http://schema.org/SoftwareApplication" itemscope="">
-            <nav class="span-21 toolbar black" id="main-nav" role="navigation">
-                <ul>
-                    <li class="vcard">
-                        <a class="fn org url uid" href="index.html" rel="home" itemprop="url">Home</a>
-                    </li>
-                    <li>
-                        <a href="#about" rel="about">About</a>
-                    </li>
-                    <li>
-                        <a href="https://groups.google.com/forum/?fromgroups#!forum/wpn-xm" rel="help">Mailing List</a>
-                    </li>
-                    <li>
-                        <a href="#getinvolved" rel="get-involved">Get Involved</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/WPN-XM/WPN-XM/wiki/" rel="install">Wiki</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/WPN-XM/WPN-XM/issues/" rel="install">Issues</a>
-                    </li>
-                    <li>
-                        <a href="#donate" rel="donate">Donate</a>
-                    </li>
-                    <li>
-                        <a href="#imprint" rel="imprint">Imprint</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="span-21 header">
-                <h1 id="logo">WPИ-XM</h1>
-                <h2><strong itemprop="name">WPИ-XM</strong> is a free and open-source <em>web server solution stack for professional PHP development on the Windows<small><sup>&reg;</sup></small> platform</em>.</h2>
-            </div>
-
-            <div class="span-21">
-                <div class="slider-wrapper">
-                    <div class="slider-background rounded inset-panel mc-is" style="height: auto;">
-                        <h3 id="download">Downloads</h3>
-
-                       <!----//
-                       Latest Version: <b><?= $downloads['latest_version']; ?></b>
-                       Released: <b><?= $downloads[0]['date']; ?></b>
-                       ---->
-                <?php
-                    unset($downloads['versions'], $downloads['latest_version']);
-                    $version = '0.0.0';
-                    $onlyOneW32 = $onlyOneW64 = true;
-
-                    echo '<table border="1" style="width:98%;">';
-
-                    foreach ($downloads as $download) {
-
-                        // print version only once for all files of that version
-                        if ($version != $download['version']) {
-                            $version = $download['version'];
-
-                            echo '<tr><td width="50%" style="vertical-align: bottom;"><h2>';
-                            echo 'WPN-XM v' . $version . '&nbsp;&nbsp;&nbsp;';
-                            echo '<small>' . $new_date = date('d M Y', strtotime($download['date'])) . '</small>';
-                            echo '</h2></td>';
-
-                            // print release notes, changelog, github tag once per version
-                            echo '<td>';
-                            echo $download['release_notes'] . '&nbsp;';
-                            echo $download['changelog']. '&nbsp;';
-                            echo $download['github_tag'];
-                            echo '</td></tr>';
-
-                            // activate platform rendering after version number change
-                            $onlyOneW32 = $onlyOneW64 = true;
-                        }
-
-                        // platform w32/w64
-                        if (isset($download['platform']) === true) { // old releases don't have a platform set
-                            if ($download['platform'] === 'w32' && $onlyOneW32 === true) {
-                                echo '<tr><td colspan=3>Windows 32-bit</td></tr>';
-                                $onlyOneW32 = false;
-                            }
-                            if ($download['platform'] === 'w64' && $onlyOneW64 === true) {
-                                echo '<tr><td colspan=3>Windows 64-bit</td></tr>';
-                                $onlyOneW64 = false;
-                            }
-                        }
-
-                        // download details
-                        echo '<td colspan="2">';
-                        echo '<table border=1>';
-                        echo '<th rowspan="4" width="100%">';
-                        echo '<a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
-                        echo '<tr><td width="15%">Size</td><td><span class="bold">' . $download['size'] . '</span></td></tr>';
-                        echo '<tr><td>MD5</td><td>' . $download['md5'] . '</td></tr>';
-                        echo '<tr><td>SHA-1</td><td>' . $download['sha1'] . '</td></tr>';
-
-                        // Components
-                        echo '<tr><td colspan="3">Components</td></tr>';
-                        echo '<tr><td colspan="3">';
-                        $registry_file = __DIR__ . '/wpnxm-software-registry-' . $version . '.csv';
-                        if (is_file($registry_file) === true) {
-                            $csvData = file_get_contents($registry_file);
-                            $lines = explode("\n", $csvData);
-                            array_pop($lines);
-                            $csvArray = array();
-                            foreach ($lines as $line) {
-                                $csvArray[] = str_getcsv($line);
-                            }
-                        }
-                        if (isset($csvArray) === true) {
-                            $c = count($csvArray)-1;
-                            foreach ($csvArray as $i => $component) {
-                                echo '<span style="font-weight:bold;">' . ucfirst($component[0]) . '</span> ' . $component[3];
-                                if ($c != $i) { echo ', '; }
-                            }
-                        }
-                        echo '</td></tr>';
-
-                        //echo '<tr><td>' . $download['link'] . '</td></tr>';
-                        //echo '<tr><td>Released: ' . $download['date'] . '</td></tr>';
-                        //echo '<tr><td>' . $download['file'] . '</td></tr>';
-                        //echo '<tr><td>v' . $download['version'] . '</td></tr>';
-                        //echo '<tr><td>' . $download['platform'] . '</td></tr>';
-                        //echo '<tr><td>' . $download['download_url'] . '</td></tr>';
-                        //echo '<tr><td>' . $download['release_notes'] . '</td></tr>';
-                        //echo '<tr><td>' . $download['changelog'] . '</td></tr>';
-                        //echo '<tr><td>' . $download['github_tag'] . '</td></tr>';
-                        echo '</table>';
-                        echo '</td></tr>';
-                    }
-                    echo '</table><br/>';
-                    ?>
-                   </div>
-               </div>
-      </body>
-</html>
