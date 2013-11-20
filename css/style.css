@@ -225,7 +225,7 @@ table.data-table tr td h3 { background: #B5463F; color: #fff; padding: 5px; }
 
 table#authors tr td { font-size: 120%; }
 
-.rounded { border-radius: 8px; -moz-border-radius: 8px; -webkit-border-radius: 8px; }
+.rounded { border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
 .centered { text-align: center; }
 .left { float: left; }
 
