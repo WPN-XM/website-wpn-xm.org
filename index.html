@@ -176,6 +176,32 @@
 
   <hr>
 
+  <div class="sellout-buttons">
+    <a class="socialite github-watch" href="https://github.com/WPN-XM/WPN-XM" data-user="WPN-XM" data-repo="WPN-XM" data-type="watch" data-count="true">
+      Watch on GitHub
+    </a>
+    <a class="socialite github-fork" href="https://github.com/WPN-XM/WPN-XM" data-user="WPN-XM" data-repo="WPN-XM" data-type="fork" data-count="true">
+      Fork on GitHub
+    </a>
+    <a class="socialite twitter-follow" href="https://twitter.com/WPNXM" data-dnt="true" rel="nofollow" target="_blank">
+      Follow @WPNXM
+    </a>
+    <a class="socialite twitter-share" href="http://twitter.com/share" data-url="http://wpn-xm.org" data-dnt="true" rel="nofollow" target="_blank">
+      Share on Twitter
+    </a>
+    <a class="socialite googleplus-one" href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://wpn-xm.org"
+       data-size="medium" data-href="http://wpn-xm.org" rel="nofollow" target="_blank">
+      Share on Google+
+    </a>
+    <a class="socialite facebook-like" href="http://www.facebook.com/sharer.php?u=http://wpn-xm.org"
+       data-href="http://wpn-xm.org" data-send="false" data-layout="button_count" data-width="90"
+       data-show-faces="false" data-font="segoe ui" rel="nofollow" target="_blank">
+      Share on Facebook
+    </a>
+  </div>
+
+  <hr>
+
   <div class="span-8 rounded inset-panel mc-is">
     <h3 id="about">What is WPN-XM?</h3>
     <p><strong>WPN-XM is a free &amp; open source web server solution stack for professional PHP development on the Windows platform</strong>.</p>
@@ -507,6 +533,8 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
 </script>
+<script src="js/socialite.min.js"></script>
+<script src="js/socialite.github.js"></script>
 <script type="text/javascript">
 $.ajax({
   type : "GET",
@@ -543,5 +571,9 @@ function populateComponentList(data) {
   elem.html('<li style="color: #999999;"><span id="windows-icon" itemprop="operatingSystem"> Windows </span><small>w32</small></li>');
   elem.append(items.join(''));
 };
+
+$(document).ready(function() {
+  Socialite.load($('.sellout-buttons'));
+});
 </script>
 </body></html>

@@ -602,3 +602,10 @@ th, td, caption {
     font-size: 9.75px;
     padding: 1px 6px;
 }
+
+.sellout-buttons > div {
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 10px;
+}
