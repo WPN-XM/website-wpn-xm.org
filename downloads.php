@@ -199,7 +199,7 @@ if (!empty($type) && ($type === 'json')) {
     $version = '0.0.0';
     $onlyOneW32 = $onlyOneW64 = true;
 
-    $html = '<table border="1" style="width:98%;">';
+    $html = '<table border="1">';
 
     foreach ($downloads as $download) {
 
