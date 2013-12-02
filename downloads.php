@@ -123,6 +123,12 @@ foreach (glob("./downloads/*.exe") as $filename) {
     }
     $details['version'] = $version;
 
+    // installer name - WPNXM-0.5.4-BigPack-Setup-w32
+    if(preg_match('#WPNXM-'.$version.'-(.*)-Setup#', $file, $matches)) {
+        $installer = strtolower($matches[1]);
+    }
+    $details['installer'] = $installer;
+
     // platform
     if (preg_match("#(w32|w64)#", $file, $matches)) {
         $details['platform'] = $matches[0];
@@ -245,10 +251,16 @@ if (!empty($type) && ($type === 'json')) {
         $html .= '<tr><td>SHA-1</td><td>' . $download['sha1'] . '</td></tr>';
 
         // Components
-        $html .= '<tr><td colspan="3">Components</td></tr>';
+        if($download['installer'] === 'webinstaller') {
+           $html .= '<tr><td colspan="3">Latest Components fetched from the Web</td></tr>';
+        } else {
+           $html .= '<tr><td colspan="3">Components</td></tr>';
+        }
         $html .= '<tr><td colspan="3">';
-        $registry_file = __DIR__ . '/wpnxm-software-registry-' . $version . '.csv';
+        $platform = isset($download['platform']) ? '-'.$download['platform'] : '';
+        $registry_file = __DIR__ . '/registry/wpnxm-software-registry-' . $download['installer'] .'-'. $version . $platform . '.csv';
         if (is_file($registry_file) === true) {
+
             $csvData = file_get_contents($registry_file);
             $lines = explode("\n", $csvData);
             array_pop($lines);
@@ -264,6 +276,7 @@ if (!empty($type) && ($type === 'json')) {
                 if ($c != $i) { $html .= ', '; }
             }
         }
+        unset($csvArray);
         $html .= '</td></tr>';
 
         //$html .= '<tr><td>' . $download['link'] . '</td></tr>';
