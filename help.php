@@ -53,20 +53,20 @@ $type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
 // map for wizard page integers to their full page names
 // see http://www.jrsoftware.org/ishelp/index.php?topic=wizardpages
 $wizardPages = array(
-    '1' => 'Welcome',
-    '2' => 'License-Agreement',
-    '3' => 'Password',
-    '4' => 'Information',
-    '5' => 'User-Information',
-    '6' => 'Select-Destination-Location',
-    '7' => 'Select-Components',
-    '8' => 'Select-Start-Menu-Folder',
-    '9' => 'Select-Tasks',
-   '10' => 'Ready-To-Install',
-   '11' => 'Preparing-To-Install',
-   '12' => 'Installing',
-   '13' => 'Information',
-   '14' => 'Setup-Completed'
+    '1' => 'welcome',
+    '2' => 'license-agreement',
+    '3' => 'password',
+    '4' => 'information',
+    '5' => 'user-information',
+    '6' => 'select-destination-location',
+    '7' => 'select-components',
+    '8' => 'select-start-menu-folder',
+    '9' => 'select-tasks',
+   '10' => 'ready-to-install',
+   '11' => 'preparing-to-install',
+   '12' => 'installing',
+   '13' => 'information',
+   '14' => 'setup-completed'
 );
 
 // map for wizard types with correct case
