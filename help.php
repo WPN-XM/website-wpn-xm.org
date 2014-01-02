@@ -73,7 +73,8 @@ $wizardPages = array(
 $wizardTypes = array(
     'webinstaller' => 'Webinstaller',
     'allinone' => 'AllInOne',
-    'bigpack' => 'BigPack'
+    'bigpack' => 'BigPack',
+    'lite' => 'Lite'
 );
 
 if(!empty($type) && !empty($version) && !empty($language) && !empty($page))
