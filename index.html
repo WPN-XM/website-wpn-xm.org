@@ -587,7 +587,7 @@ function populateComponentList(data) {
 
   $.each(data, function (id, option) {
     /* skip clansuite */
-    if(option.name == 'Clansuite') {
+    if((option.name == 'Clansuite') || (option.name == '')) {
         return true;
     }
 
