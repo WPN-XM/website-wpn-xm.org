@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html><head>
+	<title>WPN-XM Server Stack RESTful web API Documentation v0.0.1</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="assets/css.css" rel="stylesheet" type="text/css">
+	<link href="assets/bootstrap.css" rel="stylesheet" media="screen">
+	<link href="assets/prettify.css" rel="stylesheet" media="screen">
+	<link href="assets/style.css" rel="stylesheet" media="screen">
+	<link href="assets/favicon.ico" rel="icon" type="image/x-icon">
+</head>
+<body>
+<div id="border"></div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+            <div id="sidenav">
+                <ul class="sidenav nav nav-list affix">
+                    <li class="nav-fixed nav-header" data-group="introduction"><a href="#api-introduction">Introduction</a></li>
+                    <li class="nav-header" data-group="Download"><a href="#api-Download">Download</a></li>
+                    <li data-group="Download" data-name="CertainVersion" data-version="0.0.1"><a href="#api-Download-CertainVersion">Download a component</a></li>
+                    <li data-group="Download" data-name="LatestVersion" data-version="0.0.1"><a href="#api-Download-LatestVersion">Download a latest version</a></li>
+                    <li class="nav-header" data-group="Download"><a href="#api-Version">Version</a></li>
+                    <li data-group="Version" data-name="LatestVersions" data-version="0.0.1"><a href="#api-Version-LatestVersions">List latest versions</a></li>
+                    <li data-group="Version" data-name="CompareVersions" data-version="0.0.1"><a href="#api-Version-CompareVersion">Compare version</a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div id="content">
+
+            <div id="project">
+                <div class="pull-left">
+                    <h1>WPN-XM Server Stack REST API Documentation</h1>
+                    <h2>A RESTful web API to the Software Components Registry of the WPN-XM Server Stack.</h2>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="sections">
+
+                <div id="apidoc">
+
+                <div id="api-introduction" class="apidoc">
+                    <h1>Introduction</h1>
+                    <p>This document describes the REST interface, which provides access to the
+                        Software Components Registry of the WPN-XM Server Stack.</p>
+                    <h2>API Client</h2>
+                    <p>For convenience, you might install the PHP client for this API.</p>
+                    <p>It is provided as a Composer library.</p>
+                    <h2>Installation</h2>
+                    <p>To install the the PHP client as a local, per-project dependency to your project,
+                        simply add a dependency on <code>wpn-xm/api-client</code> to your project's <code>composer.json</code> file, like so:
+                    </p>
+                    <pre><code>{
+    "require" : {
+        "wpn-xm/api-client" : "*"
+    }
+}</code></pre></div>
+            </div>
+
+                <section id="api-Download">
+
+                    <h1>Download</h1>
+
+                    <div id="api-Download-CertainVersion">
+
+                        <article id="api-Download-CertainVersion-0.0.1" data-group="Download" data-name="CertainVersion" data-version="0.0.1">
+                            <div class="pull-left">
+                                <h1>Download - Download a certain version of a component</h1>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <pre style="" class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/download/:component/:version</span></code></pre>
+
+                            <h2>Parameter</h2>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 30%">Field</th>
+                                        <th style="width: 10%">Type</th>
+                                        <th style="width: 60%">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="code">component</td>
+                                        <td>String</td>
+                                        <td>Name of the Software Component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="code">version</td>
+                                        <td>String</td>
+                                        <td>Version of the Software Component.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h2>Success (302)</h2>
+                            <p>A 302 Moved Temporarily response is sent, redirecting to the download URL of the software component.</p>
+
+
+                            <h2>Error (404)</h2>
+                            <p>A 404 header response is sent, when the requested software component or version was not found.</p>
+
+                            <strong> Response </strong>
+                            <pre style="" class="prettyprint language-json prettyprinted" data-type="json">
+<code><span class="pln">HTTP</span><span class="pun">/</span><span class="lit">1.1</span><span class="pln"> </span><span class="lit">404</span><span class="pln"> </span><span class="typ">Not</span><span class="pln"></span><span class="typ">Found</span><span class="pln"></span>
+</code></pre>
+                        </article>
+                    </div>
+
+                    <div id="api-Download-LatestVersion">
+
+                        <article id="api-Download-LatestVersion-0.0.1" data-group="Download" data-name="LatestVersion" data-version="0.0.1">
+                            <div class="pull-left">
+                                <h1>Download - Download the latest version of a component</h1>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <pre style="" class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/download/:component</span></code></pre>
+
+                            <h2>Parameter</h2>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 30%">Field</th>
+                                        <th style="width: 10%">Type</th>
+                                        <th style="width: 60%">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="code">component</td>
+                                        <td>String</td>
+                                        <td>Name of the Software Component.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h2>Success (302)</h2>
+                            <p>A 302 Moved Temporarily response is sent, redirecting to the download URL of the software component.</p>
+
+                            <h2>Error (404)</h2>
+                            <p>A 404 header response is sent, when the requested software component was not found.</p>
+
+                            <strong> Response </strong>
+                            <pre style="" class="prettyprint language-json prettyprinted" data-type="json">
+<code><span class="pln">HTTP</span><span class="pun">/</span><span class="lit">1.1</span><span class="pln"> </span><span class="lit">404</span><span class="pln"> </span><span class="typ">Not</span><span class="pln"></span><span class="typ">Found</span><span class="pln"></span>
+</code></pre>
+                        </article>
+                    </div>
+
+                </section>
+
+                 <section id="api-Version">
+
+                    <h1>Version</h1>
+
+                    <div id="api-Version-LatestVersions">
+                        <article id="api-Version-LatestVersions-0.0.1" data-group="Version" data-name="LatestVersions" data-version="0.0.1">
+                            <div class="pull-left">
+                                <h1>Version - List latest versions of the Software Components Registry</h1>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <pre style="" class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/versions/latest</span></code></pre>
+
+                            <h2>Success (200)</h2>
+                            <pre style="" class="prettyprint language-json prettyprinted" data-type="json">
+<code><span class="pln">HTTP</span><span class="pun">/</span><span class="lit">1.1</span><span class="pln"> </span><span class="lit">200</span><span class="pln"> </span><span class="typ">Ok</span><span class="pln"></span>
+{
+  "adminer" : {
+    "latest" : {
+      "url" : "http://garr.dl.sourceforge.net/project/adminer/Adminer/Adminer%204.0.3/adminer-4.0.3.php",
+      "version" : "4.0.3"
+    },
+    "name" : "Adminer",
+    "website" : "http://adminer.org/"
+  },
+  ....
+}
+</code></pre>
+
+                        </article>
+                    </div>
+
+                    <div id="api-Version-CompareVersion">
+
+                        <article id="api-Version-Compare-0.0.1" data-group="Version" data-name="CompareVersion" data-version="0.0.1">
+                            <div class="pull-left">
+                                <h1>Version - Determine, if a certain version of a component is the latest version</h1>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <pre style="" class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/version/:component/:version</span></code></pre>
+
+                            <h2>Parameter</h2>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 30%">Field</th>
+                                        <th style="width: 10%">Type</th>
+                                        <th style="width: 60%">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="code">component</td>
+                                        <td>String</td>
+                                        <td>Name of the Software Component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="code">version</td>
+                                        <td>String</td>
+                                        <td>Version of the Software Component.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h2>Success (200)</h2>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 30%">Field</th>
+                                        <th style="width: 10%">Type</th>
+                                        <th style="width: 60%">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="code">software</td>
+                                        <td>String</td>
+                                        <td>Name of the Software Component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="code">your_version</td>
+                                        <td>String</td>
+                                        <td>Your Version of the Software Component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="code">latest_version</td>
+                                        <td>String</td>
+                                        <td>The latest version number of the Software Component.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="code">href</td>
+                                        <td>String</td>
+                                        <td>The download URL of the latest version.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="code">message</td>
+                                        <td>String</td>
+                                        <td>The update immediately message.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <strong>Response for "GET /version/nginx/1.2.1"</strong>
+                            <pre style="" class="prettyprint language-json prettyprinted" data-type="json">
+<code><span class="pln">HTTP</span><span class="pun">/</span><span class="lit">1.1</span><span class="pln"> </span><span class="lit">200</span><span class="pln"> </span><span class="typ">Ok</span><span class="pln"></span>
+<span class="pun">{</span>
+      <span class="str">"software"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"nginx"</span>,
+      <span class="str">"your_version"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"1.2.1"</span>,
+      <span class="str">"latest_version"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"1.5.10"</span>,
+      <span class="str">"href"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"http:\/\/nginx.org\/download\/nginx-1.5.10.zip"</span>,
+      <span class="str">"message"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"You are running an old version of nginx and should update immediately."</span>
+<span class="pun">}</span></code></pre>
+
+                            <h2>Error (404)</h2>
+                            <p>A 404 header response is sent, when the requested software component or version was not found.</p>
+
+                            <strong> Response </strong>
+                            <pre style="" class="prettyprint language-json prettyprinted" data-type="json">
+<code><span class="pln">HTTP</span><span class="pun">/</span><span class="lit">1.1</span><span class="pln"> </span><span class="lit">404</span><span class="pln"> </span><span class="typ">Not</span><span class="pln"></span><span class="typ">Found</span><span class="pln"></span>
+</code></pre>
+                        </article>
+                    </div>
+
+                 </section>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
