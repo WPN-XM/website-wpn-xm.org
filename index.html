@@ -76,6 +76,15 @@
 </head>
 
 <body>
+<!-- Facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/de_DE/all.js#xfbml=1&appId=1398546803746885";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <!-- Fork me on Github Ribbon -->
 <a href="https://github.com/WPN-XM/WPN-XM">
@@ -202,15 +211,11 @@
       Share on Twitter
     </a>
     <a class="socialite googleplus-one" href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://wpn-xm.org/"
-       data-size="medium" data-href="http://wpn-xm.org" rel="nofollow" target="_blank">
+       data-size="medium" data-href="http://wpn-xm.org/" rel="nofollow" target="_blank">
       Share on Google+
     </a>
-    <a class="socialite facebook-like" href="http://www.facebook.com/sharer.php?u=http://wpn-xm.org/"
-       data-href="http://wpn-xm.org" data-send="false" data-layout="button_count" data-width="90"
-       data-show-faces="true" data-share="true" data-font="segoe ui" rel="nofollow" target="_blank">
-      Share on Facebook
-    </a>
-    <div>
+    <div class="fb-like" data-href="http://wpn-xm.org/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+   <div>
       <span id="a2itemwidget"></span> <script type="text/javascript" src="http://api.alternativeto.net/software/wpn-xm/widgetjs/light"></script>
     </div>
   </div>
