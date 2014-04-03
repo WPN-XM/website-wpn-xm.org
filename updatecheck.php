@@ -80,7 +80,7 @@ if (!empty($s) && array_key_exists($s, $registry) ) {
             'software'       => $s,
             'your_version'   => $v,
             'latest_version' => $registry[$s]['latest']['version'],
-            'href'           => $registry[$s]['latest']['url'],
+            'url'           => $registry[$s]['latest']['url'],
             'message'        => 'You are running an old version of ' . $s . ' and should update immediately.'
         );
 
