@@ -64,17 +64,13 @@ if (!empty($s) && $s === 'all') {
         $data[$software]['latest'] = $details['latest'];
     }
 
-    // send response as json message
-    header('Content-Type: application/json');
-    echo json_encode($data);
-    exit(0);
+    sendJsonResponse($data);
 }
 
 // does the requested software exist in our registry?
 if (!empty($s) && array_key_exists($s, $registry) ) {
-    // compare versions
-    if (version_compare($v, $registry[$s]['latest']['version'], '<') ) {
 
+    if (version_compare($v, $registry[$s]['latest']['version'], '<') ) {
        // prepare json data
        $data = array (
             'software'       => $s,
@@ -83,15 +79,21 @@ if (!empty($s) && array_key_exists($s, $registry) ) {
             'url'           => $registry[$s]['latest']['url'],
             'message'        => 'You are running an old version of ' . $s . ' and should update immediately.'
         );
-
     } else {
         // prepare json data
         $data = array('message' => 'You are running the latest version.');
-
     }
-    // send response as json message
-    header('Content-Type: application/json');
-    echo json_encode($data);
+
+    sendJsonResponse($data);
 } else {
     echo 'Request Error. Specify parameters "s" and "v".';
+}
+
+/**
+ * Send JSON response
+ */
+function sendJsonResponse($json) {
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit(0);
 }
