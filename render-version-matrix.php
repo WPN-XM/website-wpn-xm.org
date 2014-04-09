@@ -37,6 +37,9 @@ $registry  = include __DIR__ . '/registry/wpnxm-software-registry.php';
 
 // Installation Wizard Registries
 $wizardFiles = glob(__DIR__ . '/registry/*.json');
+if(empty($wizardFiles) === true) {
+    exit('No JSON registries found.');
+}
 $wizardRegistries = array();
 foreach($wizardFiles as $file) {
 	$name = str_replace('wpnxm-software-registry-', '', basename($file, '.json'));
