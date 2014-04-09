@@ -94,6 +94,6 @@ if (!empty($s) && array_key_exists($s, $registry) ) {
  */
 function sendJsonResponse($json) {
     header('Content-Type: application/json');
-    echo json_encode($data);
+    echo json_encode($json);
     exit(0);
 }
