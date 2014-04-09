@@ -33,10 +33,10 @@
  */
 
 // WPNXM Software Registry
-$registry  = include __DIR__ . '\registry\wpnxm-software-registry.php';
+$registry  = include __DIR__ . '/registry/wpnxm-software-registry.php';
 
 // Installation Wizard Registries
-$wizardFiles = glob(__DIR__ . '\registry\*.json');
+$wizardFiles = glob(__DIR__ . '/registry/*.json');
 $wizardRegistries = array();
 foreach($wizardFiles as $file) {
 	$name = str_replace('wpnxm-software-registry-', '', basename($file, '.json'));
