@@ -59,9 +59,9 @@ if (!empty($s) && $s === 'all') {
     // reduce the registry (drop all version numbers and their URLs, but keep name/website/latestversion)
     $data = array();
     foreach ($registry as $software => $details) {
-        $data[$software]['name'] = isset($details['name']) ? $details['name'] : '';
-        $data[$software]['website'] =  isset($details['website']) ? $details['website'] : '';
-        $data[$software]['latest'] = $details['latest'];
+        $data[$software]['name']    = isset($details['name']) ? $details['name'] : '';
+        $data[$software]['website'] = isset($details['website']) ? $details['website'] : '';
+        $data[$software]['latest']  = $details['latest'];
     }
 
     sendJsonResponse($data);
@@ -76,7 +76,7 @@ if (!empty($s) && array_key_exists($s, $registry) ) {
             'software'       => $s,
             'your_version'   => $v,
             'latest_version' => $registry[$s]['latest']['version'],
-            'url'           => $registry[$s]['latest']['url'],
+            'url'            => $registry[$s]['latest']['url'],
             'message'        => 'You are running an old version of ' . $s . ' and should update immediately.'
         );
     } else {
