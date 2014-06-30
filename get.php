@@ -51,13 +51,34 @@ $v = filter_input(INPUT_GET, 'v', FILTER_SANITIZE_STRING);
 
 // does the requested software exist in our registry?
 if (!empty($s) && array_key_exists($s, $registry)) {
-    // yes, and does the requested version of it exist?
-    if (!empty($v) && array_key_exists($v, $registry[$s])) {
-        // yes, return download url
-        header("Location: " . $registry[$s][$v]); // e.g. $registry['nginx']['1.2.1'];
+
+    /**
+     * If the software component is a PHP extension, then 
+     * we have to take the php_version into account, when fetching the url.
+     * The version => url relationship has one level more: version => php_version => url.
+     */
+    if(strpos($s, 'phpext_') !== false) {
+        // $_GET['p'] = php version for extensions, default version is php 5.5
+        $p = ($p = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_STRING)) ? $p : '5.5';
+        // does the requested version exist?
+        if (!empty($v) && array_key_exists($v, $registry[$s]) && array_key_exists($p, $registry[$s][$v])) {
+            // yes, return download url
+            header("Location: " . $registry[$s][$v][$p]); // e.g. $registry['nginx']['1.2.1']['5.5'];
+        } else {
+            // no, requested version not existing, return latest version for php default version instead
+            header("Location: " . $registry[$s]['latest']['url'][$p]); // e.g. $registry['nginx']['latest']['url']['5.5'];
+        }
     } else {
-        // no, requested version not existing, return latest version instead
-        header("Location: " . $registry[$s]['latest']['url']); // e.g. $registry['nginx']['latest']['url'];
+        // Normal version => url relationships
+
+        // does the requested version exist?
+        if (!empty($v) && array_key_exists($v, $registry[$s])) {
+            // yes, return download url
+            header("Location: " . $registry[$s][$v]); // e.g. $registry['nginx']['1.2.1'];
+        } else {
+            // no, requested version not existing, return latest version instead
+            header("Location: " . $registry[$s]['latest']['url']); // e.g. $registry['nginx']['latest']['url'];
+        }
     }
 } else {
     // software does not exist, download will fail.
