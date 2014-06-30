@@ -257,10 +257,15 @@ if (!empty($type) && ($type === 'json')) {
            $html .= '<tr><td colspan="3">Components</td></tr>';
         }
         $html .= '<tr><td colspan="3">';
-        $platform = isset($download['platform']) ? '-'.$download['platform'] : '';
-        $registry_file = __DIR__ . '/registry/wpnxm-software-registry-' . $download['installer'] .'-'. $version . $platform . '.csv';
-        if (is_file($registry_file) === true) {
 
+        // load CSV or (from version 0.8.0 on) JSON
+        $extension = ($version <= '0.7.0') ? '.csv' : '.json';
+
+        $platform = isset($download['platform']) ? '-' . $download['platform'] : '';
+
+        $registry_file = __DIR__ . '/registry/wpnxm-software-registry-' . $download['installer'] .'-'. $version . $platform . $extension;
+
+        if (is_file($registry_file) === true) {
             $csvData = file_get_contents($registry_file);
             $lines = explode("\n", $csvData);
             array_pop($lines);
@@ -269,6 +274,7 @@ if (!empty($type) && ($type === 'json')) {
                 $csvArray[] = str_getcsv($line);
             }
         }
+
         if (isset($csvArray) === true) {
             $c = count($csvArray)-1;
             foreach ($csvArray as $i => $component) {
@@ -277,6 +283,7 @@ if (!empty($type) && ($type === 'json')) {
             }
         }
         unset($csvArray);
+
         $html .= '</td></tr>';
 
         //$html .= '<tr><td>' . $download['link'] . '</td></tr>';
