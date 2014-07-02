@@ -53,7 +53,7 @@ $v = filter_input(INPUT_GET, 'v', FILTER_SANITIZE_STRING);
 if (!empty($s) && array_key_exists($s, $registry)) {
 
     /**
-     * If the software component is a PHP extension, then 
+     * If the software component is a PHP extension, then
      * we have to take the php_version into account, when fetching the url.
      * The version => url relationship has one level more: version => php_version => url.
      */
@@ -64,9 +64,12 @@ if (!empty($s) && array_key_exists($s, $registry)) {
         if (!empty($v) && array_key_exists($v, $registry[$s]) && array_key_exists($p, $registry[$s][$v])) {
             // yes, return download url
             header("Location: " . $registry[$s][$v][$p]); // e.g. $registry['nginx']['1.2.1']['5.5'];
-        } else {
+        } elseif(array_key_exists($p, $registry[$s]['latest']['url'][$p])) {
             // no, requested version not existing, return latest version for php default version instead
             header("Location: " . $registry[$s]['latest']['url'][$p]); // e.g. $registry['nginx']['latest']['url']['5.5'];
+        } else {
+            // software does not exist, download will fail.
+            header("HTTP/1.0 404 Not Found");
         }
     } else {
         // Normal version => url relationships
