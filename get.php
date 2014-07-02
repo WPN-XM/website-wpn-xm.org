@@ -64,7 +64,7 @@ if (!empty($s) && array_key_exists($s, $registry)) {
         if (!empty($v) && array_key_exists($v, $registry[$s]) && array_key_exists($p, $registry[$s][$v])) {
             // yes, return download url
             header("Location: " . $registry[$s][$v][$p]); // e.g. $registry['nginx']['1.2.1']['5.5'];
-        } elseif(array_key_exists($p, $registry[$s]['latest']['url'][$p])) {
+        } elseif(array_key_exists($p, $registry[$s]['latest']['url'])) {
             // no, requested version not existing, return latest version for php default version instead
             header("Location: " . $registry[$s]['latest']['url'][$p]); // e.g. $registry['nginx']['latest']['url']['5.5'];
         } else {
