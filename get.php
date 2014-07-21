@@ -48,6 +48,7 @@ if (!is_array($registry)) {
 $s = filter_input(INPUT_GET, 's', FILTER_SANITIZE_STRING);
 // $_GET['v'] = version
 $v = filter_input(INPUT_GET, 'v', FILTER_SANITIZE_STRING);
+$v = ($v === 'latest') ? null : $v; // unset any latest requests, it defaults to latest
 
 // does the requested software exist in our registry?
 if (!empty($s) && array_key_exists($s, $registry)) {
