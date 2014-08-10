@@ -117,21 +117,32 @@ foreach (glob("./downloads/*.exe") as $filename) {
     // size
     $details['size'] = filesize_formatted($filename);
 
-    // version
-    if (preg_match("#(\d+\.\d+(\.\d+)*)#", $file, $matches)) {
-        $version = $matches[0];
+    // WPNXM-0.5.4-BigPack-Setup - without PHP version constraint
+    if(substr_count($file, '-') === 3) {
+        if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup.exe/', $file, $matches)) {
+            $details['version'] =  $matches['version'];
+            $details['installer'] = $matches['installer'];
+            $details['platform'] = 'w32';
+        }
     }
-    $details['version'] = $version;
 
-    // installer name - WPNXM-0.5.4-BigPack-Setup-w32
-    if(preg_match('#WPNXM-'.$version.'-(.*)-Setup#', $file, $matches)) {
-        $installer = strtolower($matches[1]);
+    // WPNXM-0.5.4-BigPack-Setup-w32
+        if(substr_count($file, '-') === 4) {
+        if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<bitsize>.*).exe/', $file, $matches)) {
+            $details['version'] =  $matches['version'];
+            $details['installer'] = $matches['installer'];
+            $details['platform'] = $matches['bitsize']; //w32|w64
+        }
     }
-    $details['installer'] = $installer;
 
-    // platform
-    if (preg_match("#(w32|w64)#", $file, $matches)) {
-        $details['platform'] = $matches[0];
+    // WPNXM-0.8.0-Full-Setup-PHP54-w32
+    if(substr_count($file, '-') === 5) {
+        if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<phpversion>.*)-(?<bitsize>.*).exe/', $file, $matches)) {
+            $details['version'] =  $matches['version'];
+            $details['installer'] = $matches['installer'];
+            $details['phpversion'] = $matches['phpversion'];
+            $details['platform'] = $matches['bitsize']; //w32|w64
+        }
     }
 
     // md5 & sha1 hashes / checksums
@@ -146,21 +157,22 @@ foreach (glob("./downloads/*.exe") as $filename) {
 
     // release notes, e.g. https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3
     $details['release_notes'] = '<a class="btn btn-large btn-info"'
-            . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v' . $version . '">Release Notes</a>';
+            . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v' . $details['version'] . '">Release Notes</a>';
 
     // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/0.5.2/changelog.txt
     $details['changelog'] = '<a class="btn btn-large btn-info"'
-            . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $version . '/changelog.txt">Changelog</a>';
+            . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $details['version'] . '/changelog.txt">Changelog</a>';
 
     // component list with version numbers
+
     // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
     $details['github_tag'] = '<a class="btn btn-large btn-info"'
-            . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $version . '">Github Tag</a>';
+            . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $details['version'] . '">Github Tag</a>';
 
     // date
     $details['date'] = date('d.m.Y', filectime($filename));
 
-    // add to downloads array
+    // add download details to downloads array
     $downloads[] = $details;
 
     // reset array for next loop
@@ -185,6 +197,7 @@ $downloads['versions'] = array_unique($versions);
 
 // debug
 // var_dump($downloads);
+
 // ----- GET
 // accept "type" as a get parameter, e.g. index.php?type=json
 $type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
@@ -258,31 +271,23 @@ if (!empty($type) && ($type === 'json')) {
         }
         $html .= '<tr><td colspan="3">';
 
-        // load CSV or (from version 0.8.0 on) JSON
-        $extension = ($version <= '0.7.0') ? '.csv' : '.json';
-
         $platform = isset($download['platform']) ? '-' . $download['platform'] : '';
 
-        $registry_file = __DIR__ . '/registry/wpnxm-software-registry-' . $download['installer'] .'-'. $version . $platform . $extension;
+        // set from 0.8.0 on
+        $phpversion = isset($download['phpversion']) ? '-' . $download['phpversion'] : '';
+
+        $registry_file = __DIR__ . '/registry/' . strtolower($download['installer']) .'-'. $version . $phpversion . $platform . '.json';
 
         if (is_file($registry_file) === true) {
-            $csvData = file_get_contents($registry_file);
-            $lines = explode("\n", $csvData);
-            array_pop($lines);
-            $csvArray = array();
-            foreach ($lines as $line) {
-                $csvArray[] = str_getcsv($line);
-            }
-        }
+            $installerRegistry = json_decode(file_get_contents($registry_file));
 
-        if (isset($csvArray) === true) {
-            $c = count($csvArray)-1;
-            foreach ($csvArray as $i => $component) {
-                $html .= '<span style="font-weight:bold;">' . ucfirst($component[0]) . '</span> ' . $component[3];
-                if ($c != $i) { $html .= ', '; }
+            $i_total = count($installerRegistry);
+            foreach ($installerRegistry as $i => $component) {
+                    $html .= '<span style="font-weight:bold;">' . ucfirst($component[0]) . '</span> ' . $component[3];
+                    $html .= ($i+1 !== $i_total) ? ', ' : '';
             }
+            unset($installerRegistry);
         }
-        unset($csvArray);
 
         $html .= '</td></tr>';
 
