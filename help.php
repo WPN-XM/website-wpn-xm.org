@@ -70,11 +70,15 @@ $wizardPages = array(
 );
 
 // map for wizard types with correct case
+// see line with "#define InstallerType" in the iss files
 $wizardTypes = array(
     'webinstaller' => 'Webinstaller',
     'allinone' => 'AllInOne',
     'bigpack' => 'BigPack',
-    'lite' => 'Lite'
+    'lite' => 'Lite',
+    // from v0.8.0 on
+    'standard' => 'Standard',
+    'full' => 'Full'
 );
 
 if(!empty($type) && !empty($version) && !empty($language) && !empty($page))
