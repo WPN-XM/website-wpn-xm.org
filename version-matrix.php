@@ -18,13 +18,75 @@ $registry  = include __DIR__ . '/registry/wpnxm-software-registry.php';
 
 // Installation Wizard Registries
 $wizardFiles = glob(__DIR__ . '/registry/*.json');
+
 if(empty($wizardFiles) === true) {
     exit('No JSON registries found.');
 }
+
 $wizardRegistries = array();
 foreach($wizardFiles as $file) {
     $name = basename($file, '.json');
-    $wizardRegistries[$name] = fixArraySoftwareAsKey(json_decode(file_get_contents($file), true));
+
+    if(substr_count($name, '-') === 2) {
+        preg_match('/(?<installer>.*)-(?<version>.*)-(?<bitsize>.*)/i', $name, $parts);
+    }
+
+    if(substr_count($name, '-') === 3) {
+        preg_match('/(?<installer>.*)-(?<version>.*)-(?<phpversion>.*)-(?<bitsize>.*)/i', $name, $parts);
+    }
+
+    $parts = dropNumericKeys($parts);
+    $wizardRegistries[$name]['constraints'] = $parts;
+    unset($parts);
+
+    // load registry
+    $registryContent = issetOrDefault(json_decode(file_get_contents($file), true), array());
+    $wizardRegistries[$name]['registry'] = fixArraySoftwareAsKey($registryContent);
+}
+
+$wizardRegistries = sortWizardRegistries($wizardRegistries);
+
+/**
+ * Sort Wizard registries from low to high version number,
+ * with -next- registries at the bottom.
+ */
+function sortWizardRegistries($wizardRegistries)
+{
+    uasort($wizardRegistries, "versionCompare");
+
+    $cnt = countNextRegistries($wizardRegistries);
+
+    // copy
+    $nextRegistries = array_slice($wizardRegistries, 0, $cnt, true);
+
+    // reduce
+    for($i = 1; $i <= $cnt; $i++) {
+        array_shift($wizardRegistries);
+    }
+
+    // append (to bottom)
+    $wizardRegistries = array_merge($wizardRegistries, $nextRegistries);
+
+    return $wizardRegistries;
+}
+
+function countNextRegistries($registries)
+{
+    $cnt = 0;
+
+    foreach($registries as $registry)
+    {
+        if($registry['constraints']['version'] === 'next') {
+            $cnt = $cnt + 1;
+        }
+    }
+
+    return $cnt;
+}
+
+function versionCompare($a, $b)
+{
+   return version_compare($a['constraints']['version'], $b['constraints']['version'], ">=");
 }
 
 function fixArraySoftwareAsKey($array) {
