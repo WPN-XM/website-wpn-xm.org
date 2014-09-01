@@ -133,6 +133,7 @@ function getVersion($registry, $software)
 
 function renderTableHeader(array $wizardRegistries)
 {
+    $header = '';
     foreach($wizardRegistries as $wizardName => $wizardRegistry) {
         $header .= '<th>' . $wizardName. '</th>';
         $i++;
