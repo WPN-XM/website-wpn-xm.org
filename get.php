@@ -41,13 +41,13 @@ if (!empty($s) && array_key_exists($s, $registry)) {
         // $_GET['p'] = php version for extensions, default version is php 5.5
         $p = ($p = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_STRING)) ? $p : '5.5';
         // $_GET['bitsize'] = php bitsize for extensions, default version is x86
-        $bitsize = ($bitsize = filter_input(INPUT_GET, 'bitsize', FILTER_SANITIZE_STRING)) ? $p : 'x86';
+        $bitsize = ($bitsize = filter_input(INPUT_GET, 'bitsize', FILTER_SANITIZE_STRING)) ? $bitsize : 'x86';
 
         // does the requested version exist?
-        if (!empty($v) && array_key_exists($v, $registry[$s]) && array_key_exists($p, $registry[$s][$v])) {
+        if (!empty($v) && array_key_exists($v, $registry[$s]) && array_key_exists($p, $registry[$s][$v][$bitsize][$p])) {
             // yes, return download url
             header("Location: " . $registry[$s][$v][$bitsize][$p]); // e.g. $registry['phpext_xdebug']['1.2.1']['x86']['5.5'];
-        } elseif(array_key_exists($p, $registry[$s]['latest']['url'])) {
+        } elseif(array_key_exists($p, $registry[$s]['latest']['url'][$bitsize])) {
             // no, requested version not existing, return latest version for php default version instead
             header("Location: " . $registry[$s]['latest']['url'][$bitsize][$p]); // e.g. $registry['phpext_xdebug']['latest']['url']['x86']['5.5'];
         } else {
