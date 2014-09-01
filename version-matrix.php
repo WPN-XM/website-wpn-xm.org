@@ -16,7 +16,12 @@
 // WPNXM Software Registry
 $registry  = include __DIR__ . '/registry/wpnxm-software-registry.php';
 
-// Installation Wizard Registries
+/**
+ * Installation Wizard Registries
+ * - fetch the registry files
+ * - split filenames to get version constraints (e.g. version, lite, php5.4, w32, w64)
+ * - restructure the arrays for sorting and better iteration
+ */
 $wizardFiles = glob(__DIR__ . '/registry/*.json');
 
 if(empty($wizardFiles) === true) {
@@ -98,7 +103,6 @@ function fixArraySoftwareAsKey($array) {
     }
     return $out;
 }
-
 function dropNumericKeys(array $array)
 {
     foreach ($array as $key => $value) {
@@ -127,33 +131,38 @@ function getVersion($registry, $software)
     return '&nbsp;';
 }
 
-function renderCell($registry, $software)
+function renderTableHeader(array $wizardRegistries)
 {
-    return '<td>' . isVersion($registry, $software) . '</td>';
-}
-
-function renderTableHeader($wizardRegistries)
-{
-    $header = '';
     foreach($wizardRegistries as $wizardName => $wizardRegistry) {
-        $header .= '<td>' . $wizardName. '</td>';
+        $header .= '<th>' . $wizardName. '</th>';
+        $i++;
     }
     return $header;
 }
 
-function renderTableCells($wizardRegistries, $software)
+function renderTableCells(array $wizardRegistries, $software)
 {
     $cells = '';
     foreach($wizardRegistries as $wizardName => $wizardRegistry) {
-        $cells .= '<td>' . getVersion($wizardRegistry, $software) . '</td>';
+        // normal versions
+        if(isset($wizardRegistry['registry'][$software]) === true) {
+            $cells .= '<td class="version-number">' . $wizardRegistry['registry'][$software] . '</td>';
+        } else {
+            $cells .= '<td>&nbsp;</td>';
+        }
     }
+
     return $cells;
 }
+
 ?>
 
-<table class="table table-condensed table-bordered">
+<table id="version-matrix" class="table table-condensed table-bordered table-version-matrix" style="width: auto !important; padding: 0px; vertical-align: middle;">
 <thead>
-    <th>Software</th> <?php echo renderTableHeader($wizardRegistries); ?>
+    <tr>
+        <th>Software Components (<?php echo count($registry); ?>)</th>
+        <?php echo renderTableHeader($wizardRegistries); ?>
+    </tr>
 </thead>
 <?php
 foreach($registry as $software => $data)
