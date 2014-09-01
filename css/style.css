@@ -250,7 +250,7 @@ big-and-bold a {
 }*/
 
 .big-and-bold {
-    font-size: 1.4em;
+    font-size: 14px;
     font-weight: bold;
     text-align: left;
 }
