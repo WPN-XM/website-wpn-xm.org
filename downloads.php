@@ -116,7 +116,7 @@ foreach (glob("./downloads/*.exe") as $filename) {
         }
     }
 
-    // WPNXM-0.8.0-Full-Setup-PHP54-w32
+    // WPNXM-0.8.0-Full-Setup-php54-w32
     if(substr_count($file, '-') === 5) {
         if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<phpversion>.*)-(?<bitsize>.*).exe/', $file, $matches)) {
             $details['version'] =  $matches['version'];
@@ -140,15 +140,18 @@ foreach (glob("./downloads/*.exe") as $filename) {
     $details['release_notes'] = '<a class="btn btn-large btn-info"'
             . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v' . $details['version'] . '">Release Notes</a>';
 
+    // put "v" in front to get a properly versionized tag, starting from version "0.8.0"
+    $version = (version_compare($details['version'], '0.8.0')) ? $details['version'] : 'v' . $details['version'];
+
     // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/0.5.2/changelog.txt
     $details['changelog'] = '<a class="btn btn-large btn-info"'
-            . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $details['version'] . '/changelog.txt">Changelog</a>';
+            . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $version . '/changelog.txt">Changelog</a>';
 
     // component list with version numbers
 
     // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
     $details['github_tag'] = '<a class="btn btn-large btn-info"'
-            . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $details['version'] . '">Github Tag</a>';
+            . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $version . '">Github Tag</a>';
 
     // date
     $details['date'] = date('d.m.Y', filectime($filename));
@@ -245,17 +248,21 @@ if (!empty($type) && ($type === 'json')) {
         $html .= '<tr><td>SHA-1</td><td>' . $download['sha1'] . '</td></tr>';
 
         // Components
-        if($download['installer'] === 'webinstaller') {
+        if('webinstaller' === strtolower($download['installer'])) {
            $html .= '<tr><td colspan="3">Latest Components fetched from the Web</td></tr>';
         } else {
            $html .= '<tr><td colspan="3">Components</td></tr>';
         }
+
         $html .= '<tr><td colspan="3">';
 
         $platform = isset($download['platform']) ? '-' . $download['platform'] : '';
 
-        // set from 0.8.0 on
+        // set PHP version starting from 0.8.0 on
         $phpversion = isset($download['phpversion']) ? '-' . $download['phpversion'] : '';
+
+        // PHP version dot fix
+        $phpversion = str_replace('php5', 'php5.', $phpversion);
 
         $registry_file = __DIR__ . '/registry/' . strtolower($download['installer']) .'-'. $version . $phpversion . $platform . '.json';
 
