@@ -228,7 +228,6 @@ if (!empty($type) && ($type === 'json')) {
 
     unset($downloads['versions'], $downloads['latest_version'], $downloads['latest_version_release_date']);
     $version = '0.0.0';
-    $onlyOneW32 = $onlyOneW64 = true;
 
     $html = '<table border="1">';
 
@@ -253,18 +252,6 @@ if (!empty($type) && ($type === 'json')) {
 
             // (re-)activate platform rendering after a version number change
             $onlyOneW32 = $onlyOneW64 = true;
-        }
-
-        // platform w32/w64
-        if (isset($download['platform']) === true) { // old releases don't have a platform set
-            if ($download['platform'] === 'w32' && $onlyOneW32 === true) {
-                $html .= '<tr><td colspan=3>Windows 32-bit</td></tr>';
-                $onlyOneW32 = false;
-            }
-            if ($download['platform'] === 'w64' && $onlyOneW64 === true) {
-                $html .= '<tr><td colspan=3>Windows 64-bit</td></tr>';
-                $onlyOneW64 = false;
-            }
         }
 
         // download details
