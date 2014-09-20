@@ -226,7 +226,7 @@ if (!empty($type) && ($type === 'json')) {
     //echo 'Latest Version: <b>'. $downloads[0]['version'].'</b>';
     //echo 'Released: <b>'. $downloads[0]['date'] . '</b>';
 
-    unset($downloads['versions'], $downloads['latest_version']);
+    unset($downloads['versions'], $downloads['latest_version'], $downloads['latest_version_release_date']);
     $version = '0.0.0';
     $onlyOneW32 = $onlyOneW64 = true;
 
