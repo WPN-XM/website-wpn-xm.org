@@ -90,9 +90,6 @@ function sha1_checksum($filename)
     return $sha1;
 }
 
-# http website and base path for downloads
-$website = 'http://wpn-xm.org/';
-
 // ----- Gather details for all available files
 
 $downloads = array();
@@ -141,7 +138,7 @@ foreach (glob("./downloads/*.exe") as $filename) {
     $details['sha1'] = sha1_checksum(substr($filename, 2));
 
     // download URL
-    $details['download_url'] = $website . 'downloads/' . $file;
+    $details['download_url'] = 'http://wpn-xm.org/downloads/' . $file;
 
     // download link
     $details['link'] = '<a href="' . $details['download_url'] . '">' . $file . '</a>';
