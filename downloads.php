@@ -298,6 +298,10 @@ if (!empty($type) && ($type === 'json')) {
                 $onlyOneTimePhpExtensionsPrefix = false;
                 foreach ($installerRegistry as $i => $component) {
 
+                        if($component[0] === 'phpext_xcache') { // removed from registry, still in 0.7.0 and breaking it
+                            continue;
+                        }
+
                         if(false !== strpos($component[0], 'phpext_')) {
                             if($onlyOneTimePhpExtensionsPrefix === false) {
                                 $html .= 'PHP Extension(s): ';
