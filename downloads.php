@@ -271,8 +271,8 @@ if (!empty($type) && ($type === 'json')) {
         $html .= '<table border=1 width="100%">';
         $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
         $html .= '<tr><td><div class="btn btn-mini bold">' . $download['size'] . '</div></td><td>';
-        $html .= '<button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>&nbsp;';
-        $html .= '<button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button>';
+        $html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>&nbsp;';
+        $html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button>';
         $html .= '</td></tr>';
 
         // Components
