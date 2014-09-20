@@ -254,10 +254,9 @@ if (!empty($type) && ($type === 'json')) {
         // download details
         $html .= '<td colspan="2">';
         $html .= '<table border=1 width="100%">';
-        $html .= '<tr rowspan="2" width="85%"><td><a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></td></tr>';
-        $html .= '<tr><td>';
-        $html .= '<span class="bold">' . $download['size'] . '</span>';
-        $html .= '<button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>';
+        $html .= '<th rowspan="2" width="85%"><a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
+        $html .= '<tr><td><span class="bold">' . $download['size'] . '</span></td><td>';
+        $html .= '<button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>&nbsp;';
         $html .= '<button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button>';
         $html .= '</td></tr>';
 
