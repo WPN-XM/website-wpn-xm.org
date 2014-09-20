@@ -298,7 +298,7 @@ if (!empty($type) && ($type === 'json')) {
                 $onlyOneTimePhpExtensionsPrefix = false;
                 foreach ($installerRegistry as $i => $component) {
 
-                        if(false !== strpos('phpext_', $component)) {
+                        if(false !== strpos($component, 'phpext_')) {
                             if($onlyOneTimePhpExtensionsPrefix === false) {
                                 $html .= 'PHP Extension(s): ';
                                 $onlyOneTimePhpExtensionsPrefix = true;
