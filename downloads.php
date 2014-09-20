@@ -230,6 +230,14 @@ if (!empty($type) && ($type === 'json')) {
 } else {
     // send html page
 
+    // load software components registry
+    $registry = include __DIR__ . '/registry/wpnxm-software-registry.php';
+
+    // ensure registry array is available
+    if (!is_array($registry)) {
+        header("HTTP/1.0 404 Not Found");
+    }
+
     //echo 'Latest Version: <b>'. $downloads[0]['version'].'</b>';
     //echo 'Released: <b>'. $downloads[0]['date'] . '</b>';
 
@@ -287,8 +295,20 @@ if (!empty($type) && ($type === 'json')) {
                 $installerRegistry = json_decode(file_get_contents($registry_file));
 
                 $i_total = count($installerRegistry);
+                $onlyOneTimePhpExtensionsPrefix = false;
                 foreach ($installerRegistry as $i => $component) {
-                        $html .= '<span style="font-weight:bold;">' . ucfirst($component[0]) . '</span> ' . $component[3];
+
+                        if(false !== strpos('phpext_', $component)) {
+                            if($onlyOneTimePhpExtensionsPrefix === false) {
+                                $html .= 'PHP Extension(s): ';
+                                $onlyOneTimePhpExtensionsPrefix = true;
+                            }
+                            $name = str_replace('PHP Extension ', '', $registry[ $component[0] ]['name']);
+                        } else {
+                            $name = $registry[ $component[0] ]['name'];
+                        }
+
+                        $html .= '<span style="font-weight:bold;">' . $name . '</span> ' . $component[3];
                         $html .= ($i+1 !== $i_total) ? ', ' : '';
                 }
                 unset($installerRegistry);
