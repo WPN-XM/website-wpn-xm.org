@@ -167,8 +167,8 @@ foreach (glob("./downloads/*.exe") as $filename) {
 // order downloads - latest version first
 arsort($downloads);
 
-// add "latest" as array key, referring to the latest version of WPN-XM
-$downloads['latest_version'] = $downloads[0]['version'];
+// reindex
+array_splice($downloads, 0, 0);
 
 // add "versions", listing "all available version"
 $versions = array();
@@ -179,8 +179,38 @@ foreach ($downloads as $download) {
 }
 $downloads['versions'] = array_unique($versions);
 
+// add "latest" as array key, referring to the latest version of WPN-XM
+$downloads['latest_version'] = $downloads[0]['version'];
+$downloads['latest_version_release_date'] = $downloads[0]['date'];
+
 // debug
-// var_dump($downloads);
+// echo '<pre>' . htmlentities(var_export($downloads, true)) . '</pre>';
+
+/*
+    Example Downloads Array
+
+    link, release_notes, changelog, github_tag are HTML anchor tags.
+
+    array (
+      39 =>
+      array (
+        'file' => 'WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe',
+        'size' => '1.59 MB',
+        'version' => '0.8.0',
+        'installer' => 'Webinstaller',
+        'phpversion' => 'php56',
+        'platform' => 'w64',
+        'md5' => '6ae27511a06bfbc98472283b30565913',
+        'sha1' => '7258ed16afe86611572e1b5ea9f879b41adf4be1',
+        'download_url' => 'http://wpn-xm.org/downloads/WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe',
+        'link' => '<a href="http://wpn-xm.org/downloads/WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe">WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe</a>',
+        'release_notes' => '<a class="btn btn-large btn-info"href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.8.0">Release Notes</a>',
+        'changelog' => '<a class="btn btn-large btn-info"href="https://github.com/WPN-XM/WPN-XM/blob/v0.8.0/changelog.txt">Changelog</a>',
+        'github_tag' => '<a class="btn btn-large btn-info"href="https://github.com/WPN-XM/WPN-XM/tree/v0.8.0">Github Tag</a>',
+        'date' => '20.09.2014',
+      ),
+
+*/
 
 // ----- GET
 // accept "type" as a get parameter, e.g. index.php?type=json
@@ -193,10 +223,8 @@ if (!empty($type) && ($type === 'json')) {
 } else {
   // send html page
 
-  /*
-     // Latest Version: <b><?= $downloads['latest_version']; </b>
-     // Released: <b><?= $downloads[0]['date']; </b>
-  */
+    //echo 'Latest Version: <b>'. $downloads[0]['version'].'</b>';
+    //echo 'Released: <b>'. $downloads[0]['date'] . '</b>';
 
     unset($downloads['versions'], $downloads['latest_version']);
     $version = '0.0.0';
@@ -244,8 +272,8 @@ if (!empty($type) && ($type === 'json')) {
         $html .= '<th rowspan="4" width="85%">';
         $html .= '<a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
         $html .= '<tr><td width="20%">Size</td><td><span class="bold">' . $download['size'] . '</span></td></tr>';
-        $html .= '<tr><td>MD5</td><td>' . $download['md5'] . '</td></tr>';
-        $html .= '<tr><td>SHA-1</td><td>' . $download['sha1'] . '</td></tr>';
+        $html .= '<tr><td><button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>';
+        $html .= '<button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button></td></tr>';
 
         // Components
         if('webinstaller' === strtolower($download['installer'])) {
@@ -278,15 +306,6 @@ if (!empty($type) && ($type === 'json')) {
             $html .= '</td></tr>';
         }
 
-        //$html .= '<tr><td>' . $download['link'] . '</td></tr>';
-        //$html .= '<tr><td>Released: ' . $download['date'] . '</td></tr>';
-        //$html .= '<tr><td>' . $download['file'] . '</td></tr>';
-        //$html .= '<tr><td>v' . $download['version'] . '</td></tr>';
-        //$html .= '<tr><td>' . $download['platform'] . '</td></tr>';
-        //$html .= '<tr><td>' . $download['download_url'] . '</td></tr>';
-        //$html .= '<tr><td>' . $download['release_notes'] . '</td></tr>';
-        //$html .= '<tr><td>' . $download['changelog'] . '</td></tr>';
-        //$html .= '<tr><td>' . $download['github_tag'] . '</td></tr>';
         $html .= '</table>';
         $html .= '</td></tr>';
     }

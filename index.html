@@ -244,37 +244,37 @@
       </div>
     </div>
 
-      <div class="centered">
-        <!-- download the full package via the download icon -->
+    <div class="centered">
+      <!-- download the full package via the download icon -->
+      <a itemprop="downloadUrl" onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.7.0-AllInOne-Setup-w32.exe']);"
+         href="http://wpn-xm.org/downloads/WPNXM-0.7.0-AllInOne-Setup-w32.exe">
+         <div class="download-icon"></div>
+      </a>
+      <p>
+        <a itemprop="downloadUrl" onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.7.0-Webinstaller-Setup-w32.exe']);"
+           href="http://wpn-xm.org/downloads/WPNXM-0.7.0-Webinstaller-Setup-w32.exe" class="bold">
+           Webinstaller (~1 MB)</a>
+        <br/>
         <a itemprop="downloadUrl" onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.7.0-AllInOne-Setup-w32.exe']);"
-           href="http://wpn-xm.org/downloads/WPNXM-0.7.0-AllInOne-Setup-w32.exe">
-           <div class="download-icon"></div>
-        </a>
-        <p>
-          <a itemprop="downloadUrl" onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.7.0-Webinstaller-Setup-w32.exe']);"
-             href="http://wpn-xm.org/downloads/WPNXM-0.7.0-Webinstaller-Setup-w32.exe" class="bold">
-             Webinstaller (~1 MB)</a>
-          <br/>
-          <a itemprop="downloadUrl" onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.7.0-AllInOne-Setup-w32.exe']);"
-             href="http://wpn-xm.org/downloads/WPNXM-0.7.0-AllInOne-Setup-w32.exe" class="bold">
-             All-In-One Installer (~88 MB)</a>
-          <br/>
-          <a itemprop="downloadUrl" onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.7.0-Lite-Setup-w32.exe']);"
-             href="http://wpn-xm.org/downloads/WPNXM-0.7.0-Lite-Setup-w32.exe" class="bold">
-             Lite Installer (~51 MB)</a>
-          <br/>
-          <a itemprop="downloadUrl" onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.7.0-BigPack-Setup-w32.exe']);"
-             href="http://wpn-xm.org/downloads/WPNXM-0.7.0-BigPack-Setup-w32.exe" class="bold">
-             Big-Pack Installer (~296 MB)</a>
-        </p>
-        <a class="bold" href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.7.0">Release Notes</a>
+           href="http://wpn-xm.org/downloads/WPNXM-0.7.0-AllInOne-Setup-w32.exe" class="bold">
+           All-In-One Installer (~88 MB)</a>
         <br/>
-           <small>(<span itemprop="datePublished" content="2014-04-12">12.Apr.2013</span>)</small>
+        <a itemprop="downloadUrl" onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.7.0-Lite-Setup-w32.exe']);"
+           href="http://wpn-xm.org/downloads/WPNXM-0.7.0-Lite-Setup-w32.exe" class="bold">
+           Lite Installer (~51 MB)</a>
         <br/>
-        <a class="bold" href="https://raw.github.com/WPN-XM/WPN-XM/master/changelog.txt">Changelog</a>
-        <br/>
-        <a id="git" href="https://github.com/WPN-XM/WPN-XM/"> Source Repository</a>
-      </div>
+        <a itemprop="downloadUrl" onclick="_gaq.push(['_trackPageview', 'http://wpn-xm.org/downloads/WPNXM-0.7.0-BigPack-Setup-w32.exe']);"
+           href="http://wpn-xm.org/downloads/WPNXM-0.7.0-BigPack-Setup-w32.exe" class="bold">
+           Big-Pack Installer (~296 MB)</a>
+      </p>
+      <a class="bold" href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.7.0">Release Notes</a>
+      <br/>
+         <small>(<span itemprop="datePublished" content="2014-04-12">12.Apr.2013</span>)</small>
+      <br/>
+      <a class="bold" href="https://raw.github.com/WPN-XM/WPN-XM/master/changelog.txt">Changelog</a>
+      <br/>
+      <a id="git" href="https://github.com/WPN-XM/WPN-XM/"> Source Repository</a>
+    </div>
 
   </div>
 
@@ -515,6 +515,7 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
 </script>
+<script src="/js/jquery.zeroclipboard.min.js"></script>
 <script src="/js/socialite.min.js"></script>
 <script src="/js/socialite.github.js"></script>
 <script type="text/javascript">
@@ -551,6 +552,20 @@ function populateComponentList(data) {
 
 $(document).ready(function() {
   Socialite.load($('.sellout-buttons'));
+});
+
+/*
+   ZeroClipboard is used to copy hashes to the clipboard.
+   The text to copy is set with a HTML data-attribute named "zclip-text"
+   on elements using class="zclip".
+*/
+jQuery(document).ready(function($) {
+  $("body")
+    .on("copy", ".zclip", function(/* ClipboardEvent */ e) {
+      e.clipboardData.clearData();
+      e.clipboardData.setData("text/plain", $(this).data("zclip-text"));
+      e.preventDefault();
+    });
 });
 </script>
 </body></html>
