@@ -563,11 +563,6 @@ function populateComponentList(data) {
   var items = [];
 
   $.each(data, function (id, option) {
-    /* skip clansuite */
-    if((option.name == 'Clansuite') || (option.name == '')) {
-        return true;
-    }
-
     items.push('<li><a href="' + option.website + '">' + option.name + '</a> <small>' + option.latest.version + '</small></li>');
   });
 
