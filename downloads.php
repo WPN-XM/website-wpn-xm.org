@@ -251,33 +251,32 @@ if (!empty($type) && ($type === 'json')) {
         if('webinstaller' === strtolower($download['installer'])) {
            $html .= '<tr><td colspan="3">Latest Components fetched from the Web</td></tr>';
         } else {
-           $html .= '<tr><td colspan="3">Components</td></tr>';
-        }
+            $html .= '<tr><td colspan="3">Components</td></tr>';
+            $html .= '<tr><td colspan="3">';
 
-        $html .= '<tr><td colspan="3">';
+            $platform = isset($download['platform']) ? '-' . $download['platform'] : '';
 
-        $platform = isset($download['platform']) ? '-' . $download['platform'] : '';
+            // set PHP version starting from 0.8.0 on
+            $phpversion = isset($download['phpversion']) ? '-' . $download['phpversion'] : '';
 
-        // set PHP version starting from 0.8.0 on
-        $phpversion = isset($download['phpversion']) ? '-' . $download['phpversion'] : '';
+            // PHP version dot fix
+            $phpversion = str_replace('php5', 'php5.', $phpversion);
 
-        // PHP version dot fix
-        $phpversion = str_replace('php5', 'php5.', $phpversion);
+            $registry_file = __DIR__ . '/registry/' . strtolower($download['installer']) .'-'. $version . $phpversion . $platform . '.json';
 
-        $registry_file = __DIR__ . '/registry/' . strtolower($download['installer']) .'-'. $version . $phpversion . $platform . '.json';
+            if (is_file($registry_file) === true) {
+                $installerRegistry = json_decode(file_get_contents($registry_file));
 
-        if (is_file($registry_file) === true) {
-            $installerRegistry = json_decode(file_get_contents($registry_file));
-
-            $i_total = count($installerRegistry);
-            foreach ($installerRegistry as $i => $component) {
-                    $html .= '<span style="font-weight:bold;">' . ucfirst($component[0]) . '</span> ' . $component[3];
-                    $html .= ($i+1 !== $i_total) ? ', ' : '';
+                $i_total = count($installerRegistry);
+                foreach ($installerRegistry as $i => $component) {
+                        $html .= '<span style="font-weight:bold;">' . ucfirst($component[0]) . '</span> ' . $component[3];
+                        $html .= ($i+1 !== $i_total) ? ', ' : '';
+                }
+                unset($installerRegistry);
             }
-            unset($installerRegistry);
-        }
 
-        $html .= '</td></tr>';
+            $html .= '</td></tr>';
+        }
 
         //$html .= '<tr><td>' . $download['link'] . '</td></tr>';
         //$html .= '<tr><td>Released: ' . $download['date'] . '</td></tr>';
