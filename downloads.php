@@ -228,6 +228,7 @@ if (!empty($type) && ($type === 'json')) {
 
     unset($downloads['versions'], $downloads['latest_version'], $downloads['latest_version_release_date']);
     $version = '0.0.0';
+    $onlyOneW32 = $onlyOneW64 = true;
 
     $html = '<table border="1">';
 
@@ -249,15 +250,29 @@ if (!empty($type) && ($type === 'json')) {
             $html .= $download['github_tag'];
             $html .= '</td>';
             $html .= '</tr>';
+
+            // (re-)activate platform rendering after a version number change
+            $onlyOneW32 = $onlyOneW64 = true;
+        }
+
+        // platform w32/w64
+        if (isset($download['platform']) === true) { // old releases don't have a platform set
+            if ($download['platform'] === 'w32' && $onlyOneW32 === true) {
+                $html .= '<tr><td colspan=3>Windows 32-bit</td></tr>';
+                $onlyOneW32 = false;
+            }
+            if ($download['platform'] === 'w64' && $onlyOneW64 === true) {
+                $html .= '<tr><td colspan=3>Windows 64-bit</td></tr>';
+                $onlyOneW64 = false;
+            }
         }
 
         // download details
         $html .= '<td colspan="2">';
         $html .= '<table border=1 width="100%">';
-        $html .= '<tr rowspan="4" width="85%">';
-        $html .= '<td><a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></td>';
-        $html .= '<td><span class="bold">' . $download['size'] . '</span></td>';
-        $html .= '<td>';
+        $html .= '<th rowspan="4" width="85%"><a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
+        $html .= '<tr><td>';
+        $html .= '<span class="bold">' . $download['size'] . '</span>';
         $html .= '<button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>';
         $html .= '<button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button>';
         $html .= '</td></tr>';
