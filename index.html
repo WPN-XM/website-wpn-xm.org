@@ -227,29 +227,7 @@
   <div class="span-7 rounded inset-panel mc-is">
     <h3 id="components">Registry Status</h3>
     <ul id="components-list" class="unstyled-list big-and-bold">
-      <li style="color: #999999;"><span id="windows-icon" itemprop="operatingSystem"> Windows </span><small>w32</small></li>
-      <li><a href="http://php.net/">PHP <small>5.4.17</small></a></li>
-      <li><a href="http://nginx.org/">Nginx <small>1.5.2</small></a></li>
-      <li><a href="http://xdebug.org/">XDebug <small>2.2.3</small></a></li>
-      <li><a href="http://mariadb.org/">MariaDB <small>5.5.31</small></a></li>
-      <li><a href="http://adminer.org/">Adminer <small>3.7.1</small></a></li>
-      <li><a href="http://phpmyadmin.net/">phpMyAdmin <small>4.0.4</small></a></li>
-      <li><a href="http://getcomposer.org/">Composer</a></li>
-      <li><a href="http://pear.php.net/">PEAR</a></li>
-      <li><a href="http://php.net/manual/de/book.apc.php/">APC <small>3.1.14</small></a></li>
-      <li><a href="http://technet.microsoft.com/de-de/sysinternals/bb896768.aspx">Junction</a></li>
-      <li><a href="http://www.junopen.com/memadmin/">Memadmin <small>1.0.12</small></a></li>
-      <li><a href="http://memcached.org/">Memcached <small>1.4.5</small></a></li>
-      <li><a href="http://mongodb.org/">MongoDB <small>2.5.0</small></a></li>
-      <li><a href="http://postgresql.org/">PostgreSQL <small>9.3.0</small></a></li>
-      <li><a href="http://slproweb.com/">OpenSSL <small>1.0.1e</small></a></li>
-      <li><a href="http://www.mongodb.org/display/DOCS/PHP+Language+Center/">phpext_mongo <small>1.3.7</small></a></li>
-      <li><a href="https://github.com/facebook/xhprof/">XHProf <small>0.10.3</small></a></li>
-      <li><a href="http://code.google.com/p/phpmemcacheadmin/">phpMemcachedAdmin <small>1.2.2</small></a></li>
-      <li><a href="http://rockmongo.org/">RockMongo <small>1.1.5</small></a></li>
-      <li><a href="http://glob.com.au/sendmail/">Fake Sendmail</a></li>
-      <li><a href="http://code.google.com/p/webgrind/">Webgrind</a></li>
-      <li><a href="http://wpn-xm.org/">WPN-XM SCP <small>0.4.0</small></a></li>
+      <!-- This element (components-list) is populated by populateComponentList(). -->
     </ul>
   </div>
 
@@ -464,8 +442,9 @@
     <div class="slider-wrapper">
       <div class="slider-background rounded mc-is" style="height: auto;">
         <h3 id="download">Downloads</h3>
-        <!-- Downloads List-->
-        <div id="downloads-list"></div>
+        <div id="downloads-list">
+          <!-- This element (downloads-list) is populated by populateDownloadList(). -->
+        </div>
       </div>
     </div>
   </div>
@@ -566,7 +545,7 @@ function populateComponentList(data) {
     items.push('<li><a href="' + option.website + '">' + option.name + '</a> <small>' + option.latest.version + '</small></li>');
   });
 
-  elem.html('<li style="color: #999999;"><span id="windows-icon" itemprop="operatingSystem"> Windows </span><small>w32</small></li>');
+  elem.html('<li style="color: #999999;"><span id="windows-icon" itemprop="operatingSystem"> Windows </span><small>w32 & w64</small></li>');
   elem.append(items.join(''));
 };
 
