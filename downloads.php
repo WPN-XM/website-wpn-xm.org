@@ -238,19 +238,20 @@ if (!empty($type) && ($type === 'json')) {
         if ($version != $download['version']) {
             $version = $download['version'];
 
-            $html .= '<tr><td width="50%" style="vertical-align: bottom;"><h2>';
-            $html .= 'WPN-XM v' . $version . '&nbsp;&nbsp;&nbsp;';
-            $html .= '<small>' . $new_date = date('d M Y', strtotime($download['date'])) . '</small>';
-            $html .= '</h2></td>';
+            $html .= '<tr>';
+            $html .= '<td width="50%" style="vertical-align: bottom;">';
+            $html .= '<h2>WPN-XM v' . $version . '&nbsp;<small>' . date('d M Y', strtotime($download['date'])) . '</small></h2>';
+            $html .= '</td>';
 
             // print release notes, changelog, github tag once per version
             $html .= '<td>';
             $html .= $download['release_notes'] . '&nbsp;';
             $html .= $download['changelog']. '&nbsp;';
             $html .= $download['github_tag'];
-            $html .= '</td></tr>';
+            $html .= '</td>';
+            $html .= '</tr>';
 
-            // activate platform rendering after version number change
+            // (re-)activate platform rendering after a version number change
             $onlyOneW32 = $onlyOneW64 = true;
         }
 
@@ -269,11 +270,12 @@ if (!empty($type) && ($type === 'json')) {
         // download details
         $html .= '<td colspan="2">';
         $html .= '<table border=1 width="100%">';
-        $html .= '<th rowspan="4" width="85%">';
-        $html .= '<a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
-        $html .= '<tr><td width="20%">Size</td><td><span class="bold">' . $download['size'] . '</span></td></tr>';
-        $html .= '<tr><td><button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>';
-        $html .= '<button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button></td></tr>';
+        $html .= '<th rowspan="4" width="85%"><a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
+        $html .= '<tr><td>';
+        $html .= '<span class="bold">' . $download['size'] . '</span>';
+        $html .= '<button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>';
+        $html .= '<button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button>';
+        $html .= '</td></tr>';
 
         // Components
         if('webinstaller' === strtolower($download['installer'])) {
