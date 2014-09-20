@@ -221,7 +221,7 @@ if (!empty($type) && ($type === 'json')) {
     header('Content-Type: application/json');
     echo json_encode($downloads);
 } else {
-  // send html page
+    // send html page
 
     //echo 'Latest Version: <b>'. $downloads[0]['version'].'</b>';
     //echo 'Released: <b>'. $downloads[0]['date'] . '</b>';
@@ -249,15 +249,12 @@ if (!empty($type) && ($type === 'json')) {
             $html .= $download['github_tag'];
             $html .= '</td>';
             $html .= '</tr>';
-
-            // (re-)activate platform rendering after a version number change
-            $onlyOneW32 = $onlyOneW64 = true;
         }
 
         // download details
         $html .= '<td colspan="2">';
         $html .= '<table border=1 width="100%">';
-        $html .= '<th rowspan="4" width="85%"><a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
+        $html .= '<th rowspan="2" width="85%"><a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
         $html .= '<tr><td>';
         $html .= '<span class="bold">' . $download['size'] . '</span>';
         $html .= '<button id="copy-to-clipboard" class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>';
@@ -268,8 +265,7 @@ if (!empty($type) && ($type === 'json')) {
         if('webinstaller' === strtolower($download['installer'])) {
            $html .= '<tr><td colspan="3">Latest Components fetched from the Web</td></tr>';
         } else {
-            $html .= '<tr><td colspan="3">Components</td></tr>';
-            $html .= '<tr><td colspan="3">';
+            $html .= '<tr><td colspan="3">Components<p>';
 
             $platform = isset($download['platform']) ? '-' . $download['platform'] : '';
 
@@ -292,7 +288,7 @@ if (!empty($type) && ($type === 'json')) {
                 unset($installerRegistry);
             }
 
-            $html .= '</td></tr>';
+            $html .= '</p></td></tr>';
         }
 
         $html .= '</table>';
