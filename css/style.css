@@ -6,7 +6,7 @@
     font-size: 12px;
 }
 
-.container {width:850px;margin:0 auto;}
+.container { width:930px; margin:0 auto;}
 
 @font-face {
     font-family: 'WPNXMicoRegular';
@@ -43,7 +43,7 @@ a {
 }
 
 /** checkmark = 2, heart= k, download: } **/
-.WPNXMicoRegular, .mc-is h3:before, .download-icon {
+.WPNXMicoRegular, .mc-is h3:before, .red-download-icon, .download-icon {
     font-family: 'WPNXMicoRegular';
     font-style: normal;
     font-weight: normal;
@@ -138,13 +138,18 @@ a#git:before {
     font-size: 25px;
 }
 
-.download-icon {
+.red-download-icon {
     background-image: url("../images/download_now.png");
     height: 51px;
     width: 183px;
     margin-bottom: 15px;
     margin-top: 15px;
 }
+
+.download-icon {
+    font-size: 20px;
+}
+
 h3:before {
     color: #FB292D;
     display: inline-block;
