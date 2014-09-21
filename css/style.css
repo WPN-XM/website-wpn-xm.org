@@ -148,6 +148,7 @@ a#git:before {
 
 .download-icon {
     font-size: 20px;
+    text-shadow: 0;
 }
 
 h3:before {
