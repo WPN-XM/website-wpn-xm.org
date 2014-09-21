@@ -615,3 +615,47 @@ th, td, caption {
     margin: 0;
     padding: 8px;
 }
+
+/* download mini matrix */
+.tg  {
+  border-collapse:collapse;
+  border-spacing:0;
+  border-color:#999;
+  margin:0px auto;
+}
+.tg td {
+  font-family:Arial, sans-serif;
+  font-size:14px;
+  padding:10px 5px;
+  border-style:solid;
+  border-width:0px;
+  overflow:hidden;
+  word-break:normal;
+  border-color:#999;
+  color:#444;
+  border-top-width:1px;
+  border-bottom-width:1px;
+}
+.tg th {
+  font-family:Arial, sans-serif;
+  font-size:14px;
+  font-weight:normal;
+  padding:10px 5px;
+  border-style:solid;
+  border-width:0px;
+  overflow:hidden;
+  word-break:normal;
+  border-color:#999;
+  color:#fff;
+  background-color:#26ADE4;
+  border-top-width:1px;
+  border-bottom-width:1px;
+}
+.tg .tg-98aa {
+  font-size:12px;
+  font-weight: bold;
+  font-family:Verdana, Geneva, sans-serif !important;
+}
+.tg .tg-hnao {
+  text-align:center
+}
