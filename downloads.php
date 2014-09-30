@@ -329,4 +329,3 @@ if (!empty($type) && ($type === 'json')) {
     header('Content-Type: text/html; charset=utf-8');
     echo $html;
 }
-?>

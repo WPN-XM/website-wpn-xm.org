@@ -62,8 +62,7 @@ $wizardTypes = array(
     'full' => 'Full'
 );
 
-if(!empty($type) && !empty($version) && !empty($language) && !empty($page))
-{
+if(!empty($type) && !empty($version) && !empty($language) && !empty($page)) {
     // build URL
     // example URL: https://github.com/WPN-XM/WPN-XM/wiki/Installation-Wizard-Webinstaller-v0.6.0-de#Welcome
     $baseURL = 'https://github.com/WPN-XM/WPN-XM/wiki/';

@@ -79,8 +79,7 @@ function countNextRegistries($registries)
 {
     $cnt = 0;
 
-    foreach($registries as $registry)
-    {
+    foreach($registries as $registry) {
         if($registry['constraints']['version'] === 'next') {
             $cnt = $cnt + 1;
         }
@@ -94,7 +93,8 @@ function versionCompare($a, $b)
    return version_compare($a['constraints']['version'], $b['constraints']['version'], ">=");
 }
 
-function fixArraySoftwareAsKey($array) {
+function fixArraySoftwareAsKey($array)
+{
     $out = array();
     foreach($array as $key => $values) {
         $software = $values[0];
@@ -165,8 +165,7 @@ function renderTableCells(array $wizardRegistries, $software)
     </tr>
 </thead>
 <?php
-foreach($registry as $software => $data)
-{
+foreach($registry as $software => $data) {
     echo '<tr><td>' . $software . '</td>' . renderTableCells($wizardRegistries, $software) . '</tr>';
 }
 ?>
