@@ -76,7 +76,7 @@ h2 {
     text-shadow: 1px 1px 0 #AAAAAA;
 }
 
-h3#about:before {
+h3#sponsors:before, h3#about:before {
     content: "*"; /* heart icon */
 }
 
