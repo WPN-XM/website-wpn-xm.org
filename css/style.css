@@ -630,3 +630,7 @@ th, td, caption {
   text-align:center;
   font-size: 14px;
 }
+.margin-left-20 { /* margin of alternativeto button */
+  margin-left: 20px;   
+}
+}
