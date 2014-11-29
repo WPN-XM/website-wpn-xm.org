@@ -17,7 +17,7 @@ h2{font-family:Verdana;font-size:2em;text-align:center;padding-bottom:15px;text-
 h3#sponsors:before, h3#about:before{content:"*";}
 h3#components:before{content:"'";}
 h3#download:before{content:"(";}
-h3#imprint:before{content:"Â§";}
+h3#imprint:before{content:"§";}
 h3#twitter:before{content:"-";}
 h3#mail:before{content:"$";}
 h3#wiki:before{content:"$";}
