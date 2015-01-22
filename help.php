@@ -63,10 +63,15 @@ $wizardTypes = array(
 );
 
 if(!empty($type) && !empty($version) && !empty($language) && !empty($page)) {
-    // build URL
-    // example URL: https://github.com/WPN-XM/WPN-XM/wiki/Installation-Wizard-Webinstaller-v0.6.0-de#Welcome
-    $baseURL = 'https://github.com/WPN-XM/WPN-XM/wiki/';
-    $helpURL = $baseURL . 'Installation-Wizard-' . $wizardTypes[$type] . '-v' . $version . '-' . $language . '#' . $wizardPages[$page];
+    // build URL - https://github.com/WPN-XM/WPN-XM/wiki/Installation-Wizard-Webinstaller-v0.6.0-de#Welcome
+
+    $helpURL = sprintf(
+        'https://github.com/WPN-XM/WPN-XM/wiki/Installation-Wizard-%s-v%s-%s#%s',
+        $wizardTypes[$type],
+        $version,
+        $language,
+        $wizardPages[$page]
+    );
 
     // redirect
     header("Location: " . $helpURL);
