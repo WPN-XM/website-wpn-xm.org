@@ -90,7 +90,7 @@ function sha1_checksum($filename)
 
 function get_github_releases()
 {
-    $cache_file = __DIR__ . '/github-releases-cache.json';
+    $cache_file = __DIR__ . '/downloads/github-releases-cache.json';
 
     if (file_exists($cache_file) && (filemtime($cache_file) > (time() - (7 * 24 * 60 * 60)))) {
        // Use cache file, when not older than 7 days.
