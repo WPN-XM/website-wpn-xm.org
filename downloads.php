@@ -21,10 +21,8 @@
  * @param file $file
  * @return string Formatted Filesize.
  */
-function filesize_formatted($file)
+function filesize_formatted($bytes)
 {
-    $bytes = filesize($file);
-
     if ($bytes >= 1073741824) {
         return number_format($bytes / 1073741824, 2) . ' GB';
     } elseif ($bytes >= 1048576) {
@@ -90,7 +88,105 @@ function sha1_checksum($filename)
     return $sha1;
 }
 
+function get_github_releases()
+{
+    $cache_file = __DIR__ . '/github-releases-cache.json';
+
+    if (file_exists($cache_file) && (filemtime($cache_file) > (time() - (7 * 24 * 60 * 60)))) {
+       // Use cache file, when not older than 7 days.
+       $data = file_get_contents($cache_file);
+    } else {
+       // The cache is out-of-date. Load the JSON data from Github.
+       $data = curl_request();
+       file_put_contents($cache_file, $data, LOCK_EX);
+    }
+
+    $array = json_decode($data, true);
+
+    return $array;
+}
+
+function render_github_releases()
+{
+    $releases = get_github_releases();
+    $release = $releases[0];
+    unset($release['author']);
+
+    if($release['prerelease'] === false) {
+
+        $html = '<tr>';
+        $html .= '<td width="50%" style="vertical-align: bottom;">';
+        $html .= '<h2>' . $release['name'] . '&nbsp;<small>' . date('d M Y', strtotime($release['created_at'])) . '</small></h2>';
+        $html .= '</td>';
+
+        // release notes, e.g. https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3
+        $release_notes = '<a class="btn btn-large btn-info"'
+                . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-' . $release['tag_name'] . '">Release Notes</a>';
+
+        // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/0.5.2/changelog.txt
+        $changelog = '<a class="btn btn-large btn-info"'
+                . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $release['tag_name'] . '/changelog.txt">Changelog</a>';
+
+        // component list with version numbers
+
+        // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
+        $github_tag = '<a class="btn btn-large btn-info"'
+                . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $release['tag_name'] . '">Github Tag</a>';
+
+        // print release notes, changelog, github tag once per version
+        $html .= '<td>' . $release_notes . '&nbsp;' . $changelog . '&nbsp;' .  $github_tag .'</td>';
+        $html .= '</tr>';
+
+        foreach($release['assets'] as $idx => $asset) {
+            unset($asset['uploader'], $asset['url'], $asset['label'], $asset['content_type'], $asset['updated_at']);
+            #var_dump($asset);
+
+            // download details
+            $html .= '<tr><td colspan="2">';
+            $html .= '<table border=1 width="100%">';
+            $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $asset['browser_download_url'] .'">' . $asset['name'] . '</a></th>';
+            $html .= '<tr><td>';
+            $html .= '<div class="btn btn-mini bold">' . filesize_formatted($asset['size']) . '</div>&nbsp;';
+            $html .= '<div class="btn btn-mini bold">' .$asset['download_count']. '</div>';
+            $html .= '</td></tr></table>';
+
+            $html .= render_component_list_for_installer($asset['name']);
+        }
+
+        $html .= '</td></tr>';
+
+        return $html;
+    }
+}
+
+function curl_request()
+{
+    $headers[] = 'Accept: application/vnd.github.manifold-preview+json';
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.github.com/repos/wpn-xm/wpn-xm/releases',
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_SSL_VERIFYHOST => 0,
+        CURLOPT_SSL_VERIFYPEER => 0,
+        CURLOPT_HTTPHEADER => $headers,
+        CURLOPT_USERAGENT => 'wpn-xm.org - downloads page'
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+
+    return $response;
+}
+
 // ----- Gather details for all available files
+
+if(!is_dir(__DIR__ . '/downloads')) {
+    echo 'The downloads directory is missing.';
+    exit();
+}
 
 $downloads = array();
 $details = array();
@@ -103,35 +199,10 @@ foreach (glob("./downloads/*.exe") as $filename) {
     $details['file'] = $file;
 
     // size
-    $details['size'] = filesize_formatted($filename);
+    $bytes = filesize($filename);
+    $details['size'] = filesize_formatted($bytes);
 
-    // WPNXM-0.5.4-BigPack-Setup - without PHP version constraint
-    if(substr_count($file, '-') === 3) {
-        if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup.exe/', $file, $matches)) {
-            $details['version'] =  $matches['version'];
-            $details['installer'] = $matches['installer'];
-            $details['platform'] = 'w32';
-        }
-    }
-
-    // WPNXM-0.5.4-BigPack-Setup-w32
-        if(substr_count($file, '-') === 4) {
-        if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<bitsize>.*).exe/', $file, $matches)) {
-            $details['version'] =  $matches['version'];
-            $details['installer'] = $matches['installer'];
-            $details['platform'] = $matches['bitsize']; //w32|w64
-        }
-    }
-
-    // WPNXM-0.8.0-Full-Setup-php54-w32
-    if(substr_count($file, '-') === 5) {
-        if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<phpversion>.*)-(?<bitsize>.*).exe/', $file, $matches)) {
-            $details['version'] =  $matches['version'];
-            $details['installer'] = $matches['installer'];
-            $details['phpversion'] = $matches['phpversion'];
-            $details['platform'] = $matches['bitsize']; //w32|w64
-        }
-    }
+    $details = array_merge($details, get_installer_details($file));
 
     // md5 & sha1 hashes / checksums
     $details['md5'] = md5_checksum(substr($filename, 2));
@@ -246,6 +317,8 @@ if (!empty($type) && ($type === 'json')) {
 
     $html = '<table border="1">';
 
+    $html .= render_github_releases();
+
     foreach ($downloads as $download) {
 
         // print version only once for all files of that version
@@ -275,51 +348,7 @@ if (!empty($type) && ($type === 'json')) {
         $html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button>';
         $html .= '</td></tr>';
 
-        // Components
-        if('webinstaller' === strtolower($download['installer'])) {
-           $html .= '<tr><td colspan="3">Latest Components fetched from the Web</td></tr>';
-        } else {
-            $html .= '<tr><td colspan="3">Components<p>';
-
-            $platform = isset($download['platform']) ? '-' . $download['platform'] : '';
-
-            // set PHP version starting from 0.8.0 on
-            $phpversion = isset($download['phpversion']) ? '-' . $download['phpversion'] : '';
-
-            // PHP version dot fix
-            $phpversion = str_replace('php5', 'php5.', $phpversion);
-
-            $registry_file = __DIR__ . '/registry/' . strtolower($download['installer']) .'-'. $version . $phpversion . $platform . '.json';
-
-            if (is_file($registry_file) === true) {
-                $installerRegistry = json_decode(file_get_contents($registry_file));
-
-                $i_total = count($installerRegistry);
-                $onlyOneTimePhpExtensionsPrefix = false;
-                foreach ($installerRegistry as $i => $component) {
-
-                        if($component[0] === 'phpext_xcache') { // removed from registry, still in 0.7.0 and breaking it
-                            continue;
-                        }
-
-                        if(false !== strpos($component[0], 'phpext_')) {
-                            if($onlyOneTimePhpExtensionsPrefix === false) {
-                                $html .= 'PHP Extension(s): ';
-                                $onlyOneTimePhpExtensionsPrefix = true;
-                            }
-                            $name = str_replace('PHP Extension ', '', $registry[ $component[0] ]['name']);
-                        } else {
-                            $name = $registry[ $component[0] ]['name'];
-                        }
-
-                        $html .= '<span style="font-weight:bold;">' . $name . '</span> ' . $component[3];
-                        $html .= ($i+1 !== $i_total) ? ', ' : '';
-                }
-                unset($installerRegistry);
-            }
-
-            $html .= '</p></td></tr>';
-        }
+        $html .= render_component_list_for_installer($download['file']);
 
         $html .= '</table>';
         $html .= '</td></tr>';
@@ -328,4 +357,99 @@ if (!empty($type) && ($type === 'json')) {
 
     header('Content-Type: text/html; charset=utf-8');
     echo $html;
+}
+
+function get_installer_details($installer_filename)
+{
+    $details = array();
+
+    // WPNXM-0.5.4-BigPack-Setup - without PHP version constraint
+    if(substr_count($installer_filename, '-') === 3) {
+        if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup.exe/', $installer_filename, $matches)) {
+            $details['version'] =  $matches['version'];
+            $details['installer'] = $matches['installer'];
+            $details['platform'] = 'w32';
+        }
+    }
+
+    // WPNXM-0.5.4-BigPack-Setup-w32
+        if(substr_count($installer_filename, '-') === 4) {
+        if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<bitsize>.*).exe/', $installer_filename, $matches)) {
+            $details['version'] =  $matches['version'];
+            $details['installer'] = $matches['installer'];
+            $details['platform'] = $matches['bitsize']; //w32|w64
+        }
+    }
+
+    // WPNXM-0.8.0-Full-Setup-php54-w32
+    if(substr_count($installer_filename, '-') === 5) {
+        if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<phpversion>.*)-(?<bitsize>.*).exe/', $installer_filename, $matches)) {
+            $details['version'] =  $matches['version'];
+            $details['installer'] = $matches['installer'];
+            $details['phpversion'] = $matches['phpversion'];
+            $details['platform'] = $matches['bitsize']; //w32|w64
+        }
+    }
+
+    $details['name'] = $installer_filename;
+
+    return $details;
+}
+
+function render_component_list_for_installer($installer_name)
+{
+    global $registry;
+
+    $download = get_installer_details($installer_name);
+
+    $html = '';
+
+    // Components
+    if('webinstaller' === strtolower($download['installer'])) {
+       $html .= '<tr><td colspan="3">Latest Components fetched from the Web</td></tr>';
+    } else {
+        $html .= '<tr><td colspan="3">Components<p>';
+
+        $platform = isset($download['platform']) ? '-' . $download['platform'] : '';
+
+        // set PHP version starting from 0.8.0 on
+        $phpversion = isset($download['phpversion']) ? '-' . $download['phpversion'] : '';
+
+        // PHP version dot fix
+        $phpversion = str_replace('php5', 'php5.', $phpversion);
+
+        $registry_file = __DIR__ . '/registry/' . strtolower($download['installer']) . '-' . $download['version'] . $phpversion . $platform . '.json';
+
+        if (is_file($registry_file) === true) {
+
+            $installerRegistry = json_decode(file_get_contents($registry_file));
+
+            $i_total = count($installerRegistry);
+            $onlyOneTimePhpExtensionsPrefix = false;
+            foreach ($installerRegistry as $i => $component) {
+
+                    if($component[0] === 'phpext_xcache') { // removed from registry, still in 0.7.0 and breaking it
+                        continue;
+                    }
+
+                    if(false !== strpos($component[0], 'phpext_')) {
+                        if($onlyOneTimePhpExtensionsPrefix === false) {
+                            $html .= 'PHP Extension(s): ';
+                            $onlyOneTimePhpExtensionsPrefix = true;
+                        }
+                        $name = str_replace('PHP Extension ', '', $registry[ $component[0] ]['name']);
+                    } else {
+                        $name = $registry[ $component[0] ]['name'];
+                    }
+
+                    $html .= '<span style="font-weight:bold;">' . $name . '</span> ' . $component[3];
+                    $html .= ($i+1 !== $i_total) ? ', ' : '';
+            }
+            unset($installerRegistry);
+        }
+
+        $html .= '</p></td></tr>';
+    }
+
+    return $html;
 }
