@@ -15,8 +15,8 @@
  * This script forwards to our Google Form.
  *
  * The link to this script is opened from the InnoSetup Uninstaller during the uninstallation procedure.
- * The APPVERSION of the InnoSetup application is passed to the script (as value of the GET request parameter "version").
- * Thr version is used to build the form-prefilling URL for our "Uninstallation Survey" Google Form.
+ * The APPVERSION of the InnoSetup application is passed to the script as the value of the GET request parameter "version".
+ * The version is used to build the (form-prefilling) URL for our "Uninstallation Survey" Google Form.
  *
  * Example: http://wpn-xm.org/uninstall-survey.php?version=MAJOR.MINOR.PATCH
  *
