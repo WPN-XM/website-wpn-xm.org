@@ -423,7 +423,7 @@ function render_component_list_for_installer($installer_name)
         $registry_file = __DIR__ . '/registry/' . strtolower($download['installer']) . '-' . $download['version'] . $phpversion . $platform . '.json';
 
         if (!is_file($registry_file)) {
-            $html .= '</p></td></tr>';
+            return '</p></td></tr>';
         }
 
         $installerRegistry = json_decode(file_get_contents($registry_file));
