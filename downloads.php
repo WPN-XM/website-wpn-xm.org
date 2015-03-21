@@ -574,21 +574,6 @@ return <<<EOD
   <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
   <!--[if IE]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
   <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
-  <style>
-    #multi-column-list {
-        -webkit-column-count: 4;
-        -moz-column-count: 4;
-        -ms-column-count: 4;
-        -o-column-count: 4;
-        column-count: 4;
-        -webkit-column-gap: 15px;
-        -moz-column-gap: 15px;
-        -ms-column-gap: 15px;
-        -o-column-gap: 15px;
-        column-gap: 15px;
-        columns: 4;
-    }
-  </style>
 </head>
 <body>
 EOD;

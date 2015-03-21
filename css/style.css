@@ -123,3 +123,8 @@ th, td, caption{padding:4px 10px 4px 15px;}
 .tg td{padding:3px 6px;}
 .tg .tg-hnao{text-align:center;font-size:14px;}
 .margin-left-20{margin-left:20px !important;}
+#multi-column-list {
+	-webkit-column-count:4; -moz-column-count: 4; -ms-column-count: 4;-o-column-count:4;column-count: 4;
+    -webkit-column-gap: 15px; -moz-column-gap: 15px; -ms-column-gap: 15px;-o-column-gap: 15px;
+    column-gap: 15px; columns: 4;
+}
