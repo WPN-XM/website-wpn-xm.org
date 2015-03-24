@@ -496,7 +496,7 @@ function render_component_list_comma_separated($registry, $installerRegistry, $n
 
         if(false !== strpos($component[0], 'phpext_')) {
             $name = str_replace('PHP Extension ', '', $registry[ $component[0] ]['name']);
-            $extensions_html .= '<span style="font-weight:bold;">' . $name . '</span> ' . $version;
+            $extensions_html .= '<span class="bold">' . $name . '</span> ' . $version;
             continue;
         }
 
@@ -514,7 +514,7 @@ function render_component_list_comma_separated($registry, $installerRegistry, $n
 
 function render_component_li($name, $version)
 {
-    return '<li><span style="font-weight:bold;">' . $name . '</span> ' . $version . '</li>';
+    return '<li><span class="bold">' . $name . '</span> ' . $version . '</li>';
 }
 
 function render_header()
