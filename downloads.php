@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2015 Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -139,9 +139,8 @@ function render_github_releases()
 
         foreach($release['assets'] as $idx => $asset) {
             unset($asset['uploader'], $asset['url'], $asset['label'], $asset['content_type'], $asset['updated_at']);
-            #var_dump($asset);
 
-            // download details
+            // download button for installer, filesize, downloadcounter
             $html .= '<tr><td colspan="2">';
             $html .= '<table border=1 width="100%">';
             $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $asset['browser_download_url'] .'">' . $asset['name'] . '</a></th>';
@@ -150,6 +149,7 @@ function render_github_releases()
             $html .= '<div class="btn btn-mini bold">' .$asset['download_count']. '</div>';
             $html .= '</td></tr></table>';
 
+            // component list for the installer
             $html .= render_component_list_for_installer($asset['name']);
         }
 
@@ -261,9 +261,6 @@ $downloads['versions'] = array_unique($versions);
 $downloads['latest_version'] = $downloads[0]['version'];
 $downloads['latest_version_release_date'] = $downloads[0]['date'];
 
-// debug
-// echo '<pre>' . htmlentities(var_export($downloads, true)) . '</pre>';
-
 /*
     Example Downloads Array
 
@@ -331,7 +328,7 @@ if (!empty($type) && ($type === 'json')) {
 
             $html .= '<tr>';
             $html .= '<td width="50%" style="vertical-align: bottom;">';
-            $html .= '<h2>WPN-XM v' . $version . '&nbsp;<small>' . date('d M Y', strtotime($download['date'])) . '</small></h2>';
+            $html .= '<h2>WPИ-XM v' . $version . '&nbsp;<small>' . date('d M Y', strtotime($download['date'])) . '</small></h2>';
             $html .= '</td>';
 
             // print release notes, changelog, github tag once per version
