@@ -263,8 +263,8 @@
 
   <div class="span-7 rounded inset-panel mc-is">
     <h3 id="components">Registry Status</h3>
-    <ul id="components-list" class="unstyled-list big-and-bold">
-      <!-- This element (components-list) is populated by populateComponentList(). -->
+    <ul id="registry-list" class="unstyled-list big-and-bold">
+      <!-- This element (registry-list) is populated by populateRegistryList(). -->
     </ul>
   </div>
 
@@ -365,7 +365,7 @@
       You are welcome to send cash donations through the following channels:
     </p>
 
-    <div class="left" style="margin-left: 10em">
+    <div class="left" style="margin-left: 3em">
     <h4>Donate via PayPal</h4>
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
       <div class="prepend-top">
@@ -409,10 +409,12 @@
       </form>
     </div>
 
-    <div class="left" style="margin-right: 5em">
+    <div class="left" style="margin-right: 3em">
       <h4>Donate via Gratipay</h4>
       <script data-gratipay-username="jakoch" data-gratipay-widget="button" src="//grtp.co/v1.js"></script>
-      <br/>
+    </div>
+
+    <div class="left" style="margin-right: 3em">
       <h4>Donate via Flattr</h4>
       <script id='fbctg0s'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');
         f.src='//api.flattr.com/button/view/?uid=WPNXM&url=http%3A%2F%2Fwpn-xm.org%2F';
@@ -599,7 +601,7 @@ $.ajax({
   type : "GET",
   url : "http://wpn-xm.org/updatecheck.php?s=all",
   success: function(data){
-    populateComponentList(data);
+    populateRegistryList(data);
   }
 });
 $.ajax({
@@ -614,8 +616,8 @@ function populateDownloadList(data) {
   $('#downloads-list').append(data);
 }
 
-function populateComponentList(data) {
-  var elem = $('#components-list');
+function populateRegistryList(data) {
+  var elem = $('#registry-list');
   var items = [];
 
   $.each(data, function (id, option) {
