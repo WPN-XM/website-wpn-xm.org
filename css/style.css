@@ -74,7 +74,7 @@ table tr td{vertical-align:top;}
 table.data-table tr td{vertical-align:top;}
 table.data-table tr td h3{background:#B5463F;color:#fff;padding:5px;}
 table#authors tr td{font-size:120%;}
-.rounded{border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;}
+.rounded{border-radius:5px;-moz-border-radius:5px;}
 .centered{text-align:center;}
 .left{float:left;}
 .unstyled-list{list-style-image:none;list-style-type:none;margin:0 0.25em 0.25em 0;padding-left:10px;}
@@ -96,7 +96,7 @@ a{-moz-transition:color 0.2s ease-out 0s;outline:medium none;text-decoration:non
 .clearfix:after{display:table;content:"";}
 .clearfix:after{clear:both;}
 .hide-text{font:0/0 a;color:transparent;text-shadow:none;background-color:transparent;border:0;}
-.input-block-level{display:block;width:100%;min-height:28px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}
+.input-block-level{display:block;width:100%;min-height:28px;-moz-box-sizing:border-box;-ms-box-sizing:border-box;box-sizing:border-box;}
 .slider-wrapper{padding:9px;background-color:#FAFAFA;border:1px solid rgba(70, 70, 70, 0.3);border-radius:5px 5px 5px 5px;margin-bottom:1.5em;box-shadow:1px 1px 15px #DDD;}
 .slider-background{z-index:7;top:0px;left:0px;height:300px;overflow:hidden;border:1px solid #AAA;background:repeat scroll 0 0 #ECECEC;}
 .carousel{position:relative;margin-bottom:18px;line-height:1;}
@@ -114,7 +114,7 @@ a{-moz-transition:color 0.2s ease-out 0s;outline:medium none;text-decoration:non
 .carousel .prev.right{left:0;}
 .carousel .active.left{left:-100%;}
 .carousel .active.right{left:100%;}
-.carousel-control{position:absolute;top:250px;left:15px;width:40px;height:40px;margin-top:-20px;font-size:60px;font-weight:100;line-height:30px;color:#ffffff;text-align:center;background:#222222;border:3px solid #ffffff;-webkit-border-radius:23px;-moz-border-radius:23px;border-radius:23px;opacity:0.5;filter:alpha(opacity=50);}
+.carousel-control{position:absolute;top:250px;left:15px;width:40px;height:40px;margin-top:-20px;font-size:60px;font-weight:100;line-height:30px;color:#ffffff;text-align:center;background:#222222;border:3px solid #ffffff;-moz-border-radius:23px;border-radius:23px;opacity:0.5;filter:alpha(opacity=50);}
 .carousel-control.right{left:auto;right:15px;}
 .carousel-control:hover{color:#ffffff;text-decoration:none;opacity:0.9;filter:alpha(opacity=90);}
 .carousel-caption{position:absolute;left:0;right:0;bottom:0;padding:10px 15px 5px;background:#333333;background:rgba(0, 0, 0, 0.75);}
