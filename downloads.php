@@ -316,7 +316,7 @@ if (!empty($type) && ($type === 'json')) {
     unset($downloads['versions'], $downloads['latest_version'], $downloads['latest_version_release_date']);
     $version = '0.0.0';
 
-    $html .= '<table border="1" style="width:960px">';
+    $html .= '<table style="width:auto; min-width:900px">';
 
     $html .= render_github_releases();
 
@@ -342,7 +342,7 @@ if (!empty($type) && ($type === 'json')) {
 
         // download details
         $html .= '<td colspan="2">';
-        $html .= '<table border=1 width="100%">';
+        $html .= '<table width="100%">';
         $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
         $html .= '<tr><td><div class="btn btn-mini bold">' . $download['size'] . '</div></td><td>';
         $html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>&nbsp;';
