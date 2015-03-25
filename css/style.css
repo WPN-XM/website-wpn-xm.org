@@ -45,7 +45,7 @@ a#git:before{content:"0";font-family:'WPNXMicoRegular';font-size:2.2em;vertical-
 #windows-icon:before{content:"2";font-family:'WPNXMicoRegular';font-size:25px;}
 .red-download-icon{background-image:url("../images/download_now.png");height:51px;width:183px;margin-bottom:15px;margin-top:15px;}
 .download-icon{font-size:20px;text-shadow:0;}
-h3:before{color:#FB292D;display:inline-block;font-size:1.2em;padding-right:0.3em;}
+h3:before{color:#FB292D;display:inline-block;font-size:1.2em;padding-right:0.3em;text-shadow: 0 1px 1px #FFFFFF;}
 h4{font-weight:bold;}
 #main-nav a[rel="home"]{color:#D40408;}
 .horizontal-rule-light, #main-nav, h2, hr{border-bottom:1px solid #BBBBBB;box-shadow:0 1px 0 white;}
