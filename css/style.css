@@ -135,7 +135,7 @@ th, td, caption{padding:4px 10px 4px 15px;}
 .btn-mini{border-radius:3px 3px 3px 3px;font-size:9.75px;padding:1px 6px;}
 .sellout-buttons > div{display:block;float:left;margin:0;padding:6px;}
 .tg{border-collapse:collapse;border-spacing:0;border-color:#999;margin:0px auto;}
-.tg td{padding:3px 6px;}
+.tg td{padding:3px 6px; text-align: center;}
 .tg .tg-hnao{text-align:center;font-size:14px;}
 .margin-left-20{margin-left:20px !important;}
 #multi-column-list {
