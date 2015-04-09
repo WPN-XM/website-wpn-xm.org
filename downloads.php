@@ -106,6 +106,32 @@ function get_github_releases()
     return $array;
 }
 
+function get_github_releases_tag($release_tag)
+{
+    $releases = get_github_releases();
+
+    foreach($releases as $release) {
+        if($release['tag_name'] === $release_tag) {
+            return $release;
+        }
+    }
+}
+
+function get_total_downloads($release_tag)
+{
+    $release = get_github_releases_tag($release_tag);
+
+    $downloadsTotal = 0;
+
+    if($release['prerelease'] === false) {
+        foreach($release['assets'] as $idx => $asset) {
+            $downloadsTotal += $asset['download_count'];
+        }
+    }
+
+    return $downloadsTotal;
+}
+
 function render_github_releases()
 {
     $releases = get_github_releases();
@@ -114,10 +140,14 @@ function render_github_releases()
 
     if($release['prerelease'] === false) {
 
-        $html = '<tr>';
-        $html .= '<td width="50%" style="vertical-align: bottom;">';
-        $html .= '<h2>' . $release['name'] . '&nbsp;<small>' . date('d M Y', strtotime($release['created_at'])) . '</small></h2>';
-        $html .= '</td>';
+        $html = '<tr>'
+              . '<td width="50%" style="vertical-align: bottom;">'
+              . '<h2>' . $release['name'] . '&nbsp;'
+              . '<small class="btn btn-default" title="Release Date">Release Date<br><span class="bold">' . date('d M Y', strtotime($release['created_at'])) . '</span></small>'
+              . '&nbsp;'
+              . '<small class="btn btn-default" title="Total Downloads">Downloads<br><span class="bold">' . get_total_downloads($release['tag_name']) . '</span></small>'
+              . '</h2>'
+              . '</td>';
 
         // release notes, e.g. https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3
         $release_notes = '<a class="btn btn-large btn-info"'
@@ -145,8 +175,8 @@ function render_github_releases()
             $html .= '<table border=1 width="100%">';
             $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $asset['browser_download_url'] .'">' . $asset['name'] . '</a></th>';
             $html .= '<tr><td>';
-            $html .= '<div class="btn btn-mini bold">' . filesize_formatted($asset['size']) . '</div>&nbsp;';
-            $html .= '<div class="btn btn-mini bold">' .$asset['download_count']. '</div>';
+            $html .= '<div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div>&nbsp;';
+            $html .= '<div class="btn btn-small bold" title="Downloads">' .$asset['download_count']. '</div>';
             $html .= '</td></tr></table>';
 
             // component list for the installer
