@@ -154,7 +154,7 @@
 
   <div class="span-21 header">
     <h1 id="logo">WPИ-XM</h1>
-    <h2><strong itemprop="name">WPИ-XM</strong> is a free and open-source <em>web server solution stack for professional PHP development on the Windows<small><sup>&reg;</sup></small> platform</em>.</h2>
+    <h2><strong itemprop="name">WPИ-XM</strong> is a free and open-source web server solution stack for professional PHP development on the Windows<small><sup>&reg;</sup></small> platform.</h2>
   </div>
 
   <div class="span-21">
@@ -216,11 +216,7 @@
     <script type="text/javascript">
       $(".carousel").carousel({
           interval: 4400
-      });/*.bind("slide", function(){
-          console.log("sliding is started");
-      }).bind("slid", function(){
-          console.log("sliding is finished");
-      });*/
+      });
     </script>
   </div>
 
@@ -229,9 +225,6 @@
   <div class="sellout-buttons">
     <a class="socialite github-watch" href="https://github.com/WPN-XM/WPN-XM/" data-user="WPN-XM" data-repo="WPN-XM" data-type="watch" data-count="true" data-size="large">
       Watch on GitHub
-    </a>
-    <a class="socialite github-fork" href="https://github.com/WPN-XM/WPN-XM/" data-user="WPN-XM" data-repo="WPN-XM" data-type="fork" data-count="true" data-size="large">
-      Fork on GitHub
     </a>
     <a class="socialite twitter-share" href="http://twitter.com/share" data-url="http://wpn-xm.org/" data-size="large" data-dnt="true" rel="nofollow" target="_blank">
       Share on Twitter
@@ -270,12 +263,12 @@
 
   <div class="span-7 rounded inset-panel mc-is">
     <h3 id="components">Registry Status</h3>
-    <ul id="components-list" class="unstyled-list big-and-bold">
-      <!-- This element (components-list) is populated by populateComponentList(). -->
+    <ul id="registry-list" class="unstyled-list big-and-bold">
+      <!-- This element (registry-list) is populated by populateRegistryList(). -->
     </ul>
   </div>
 
-  <div class="span-8 last rounded inset-panel mc-is">
+  <div class="span-8 last rounded inset-panel mc-is textshadow">
     <h3 id="download">Downloads</h3>
 
     <div class="download-innerbox rounded inset-panel">
@@ -372,7 +365,7 @@
       You are welcome to send cash donations through the following channels:
     </p>
 
-    <div class="left" style="margin-left: 10em">
+    <div class="left" style="margin-left: 3em">
     <h4>Donate via PayPal</h4>
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
       <div class="prepend-top">
@@ -416,10 +409,12 @@
       </form>
     </div>
 
-    <div class="left" style="margin-right: 5em">
+    <div class="left" style="margin-right: 3em">
       <h4>Donate via Gratipay</h4>
       <script data-gratipay-username="jakoch" data-gratipay-widget="button" src="//grtp.co/v1.js"></script>
-      <br/>
+    </div>
+
+    <div class="left" style="margin-right: 3em">
       <h4>Donate via Flattr</h4>
       <script id='fbctg0s'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');
         f.src='//api.flattr.com/button/view/?uid=WPNXM&url=http%3A%2F%2Fwpn-xm.org%2F';
@@ -523,15 +518,11 @@
 
   <hr>
 
-  <div class="span-21">
-    <div class="slider-wrapper">
-      <div class="slider-background rounded mc-is" style="height: auto;">
-        <h3 id="download">Downloads</h3>
-        <div id="downloads-list">
-          <!-- This element (downloads-list) is populated by populateDownloadList(). -->
-        </div>
+  <div class="span-23 slider-wrapper rounded mc-is">
+      <h3 id="download">Downloads</h3>
+      <div id="downloads-list">
+        <!-- This element (downloads-list) is populated by populateDownloadList(). -->
       </div>
-    </div>
   </div>
 
   <!--
@@ -572,19 +563,17 @@
          <br/> Jahnstraße 36 <br/> 17033 Neubrandenburg <br/> Bundesrepublik Deutschland</p>
       <p>Telefon: (DE) 0172 - 966-0273 <br/>
         <small>(Der Anruf ins Funknetz ist kostenpflichtig. Es entfallen Verbindungsentgelte gemäß der jeweiligen Gebührentabelle der verwendeten Telefongesellschaft.)</small></p>
-      <p> Email: jakoch[at]web.de</p>
-      <p> XMPP: jakoch[at]jabber.ccc.de</p>
+      <p>Email: jakoch[at]web.de</p>
     </div>
 
   </div>
 
-  <div class="span-21"><hr/></div>
-
+  <!-- <div class="span-21"><hr/></div>
   <footer role="contentinfo" class="span-21 footer rounded">
     Page maintained by <a href="http://jens-andre-koch.de">Jens-André Koch.</a><br/>
     Layout forked from Scott Chacon's <a href="http://git-scm.com/">git-scm.com</a>.
     Style forked from Christopher M. Eppstein's <a href="http://compass-style.org/">Compass-Style</a> light.
-  </footer>
+  </footer> -->
 
 </div>
 
@@ -608,12 +597,12 @@ $.ajax({
   type : "GET",
   url : "http://wpn-xm.org/updatecheck.php?s=all",
   success: function(data){
-    populateComponentList(data);
+    populateRegistryList(data);
   }
 });
 $.ajax({
   type : "GET",
-  url : "http://wpn-xm.org/downloads.php",
+  url : "http://wpn-xm.org/downloads.php?type=only-body",
   success: function(data){
     populateDownloadList(data);
   }
@@ -623,8 +612,8 @@ function populateDownloadList(data) {
   $('#downloads-list').append(data);
 }
 
-function populateComponentList(data) {
-  var elem = $('#components-list');
+function populateRegistryList(data) {
+  var elem = $('#registry-list');
   var items = [];
 
   $.each(data, function (id, option) {
@@ -640,9 +629,8 @@ $(document).ready(function() {
 });
 
 /*
-   ZeroClipboard is used to copy hashes to the clipboard.
-   The text to copy is set with a HTML data-attribute named "zclip-text"
-   on elements using class="zclip".
+   ZeroClipboard is used to copy the file-hashes for downloads to the clipboard.
+   The text to copy is set by the HTML data-attribute "zclip-text" on DOM elements using class="zclip".
 */
 jQuery(document).ready(function($) {
   $("body")

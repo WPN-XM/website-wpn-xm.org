@@ -1,7 +1,7 @@
 <?php
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2015 Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -139,9 +139,8 @@ function render_github_releases()
 
         foreach($release['assets'] as $idx => $asset) {
             unset($asset['uploader'], $asset['url'], $asset['label'], $asset['content_type'], $asset['updated_at']);
-            #var_dump($asset);
 
-            // download details
+            // download button for installer, filesize, downloadcounter
             $html .= '<tr><td colspan="2">';
             $html .= '<table border=1 width="100%">';
             $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $asset['browser_download_url'] .'">' . $asset['name'] . '</a></th>';
@@ -150,6 +149,7 @@ function render_github_releases()
             $html .= '<div class="btn btn-mini bold">' .$asset['download_count']. '</div>';
             $html .= '</td></tr></table>';
 
+            // component list for the installer
             $html .= render_component_list_for_installer($asset['name']);
         }
 
@@ -261,9 +261,6 @@ $downloads['versions'] = array_unique($versions);
 $downloads['latest_version'] = $downloads[0]['version'];
 $downloads['latest_version_release_date'] = $downloads[0]['date'];
 
-// debug
-// echo '<pre>' . htmlentities(var_export($downloads, true)) . '</pre>';
-
 /*
     Example Downloads Array
 
@@ -309,13 +306,17 @@ if (!empty($type) && ($type === 'json')) {
         header("HTTP/1.0 404 Not Found");
     }
 
-    //echo 'Latest Version: <b>'. $downloads[0]['version'].'</b>';
-    //echo 'Released: <b>'. $downloads[0]['date'] . '</b>';
+    // send with header (downloads.php) or without header (downloads.php?type=only-body)
+    if (!empty($type) && ($type === 'only-body')) {
+        $html = '';
+    } else {
+        $html = render_header();
+    }
 
     unset($downloads['versions'], $downloads['latest_version'], $downloads['latest_version_release_date']);
     $version = '0.0.0';
 
-    $html = '<table border="1">';
+    $html .= '<table style="width:auto; min-width:900px">';
 
     $html .= render_github_releases();
 
@@ -327,7 +328,7 @@ if (!empty($type) && ($type === 'json')) {
 
             $html .= '<tr>';
             $html .= '<td width="50%" style="vertical-align: bottom;">';
-            $html .= '<h2>WPN-XM v' . $version . '&nbsp;<small>' . date('d M Y', strtotime($download['date'])) . '</small></h2>';
+            $html .= '<h2>WPИ-XM v' . $version . '&nbsp;<small>' . date('d M Y', strtotime($download['date'])) . '</small></h2>';
             $html .= '</td>';
 
             // print release notes, changelog, github tag once per version
@@ -341,7 +342,7 @@ if (!empty($type) && ($type === 'json')) {
 
         // download details
         $html .= '<td colspan="2">';
-        $html .= '<table border=1 width="100%">';
+        $html .= '<table width="100%">';
         $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
         $html .= '<tr><td><div class="btn btn-mini bold">' . $download['size'] . '</div></td><td>';
         $html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>&nbsp;';
@@ -408,8 +409,6 @@ function render_component_list_for_installer($installer_name)
     if('webinstaller' === strtolower($download['installer'])) {
        $html .= '<tr><td colspan="3">Latest Components fetched from the Web</td></tr>';
     } else {
-        $html .= '<tr><td colspan="3">Components<p>';
-
         $platform = isset($download['platform']) ? '-' . $download['platform'] : '';
 
         // set PHP version starting from 0.8.0 on
@@ -420,36 +419,159 @@ function render_component_list_for_installer($installer_name)
 
         $registry_file = __DIR__ . '/registry/' . strtolower($download['installer']) . '-' . $download['version'] . $phpversion . $platform . '.json';
 
-        if (is_file($registry_file) === true) {
-
-            $installerRegistry = json_decode(file_get_contents($registry_file));
-
-            $i_total = count($installerRegistry);
-            $onlyOneTimePhpExtensionsPrefix = false;
-            foreach ($installerRegistry as $i => $component) {
-
-                    if($component[0] === 'phpext_xcache') { // removed from registry, still in 0.7.0 and breaking it
-                        continue;
-                    }
-
-                    if(false !== strpos($component[0], 'phpext_')) {
-                        if($onlyOneTimePhpExtensionsPrefix === false) {
-                            $html .= 'PHP Extension(s): ';
-                            $onlyOneTimePhpExtensionsPrefix = true;
-                        }
-                        $name = str_replace('PHP Extension ', '', $registry[ $component[0] ]['name']);
-                    } else {
-                        $name = $registry[ $component[0] ]['name'];
-                    }
-
-                    $html .= '<span style="font-weight:bold;">' . $name . '</span> ' . $component[3];
-                    $html .= ($i+1 !== $i_total) ? ', ' : '';
-            }
-            unset($installerRegistry);
+        if (!is_file($registry_file)) {
+            return '</p></td></tr>';
         }
+
+        $installerRegistry = json_decode(file_get_contents($registry_file));
+
+        $number_of_components = count($installerRegistry);
+
+        $html .= '<tr><td colspan="3">Components (' . $number_of_components . ')<p>';
+
+        //if($number_of_components >= 10) {
+            $html .= render_component_list_multi_column($registry, $installerRegistry);
+        //} else {
+          //  $html .= render_component_list_comma_separated($registry, $installerRegistry, $number_of_components);
+        //}
 
         $html .= '</p></td></tr>';
     }
 
     return $html;
+}
+
+function render_component_list_multi_column($registry, $installerRegistry)
+{
+    $html = '';
+    $html .= '<ul id="multi-column-list">';
+
+    $extensions_html = '<br>PHP Extension(s): ';
+
+    foreach ($installerRegistry as $i => $component) {
+        $shortName = $component[0];
+        $version = $component[3];
+
+        // skip - removed from registry, still in 0.7.0 and breaking it
+        if($shortName === 'phpext_xcache') {
+            continue;
+        }
+
+        // php extension - they are appended to the extension html fragment
+        if(false !== strpos($shortName, 'phpext_')) {
+            $name = str_replace('PHP Extension ', '', $registry[ $shortName ]['name']);
+            $extensions_html .= render_component_li($name, $version);
+            continue;
+        }
+
+        // normal component
+        $name = $registry[ $shortName ]['name'];
+        $html .= render_component_li($name, $version);
+    }
+    unset($installerRegistry);
+
+    $html .= $extensions_html;
+    $html .= '</ul>';
+
+    return $html;
+}
+
+function render_component_list_comma_separated($registry, $installerRegistry, $number_of_components)
+{
+    $html = '';
+    $extensions_html = ', PHP Extension(s): ';;
+
+    foreach ($installerRegistry as $i => $component)
+    {
+        $shortName = $component[0];
+        $version = $component[3];
+
+        // skip - removed from registry, still in 0.7.0 and breaking it
+        if($shortName === 'phpext_xcache') {
+            continue;
+        }
+
+        if(false !== strpos($component[0], 'phpext_')) {
+            $name = str_replace('PHP Extension ', '', $registry[ $component[0] ]['name']);
+            $extensions_html .= '<span class="bold">' . $name . '</span> ' . $version;
+            continue;
+        }
+
+        $name = $registry[ $shortName ]['name'];
+
+        $html .= '<span style="font-weight:bold;">' . $name . '</span> ' . $version;
+        $html .= ($i+1 !== $number_of_components) ? ', ' : '';
+    }
+    unset($installerRegistry);
+
+    $html .= $extensions_html;
+
+    return $html;
+}
+
+function render_component_li($name, $version)
+{
+    return '<li><span class="bold">' . $name . '</span> ' . $version . '</li>';
+}
+
+function render_header()
+{
+
+return <<<EOD
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#">
+  <meta charset="utf-8" />
+  <title>WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows&reg; platform.</title>
+  <meta http-equiv="x-ua-compatible" content="IE=EmulateIE7" />
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="OxwcTMUNiYu78EIEA2kq-vg_CoTyhGL-YVKXieCObDw" />
+  <meta name="Googlebot" content="index,follow">
+  <meta name="Author" content="Jens-Andre Koch" />
+  <meta name="Copyright" content="(c) 2011-onwards Jens-Andre Koch." />
+  <meta name="Publisher" content="Koch Softwaresystemtechnik" />
+  <meta name="Rating" content="general" />
+  <meta name="page-type" content="Homepage, Website" />
+  <meta name="robots" content="index, follow, all, noodp" />
+  <meta name="Description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
+  <meta name="keywords" content="WPN-XM, free, open-source, server, NGINX, PHP, Windows, MariaDb, MongoDb, Adminer, XDebug, WAMP, WIMP, WAMPP, LAMP" />
+  <!-- avgthreatlabs.com Site Verification -->
+  <meta name="avgthreatlabs-verification" content="247b6d3c405a91491b1fea8e89fb3b779f164a5f" />
+  <!-- DC -->
+  <meta name="DC.Title" content="WPN-XM" />
+  <meta name="DC.Creator" content="Jens-Andre Koch" />
+  <meta name="DC.Publisher" content="Koch Softwaresystemtechnik" />
+  <meta name="DC.Type" content="Service" />
+  <meta name="DC.Format" content="text/html" />
+  <meta name="DC.Language" content="en" />
+  <!-- Geo -->
+  <meta name="geo.region" content="DE-MV" />
+  <meta name="geo.placename" content="Neubrandenburg" />
+  <meta name="geo.position" content="53.560348;13.249941" />
+  <meta name="ICBM" content="53.560348, 13.249941" />
+  <!-- Facebook OpenGraph -->
+  <meta property="og:url" content="http://wpn-xm.org/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
+  <meta property="og:description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
+
+  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" sizes="57x57" href="images/touch/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="60x60" href="images/touch/apple-touch-icon-60x60.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="images/touch/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="images/touch/apple-touch-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="images/touch/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="images/touch/apple-touch-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="images/touch/apple-touch-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="images/touch/apple-touch-icon-152x152.png" />
+
+  <!-- Blueprint CSS Framework -->
+  <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
+  <!--[if IE]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+</head>
+<body>
+EOD;
 }

@@ -44,7 +44,7 @@ if (!empty($s) && array_key_exists($s, $registry)) {
         $bitsize = ($bitsize = filter_input(INPUT_GET, 'bitsize', FILTER_SANITIZE_STRING)) ? $bitsize : 'x86';
 
         // does the requested version exist?
-        if (!empty($v) && array_key_exists($v, $registry[$s]) && array_key_exists($p, $registry[$s][$v][$bitsize][$p])) {
+        if (!empty($v) && array_key_exists($v, $registry[$s]) && array_key_exists($p, $registry[$s][$v][$bitsize])) {
             // yes, return download url
             header("Location: " . $registry[$s][$v][$bitsize][$p]); // e.g. $registry['phpext_xdebug']['1.2.1']['x86']['5.5'];
         } elseif(array_key_exists($p, $registry[$s]['latest']['url'][$bitsize])) {
