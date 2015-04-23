@@ -25,7 +25,16 @@ echo '</div></body></html>';
 
 function render_component_tables($render_components)
 {
-  $html = '<div style="width: 1111px; margin: 0 auto;">'
+  $html = '<div class="span-20 inset-panel mc-is">'
+        . '<h3 id="download">Software Components for Web Development on Windows</h2>'
+        . '<p style="font-size: 16px;">'
+        . 'All software components of the WPN-XM software registry are available for selective download.'
+        . '<br>This collection of download links is provided to save you some time.'
+        . '<br>You have to install these components manually.'
+        . '<br>Please follow the installation instructions of the specific component.'
+        . '</p>'
+        . '</div></div>'
+        . '<div style="width: 1111px; margin: 0 auto; display: flex;">'
         . '<div class="download-components span-14">'
         . '<h2>Software Components</h2>'
         . '<table border=1 style="width: auto">'
@@ -272,13 +281,13 @@ return <<<EOD
   <nav role="navigation" id="main-nav" class="span-21 toolbar black">
     <ul>
       <li class="vcard"><a itemprop="url" rel="home" href="index.html" class="fn org url uid">Home</a></li>
-      <li><a rel="about" href="#about">About</a></li>
+      <li><a rel="about" href="index.html#about">About</a></li>
       <li><a rel="help" href="https://groups.google.com/forum/?fromgroups#!forum/wpn-xm">Mailing List</a></li>
-      <li><a rel="get-involved" href="#getinvolved">Get Involved</a></li>
+      <li><a rel="get-involved" href="index.html#getinvolved">Get Involved</a></li>
       <li><a rel="install" href="https://github.com/WPN-XM/WPN-XM/wiki/">Wiki</a></li>
       <li><a rel="install" href="https://github.com/WPN-XM/WPN-XM/issues/">Issues</a></li>
-      <li><a rel="donate" href="#donate">Donate</a></li>
-      <li><a rel="imprint" href="#imprint">Imprint</a></li>
+      <li><a rel="donate" href="index.html#donate">Donate</a></li>
+      <li><a rel="imprint" href="index.html#imprint">Imprint</a></li>
     </ul>
   </nav>
 
@@ -287,11 +296,6 @@ return <<<EOD
     <h2><strong itemprop="name">WPИ-XM</strong> is a free and open-source web server solution stack for professional PHP development on the Windows<small><sup>&reg;</sup></small> platform.</h2>
   </div>
 
-  <div class="span-21">
-    <span class="span-7" style="margin-top: 11px;"><hr></span>
-    <div class="span-4" style="font-size: 20px;text-align: center;margin-right: 0px;">Software Components</div>
-    <span class="span-7 last" style="margin-top: 11px;"><hr></span>
-  </div>
 
 EOD;
 }
