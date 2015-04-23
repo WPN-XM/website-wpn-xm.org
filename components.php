@@ -21,6 +21,7 @@ $render_components = render_components($registry);
 
 echo render_header();
 echo render_component_tables($render_components);
+echo '</div></body></html>';
 
 function render_component_tables($render_components)
 {
@@ -45,33 +46,33 @@ function render_component_tables($render_components)
 
 function render_components($registry)
 {
-	$html = '';
-	$html_extensions = '';
+    $html = '';
+    $html_extensions = '';
 
-	foreach($registry as $software => $component)
-	{
-		if (strpos($software, 'phpext_') !== false) {
-			$html_extensions .= render_tr_for_php_extension($component);
-			continue;
-		}
+    foreach($registry as $software => $component)
+    {
+        if (strpos($software, 'phpext_') !== false) {
+            $html_extensions .= render_tr_for_php_extension($component);
+            continue;
+        }
 
-		$html .= render_tr_for_normal_component($component);
-	}
+        $html .= render_tr_for_normal_component($component);
+    }
 
-	return array('components' => $html, 'extensions' => $html_extensions);
+    return array('components' => $html, 'extensions' => $html_extensions);
 }
 
 function render_tr_for_php_extension($component)
 {
-	$name = str_replace('PHP Extension ', '', $component['name']);
+    $name = str_replace('PHP Extension ', '', $component['name']);
 
-	$html = '<tr>'
-	      . '<td><a href="' . $component['website'] . '">' . $name . '</a>' . '</td>'
-	      . '<td>' . render_version_dropdown_for_extension($component) . '</td>'
-	      . '<td>' . $component['latest']['version'] . '</td>'
-	      . '</tr>';
+    $html = '<tr>'
+          . '<td><a href="' . $component['website'] . '">' . $name . '</a>' . '</td>'
+          . '<td>' . render_version_dropdown_for_extension($component) . '</td>'
+          . '<td>' . $component['latest']['version'] . '</td>'
+          . '</tr>';
 
-	return $html;
+    return $html;
 }
 
 function render_version_dropdown_for_extension($component)
@@ -83,34 +84,34 @@ function render_version_dropdown_for_extension($component)
     // restructure the array
     foreach($component as $version => $bitsizes)
     {
-    	foreach($bitsizes as $bitsize => $php_versions)
-    	{
-    		foreach($php_versions as $php_version => $url)
-    		{
-    			$v[$bitsize][$php_version][$version] = $url;
-    		}
-    	}
+        foreach($bitsizes as $bitsize => $php_versions)
+        {
+            foreach($php_versions as $php_version => $url)
+            {
+                $v[$bitsize][$php_version][$version] = $url;
+            }
+        }
     }
 
     // render
     $html = '';
     foreach($v as $bitsize => $php_version)
     {
-    	$html .= '<span class="left">'.$bitsize.'</span>';
-    	foreach($php_version as $php_v => $urls)
-    	{
-    		$html .= ' ' . $php_v;
-	    	$html .= ' <select onchange="if (this.value) window.location.href=this.value">';
-    		foreach($urls as $ver => $url)
-    		{
-	    		$html .= '<option value="' . $url . '">' . $ver . '</option>';
-    		}
-    		$html .= '</select>';
-    	}
-    	$html .= '<br>';
+        $html .= '<span class="left">'.$bitsize.'</span>';
+        foreach($php_version as $php_v => $urls)
+        {
+            $html .= ' ' . $php_v;
+            $html .= ' <select onchange="if (this.value) window.location.href=this.value">';
+            foreach($urls as $ver => $url)
+            {
+                $html .= '<option value="' . $url . '">' . $ver . '</option>';
+            }
+            $html .= '</select>';
+        }
+        $html .= '<br>';
     }
 
-	return $html;
+    return $html;
 }
 
 function render_tr_for_normal_component($component)
@@ -121,7 +122,7 @@ function render_tr_for_normal_component($component)
           . '<td><a href="' . $component['latest']['url'] . '">' . $component['latest']['version'] . '</a></td>'
           . '</tr>';
 
-	  return $html;
+      return $html;
 }
 
 function render_version_dropdown($component)
@@ -133,16 +134,17 @@ function render_version_dropdown($component)
 
     unset($component['name'], $component['website'], $component['latest']);
 
-    krsort($component);
+    asort($component);
 
     $html = '<select onchange="if (this.value) window.location.href=this.value">';
+    $html .= '<option value="" selected disabled>Please select a version...</option>';
     foreach($component as $version => $url)
     {
-    	$html .= '<option value="' . $url . '">' . $version . '</option>';
+        $html .= '<option value="' . $url . '">' . $version . '</option>';
     }
-	  $html .= '</select>';
+      $html .= '</select>';
 
-	  return $html;
+      return $html;
 }
 
 function render_header()
@@ -206,64 +208,90 @@ return <<<EOD
   div.download-components h2 {
    font-size:18px;
    margin:10px 0;
-}
-div.download-components table {
-  border: 1px solid #DDDEDE;
-  box-shadow: 0 1px 0 white;
-  background: #F7F7F8;
-  width: 100%;
-}
-div.download-components td,
-div.download-components th {
-  text-align:center;
-  padding: 3px 8px 3px 8px;
-  border-right: 1px solid #DDDEDE;
-  border-bottom: 1px solid #DDDEDE;
-  box-shadow: 0 2px 0 white;
-  margin:0;
-}
-div.download-components th {
-  background-color:transparent!important;
-  color:inherit!important;
-}
-div.download-components td:first-child,
-div.download-components th:first-child {
-  text-align:left;
-  width:50%;
-}
-div.download-components td:nth-child(2) {
-	text-align: right;
-}
-div.download-components tr:last-child td {
-  border-bottom: none;
-  box-shadow: none;
-}
-div.download-components td:last-child,
-div.download-components th:last-child  {
-  border-right:none;
-}
+  }
+  div.download-components table {
+    border: 1px solid #DDDEDE;
+    box-shadow: 0 1px 0 white;
+    background: #F7F7F8;
+    width: 100%;
+  }
+  div.download-components td,
+  div.download-components th {
+    text-align:center;
+    padding: 3px 8px 3px 8px;
+    border-right: 1px solid #DDDEDE;
+    border-bottom: 1px solid #DDDEDE;
+    box-shadow: 0 2px 0 white;
+    margin:0;
+  }
+  div.download-components th {
+    background-color:transparent!important;
+    color:inherit!important;
+  }
+  div.download-components td:first-child,
+  div.download-components th:first-child {
+    text-align:left;
+    width:50%;
+  }
+  div.download-components td:nth-child(2) {
+    text-align: right;
+  }
+  div.download-components tr:last-child td {
+    border-bottom: none;
+    box-shadow: none;
+  }
+  div.download-components td:last-child,
+  div.download-components th:last-child  {
+    border-right:none;
+  }
 
-div.download-components td:first-child,
-div.download-components th:first-child {
-  text-align:left;
-  width:15%;
-}
-div.download-extensions td:nth-child(2) {
-	width: 70%;
-	text-align: right;
-}
+  div.download-components td:first-child,
+  div.download-components th:first-child {
+    text-align:left;
+    width:15%;
+  }
+  div.download-extensions td:nth-child(2) {
+    width: 70%;
+    text-align: right;
+  }
 
-div.download-components td a {
-  color: rgb(80, 80, 80);
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-  font-weight: normal;
-}
-div.download-components select {
-  margin: 0;
-}
-</style>
+  div.download-components td a {
+    color: rgb(80, 80, 80);
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+  }
+  div.download-components select {
+    margin: 0;
+  }
+  </style>
 </head>
 <body>
+<div class="container showgrids">
+
+  <nav role="navigation" id="main-nav" class="span-21 toolbar black">
+    <ul>
+      <li class="vcard"><a itemprop="url" rel="home" href="index.html" class="fn org url uid">Home</a></li>
+      <li><a rel="about" href="#about">About</a></li>
+      <li><a rel="help" href="https://groups.google.com/forum/?fromgroups#!forum/wpn-xm">Mailing List</a></li>
+      <li><a rel="get-involved" href="#getinvolved">Get Involved</a></li>
+      <li><a rel="install" href="https://github.com/WPN-XM/WPN-XM/wiki/">Wiki</a></li>
+      <li><a rel="install" href="https://github.com/WPN-XM/WPN-XM/issues/">Issues</a></li>
+      <li><a rel="donate" href="#donate">Donate</a></li>
+      <li><a rel="imprint" href="#imprint">Imprint</a></li>
+    </ul>
+  </nav>
+
+  <div class="span-21 header">
+    <h1 id="logo">WPИ-XM</h1>
+    <h2><strong itemprop="name">WPИ-XM</strong> is a free and open-source web server solution stack for professional PHP development on the Windows<small><sup>&reg;</sup></small> platform.</h2>
+  </div>
+
+  <div class="span-21">
+    <span class="span-7" style="margin-top: 11px;"><hr></span>
+    <div class="span-4" style="font-size: 20px;text-align: center;margin-right: 0px;">Software Components</div>
+    <span class="span-7 last" style="margin-top: 11px;"><hr></span>
+  </div>
+
 EOD;
 }
