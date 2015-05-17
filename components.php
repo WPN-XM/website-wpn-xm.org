@@ -112,6 +112,7 @@ function render_version_dropdown_for_extension($component)
         {
             $html .= ' ' . $php_v;
             $html .= ' <select onchange="if (this.value) window.location.href=this.value">';
+            $html .= '<option value="" selected disabled>Select..</option>';
             foreach($urls as $ver => $url)
             {
                 $html .= '<option value="' . $url . '">' . $ver . '</option>';
