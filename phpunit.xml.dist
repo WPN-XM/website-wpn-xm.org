@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit
+    backupGlobals               = "false"
+    backupStaticAttributes      = "false"
+    colors                      = "true"
+    convertErrorsToExceptions   = "true"
+    convertNoticesToExceptions  = "true"
+    convertWarningsToExceptions = "true"
+    processIsolation            = "true"
+    stopOnFailure               = "false"
+    syntaxCheck                 = "true"
+    verbose                     = "true"
+    bootstrap                   = "./tests/bootstrap.php">
+
+    <php>
+        <ini name="error_reporting" value="-1" />
+        <ini name="memory_limit" value="-1" />
+        <ini name="intl.default_locale" value="en" />
+        <ini name="intl.error_level" value="0" />
+
+        <const name="PHPUNIT_TESTSUITE" value="1"/>
+    </php>
+
+    <testsuite name="WPN-XM Website Test Suite">
+        <directory>./</directory>
+    </testsuite>
+
+    <filter>
+	     <blacklist>
+	        <directory suffix=".php">../vendor/</directory>
+	    </blacklist>
+    </filter>
+
+    <logging>
+        <!-- clover report is used by ./bin/coverage-checker.php -->
+        <!-- <log type="coverage-clover" target="../build/logs/clover.xml" />-->
+        <log type="coverage-text" target="php://stdout" showOnlySummary="true" />
+    </logging>
+</phpunit>
+
