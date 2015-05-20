@@ -19,7 +19,7 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->notName('*.png')
     ->notName('*.exe')
     ->exclude('vendor')
-    ->exclide('registry')  // exclude the registry files
+    ->exclude('registry')  // exclude the registry files
     ->exclude('nbproject') // netbeans project files
     ->in(__DIR__);
 
