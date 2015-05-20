@@ -291,10 +291,14 @@ $request  = new Request();
 $response = new Response();
 $registry = new Registry();
 
-$handler = new Handler($request, $response, $registry);
-$handler->exec();
+$component = new Component($request, $response, $registry);
+$component->redirectTo();
 
-class Handler
+/**
+ * Find component in registry. 
+ * Redirect to download url.
+ */
+class Component
 {
     public $registry;
     public $request;
@@ -307,7 +311,7 @@ class Handler
         $this->registry = $registry;
     }
 
-    public function exec()
+    public function redirectTo()
     {
         // re-assign vars to shorter ones
         $software = $this->request->software;
