@@ -1,0 +1,32 @@
+{
+    "name": "wpn-xm/website",
+    "description": "Website of the WPN-XM Server Stack.",
+    "keywords": ["webinterface", "server stack", "PHP", "windows"],
+    "homepage": "http://wpn-xm.org/",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jens-André Koch",
+            "email": "jakoch@web.de",
+            "homepage": "http://jakoch.de/"
+        }
+    ],
+    "support": {
+        "irc": "irc://irc.freenode.org/koch",
+        "source": "https://github.com/WPN-XM/website-wpn-xm.org",
+        "issues": "https://github.com/wpn-xm/wpn-xm/issues/"
+    },
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit":        "^4.1"
+    },
+    "autoload-dev": {
+        "psr-0": { "Test\\": "tests/" }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
