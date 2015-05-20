@@ -309,8 +309,14 @@ class Handler
 
     public function exec()
     {
+        // re-assign vars to shorter ones
+        $software = $this->request->software;
+        $version = $this->request->version;
+        $phpVersion = $this->request->phpVersion;
+        $bitsize = $this->request->bitsize;        
+        
         if (!defined('PHPUNIT_TESTSUITE')) {
-            if (!$this->registry->softwareExists($this->request->software)) {
+            if (!$this->registry->softwareExists($software)) {
                 $this->response->setHeader('HTTP/1.0 404 Not Found');
                 $this->response->send();
             }
@@ -321,31 +327,30 @@ class Handler
          * we have to take the "phpVersion" and "bitsize" into account, when fetching the url.
          * The "version" to "url" relationship has two levels more: "version" to "bizsize" to phpVersion" to "url".
          */
-        if ($this->registry->softwareIsPHPExtension($this->request->software)) {
-            if ($this->registry->versionExists($this->request->software, $this->request->version) &&
-                $this->registry->extensionsHasPhpVersion($this->request->software, $this->request->version, $this->request->bitsize, $this->request->phpVersion)) {
+        if ($this->registry->softwareIsPHPExtension($software)) {
+            if ($this->registry->versionExists($software, $version) &&
+                $this->registry->extensionsHasPhpVersion($software, $version, $bitsize, $phpVersion)) {
 
                 // return download url for specific version, e.g. $registry['phpext_xdebug']['1.2.1']['x86']['5.5']
-                $url = $this->registry[$this->request->software][$this->request->version][$this->request->bitsize][$this->request->phpVersion];
-
+                $url = $this->registry[$software][$version][$bitsize][$phpVersion];
                 $this->response->redirect($url);
-            } elseif ($this->request->software === 'phpext_phalcon') {
+                
+            } elseif ($software === 'phpext_phalcon') {
 
                 // special handling for phpext_phalcon, because it has a PHP "patch level" version constraint.
                 // (while all other PHP extensions have only a "major.minor" version constraint.)
-                $version    = $this->registry->getLatestVersion($this->request->software);
-                $phpVersion = $this->registry->getPhpVersionInRange($this->request->software, $version, $this->request->bitsize, $this->request->phpVersion);
-                $url        = $this->registry[$this->request->software][$version][$this->request->bitsize][$phpVersion];
-
+                $version    = $this->registry->getLatestVersion($software);
+                $phpVersion = $this->registry->getPhpVersionInRange($software, $version, $bitsize, $phpVersion);
+                $url        = $this->registry[$software][$version][$bitsize][$phpVersion];
                 $this->response->redirect($url);
-            } elseif ($this->registry->extensionLatestVersionHasPhpVersion($this->request->software, $this->request->bitsize, $this->request->phpVersion)) {
+                
+            } elseif ($this->registry->extensionLatestVersionHasPhpVersion($software, $bitsize, $phpVersion)) {
 
                 // the specific version does not exist. return latest version for php default version instead,
                 // e.g. $registry['phpext_xdebug']['latest']['url']['x86']['5.5']
-                $this->response->redirect(
-                    $this->registry[$this->request->software]['latest']['url'][$this->request->bitsize][$this->request->phpVersion]
-                );
+                $this->response->redirect($this->registry[$software]['latest']['url'][$bitsize][$phpVersion]);
             } else {
+                
                 // software does not exist, download will fail.
                 $this->response->setHeader('HTTP/1.0 404 Not Found');
                 $this->response->send();
@@ -357,20 +362,22 @@ class Handler
              * There are no other constrains, like "phpVersion" or "bitsize" to consider.
              */
 
-            if ($this->registry->versionExists($this->request->software, $this->request->version)) {
+            if ($this->registry->versionExists($software, $version)) {
+                
                 // return download url for specific version, e.g. $registry['nginx']['1.2.1']
-
-                $this->response->redirect($this->registry[$this->request->software][$this->request->version]);
-            } elseif ($this->request->software === 'php' or $this->request->software === 'php-x64') {
+                $this->response->redirect($this->registry[$software][$version]);
+                
+            } elseif ($software === 'php' or $software === 'php-x64') {
+                
                 // special handling for PHP, because we have to
                 // return the latest patch version (x.y.*) of a "major.minor" PHP version (x.y)
-
-                $version = getLatestVersion($this->registry, $this->request->software, $this->request->version);
-                $this->response->redirect($this->registry[$this->request->software][$this->request->version]);
+                $version = getLatestVersion($this->registry, $software, $version);
+                $this->response->redirect($this->registry[$software][$version]);
+                
             } else {
+                
                 // return latest version url, e.g. $registry['nginx']['latest']['url']
-
-                $url = $this->registry[$this->request->software]['latest']['url'];
+                $url = $this->registry[$software]['latest']['url'];
                 $this->response->redirect($url);
             }
         }
