@@ -9,8 +9,6 @@ use Symfony\CS\FixerInterface;
 $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->ignoreVCS(true)
     ->notName('.php_cs')
-    ->notName('php-cs-fixer.report.txt')
-    ->notName('AllTests.php')
     ->notName('composer.*')
     ->notName('*.phar')
     ->notName('*.ico')
