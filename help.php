@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WPИ-XM Server Stack
  * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
@@ -33,7 +34,7 @@ $type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
 
 // map for wizard page integers to their full page names
 // see http://www.jrsoftware.org/ishelp/index.php?topic=wizardpages
-$wizardPages = array(
+$wizardPages = [
     '1' => 'welcome',
     '2' => 'license-agreement',
     '3' => 'password',
@@ -47,22 +48,22 @@ $wizardPages = array(
    '11' => 'preparing-to-install',
    '12' => 'installing',
    '13' => 'information',
-   '14' => 'setup-completed'
-);
+   '14' => 'setup-completed',
+];
 
 // map for wizard types with correct case
 // see line with "#define InstallerType" in the iss files
-$wizardTypes = array(
+$wizardTypes = [
     'webinstaller' => 'Webinstaller',
-    'allinone' => 'AllInOne',
-    'bigpack' => 'BigPack',
-    'lite' => 'Lite',
+    'allinone'     => 'AllInOne',
+    'bigpack'      => 'BigPack',
+    'lite'         => 'Lite',
     // from v0.8.0 on
     'standard' => 'Standard',
-    'full' => 'Full'
-);
+    'full'     => 'Full',
+];
 
-if(!empty($type) && !empty($version) && !empty($language) && !empty($page)) {
+if (!empty($type) && !empty($version) && !empty($language) && !empty($page)) {
     // build URL - https://github.com/WPN-XM/WPN-XM/wiki/Installation-Wizard-Webinstaller-v0.6.0-de#Welcome
 
     $helpURL = sprintf(
@@ -74,7 +75,7 @@ if(!empty($type) && !empty($version) && !empty($language) && !empty($page)) {
     );
 
     // redirect
-    header("Location: " . $helpURL);
+    header('Location: ' . $helpURL);
 } else {
-    header("HTTP/1.0 404 Not Found");
+    header('HTTP/1.0 404 Not Found');
 }

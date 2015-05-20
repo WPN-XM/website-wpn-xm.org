@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WPИ-XM Server Stack
  * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
@@ -24,7 +25,7 @@ $registry = include __DIR__ . '/registry/wpnxm-software-registry.php';
 
 // ensure registry array is available
 if (!is_array($registry)) {
-    header("HTTP/1.0 504 Service Unavailable");
+    header('HTTP/1.0 504 Service Unavailable');
 }
 
 // $_GET['s'] = software component
@@ -38,7 +39,7 @@ $v = (!empty($v)) ? $v : '0.0.0';
 if (!empty($s) && $s === 'all') {
 
     // reduce the registry (drop all version numbers and their URLs, but keep name/website/latestversion)
-    $data = array();
+    $data = [];
     foreach ($registry as $software => $details) {
         $data[$software]['name']    = isset($details['name']) ? $details['name'] : '';
         $data[$software]['website'] = isset($details['website']) ? $details['website'] : '';
@@ -49,20 +50,19 @@ if (!empty($s) && $s === 'all') {
 }
 
 // does the requested software exist in our registry?
-if (!empty($s) && array_key_exists($s, $registry) ) {
-
-    if (version_compare($v, $registry[$s]['latest']['version'], '<') ) {
-       // prepare json data
-       $data = array (
+if (!empty($s) && array_key_exists($s, $registry)) {
+    if (version_compare($v, $registry[$s]['latest']['version'], '<')) {
+        // prepare json data
+       $data = [
             'software'       => $s,
             'your_version'   => $v,
             'latest_version' => $registry[$s]['latest']['version'],
             'url'            => $registry[$s]['latest']['url'],
-            'message'        => 'You are running an old version of ' . $s . ' and should update immediately.'
-        );
+            'message'        => 'You are running an old version of ' . $s . ' and should update immediately.',
+        ];
     } else {
         // prepare json data
-        $data = array('message' => 'You are running the latest version.');
+        $data = ['message' => 'You are running the latest version.'];
     }
 
     sendJsonResponse($data);

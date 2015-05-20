@@ -14,9 +14,9 @@
  */
 
 // WPNXM Software Registry
-$registry  = include __DIR__ . '/registry/wpnxm-software-registry.php';
+$registry = include __DIR__ . '/registry/wpnxm-software-registry.php';
 
-/**
+/*
  * Installation Wizard Registries
  * - fetch the registry files
  * - split filenames to get version constraints (e.g. version, lite, php5.4, w32, w64)
@@ -24,28 +24,28 @@ $registry  = include __DIR__ . '/registry/wpnxm-software-registry.php';
  */
 $wizardFiles = glob(__DIR__ . '/registry/*.json');
 
-if(empty($wizardFiles) === true) {
+if (empty($wizardFiles) === true) {
     exit('No JSON registries found.');
 }
 
-$wizardRegistries = array();
-foreach($wizardFiles as $file) {
+$wizardRegistries = [];
+foreach ($wizardFiles as $file) {
     $name = basename($file, '.json');
 
-    if(substr_count($name, '-') === 2) {
+    if (substr_count($name, '-') === 2) {
         preg_match('/(?<installer>.*)-(?<version>.*)-(?<bitsize>.*)/i', $name, $parts);
     }
 
-    if(substr_count($name, '-') === 3) {
+    if (substr_count($name, '-') === 3) {
         preg_match('/(?<installer>.*)-(?<version>.*)-(?<phpversion>.*)-(?<bitsize>.*)/i', $name, $parts);
     }
 
-    $parts = dropNumericKeys($parts);
+    $parts                                  = dropNumericKeys($parts);
     $wizardRegistries[$name]['constraints'] = $parts;
     unset($parts);
 
     // load registry
-    $registryContent = issetOrDefault(json_decode(file_get_contents($file), true), array());
+    $registryContent                     = issetOrDefault(json_decode(file_get_contents($file), true), []);
     $wizardRegistries[$name]['registry'] = fixArraySoftwareAsKey($registryContent);
 }
 
@@ -57,7 +57,7 @@ $wizardRegistries = sortWizardRegistries($wizardRegistries);
  */
 function sortWizardRegistries($wizardRegistries)
 {
-    uasort($wizardRegistries, "versionCompare");
+    uasort($wizardRegistries, 'versionCompare');
 
     $cnt = countNextRegistries($wizardRegistries);
 
@@ -65,7 +65,7 @@ function sortWizardRegistries($wizardRegistries)
     $nextRegistries = array_slice($wizardRegistries, 0, $cnt, true);
 
     // reduce
-    for($i = 1; $i <= $cnt; $i++) {
+    for ($i = 1; $i <= $cnt; ++$i) {
         array_shift($wizardRegistries);
     }
 
@@ -79,8 +79,8 @@ function countNextRegistries($registries)
 {
     $cnt = 0;
 
-    foreach($registries as $registry) {
-        if($registry['constraints']['version'] === 'next') {
+    foreach ($registries as $registry) {
+        if ($registry['constraints']['version'] === 'next') {
             $cnt = $cnt + 1;
         }
     }
@@ -90,13 +90,13 @@ function countNextRegistries($registries)
 
 function versionCompare($a, $b)
 {
-   return version_compare($a['constraints']['version'], $b['constraints']['version'], ">=");
+    return version_compare($a['constraints']['version'], $b['constraints']['version'], '>=');
 }
 
 function fixArraySoftwareAsKey($array)
 {
-    $out = array();
-    foreach($array as $key => $values) {
+    $out = [];
+    foreach ($array as $key => $values) {
         $software = $values[0];
         unset($values[0]);
         $out[$software] = $values[3];
@@ -125,7 +125,7 @@ function issetArrayKeyOrDefault(array $array, $key, $defaultValue = null)
 
 function getVersion($registry, $software)
 {
-    if(isset($registry[$software]) === true) {
+    if (isset($registry[$software]) === true) {
         return '<span class="badge badge-info">' . $registry[$software] . '</span>';
     }
     return '&nbsp;';
@@ -134,8 +134,8 @@ function getVersion($registry, $software)
 function renderTableHeader(array $wizardRegistries)
 {
     $header = '';
-    foreach($wizardRegistries as $wizardName => $wizardRegistry) {
-        $header .= '<th>' . $wizardName. '</th>';
+    foreach ($wizardRegistries as $wizardName => $wizardRegistry) {
+        $header .= '<th>' . $wizardName . '</th>';
     }
     return $header;
 }
@@ -143,9 +143,9 @@ function renderTableHeader(array $wizardRegistries)
 function renderTableCells(array $wizardRegistries, $software)
 {
     $cells = '';
-    foreach($wizardRegistries as $wizardName => $wizardRegistry) {
+    foreach ($wizardRegistries as $wizardName => $wizardRegistry) {
         // normal versions
-        if(isset($wizardRegistry['registry'][$software]) === true) {
+        if (isset($wizardRegistry['registry'][$software]) === true) {
             $cells .= '<td class="version-number">' . $wizardRegistry['registry'][$software] . '</td>';
         } else {
             $cells .= '<td>&nbsp;</td>';
@@ -165,7 +165,7 @@ function renderTableCells(array $wizardRegistries, $software)
     </tr>
 </thead>
 <?php
-foreach($registry as $software => $data) {
+foreach ($registry as $software => $data) {
     echo '<tr><td>' . $software . '</td>' . renderTableCells($wizardRegistries, $software) . '</tr>';
 }
 ?>

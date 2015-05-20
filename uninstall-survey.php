@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WPИ-XM Server Stack
  * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
@@ -27,9 +28,8 @@
 // $_GET['version'] = version of the WPN-XM Uninstaller
 $version = filter_input(INPUT_GET, 'version', FILTER_SANITIZE_STRING);
 
-if(preg_match('#(\d+\\.)?(\d+\\.)?(\\*|\d+)#', $version) === 1)
-{
-	header('Location: https://docs.google.com/forms/d/1woBYQ04KsWYHZXJ2RBQVbi4kzx-FU7fCnpniaKanGKI/viewform?entry.18516131=' . $version);
+if (preg_match('#(\d+\\.)?(\d+\\.)?(\\*|\d+)#', $version) === 1) {
+    header('Location: https://docs.google.com/forms/d/1woBYQ04KsWYHZXJ2RBQVbi4kzx-FU7fCnpniaKanGKI/viewform?entry.18516131=' . $version);
 } else {
-	header('HTTP/1.0 404 Not Found');
+    header('HTTP/1.0 404 Not Found');
 }

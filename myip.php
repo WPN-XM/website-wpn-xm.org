@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WPИ-XM Server Stack
  * Copyright © 2010 - 2014 Jens-André Koch <jakoch@web.de>
@@ -8,6 +9,9 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
+/**
+ * MyIP - echos the client's IP address.
+ */
 $ip = $_SERVER['HTTP_X_REAL_IP'];
 
 if (preg_match('/^\d+\.\d+\.\d+\.\d+$/', $ip) === 1) {

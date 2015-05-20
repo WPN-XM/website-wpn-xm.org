@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WPИ-XM Server Stack
  * Copyright © 2010 - 2015 Jens-André Koch <jakoch@web.de>
@@ -15,7 +16,7 @@
  */
 
 // WPNXM Software Registry
-$registry  = include __DIR__ . '/registry/wpnxm-software-registry.php';
+$registry = include __DIR__ . '/registry/wpnxm-software-registry.php';
 
 $render_components = render_components($registry);
 
@@ -25,7 +26,7 @@ echo '</div></body></html>';
 
 function render_component_tables($render_components)
 {
-  $html = '<div class="span-20 inset-panel mc-is">'
+    $html = '<div class="span-20 inset-panel mc-is">'
         . '<h3 id="download">Software Components for Web Development on Windows</h2>'
         . '<p style="font-size: 16px;">'
         . 'All software components of the WPN-XM software registry are available for selective download.'
@@ -43,7 +44,7 @@ function render_component_tables($render_components)
         . $render_components['components']
         . '</table></div>';
 
-  $html .= '<div class="download-components download-extensions span-13">'
+    $html .= '<div class="download-components download-extensions span-13">'
         . '<h2>PHP Extensions</h2>'
         . '<table border=1>'
         . '<thead><th>PHP Extension</th><th>Versions</th><th>Latest Version</th></thead>'
@@ -51,16 +52,15 @@ function render_component_tables($render_components)
         . '</table></div>'
         . '</div>';
 
-  return $html;
+    return $html;
 }
 
 function render_components($registry)
 {
-    $html = '';
+    $html            = '';
     $html_extensions = '';
 
-    foreach($registry as $software => $component)
-    {
+    foreach ($registry as $software => $component) {
         if (strpos($software, 'phpext_') !== false) {
             $html_extensions .= render_tr_for_php_extension($component);
             continue;
@@ -69,7 +69,7 @@ function render_components($registry)
         $html .= render_tr_for_normal_component($component);
     }
 
-    return array('components' => $html, 'extensions' => $html_extensions);
+    return ['components' => $html, 'extensions' => $html_extensions];
 }
 
 function render_tr_for_php_extension($component)
@@ -92,12 +92,9 @@ function render_version_dropdown_for_extension($component)
     krsort($component);
 
     // restructure the array
-    foreach($component as $version => $bitsizes)
-    {
-        foreach($bitsizes as $bitsize => $php_versions)
-        {
-            foreach($php_versions as $php_version => $url)
-            {
+    foreach ($component as $version => $bitsizes) {
+        foreach ($bitsizes as $bitsize => $php_versions) {
+            foreach ($php_versions as $php_version => $url) {
                 $v[$bitsize][$php_version][$version] = $url;
             }
         }
@@ -105,16 +102,13 @@ function render_version_dropdown_for_extension($component)
 
     // render
     $html = '';
-    foreach($v as $bitsize => $php_version)
-    {
-        $html .= '<span class="left">'.$bitsize.'</span>';
-        foreach($php_version as $php_v => $urls)
-        {
+    foreach ($v as $bitsize => $php_version) {
+        $html .= '<span class="left">' . $bitsize . '</span>';
+        foreach ($php_version as $php_v => $urls) {
             $html .= ' ' . $php_v;
             $html .= ' <select onchange="if (this.value) window.location.href=this.value">';
             $html .= '<option value="" selected disabled>Select..</option>';
-            foreach($urls as $ver => $url)
-            {
+            foreach ($urls as $ver => $url) {
                 $html .= '<option value="' . $url . '">' . $ver . '</option>';
             }
             $html .= '</select>';
@@ -133,14 +127,14 @@ function render_tr_for_normal_component($component)
           . '<td><a href="' . $component['latest']['url'] . '">' . $component['latest']['version'] . '</a></td>'
           . '</tr>';
 
-      return $html;
+    return $html;
 }
 
 function render_version_dropdown($component)
 {
     // if a component only provides a latest version, we need no dropdown
-    if($component['latest']['version'] === 'latest') {
-      return '&nbsp;';
+    if ($component['latest']['version'] === 'latest') {
+        return '&nbsp;';
     }
 
     unset($component['name'], $component['website'], $component['latest']);
@@ -149,19 +143,17 @@ function render_version_dropdown($component)
 
     $html = '<select onchange="if (this.value) window.location.href=this.value">';
     $html .= '<option value="" selected disabled>Please select a version...</option>';
-    foreach($component as $version => $url)
-    {
+    foreach ($component as $version => $url) {
         $html .= '<option value="' . $url . '">' . $version . '</option>';
     }
-      $html .= '</select>';
+    $html .= '</select>';
 
-      return $html;
+    return $html;
 }
 
 function render_header()
 {
-
-return <<<EOD
+    return <<<EOD
 <!DOCTYPE html>
 <html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 <head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#">

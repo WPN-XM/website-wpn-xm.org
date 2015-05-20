@@ -1,4 +1,5 @@
 <?php
+
 /**
  * WPИ-XM Server Stack
  * Copyright © 2010 - 2015 Jens-André Koch <jakoch@web.de>
@@ -19,6 +20,7 @@
  * Formats filesize in human readable way.
  *
  * @param file $file
+ *
  * @return string Formatted Filesize.
  */
 function filesize_formatted($bytes)
@@ -31,7 +33,7 @@ function filesize_formatted($bytes)
         return number_format($bytes / 1024, 2) . ' KB';
     } elseif ($bytes > 1) {
         return $bytes . ' bytes';
-    } elseif ($bytes == 1) {
+    } elseif ($bytes === 1) {
         return '1 byte';
     } else {
         return '0 bytes';
@@ -42,6 +44,7 @@ function filesize_formatted($bytes)
  * Builds a md5 checksum for a file and writes it to a file for later reuse.
  *
  * @param string $filename
+ *
  * @return string md5 file checksum
  */
 function md5_checksum($filename)
@@ -49,15 +52,17 @@ function md5_checksum($filename)
     $md5 = '';
 
     $path = pathinfo($filename);
-    $dir = __DIR__ . '/' . $path['dirname'] . '/checksums/';
-    if (is_dir($dir) === false) { mkdir($dir); }
+    $dir  = __DIR__ . '/' . $path['dirname'] . '/checksums/';
+    if (is_dir($dir) === false) {
+        mkdir($dir);
+    }
     $md5ChecksumFile = $dir . $path['filename'] . '.md5';
 
     if (is_file($md5ChecksumFile) === true) {
-         return file_get_contents($md5ChecksumFile);
+        return file_get_contents($md5ChecksumFile);
     } else {
-         $md5 = md5_file($filename);
-         file_put_contents($md5ChecksumFile, $md5);
+        $md5 = md5_file($filename);
+        file_put_contents($md5ChecksumFile, $md5);
     }
 
     return $md5;
@@ -67,6 +72,7 @@ function md5_checksum($filename)
  * Builds a sha1 checksum for a file and writes it to a file for later reuse.
  *
  * @param string $filename
+ *
  * @return string sha1 file checksum
  */
 function sha1_checksum($filename)
@@ -74,15 +80,17 @@ function sha1_checksum($filename)
     $sha1 = '';
 
     $path = pathinfo($filename);
-    $dir = __DIR__ . '/' . $path['dirname'] . '/checksums/';
-    if (is_dir($dir) === false) { mkdir($dir); }
+    $dir  = __DIR__ . '/' . $path['dirname'] . '/checksums/';
+    if (is_dir($dir) === false) {
+        mkdir($dir);
+    }
     $sha1ChecksumFile = $dir . $path['filename'] . '.sha1';
 
     if (is_file($sha1ChecksumFile) === true) {
-         $sha1 = file_get_contents($sha1ChecksumFile);
+        $sha1 = file_get_contents($sha1ChecksumFile);
     } else {
-         $sha1 = sha1_file($filename);
-         file_put_contents($sha1ChecksumFile, $sha1);
+        $sha1 = sha1_file($filename);
+        file_put_contents($sha1ChecksumFile, $sha1);
     }
 
     return $sha1;
@@ -93,12 +101,12 @@ function get_github_releases()
     $cache_file = __DIR__ . '/downloads/github-releases-cache.json';
 
     if (file_exists($cache_file) && (filemtime($cache_file) > (time() - (7 * 24 * 60 * 60)))) {
-       // Use cache file, when not older than 7 days.
+        // Use cache file, when not older than 7 days.
        $data = file_get_contents($cache_file);
     } else {
-       // The cache is out-of-date. Load the JSON data from Github.
+        // The cache is out-of-date. Load the JSON data from Github.
        $data = curl_request();
-       file_put_contents($cache_file, $data, LOCK_EX);
+        file_put_contents($cache_file, $data, LOCK_EX);
     }
 
     $array = json_decode($data, true);
@@ -110,8 +118,8 @@ function get_github_releases_tag($release_tag)
 {
     $releases = get_github_releases();
 
-    foreach($releases as $release) {
-        if($release['tag_name'] === $release_tag) {
+    foreach ($releases as $release) {
+        if ($release['tag_name'] === $release_tag) {
             return $release;
         }
     }
@@ -123,8 +131,8 @@ function get_total_downloads($release_tag)
 
     $downloadsTotal = 0;
 
-    if($release['prerelease'] === false) {
-        foreach($release['assets'] as $idx => $asset) {
+    if ($release['prerelease'] === false) {
+        foreach ($release['assets'] as $idx => $asset) {
             $downloadsTotal += $asset['download_count'];
         }
     }
@@ -135,11 +143,10 @@ function get_total_downloads($release_tag)
 function render_github_releases()
 {
     $releases = get_github_releases();
-    $release = $releases[0];
+    $release  = $releases[0];
     unset($release['author']);
 
-    if($release['prerelease'] === false) {
-
+    if ($release['prerelease'] === false) {
         $html = '<tr>'
               . '<td width="50%" style="vertical-align: bottom;">'
               . '<h2>' . $release['name'] . '&nbsp;'
@@ -164,19 +171,19 @@ function render_github_releases()
                 . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $release['tag_name'] . '">Github Tag</a>';
 
         // print release notes, changelog, github tag once per version
-        $html .= '<td>' . $release_notes . '&nbsp;' . $changelog . '&nbsp;' .  $github_tag .'</td>';
+        $html .= '<td>' . $release_notes . '&nbsp;' . $changelog . '&nbsp;' . $github_tag . '</td>';
         $html .= '</tr>';
 
-        foreach($release['assets'] as $idx => $asset) {
+        foreach ($release['assets'] as $idx => $asset) {
             unset($asset['uploader'], $asset['url'], $asset['label'], $asset['content_type'], $asset['updated_at']);
 
             // download button for installer, filesize, downloadcounter
             $html .= '<tr><td colspan="2">';
             $html .= '<table border=1 width="100%">';
-            $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $asset['browser_download_url'] .'">' . $asset['name'] . '</a></th>';
+            $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $asset['browser_download_url'] . '">' . $asset['name'] . '</a></th>';
             $html .= '<tr><td>';
             $html .= '<div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div>&nbsp;';
-            $html .= '<div class="btn btn-small bold" title="Downloads">' .$asset['download_count']. '</div>';
+            $html .= '<div class="btn btn-small bold" title="Downloads">' . $asset['download_count'] . '</div>';
             $html .= '</td></tr></table>';
 
             // component list for the installer
@@ -195,14 +202,14 @@ function curl_request()
 
     $curl = curl_init();
 
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.github.com/repos/wpn-xm/wpn-xm/releases',
+    curl_setopt_array($curl, [
+        CURLOPT_URL            => 'https://api.github.com/repos/wpn-xm/wpn-xm/releases',
         CURLOPT_RETURNTRANSFER => 1,
         CURLOPT_SSL_VERIFYHOST => 0,
         CURLOPT_SSL_VERIFYPEER => 0,
-        CURLOPT_HTTPHEADER => $headers,
-        CURLOPT_USERAGENT => 'wpn-xm.org - downloads page'
-    ));
+        CURLOPT_HTTPHEADER     => $headers,
+        CURLOPT_USERAGENT      => 'wpn-xm.org - downloads page',
+    ]);
 
     $response = curl_exec($curl);
 
@@ -213,29 +220,29 @@ function curl_request()
 
 // ----- Gather details for all available files
 
-if(!is_dir(__DIR__ . '/downloads')) {
+if (!is_dir(__DIR__ . '/downloads')) {
     echo 'The downloads directory is missing.';
     exit();
 }
 
-$downloads = array();
-$details = array();
+$downloads = [];
+$details   = [];
 
 # scan folder for files
-foreach (glob("./downloads/*.exe") as $filename) {
+foreach (glob('./downloads/*.exe') as $filename) {
 
     // file
-    $file = str_replace('./downloads/', '', $filename);
+    $file            = str_replace('./downloads/', '', $filename);
     $details['file'] = $file;
 
     // size
-    $bytes = filesize($filename);
+    $bytes           = filesize($filename);
     $details['size'] = filesize_formatted($bytes);
 
     $details = array_merge($details, get_installer_details($file));
 
     // md5 & sha1 hashes / checksums
-    $details['md5'] = md5_checksum(substr($filename, 2));
+    $details['md5']  = md5_checksum(substr($filename, 2));
     $details['sha1'] = sha1_checksum(substr($filename, 2));
 
     // download URL
@@ -268,7 +275,7 @@ foreach (glob("./downloads/*.exe") as $filename) {
     $downloads[] = $details;
 
     // reset array for next loop
-    $details = array();
+    $details = [];
 }
 
 // ----- Gather some general data for the downloads list
@@ -279,7 +286,7 @@ arsort($downloads);
 array_splice($downloads, 0, 0);
 
 // add "versions", listing "all available version"
-$versions = array();
+$versions = [];
 foreach ($downloads as $download) {
     if (isset($download['version']) === true) {
         $versions[] = $download['version'];
@@ -288,7 +295,7 @@ foreach ($downloads as $download) {
 $downloads['versions'] = array_unique($versions);
 
 // add "latest" as array key, referring to the latest version of WPN-XM
-$downloads['latest_version'] = $downloads[0]['version'];
+$downloads['latest_version']              = $downloads[0]['version'];
 $downloads['latest_version_release_date'] = $downloads[0]['date'];
 
 /*
@@ -333,7 +340,7 @@ if (!empty($type) && ($type === 'json')) {
 
     // ensure registry array is available
     if (!is_array($registry)) {
-        header("HTTP/1.0 404 Not Found");
+        header('HTTP/1.0 404 Not Found');
     }
 
     // send with header (downloads.php) or without header (downloads.php?type=only-body)
@@ -353,7 +360,7 @@ if (!empty($type) && ($type === 'json')) {
     foreach ($downloads as $download) {
 
         // print version only once for all files of that version
-        if ($version != $download['version']) {
+        if ($version !== $download['version']) {
             $version = $download['version'];
 
             $html .= '<tr>';
@@ -364,7 +371,7 @@ if (!empty($type) && ($type === 'json')) {
             // print release notes, changelog, github tag once per version
             $html .= '<td>';
             $html .= $download['release_notes'] . '&nbsp;';
-            $html .= $download['changelog']. '&nbsp;';
+            $html .= $download['changelog'] . '&nbsp;';
             $html .= $download['github_tag'];
             $html .= '</td>';
             $html .= '</tr>';
@@ -373,7 +380,7 @@ if (!empty($type) && ($type === 'json')) {
         // download details
         $html .= '<td colspan="2">';
         $html .= '<table width="100%">';
-        $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $download['download_url'] .'">' . $download['file'] . '</a></th>';
+        $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $download['download_url'] . '">' . $download['file'] . '</a></th>';
         $html .= '<tr><td><div class="btn btn-mini bold">' . $download['size'] . '</div></td><td>';
         $html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>&nbsp;';
         $html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button>';
@@ -392,33 +399,33 @@ if (!empty($type) && ($type === 'json')) {
 
 function get_installer_details($installer_filename)
 {
-    $details = array();
+    $details = [];
 
     // WPNXM-0.5.4-BigPack-Setup - without PHP version constraint
-    if(substr_count($installer_filename, '-') === 3) {
-        if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup.exe/', $installer_filename, $matches)) {
-            $details['version'] =  $matches['version'];
+    if (substr_count($installer_filename, '-') === 3) {
+        if (preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup.exe/', $installer_filename, $matches)) {
+            $details['version']   = $matches['version'];
             $details['installer'] = $matches['installer'];
-            $details['platform'] = 'w32';
+            $details['platform']  = 'w32';
         }
     }
 
     // WPNXM-0.5.4-BigPack-Setup-w32
-        if(substr_count($installer_filename, '-') === 4) {
-        if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<bitsize>.*).exe/', $installer_filename, $matches)) {
-            $details['version'] =  $matches['version'];
-            $details['installer'] = $matches['installer'];
-            $details['platform'] = $matches['bitsize']; //w32|w64
+        if (substr_count($installer_filename, '-') === 4) {
+            if (preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<bitsize>.*).exe/', $installer_filename, $matches)) {
+                $details['version']   = $matches['version'];
+                $details['installer'] = $matches['installer'];
+                $details['platform']  = $matches['bitsize']; //w32|w64
+            }
         }
-    }
 
     // WPNXM-0.8.0-Full-Setup-php54-w32
-    if(substr_count($installer_filename, '-') === 5) {
-        if(preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<phpversion>.*)-(?<bitsize>.*).exe/', $installer_filename, $matches)) {
-            $details['version'] =  $matches['version'];
-            $details['installer'] = $matches['installer'];
+    if (substr_count($installer_filename, '-') === 5) {
+        if (preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<phpversion>.*)-(?<bitsize>.*).exe/', $installer_filename, $matches)) {
+            $details['version']    = $matches['version'];
+            $details['installer']  = $matches['installer'];
             $details['phpversion'] = $matches['phpversion'];
-            $details['platform'] = $matches['bitsize']; //w32|w64
+            $details['platform']   = $matches['bitsize']; //w32|w64
         }
     }
 
@@ -436,8 +443,8 @@ function render_component_list_for_installer($installer_name)
     $html = '';
 
     // Components
-    if('webinstaller' === strtolower($download['installer'])) {
-       $html .= '<tr><td colspan="3">Latest Components fetched from the Web</td></tr>';
+    if ('webinstaller' === strtolower($download['installer'])) {
+        $html .= '<tr><td colspan="3">Latest Components fetched from the Web</td></tr>';
     } else {
         $platform = isset($download['platform']) ? '-' . $download['platform'] : '';
 
@@ -480,15 +487,15 @@ function render_component_list_multi_column($registry, $installerRegistry)
 
     foreach ($installerRegistry as $i => $component) {
         $shortName = $component[0];
-        $version = $component[3];
+        $version   = $component[3];
 
         // skip - removed from registry, still in 0.7.0 and breaking it
-        if($shortName === 'phpext_xcache') {
+        if ($shortName === 'phpext_xcache') {
             continue;
         }
 
         // php extension - they are appended to the extension html fragment
-        if(false !== strpos($shortName, 'phpext_')) {
+        if (false !== strpos($shortName, 'phpext_')) {
             $name = str_replace('PHP Extension ', '', $registry[ $shortName ]['name']);
             $extensions_html .= render_component_li($name, $version);
             continue;
@@ -508,20 +515,19 @@ function render_component_list_multi_column($registry, $installerRegistry)
 
 function render_component_list_comma_separated($registry, $installerRegistry, $number_of_components)
 {
-    $html = '';
-    $extensions_html = ', PHP Extension(s): ';;
+    $html            = '';
+    $extensions_html = ', PHP Extension(s): ';
 
-    foreach ($installerRegistry as $i => $component)
-    {
+    foreach ($installerRegistry as $i => $component) {
         $shortName = $component[0];
-        $version = $component[3];
+        $version   = $component[3];
 
         // skip - removed from registry, still in 0.7.0 and breaking it
-        if($shortName === 'phpext_xcache') {
+        if ($shortName === 'phpext_xcache') {
             continue;
         }
 
-        if(false !== strpos($component[0], 'phpext_')) {
+        if (false !== strpos($component[0], 'phpext_')) {
             $name = str_replace('PHP Extension ', '', $registry[ $component[0] ]['name']);
             $extensions_html .= '<span class="bold">' . $name . '</span> ' . $version;
             continue;
@@ -530,7 +536,7 @@ function render_component_list_comma_separated($registry, $installerRegistry, $n
         $name = $registry[ $shortName ]['name'];
 
         $html .= '<span style="font-weight:bold;">' . $name . '</span> ' . $version;
-        $html .= ($i+1 !== $number_of_components) ? ', ' : '';
+        $html .= ($i + 1 !== $number_of_components) ? ', ' : '';
     }
     unset($installerRegistry);
 
@@ -546,8 +552,7 @@ function render_component_li($name, $version)
 
 function render_header()
 {
-
-return <<<EOD
+    return <<<EOD
 <!DOCTYPE html>
 <html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 <head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#">
