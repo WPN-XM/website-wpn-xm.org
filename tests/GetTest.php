@@ -43,6 +43,20 @@ class GetTest extends PHPUnit_Framework_TestCase
             $handler->response->url
         );
     }
+    
+    public function testRequest_PHPExtension_Phalcon_WithShortPHPVersion540()
+    {
+        $url = 'http://wpn-xm.org/get.php?s=phpext_phalcon&p=5.4.0';
+
+        $this->setGetRequest($url);
+
+        include dirname(__DIR__) . '/get.php';
+
+        $this->assertEquals(
+            'http://static.phalconphp.com/files/phalcon_x86_VC9_php5.4.0_2.0.1_nts.zip',
+            $handler->response->url
+        );
+    }
 
     public function testRequest_PHPExtension_Phalcon_WithShortPHPVersion55()
     {
