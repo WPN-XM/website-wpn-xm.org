@@ -295,7 +295,7 @@ $component = new Component($request, $response, $registry);
 $component->redirectTo();
 
 /**
- * Find component in registry. 
+ * Find component in registry.
  * Redirect to download url.
  */
 class Component
@@ -314,11 +314,11 @@ class Component
     public function redirectTo()
     {
         // re-assign vars to shorter ones
-        $software = $this->request->software;
-        $version = $this->request->version;
+        $software   = $this->request->software;
+        $version    = $this->request->version;
         $phpVersion = $this->request->phpVersion;
-        $bitsize = $this->request->bitsize;        
-        
+        $bitsize    = $this->request->bitsize;
+
         if (!defined('PHPUNIT_TESTSUITE')) {
             if (!$this->registry->softwareExists($software)) {
                 $this->response->setHeader('HTTP/1.0 404 Not Found');
@@ -338,7 +338,6 @@ class Component
                 // return download url for specific version, e.g. $registry['phpext_xdebug']['1.2.1']['x86']['5.5']
                 $url = $this->registry[$software][$version][$bitsize][$phpVersion];
                 $this->response->redirect($url);
-                
             } elseif ($software === 'phpext_phalcon') {
 
                 // special handling for phpext_phalcon, because it has a PHP "patch level" version constraint.
@@ -347,14 +346,13 @@ class Component
                 $phpVersion = $this->registry->getPhpVersionInRange($software, $version, $bitsize, $phpVersion);
                 $url        = $this->registry[$software][$version][$bitsize][$phpVersion];
                 $this->response->redirect($url);
-                
             } elseif ($this->registry->extensionLatestVersionHasPhpVersion($software, $bitsize, $phpVersion)) {
 
                 // the specific version does not exist. return latest version for php default version instead,
                 // e.g. $registry['phpext_xdebug']['latest']['url']['x86']['5.5']
                 $this->response->redirect($this->registry[$software]['latest']['url'][$bitsize][$phpVersion]);
             } else {
-                
+
                 // software does not exist, download will fail.
                 $this->response->setHeader('HTTP/1.0 404 Not Found');
                 $this->response->send();
@@ -367,19 +365,17 @@ class Component
              */
 
             if ($this->registry->versionExists($software, $version)) {
-                
+
                 // return download url for specific version, e.g. $registry['nginx']['1.2.1']
                 $this->response->redirect($this->registry[$software][$version]);
-                
             } elseif ($software === 'php' or $software === 'php-x64') {
-                
+
                 // special handling for PHP, because we have to
                 // return the latest patch version (x.y.*) of a "major.minor" PHP version (x.y)
                 $version = getLatestVersion($this->registry, $software, $version);
                 $this->response->redirect($this->registry[$software][$version]);
-                
             } else {
-                
+
                 // return latest version url, e.g. $registry['nginx']['latest']['url']
                 $url = $this->registry[$software]['latest']['url'];
                 $this->response->redirect($url);
