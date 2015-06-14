@@ -7,8 +7,12 @@
     convertErrorsToExceptions   = "true"
     convertNoticesToExceptions  = "true"
     convertWarningsToExceptions = "true"
+    forceCoversAnnotation       = "false"
     processIsolation            = "true"
+    stopOnError                 = "false"
     stopOnFailure               = "false"
+    stopOnIncomplete            = "false"
+    stopOnSkipped               = "false"
     syntaxCheck                 = "true"
     verbose                     = "true"
     bootstrap                   = "./tests/bootstrap.php">
@@ -27,7 +31,10 @@
     </testsuite>
 
     <filter>
-	     <blacklist>
+            <whitelist processUncoveredFilesFromWhitelist="true">>
+                <directory suffix=".php">.</directory>
+            </whitelist>
+	    <blacklist>
 	        <directory suffix=".php">../vendor/</directory>
 	    </blacklist>
     </filter>
