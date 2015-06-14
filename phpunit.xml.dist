@@ -31,7 +31,7 @@
     </testsuite>
 
     <filter>
-            <whitelist processUncoveredFilesFromWhitelist="true">>
+            <whitelist processUncoveredFilesFromWhitelist="false">>
                 <directory suffix=".php">.</directory>
             </whitelist>
 	    <blacklist>
