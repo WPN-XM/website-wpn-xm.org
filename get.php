@@ -372,7 +372,7 @@ class Component
 
                 // special handling for PHP, because we have to
                 // return the latest patch version (x.y.*) of a "major.minor" PHP version (x.y)
-                $version = getLatestVersion($this->registry, $software, $version);
+                $version = $this->registry->getLatestVersion($this->registry, $software, $version);
                 $this->response->redirect($this->registry[$software][$version]);
             } else {
 
