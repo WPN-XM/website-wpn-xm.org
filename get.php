@@ -137,7 +137,8 @@ class Registry implements ArrayAccess
         // reduce array to values in constraint range
         foreach ($versions as $idx => $version) {
 
-            // fix "5.y" to "5.y.1"
+            // The majority of PHP extensions uses just "major.minor" PHP versions.
+            // Let's fix these: "5.y" to "5.y.1".
             if (strlen($version) === 3) {
                 $version = $version . '.1';
             }
