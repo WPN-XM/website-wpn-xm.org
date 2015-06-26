@@ -7,9 +7,9 @@ class GetTest extends PHPUnit_Framework_TestCase
         $url = 'http://wpn-xm.org/get.php?s=nginx';
 
         $this->setGetRequest($url);
-
+ 
         include dirname(__DIR__) . '/get.php';
-
+        
         $this->assertEquals(
             'http://nginx.org/download/nginx-1.9.0.zip',
             $handler->response->url
