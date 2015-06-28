@@ -106,7 +106,7 @@ function get_github_releases()
     } else {
         // The cache is out-of-date. Load the JSON data from Github.
        $data = curl_request();
-        file_put_contents($cache_file, $data, LOCK_EX);
+       file_put_contents($cache_file, $data, LOCK_EX);
     }
 
     $array = json_decode($data, true);
@@ -125,16 +125,12 @@ function get_github_releases_tag($release_tag)
     }
 }
 
-function get_total_downloads($release_tag)
+function get_total_downloads($release)
 {
-    $release = get_github_releases_tag($release_tag);
-
     $downloadsTotal = 0;
 
-    if ($release['prerelease'] === false) {
-        foreach ($release['assets'] as $idx => $asset) {
-            $downloadsTotal += $asset['download_count'];
-        }
+    foreach ($release['assets'] as $idx => $asset) {
+        $downloadsTotal += $asset['download_count'];
     }
 
     return $downloadsTotal;
@@ -143,57 +139,61 @@ function get_total_downloads($release_tag)
 function render_github_releases()
 {
     $releases = get_github_releases();
-    $release  = $releases[0];
-    unset($release['author']);
 
-    if ($release['prerelease'] === false) {
-        $html = '<tr>'
-              . '<td width="50%" style="vertical-align: bottom;">'
-              . '<h2>' . $release['name'] . '&nbsp;'
-              . '<small class="btn btn-default" title="Release Date">Release Date<br><span class="bold">' . date('d M Y', strtotime($release['created_at'])) . '</span></small>'
-              . '&nbsp;'
-              . '<small class="btn btn-default" title="Total Downloads">Downloads<br><span class="bold">' . get_total_downloads($release['tag_name']) . '</span></small>'
-              . '</h2>'
-              . '</td>';
+    $html = '';
 
-        // release notes, e.g. https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3
-        $release_notes = '<a class="btn btn-large btn-info"'
-                . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-' . $release['tag_name'] . '">Release Notes</a>';
+    foreach($releases as $release)
+    {
+        unset($release['author']);
 
-        // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/0.5.2/changelog.txt
-        $changelog = '<a class="btn btn-large btn-info"'
-                . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $release['tag_name'] . '/changelog.txt">Changelog</a>';
+        if ($release['prerelease'] === false) {
+            $html .= '<tr>'
+                  . '<td width="50%" style="vertical-align: bottom;">'
+                  . '<h2>' . $release['name'] . '&nbsp;'
+                  . '<small class="btn btn-default" title="Release Date">Release Date<br><span class="bold">' . date('d M Y', strtotime($release['created_at'])) . '</span></small>'
+                  . '&nbsp;'
+                  . '<small class="btn btn-default" title="Total Downloads">Downloads<br><span class="bold">' . get_total_downloads($release) . '</span></small>'
+                  . '</h2>'
+                  . '</td>';
 
-        // component list with version numbers
+            // release notes, e.g. https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3
+            $release_notes = '<a class="btn btn-large btn-info"'
+                    . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-' . $release['tag_name'] . '">Release Notes</a>';
 
-        // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
-        $github_tag = '<a class="btn btn-large btn-info"'
-                . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $release['tag_name'] . '">Github Tag</a>';
+            // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/0.5.2/changelog.txt
+            $changelog = '<a class="btn btn-large btn-info"'
+                    . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $release['tag_name'] . '/changelog.txt">Changelog</a>';
 
-        // print release notes, changelog, github tag once per version
-        $html .= '<td>' . $release_notes . '&nbsp;' . $changelog . '&nbsp;' . $github_tag . '</td>';
-        $html .= '</tr>';
+            // component list with version numbers
 
-        foreach ($release['assets'] as $idx => $asset) {
-            unset($asset['uploader'], $asset['url'], $asset['label'], $asset['content_type'], $asset['updated_at']);
+            // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
+            $github_tag = '<a class="btn btn-large btn-info"'
+                    . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $release['tag_name'] . '">Github Tag</a>';
 
-            // download button for installer, filesize, downloadcounter
-            $html .= '<tr><td colspan="2">';
-            $html .= '<table border=1 width="100%">';
-            $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $asset['browser_download_url'] . '">' . $asset['name'] . '</a></th>';
-            $html .= '<tr><td>';
-            $html .= '<div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div>&nbsp;';
-            $html .= '<div class="btn btn-small bold" title="Downloads">' . $asset['download_count'] . '</div>';
-            $html .= '</td></tr></table>';
+            // print release notes, changelog, github tag once per version
+            $html .= '<td>' . $release_notes . '&nbsp;' . $changelog . '&nbsp;' . $github_tag . '</td>';
+            $html .= '</tr>';
 
-            // component list for the installer
-            $html .= render_component_list_for_installer($asset['name']);
+            foreach ($release['assets'] as $idx => $asset) {
+                unset($asset['uploader'], $asset['url'], $asset['label'], $asset['content_type'], $asset['updated_at']);
+
+                // download button for installer, filesize, downloadcounter
+                $html .= '<tr><td colspan="2">';
+                $html .= '<table border=1 width="100%">';
+                $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $asset['browser_download_url'] . '">' . $asset['name'] . '</a></th>';
+                $html .= '<tr><td>';
+                $html .= '<div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div>&nbsp;';
+                $html .= '<div class="btn btn-small bold" title="Downloads">' . $asset['download_count'] . '</div>';
+                $html .= '</td></tr></table>';
+
+                // component list for the installer
+                $html .= render_component_list_for_installer($asset['name']);
+            }
+
+            $html .= '</td></tr>';
         }
-
-        $html .= '</td></tr>';
-
-        return $html;
     }
+    return $html;
 }
 
 function curl_request()
@@ -411,13 +411,13 @@ function get_installer_details($installer_filename)
     }
 
     // WPNXM-0.5.4-BigPack-Setup-w32
-        if (substr_count($installer_filename, '-') === 4) {
-            if (preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<bitsize>.*).exe/', $installer_filename, $matches)) {
-                $details['version']   = $matches['version'];
-                $details['installer'] = $matches['installer'];
-                $details['platform']  = $matches['bitsize']; //w32|w64
-            }
+    if (substr_count($installer_filename, '-') === 4) {
+        if (preg_match('/WPNXM-(?<version>.*)-(?<installer>.*)-Setup-(?<bitsize>.*).exe/', $installer_filename, $matches)) {
+            $details['version']   = $matches['version'];
+            $details['installer'] = $matches['installer'];
+            $details['platform']  = $matches['bitsize']; //w32|w64
         }
+    }
 
     // WPNXM-0.8.0-Full-Setup-php54-w32
     if (substr_count($installer_filename, '-') === 5) {
