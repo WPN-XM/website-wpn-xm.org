@@ -144,6 +144,11 @@ function render_github_releases()
 
     foreach($releases as $release)
     {
+        // skip our first release - only commits, no downloads
+        if($release['tag_name'] === '0.2.0') {
+            continue;
+        }
+
         unset($release['author']);
 
         if ($release['prerelease'] === false) {
