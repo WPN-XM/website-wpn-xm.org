@@ -494,7 +494,7 @@ function render_component_list_multi_column($registry, $installerRegistry)
         $shortName = $component[0];
 
         // skip - components removed from registry, still in 0.7.0 and breaking it
-        if (in_array($shortName, ['phpext_xcache', 'junction']) {
+        if (in_array($shortName, ['phpext_xcache', 'junction'])) {
             continue;
         }
 
