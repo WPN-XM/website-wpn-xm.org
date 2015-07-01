@@ -492,12 +492,13 @@ function render_component_list_multi_column($registry, $installerRegistry)
 
     foreach ($installerRegistry as $i => $component) {
         $shortName = $component[0];
-        $version   = $component[3];
 
-        // skip - removed from registry, still in 0.7.0 and breaking it
-        if ($shortName === 'phpext_xcache') {
+        // skip - components removed from registry, still in 0.7.0 and breaking it
+        if (in_array($shortName, ['phpext_xcache', 'junction']) {
             continue;
         }
+
+        $version   = $component[3];
 
         // php extension - they are appended to the extension html fragment
         if (false !== strpos($shortName, 'phpext_')) {
