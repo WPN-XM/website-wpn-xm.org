@@ -20,7 +20,7 @@ body{background:#ECECEC;color:#333;margin:1.1em 0;font-family:'Roboto','Lucida G
 .container{width:930px;margin:0 auto;}
 .inset-panel{background:none repeat scroll 0 0 rgba(0, 0, 0, 0.04);box-shadow:0 1px 1px white, 0 0 1px 0 rgba(0, 0, 0, 0.5) inset;padding:10px;}
 .textshadow {text-shadow: 0 1px 1px #FFFFFF;}
-.github-ribbon{position:absolute;top:0;left:0;border:0;}
+.github-ribbon{position: absolute; top: 0; left: 0; border: 0;}
 #widget-twitter{text-shadow:none;}
 a{color:#000000;}
 .google_ad_1{margin:auto;width:300px;position:relative;left:45px;top:-30px;height:227px;}
