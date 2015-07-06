@@ -1,649 +1,871 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
-<head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#">
-  <meta charset="utf-8" />
-  <title>WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows&reg; platform.</title>
-  <meta http-equiv="x-ua-compatible" content="IE=EmulateIE7" />
-  <!-- Google Site Verification -->
-  <meta name="google-site-verification" content="OxwcTMUNiYu78EIEA2kq-vg_CoTyhGL-YVKXieCObDw" />
-  <meta name="Googlebot" content="index,follow">
-  <meta name="Author" content="Jens-Andre Koch" />
-  <meta name="Copyright" content="(c) 2011-onwards Jens-Andre Koch." />
-  <meta name="Publisher" content="Koch Softwaresystemtechnik" />
-  <meta name="Rating" content="general" />
-  <meta name="page-type" content="Homepage, Website" />
-  <meta name="robots" content="index, follow, all, noodp" />
-  <meta name="Description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
-  <meta name="keywords" content="WPN-XM, free, open-source, server, NGINX, PHP, Windows, MariaDb, MongoDb, Adminer, XDebug, WAMP, WIMP, WAMPP, LAMP" />
-  <!-- avgthreatlabs.com Site Verification -->
-  <meta name="avgthreatlabs-verification" content="247b6d3c405a91491b1fea8e89fb3b779f164a5f" />
-  <!-- DC -->
-  <meta name="DC.Title" content="WPN-XM" />
-  <meta name="DC.Creator" content="Jens-Andre Koch" />
-  <meta name="DC.Publisher" content="Koch Softwaresystemtechnik" />
-  <meta name="DC.Type" content="Service" />
-  <meta name="DC.Format" content="text/html" />
-  <meta name="DC.Language" content="en" />
-  <!-- Geo -->
-  <meta name="geo.region" content="DE-MV" />
-  <meta name="geo.placename" content="Neubrandenburg" />
-  <meta name="geo.position" content="53.560348;13.249941" />
-  <meta name="ICBM" content="53.560348, 13.249941" />
-  <!-- Facebook OpenGraph -->
-  <meta property="og:url" content="http://wpn-xm.org/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
-  <meta property="og:description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
+  <head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#">
+    <meta charset="utf-8" />
+    <title>WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows&reg; platform.</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="OxwcTMUNiYu78EIEA2kq-vg_CoTyhGL-YVKXieCObDw" />
+    <meta name="Googlebot" content="index,follow" />
+    <meta name="Author" content="Jens-Andre Koch" />
+    <meta name="Copyright" content="(c) 2011-onwards Jens-Andre Koch." />
+    <meta name="Publisher" content="Koch Softwaresystemtechnik" />
+    <meta name="Rating" content="general" />
+    <meta name="page-type" content="Homepage, Website" />
+    <meta name="robots" content="index, follow, all, noodp" />
+    <meta name="Description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
+    <meta name="keywords" content="WPN-XM, free, open-source, server, NGINX, PHP, Windows, MariaDb, MongoDb, Adminer, XDebug, WAMP, WIMP, WAMPP, LAMP" />
+    <!-- avgthreatlabs.com Site Verification -->
+    <meta name="avgthreatlabs-verification" content="247b6d3c405a91491b1fea8e89fb3b779f164a5f" />
+    <!-- DC -->
+    <meta name="DC.Title" content="WPN-XM" />
+    <meta name="DC.Creator" content="Jens-Andre Koch" />
+    <meta name="DC.Publisher" content="Koch Softwaresystemtechnik" />
+    <meta name="DC.Type" content="Service" />
+    <meta name="DC.Format" content="text/html" />
+    <meta name="DC.Language" content="en" />
+    <!-- Geo -->
+    <meta name="geo.region" content="DE-MV" />
+    <meta name="geo.placename" content="Neubrandenburg" />
+    <meta name="geo.position" content="53.560348;13.249941" />
+    <meta name="ICBM" content="53.560348, 13.249941" />
+    <!-- Facebook OpenGraph -->
+    <meta property="og:url" content="http://wpn-xm.org/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
+    <meta property="og:description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
+    <!-- Favicon & Touch-Icons -->
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="images/touch/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="images/touch/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="images/touch/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="images/touch/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="images/touch/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="images/touch/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="images/touch/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="images/touch/apple-touch-icon-152x152.png" />
+    <!-- Bootstrap CSS Framework -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Javascripts -->
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>    
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="/js/html5shiv.js"></script>
+    <![endif]-->
+    <script type="application/ld+json">
+      // JavaScript Object Notation for Linking Data
+      {
+      "@context": "http://schema.org/",
+      "@type": "SoftwareApplication",
+      "about": "WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform.",
+      "applicationCategory": "web server stack, PHP development, Windows platform",
+      "applicationSubCategory": "wamp, wnmp",
+      "author": "Jens-André Koch",
+      "copyrightHolder": "Jens-André Koch",
+      "copyrightYear": "2010",
+      "datePublished": "2014-06-28",
+      "downloadUrl": [
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php55-w32.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php56-w32.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php55-w64.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php56-w64.exe",
 
-  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.png" />
-  <link rel="apple-touch-icon" sizes="57x57" href="/images/touch/apple-touch-icon-57x57.png" />
-  <link rel="apple-touch-icon" sizes="60x60" href="/images/touch/apple-touch-icon-60x60.png" />
-  <link rel="apple-touch-icon" sizes="72x72" href="/images/touch/apple-touch-icon-72x72.png" />
-  <link rel="apple-touch-icon" sizes="76x76" href="/images/touch/apple-touch-icon-76x76.png" />
-  <link rel="apple-touch-icon" sizes="114x114" href="/images/touch/apple-touch-icon-114x114.png" />
-  <link rel="apple-touch-icon" sizes="120x120" href="/images/touch/apple-touch-icon-120x120.png" />
-  <link rel="apple-touch-icon" sizes="144x144" href="/images/touch/apple-touch-icon-144x144.png" />
-  <link rel="apple-touch-icon" sizes="152x152" href="/images/touch/apple-touch-icon-152x152.png" />
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php55-w32.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php56-w32.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php55-w64.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php56-w64.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-LiteRC-Setup-php56-w32.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-LiteRC-Setup-php56-w64.exe",
 
-  <!-- Blueprint CSS Framework -->
-  <link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection" />
-  <link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print" />
-  <!--[if IE]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
-  <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen, projection" />
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php55-w32.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php56-w32.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php55-w64.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php56-w64.exe",
 
-  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-  <!--[if lt IE 9]>
-      <script src="/js/html5shiv.js"></script>
-  <![endif]-->
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php55-w32.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php56-w32.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php55-w64.exe",
+      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php56-w64.exe"
+      ],
+      "featureList": "index.html",
+      "fileFormat": "application/octet-stream, application/exe, application/x-exe, application/dos-exe, application/x-winexe, application/msdos-windows",
+      "fileSize": "",
+      "image": "http://wpn-xm.org/images/wpnxm-logo.png",
+      "keywords": "web server stack, PHP development, Windows platform",
+      "license": "https://github.com/WPN-XM/WPN-XM/blob/master/LICENSE",
+      "name": "WPИ-XM",
+      "operatingSystem": "Windows",
+      "releaseNotes": "https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.8.4",
+      "softwareVersion": "0.8.4",
+      "url": "http://wpn-xm.org/index.html"
+      }
+    </script>
+    <style>
+      .github-ribbon{position: absolute; top: 0; left: 0; border: 0;z-index: 9999;}
+      body{background:#ECECEC;color:#333;font-family:'Roboto','Lucida Grande',Arial,sans-serif;font-size:16px;text-rendering:optimizeLegibility;
+           padding-top: 120px; position: relative;
+      }
 
-  <script src="/js/jquery-2.1.1.min.js"></script>
-  <script src="/js/bootstrap.min.js"></script>
+      div#logo {
+          background:url("images/wpn-xm-logo.png") no-repeat scroll 0 0 transparent;
+          /*box-shadow: 0 0 0 1px #b6bdc3;*/
+          min-height: 85px;
+          background-position-x: center;
+          background-position: center;
+      }
 
-  <script type="application/ld+json">
-  // JavaScript Object Notation for Linking Data
-  {
-    "@context": "http://schema.org/",
-    "@type": "SoftwareApplication",
-    "about": "WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform.",
-    "applicationCategory": "web server stack, PHP development, Windows platform",
-    "applicationSubCategory": "wamp, wnmp",
-    "author": "Jens-André Koch",
-    "copyrightHolder": "Jens-André Koch",
-    "copyrightYear": "2010",
-    "datePublished": "2014-06-26",
-    "downloadUrl": [
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Webinstaller-Setup-php54-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Webinstaller-Setup-php55-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Webinstaller-Setup-php56-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Webinstaller-Setup-php55-w64.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Webinstaller-Setup-php56-w64.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Lite-Setup-php54-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Lite-Setup-php55-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Lite-Setup-php56-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Lite-Setup-php55-w64.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Lite-Setup-php56-w64.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-LiteRC-Setup-php56-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-LiteRC-Setup-php56-w64.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Standard-Setup-php54-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Standard-Setup-php55-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Standard-Setup-php56-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Standard-Setup-php55-w64.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Standard-Setup-php56-w64.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Full-Setup-php54-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Full-Setup-php55-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Full-Setup-php56-w32.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Full-Setup-php55-w64.exe",
-      "https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Full-Setup-php56-w64.exe"
-    ],
-    "featureList": "index.html",
-    "fileFormat": "application/octet-stream, application/exe, application/x-exe, application/dos-exe, application/x-winexe, application/msdos-windows",
-    "fileSize": "",
-    "image": "http://wpn-xm.org/images/wpnxm-logo.png",
-    "keywords": "web server stack, PHP development, Windows platform",
-    "license": "https://github.com/WPN-XM/WPN-XM/blob/master/LICENSE",
-    "name": "WPИ-XM",
-    "operatingSystem": "Windows",
-    "releaseNotes": "https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.8.3",
-    "softwareVersion": "0.8.3",
-    "url": "http://wpn-xm.org/index.html"
-  }
-  </script>
-</head>
+      /*    yo, man.. SVG. looking sharp and nice in Chrome, but nowhere else.
+            incompatibilities... in 2015! WTF! And Flash is still alive. WTF!
+            div#logo{
+                background:url("images/wpnxm-logo.svg") no-repeat scroll 0 0 transparent; 
+                box-shadow: 0 0 0 10px #b6bdc3;
+      
+                 just to get an apsect ratio same as the SVG's: 
+                padding-top: 13%;
+      
+                background-size: auto auto;
+                background-size: 480px 140px;
+                background-repeat: no-repeat;
+                background-position-x: center;
+                // if small display, shrink, but do not cut off
+                min-height: 125px;
+            }*/
 
-<body>
-<!-- Facebook -->
-<div id="fb-root"></div>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1398546803746885',
-      xfbml      : true,
-      version    : 'v2.2'
-    });
-  };
+      h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong{color:#D40408;}
+      h2 {font-family:Verdana;font-size:25px;text-align:center;padding-bottom:15px;text-shadow:0px 1px 0 #FFF;}
+      hr { border-bottom: 1px solid #BBBBBB; box-shadow: 0 1px 0 white;}
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
+      .bold{font-weight:bold;}
+      .centered{text-align:center;}
+      .center {
+          float: none;
+          margin-left: auto;
+          margin-right: auto;
+      }
 
-<!-- Fork me on Github Ribbon -->
-<a href="https://github.com/WPN-XM/WPN-XM">
-<img width="149" height="149" alt="Fork WPN-XM on GitHub" src="images/fork-me-on-github.png" class="github-ribbon" />
-</a>
+      .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+          margin-left: -15px;
+          margin-top: -11px;
+      }
+      .navbar-inverse {
+          border-color: #ccc;
+      }
 
-<div class="container showgrids">
+      /*#nav-brand {
+          padding-top: 5px;
+      }*/
 
-  <nav role="navigation" id="main-nav" class="span-21 toolbar black">
-    <ul>
-      <li class="vcard"><a itemprop="url" rel="home" href="index.html" class="fn org url uid">Home</a></li>
-      <li><a rel="about" href="#about">About</a></li>
-      <li><a rel="help" href="https://groups.google.com/forum/?fromgroups#!forum/wpn-xm">Mailing List</a></li>
-      <li><a rel="get-involved" href="#getinvolved">Get Involved</a></li>
-      <li><a rel="install" href="https://github.com/WPN-XM/WPN-XM/wiki/">Wiki</a></li>
-      <li><a rel="install" href="https://github.com/WPN-XM/WPN-XM/issues/">Issues</a></li>
-      <li><a rel="donate" href="#donate">Donate</a></li>
-      <li><a rel="imprint" href="#imprint">Imprint</a></li>
-    </ul>
-  </nav>
+      .sellout-buttons > div{display:block;float:left;margin:0;padding:6px;}
 
-  <div class="span-21 header">
-    <h1 id="logo">WPИ-XM</h1>
-    <h2><strong itemprop="name">WPИ-XM</strong> is a free and open-source web server solution stack for professional PHP development on the Windows<small><sup>&reg;</sup></small> platform.</h2>
-  </div>
+      .banner {
+          padding: 15px 20px;
+          color: #777;
+          background-color: #fafafa;
+          border-top: 1px solid #fff;
+          border-bottom: 1px solid #e5e5e5;
+          margin-top: 5em;
+          margin-bottom: 5em;
+      }
 
-  <div class="span-21">
-    <div class="slider-wrapper">
-      <div class="slider-background">
-        <div id="myCarousel" class="carousel slide carousel-kenburns">
-          <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-            <li data-target="#myCarousel" data-slide-to="3"></li>
-            <li data-target="#myCarousel" data-slide-to="4"></li>
-          </ol>
-          <!-- Carousel items -->
-          <div class="carousel-inner">
-            <div class="item active">
-                <img alt="" src="/images/screenshots/img1.png" width="978" height="647">
-                <div class="carousel-caption">
-                  <h4>Webinterface - Projects &amp; Tools</h4>
-                  <p>First Image Text</p>
-                </div>
+      .unstyled-list{list-style-image:none;list-style-type:none;margin:0 0.25em 0.25em 0;padding-left:10px;}
+
+      /*.show-grid [class^=col-] {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          background-color: #eee;
+          background-color: rgba(86,61,124,.15);
+          border: 1px solid #ddd;
+          border: 1px solid rgba(86,61,124,.2);
+      }*/
+
+      /* latin */
+      @font-face {
+          font-family: 'Open Sans';
+          font-style: normal;
+          font-weight: 400;
+          src: local('Open Sans'), local('OpenSans'), url('fonts/roboto/Roboto-Regular.ttf') format('truetype');
+          /*unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;*/
+      }
+
+      /* Slider */
+      .slider-wrapper{padding:9px;background-color:#FAFAFA;border:1px solid rgba(70, 70, 70, 0.3);border-radius:5px 5px 5px 5px;box-shadow:1px 1px 15px #DDD;
+                      width: 830px;height: 322px; margin-top: 3em;margin-bottom:5em;}
+      .slider-background{z-index:7;top:0px;left:0px;height:300px;overflow:hidden;border:1px solid #AAA;background:repeat scroll 0 0 #ECECEC;}
+      .carousel{position:relative;margin-bottom:18px;line-height:1;}
+      .carousel-inner{overflow:hidden;width:100%;position:relative;text-align:center;height:100%;}
+      .carousel .item{display:none;position:relative;opacity:0.8;}
+      .carousel .active,
+      .carousel .next,
+      .carousel .prev{display:block;}
+      .carousel .active{left:0;}
+      .carousel .next,
+      .carousel .prev{position:absolute;top:0;width:100%;}
+      .carousel .next{left:100%;}
+      .carousel .prev{left:-100%;}
+      .carousel .next.left,
+      .carousel .prev.right{left:0;}
+      .carousel .active.left{left:-100%;}
+      .carousel .active.right{left:100%;}
+      .carousel-control{position:absolute;top:250px;left:15px;width:40px;height:40px;margin-top:-20px;font-size:60px;font-weight:100;line-height:24px;color:#ffffff;text-align:center;background:#222222;border:3px solid #ffffff;-moz-border-radius:23px;border-radius:23px;opacity:0.5;filter:alpha(opacity=50);}
+      .carousel-control.right{left:auto;right:15px;}
+      .carousel-control:hover{color:#ffffff;text-decoration:none;opacity:0.9;filter:alpha(opacity=90);}
+      .carousel-caption{position:absolute;left:0;right:0;bottom:0;padding:10px 15px 5px;background:#333333;background:rgba(0, 0, 0, 0.75);}
+      .carousel-caption h4,
+      .carousel-caption p{color:#ffffff;margin:0px;padding:5px;}
+      .carousel-indicators{position:absolute;top:15px;right:15px;z-index:5;margin:0;list-style:none;}
+      .carousel-indicators li{display:block;float:left;width:10px;height:10px;margin-left:5px;text-indent:-999px;background-color:#ccc;background-color:rgba(180,180,180,.25);border-radius:10px;border:1px solid #999999;}
+      .carousel-indicators .active{background-color:#fff;}
+      .carousel.carousel-kenburns .item{-o-transition-duration:1.75s;-ms-transition-duration:1.75s;-moz-transition-duration:1.75s;-webkit-transition-duration:1.75s;-o-transform:scale(1.0);-ms-transform:scale(1.0);-moz-transform:scale(1.0);-webkit-transform:scale(1.0);}
+      .carousel.carousel-kenburns .carousel-inner .active{-o-transition-duration:2s;-ms-transition-duration:2s;-moz-transition-duration:2s;-webkit-transition-duration:2s;-webkit-transform:scale(0.91) translateY(-40%);-moz-transform:scale(0.91) translateY(-40%);-ms-transform:scale(0.91) translateY(-40%);-o-transform:scale(0.91) translateY(-40%);transform:scale(0.91) translateY(-40%);-webkit-transform-origin:bottom left;-moz-transform-origin:bottom left;-ms-transform-origin:bottom left;-o-transform-origin:bottom left;transform-origin:bottom left;}
+
+      /* Download Mini Matrix Table */
+      .tg{border-collapse:collapse;border-spacing:0;border-color:#999;margin:0px auto;}
+      .tg td{padding:3px 6px; text-align: center;}
+      .tg .tg-hnao{text-align:center;font-size:14px;}
+
+      /* Buttons */
+      .btn{-moz-border-bottom-colors:none;-moz-border-left-colors:none;-moz-border-right-colors:none;-moz-border-top-colors:none;background-color:#F5F5F5;background-image:linear-gradient(to bottom, #FFFFFF, #E6E6E6);background-repeat:repeat-x;border-color:#BBBBBB #BBBBBB #A2A2A2;border-image:none;border-radius:4px 4px 4px 4px;border-style:solid;border-width:1px;box-shadow:0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);color:#333333;cursor:pointer;display:inline-block;font-size:13px;line-height:18px;margin-bottom:0;padding:4px 12px;text-align:center;text-shadow:0 1px 1px rgba(255, 255, 255, 0.75);vertical-align:middle;}
+      .btn-info{background-color:#49AFCD;background-image:linear-gradient(to bottom, #5BC0DE, #2F96B4);background-repeat:repeat-x;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);color:#FFFFFF;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);}
+      .btn-success{background-color:#5BB75B;background-image:linear-gradient(to bottom, #62C462, #51A351);background-repeat:repeat-x;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);color:#FFFFFF;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);}
+      .btn-large{border-radius:6px 6px 6px 6px;font-size:16.25px;padding:9px 14px;}
+      .btn-mini{border-radius:3px 3px 3px 3px;font-size:9.75px;padding:1px 6px;}
+    </style>
+  </head>
+
+  <!-- Activate the ScrollSpy for the NavBar -->
+  <body data-spy="scroll" data-target="#top-nav">
+    <!-- Facebook Widget -->
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function () {
+          FB.init({
+              appId: '1398546803746885',
+              xfbml: true,
+              version: 'v2.2'
+          });
+      };
+
+      (function (d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {
+              return;
+          }
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- "Fork me on Github" Ribbon -->
+    <a href="https://github.com/WPN-XM/WPN-XM" id="section-home">
+      <img width="149" height="149" alt="Fork WPN-XM on GitHub" 
+           src="images/fork-me-on-github.png" class="github-ribbon" />
+    </a>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+      <div class="container" id="top-nav">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- Logo -->
+          <a class="navbar-brand" href="#">
+            <img alt="WPN-XM" src="images/logo-transparent.png"/>
+          </a>
+        </div>
+        <nav class="collapse navbar-collapse" role="navigation" id="navigation-bar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#section-home">Home</a></li>
+            <li><a href="#section-about">About</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Downloads <span class="caret"></span></a>
+              <ul class="dropdown-menu"> 
+                <li class="dropdown-header"><strong>Installation Wizards</strong></li>
+                <li><a href="#section-installer-download-box">Box</a></li>
+                <li><a href="#section-installer-download-table">Table</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header"><strong>Web Components</strong></li>
+                <li><a href="#section-components-download-table">Table</a></li>
+              </ul>
+            </li>            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community <span class="caret"></span></a>
+              <ul class="dropdown-menu">                                       
+                <!--<li><a href="#">Forum</a></li>-->
+                <li><a href="#">Mailinglist</a></li>                         
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+              <ul class="dropdown-menu">                                       
+                <!--<li><a href="#section-docu-manual">Manual</a></li>-->
+                <li><a href="https://github.com/WPN-XM/WPN-XM/wiki">Wiki</a></li>
+              </ul>
+            </li>
+            <li><a href="#section-donate">Donate</a></li> 
+            <li><a href="#section-imprint">Imprint</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">   
+            <li><a href="https://github.com/WPN-XM/WPN-XM/issues/new">Report Issue</a></li>
+            <li class="dropdown">
+              <a id="git" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Github <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="https://github.com/WPN-XM/WPN-XM/">WPN-XM Build Tools</a></li>                                 
+                <li role="separator" class="divider"></li>
+                <li><a href="https://github.com/WPN-XM/registry">Registry</a></li>
+                <li><a href="https://github.com/WPN-XM/updater">Updater</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="https://github.com/WPN-XM/webinterface">Webinterface</a></li>
+                <li><a href="https://github.com/WPN-XM/server-control-panel">Server Control Panel</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container" id="content">
+
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+
+            <!-- Logo -->
+            <div class="header">
+              <div id="logo"></div>
+              <h1 style="visibility:hidden; line-height: 1px;" >WPN-XM</h1>
+              <h2><strong itemprop="name">WPИ-XM</strong> is a free and open-source web server solution stack for professional PHP development on the Windows<small><sup>&reg;</sup></small> platform.</h2>
             </div>
-            <div class="item">
-                <img alt="" src="/images/screenshots/img2.png" width="1060" height="946">
-                <div class="carousel-caption">
-                  <h4>Webinterface - Configuration - PHP Extensions</h4>
-                  <p>SecondImage Text</p>
+
+            <hr/>
+
+            <div class="slider-wrapper center">
+              <div class="slider-background">
+                <div id="myCarousel" class="carousel carousel-kenburns">
+                  <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                    <li data-target="#myCarousel" data-slide-to="4"></li>
+                  </ol>
+                  <!-- Carousel items -->
+                  <div class="carousel-inner">
+                    <div class="item active"><img alt="" src="images/screenshots/img1.png" width="978" height="647"></div>
+                    <div class="item"><img alt="" src="images/screenshots/img2.png" width="1060" height="946"></div>
+                    <div class="item"><img alt="" src="images/screenshots/img3.png" width="942" height="907"></div>
+                    <div class="item"><img alt="" src="images/screenshots/img4.png" width="766" height="575"></div>
+                    <div class="item"><img alt="" src="images/screenshots/img5.png" width="900" height="720"></div>
+                  </div>
+                  <!-- Carousel Controls -->
+                  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                  </a>
+                  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                  </a>                                        
                 </div>
+              </div>
             </div>
-            <div class="item">
-                <img alt="" src="/images/screenshots/img3.png" width="942" height="907">
-                <div class="carousel-caption">
-                  <h4>Webinterface - Overview - All Components</h4>
-                  <p>Third Image Text</p>
-                </div>
-            </div>
-            <div class="item">
-                <img alt="" src="/images/screenshots/img4.png" width="766" height="575">
-                <div class="carousel-caption">
-                  <h4>Server Control Panel - Tray Application</h4>
-                  <p>Fourth Image Text</p>
-                </div>
-            </div>
-            <div class="item">
-                <img alt="" src="/images/screenshots/img5.png" width="900" height="720">
-                <div class="carousel-caption">
-                  <h4>Software Registry Updater</h4>
-                  <p>Fourth Image Text</p>
-                </div>
+            <script type="text/javascript">
+              $(".carousel").carousel({
+                  interval: 4400
+              });
+            </script>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+      </div>
+
+
+      <div class="col-md-8 col-md-offset-2" style="margin-bottom: 3em;">
+        <!-- Social Buttons-->
+        <div class="sellout-buttons"> 
+          <a class="socialite github-watch" href="https://github.com/WPN-XM/WPN-XM/" data-user="WPN-XM" data-repo="WPN-XM" data-type="watch" data-count="true" data-size="large">
+            Watch on GitHub
+          </a>
+          <a class="socialite twitter-share" href="http://twitter.com/share" data-url="http://wpn-xm.org/" data-size="large" data-dnt="true" rel="nofollow" target="_blank">
+            Share on Twitter
+          </a>
+          <a class="socialite googleplus-one" href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://wpn-xm.org/"
+             data-size="large" data-href="http://wpn-xm.org/" rel="nofollow" target="_blank">
+            Share on Google+
+          </a>
+          <div class="fb-like" data-href="http://wpn-xm.org/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" data-size="large"></div>
+          <span class="pull-right">
+            <span id="a2itemwidget"></span> <script type="text/javascript" src="http://api.alternativeto.net/software/wpn-xm/widgetjs/light"></script>
+          </span>                       
+        </div>
+      </div>
+    </div>
+
+    <div class="banner">
+      <div class="container centered">
+        WPN-XM v0.8.4 has been released <span class="glyphicon glyphicon-arrow-down"></span>
+        <strong>
+          <a href="https://github.com/WPN-XM/WPN-XM/blob/master/changelog.txt">See what's new</a>
+        </strong>        
+      </div>
+    </div>
+
+    <!-- Bootstrap Main Container -fluid -->
+    <div class="container show-grid">
+
+      <div class="row">
+
+        <div class="row">
+          <div class="col-md-2">
+
+            <!-- Registry Status -->
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 id="components">Registry</h4>
+              </div>
+              <div class="panel-body">
+                <ul id="registry-list" class="unstyled-list big-and-bold">
+                  <!-- This element (registry-list) is populated by populateRegistryList(). -->
+                </ul>
+              </div>
             </div>
 
           </div>
-          <!-- Carousel nav -->
-          <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-          <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+          <div class="col-md-6">
+
+            <!-- About -->
+            <div class="panel panel-default" id="section-about">
+              <div class="panel-heading">
+                <h4 id="about">What is WPN-XM?</h4>
+              </div>
+              <div class="panel-body">
+                <p><strong>WPN-XM is a free &amp; open source web server solution stack for professional PHP development on the Windows platform.</strong></p>
+                <p>In order to develop PHP web applications, a programmer needs to use an operating system, web server, database and PHP as programming language.
+                  If your operating system is Windows, then this solution stack might be the right choice for you.</p>
+                <p>WPN-XM is a selection of software components bundled and preconfigured in an easy to install software distribution to create a professional PHP development environment. The base of the stack consists of NGINX as the web server, MariaDB as the database and PHP as the scripting and programming language.</p>
+                <p>WPN-XM provides a webinterface for server administration and a server control panel (tray application) which makes starting and stopping of servers easy.</p>
+                <p><strong>It is a modern web stack leveraging state-of-the-art components.</strong></p>
+                <p>The stack has a "Software Components Registry", which is a database of all software components provided by the project.
+                  The registry is maintained via the "Registry Updater", which allows crawling vendor websites for latest versions of their software products and updating the registry accordingly. The registry is exposed via our Web API.</p>
+                <p>All software packages are available for selective download.</p>
+                <p><strong>Its an open-source project.</strong></p>
+                <p>The project is developed on Github and actively maintained. All installers are build on Travis CI and released to Github.</p>
+                <p>WPN-XM is open-source and MIT licensed.</p>
+                <p><strong>What does WPN-XM stand for?</strong><br/>
+                  WPN-XM is simply an abbreviation formed from the initials of software component names.</p>
+                <ul>
+                  <li><strong>W</strong> - Windows (operating system)</li>
+                  <li><strong>P</strong> - PHP (scripting &amp; programming language)</li>
+                  <li><strong>N</strong> - NGINX (web server)</li>
+                  <li><strong>X</strong> - XDebug (debugger)</li>
+                  <li><strong>M</strong> - MariaDB/MongoDB (sql/nosql database)</li>
+                </ul>
+                <p><strong>WPN-XM is simple yet powerful.</strong></p>
+              </div>
+            </div>
+
+            <hr/>
+
+            <div class="panel panel-default" id="section-donate">
+              <div class="panel-heading">
+                <h3 id="donate">Thank you for donating!</h3>
+              </div>
+              <div class="panel-body">
+
+                <p>
+                  The WPN-XM Sever Stack is an open source product, provided to the community free of charge.
+                  Many sleepless nights have gone into it, in order to deliver you a quality product.
+                  If you like it, please give us a donation.
+                </p>
+                <p>
+                  You are welcome to send cash donations mediated by the following services:
+                </p>
+
+                <div class="list-group">
+
+                  <div class="list-group-item">
+                    <h4>Donate via PayPal</h4>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+                      <input type="hidden" name="charset" value="utf-8"/>
+                      <input type="hidden" name="item_name" value="WPN-XM Server Stack (Donation)"/>
+                      <input type="hidden" name="business" value="jakoch@web.de"/>
+                      <input type="hidden" name="return" value="http://wpn-xm.org/"/>
+                      <input type="hidden" name="cancel_return" value="http://wpn-xm.org/"/>
+                      <input type="hidden" name="undefined_quantity" value="0"/>
+                      <input type="hidden" name="cmd" value="_donations"/>
+                      <input type="hidden" name="hosted_button_id" value="QDKDE6GHTD894"/>
+
+                      <div style="margin-top: 10px; margin-bottom: 15px; width: 200px;">
+                        Amount: <input name="amount" type="text" style="text-align: right;" value="10" maxlength="10" size="4">
+                          <select name="currency_code">
+                            <option value="EUR">EUR</option>
+                            <option value="USD">USD</option>
+                            <option value="GBP">GBP</option>
+                            <option value="CHF">CHF</option>
+                            <option value="AUD">AUD</option>
+                            <option value="HKD">HKD</option>
+                            <option value="CAD">CAD</option>
+                            <option value="JPY">JPY</option>
+                            <option value="NZD">NZD</option>
+                            <option value="SGD">SGD</option>
+                            <option value="SEK">SEK</option>
+                            <option value="DKK">DKK</option>
+                            <option value="PLN">PLN</option>
+                            <option value="NOK">NOK</option>
+                            <option value="HUF">HUF</option>
+                            <option value="CZK">CZK</option>
+                            <option value="ILS">ILS</option>
+                            <option value="MXN">MXN</option>
+                          </select>
+                      </div>
+
+                      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+                             name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal."/>
+                      <img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+
+                    </form>
+                  </div>
+
+                  <div class="list-group-item">
+                    <h4>Donate via Gratipay</h4>
+                    <script data-gratipay-username="jakoch" data-gratipay-widget="button" src="//grtp.co/v1.js"></script>
+                  </div>
+
+                  <div class="list-group-item">
+                    <h4>Donate via Flattr</h4>
+                    <script id='fbctg0s'>(function (i) {
+                  var f, s = document.getElementById(i);
+                  f = document.createElement('iframe');
+                  f.src = '//api.flattr.com/button/view/?uid=WPNXM&url=http%3A%2F%2Fwpn-xm.org%2F';
+                  f.title = 'Flattr';
+                  f.height = 62;
+                  f.width = 55;
+                  f.style.borderWidth = 0;
+                  s.parentNode.insertBefore(f, s);
+              })('fbctg0s');</script>
+                  </div>
+
+                  <div class="list-group-item">
+                    <h4>Donate via Bitcoin</h4>
+                    <a href="bitcoin:12BfFmg1WaSTdoRAEm2fGP6E3PU8JhxHPL?label=Donation%20for%20WPN-XM%20Server%20Stack%20-%20http%3A%2F%2Fwpn-xm.org%2F">
+                      <i>12BfFmg1WaSTdoRAEm2fGP6E3PU8JhxHPL</i>
+                    </a>
+                    <img alt="Donate with Bitcoin" src="images/bitcoin-donate-qr-code.png" width="256" height="256" />
+                  </div>
+
+                </div>      
+
+              </div>                           
+            </div>
+
+            <hr/>
+
+            <div class="panel panel-default">
+              <div  class="panel-body">
+                <h4>Get involved..</h4>                                
+                <p>Creating and maintaing a project is a lot of work. You're welcome to contribute to this project.</p>
+                <p>You may help on coding, improving documentation, creating and updating translations, testing preview releases or helping other users.</p>
+                <p>You can also support the project in other ways, such as adding your ideas on open issues or blogging about WPN-XM ;-).</p>
+                <p>Our source-code is located over at <a href="https://github.com/WPN-XM/">GitHub</a>.</p>
+                <p>Feel free to contact us and get involved in the development of WPN-XM.</p>
+                <img src="images/git-flow.svg" alt="git-flow" width="auto">
+              </div>
+            </div>
+
+            <div class="list-group">                            
+              <div class="list-group-item">
+                <h4 class="list-group-item-heading">Using WPN-XM?</h4>
+                <p class="list-group-item-text">Let us know how you're using WPN-XM and we might feature you or your company as an example!
+                  <a href="mailto:jakoch@wpn-xm.org?subject=I'm%20using%20WPN-XM">Get in touch</a>
+                </p>                            
+              </div>
+              <div  class="list-group-item">
+                <h4 class="list-group-item-heading" id="wiki">Wiki</h4>
+                <p class="list-group-item-text">
+                  Many common questions are answered at the  <a href="https://github.com/WPN-XM/WPN-XM/wiki/">WPN-XM Wiki</a>.</p>
+              </div>
+              <div  class="list-group-item">
+                <h4>Sponsors</h3>
+                  <p><a href="https://www.jetbrains.com/">JetBrains</a> sponsors the WPN-XM project with licenses for <a href="https://www.jetbrains.com/phpstorm/">PhpStorm</a>.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-4">
+
+            <!-- Download Box -->                
+            <div class="panel panel-default" id="section-installer-download-box">
+              <div class="panel-heading">
+                <div class="centered">
+                  The latest release is
+                  <div id="current-release">
+                    <div class="bold" id="version">WPN-XM <span itemprop="softwareVersion">v0.8.4</span></div>
+                  </div>
+                </div>                              
+              </div>
+              <div class="panel-body">
+
+                <table class="tg">
+                  <tr>
+                    <th class="tg-hnao" width="110px">Installer</th>
+                    <th class="tg-hnao" colspan="6">PHP</th>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="tg-hnao" colspan="2">5.5</td>
+                    <td class="tg-hnao" colspan="2">5.6</td>
+                    <td class="tg-hnao" colspan="2">7.0</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td class="tg-hnao">x86</td>
+                    <td class="tg-hnao">x64</td>
+                    <td class="tg-hnao">x86</td>
+                    <td class="tg-hnao">x64</td>
+                    <td class="tg-hnao">x86</td>
+                    <td class="tg-hnao">x64</td>
+                  </tr>
+                  <tr>
+                    <td class="tg-hnao">Webinstaller</td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php55-w32.exe" title="WPNXM-0.8.4-Webinstaller-Setup-php55-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php55-w64.exe" title="WPNXM-0.8.4-Webinstaller-Setup-php55-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php56-w32.exe" title="WPNXM-0.8.4-Webinstaller-Setup-php56-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php56-w64.exe" title="WPNXM-0.8.4-Webinstaller-Setup-php56-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  </tr>
+
+
+                  <tr>
+                    <td class="tg-hnao">Lite</td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php55-w32.exe" title="WPNXM-0.8.4-Lite-Setup-php55-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php55-w64.exe" title="WPNXM-0.8.4-Lite-Setup-php55-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php56-w32.exe" title="WPNXM-0.8.4-Lite-Setup-php56-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php56-w64.exe" title="WPNXM-0.8.4-Lite-Setup-php56-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  </tr>
+                  <tr>
+                    <td class="tg-hnao">LiteRC</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-LiteRC-Setup-php70-w32.exe" title="WPNXM-0.8.4-LiteRC-Setup-php70-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-LiteRC-Setup-php70-w64.exe" title="WPNXM-0.8.4-LiteRC-Setup-php70-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  </tr>
+                  <tr>
+                    <td class="tg-hnao">Standard</td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php55-w32.exe" title="WPNXM-0.8.4-Standard-Setup-php55-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php55-w64.exe" title="WPNXM-0.8.4-Standard-Setup-php55-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php56-w32.exe" title="WPNXM-0.8.4-Standard-Setup-php56-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php56-w64.exe" title="WPNXM-0.8.4-Standard-Setup-php56-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  </tr>
+                  <tr>
+                    <td class="tg-hnao">Full</td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php55-w32.exe" title="WPNXM-0.8.4-Full-Setup-php55-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php55-w64.exe" title="WPNXM-0.8.4-Full-Setup-php55-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php56-w32.exe" title="WPNXM-0.8.4-Full-Setup-php56-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php56-w64.exe" title="WPNXM-0.8.4-Full-Setup-php56-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  </tr>
+                </table>
+
+              </div>
+              <div class="panel-footer centered">
+                <a class="btn bold" href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.8.4">Release Notes <small>(<span>28th June 2015</span>)</small></a>
+                <a class="btn bold" href="https://raw.github.com/WPN-XM/WPN-XM/master/changelog.txt">Changelog</a>
+              </div>
+            </div>
+
+            <div class="panel panel-default">                    
+              <!-- Twitter Profile Widget -->
+              <a class="twitter-timeline"  href="https://twitter.com/WPNXM/" data-widget-id="352661237504557056">Tweets von @WPNXM</a>
+              <script>
+                !function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                    if (!d.getElementById(id)) {
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = p + "://platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }
+                }(document, "script", "twitter-wjs");
+              </script>
+            </div>
+
+          </div>
         </div>
       </div>
+
+      <hr/>
+
+      <div class="row">
+
+        <div class="panel panel-default" id="section-installer-download-table">
+          <div class="panel-heading" style="overflow: hidden; min-height: 90px;">
+
+            <h3 id="download" class="pull-left">Downloads</h3>
+
+            <!-- Google Ads -->
+            <div class="pull-right" style="height: 90px; width: 728px;">
+              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+              <!-- WPN-XM Leaderboard, 728x90, Erstellt 8.11.11 -->
+              <ins class="adsbygoogle"
+                   style="display:inline-block;width:728px;height:90px"
+                   data-ad-client="ca-pub-8272564713803494"
+                   data-ad-slot="1380654938"></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>
+
+          </div>
+          <div class="panel-body" id="downloads-list">                    
+            <!-- This element (downloads-list) is populated by populateDownloadList(). -->
+          </div>
+        </div>
+      </div>
+      <!--
+      <div class="span-10 rounded inset-panel mc-is">
+        <h3 id="ads1">Ads</h3>
+        <div class="google_ad_1">
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-8272564713803494";
+        /* WPN-XM Medium Rectangle, 300x250px, created 8.11.11 */
+        google_ad_slot = "6323071524";
+        google_ad_width = 300;
+        google_ad_height = 250;
+        //--><!--</script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+        </div>
+      </div> -->
+
+      <hr/>
+
+      <div class="row col-md-6 center">
+
+        <div class="panel panel-default" id="section-imprint">
+          <div class="panel-heading">
+            <h3 id="imprint">Legal Information <small>Imprint | Impressum</small></h3>
+          </div>
+          <div class="panel-body">
+            <h4>Verantwortungsbereich</h4>
+            <p>Die nachstehenden Informationen enthalten die nach deutschen Gesetzen vorgesehenen Pflichtangaben zur Anbieterkennzeichnung, sowie wichtige rechtliche Hinweise zur Internetpräsenz des WPN-XM Projekts : "http://www.wpn-xm.org".</p>
+            <h4>Herausgeber / Anbieter nach § 5 Telemediengesetz (TMG):</h4>
+            <p>Anbieter dieser Internetpräsenz ist im Rechtssinne das Entwicklerteam von WPN-XM.</p>
+            <p>Inhaltlich Verantwortlicher ist: Jens-André Koch.</p>
+            <p>All products names, company names, brand names, trademarks and logos maybe the property of their respective owners.</p>
+
+            <h4>Kontakt</h4>
+            <address>
+              <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jens-André Koch</span> </span>
+              <br/> Jahnstraße 36
+              <br/> 17033 Neubrandenburg
+              <br/> Bundesrepublik Deutschland  
+              <br/><abbr title="Phone">P:</abbr> (DE) 0172 - 966-0273
+              <br/><small>(Der Anruf ins Funknetz ist kostenpflichtig. Es entfallen Verbindungsentgelte gemäß der jeweiligen Gebührentabelle der verwendeten Telefongesellschaft.)</small></p>
+            </address>
+            <address>
+              <strong>Jens A. Koch</strong>
+              <br/><a href="mailto:#">jakoch[at]web.de</a>
+            </address>                    
+          </div>
+        </div>
+
+      </div>
+
+
     </div>
+
+    <!-- Google Analytics -->
     <script type="text/javascript">
-      $(".carousel").carousel({
-          interval: 4400
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-26811143-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script src="js/jquery.zeroclipboard.min.js"></script>
+    <script src="js/socialite.min.js"></script>
+    <script src="js/socialite.github.js"></script>       
+
+    <script type="text/javascript">
+      // this is a ScollTo() function with an additional scrolling offset
+      $(".navbar li a[href^='#']").on('click', function (event) {
+          var target = this.hash;
+          event.preventDefault();
+          var navOffset = $('#navbar').height() + 72;
+
+          return $('html, body').animate({
+              scrollTop: $(this.hash).offset().top - navOffset
+          }, 1100, function () {
+              return window.history.pushState(null, null, target);
+          });
+      });
+
+      $.ajax({
+          type: "GET",
+          url: "http://wpn-xm.org/updatecheck.php?s=all",
+          success: function (data) {
+              populateRegistryList(data);
+          }
+      });
+      $.ajax({
+          type: "GET",
+          url: "http://wpn-xm.org/downloads.php?type=only-body",
+          success: function (data) {
+              populateDownloadList(data);
+          }
+      });
+
+      function populateDownloadList(data) {
+          $('#downloads-list').append(data);
+      }
+
+      function populateRegistryList(data) {
+          var elem = $('#registry-list');
+          var items = [];
+
+          $.each(data, function (id, option) {
+              items.push('<li><a href="' + option.website + '">' + option.name + '</a> <small>' + option.latest.version + '</small></li>');
+          });
+
+          elem.html('<li style="color: #999999;"><span id="windows-icon"> Windows </span><small>w32 & w64</small></li>');
+          elem.append(items.join(''));
+      }
+      ;
+
+      $(document).ready(function () {
+          Socialite.load($('.sellout-buttons'));
+      });
+
+      /*
+       ZeroClipboard is used to copy the file-hashes for downloads to the clipboard.
+       The text to copy is set by the HTML data-attribute "zclip-text" on DOM elements using class="zclip".
+       */
+      jQuery(document).ready(function ($) {
+          $("body")
+                  .on("copy", ".zclip", function (/* ClipboardEvent */ e) {
+                      e.clipboardData.clearData();
+                      e.clipboardData.setData("text/plain", $(this).data("zclip-text"));
+                      e.preventDefault();
+                  });
       });
     </script>
-  </div>
-
-  <hr>
-
-  <div class="sellout-buttons">
-    <a class="socialite github-watch" href="https://github.com/WPN-XM/WPN-XM/" data-user="WPN-XM" data-repo="WPN-XM" data-type="watch" data-count="true" data-size="large">
-      Watch on GitHub
-    </a>
-    <a class="socialite twitter-share" href="http://twitter.com/share" data-url="http://wpn-xm.org/" data-size="large" data-dnt="true" rel="nofollow" target="_blank">
-      Share on Twitter
-    </a>
-    <a class="socialite googleplus-one" href="https://plusone.google.com/_/+1/confirm?hl=en&amp;url=http://wpn-xm.org/"
-       data-size="large" data-href="http://wpn-xm.org/" rel="nofollow" target="_blank">
-      Share on Google+
-    </a>
-    <div class="fb-like" data-href="http://wpn-xm.org/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" data-size="large"></div>
-    <div class="margin-left-20">
-      <span id="a2itemwidget"></span> <script type="text/javascript" src="http://api.alternativeto.net/software/wpn-xm/widgetjs/light"></script>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="span-7 rounded inset-panel mc-is">
-    <h3 id="about">What is WPN-XM?</h3>
-    <p><strong>WPN-XM is a free &amp; open source web server solution stack for professional PHP development on the Windows platform.</strong></p>
-    <p>In order to develop PHP web applications, a programmer needs to use an operating system, web server, database, and PHP as programming language.
-    If your operating system is Windows, then this solution stack might be the right choice for you.</p>
-    <p>WPN-XM is a selection of software components bundled and preconfigured in an easy to install software distribution to create a professional PHP development environment. The base of the stack consists of NGINX as the web server, MariaDB as the database and PHP as the scripting and programming language.</p>
-    <p>WPN-XM provides a webinterface for server administration and a server control panel (tray application) which makes starting and stopping of servers easy.</p>
-    <p><strong>It is a modern web stack leveraging state-of-the-art components.</strong></p>
-    <p>The stack has a "Software Components Registry", which is an database of all software components provided by the project.
-       The registry is maintained via the "Registry Updater", which allows crawling the vendor sites for latest versions of their software products and updating the registry accordingly. The registry is exposed via our WEB-API.</p>
-    <p>All software packages are available for selective download.</p>
-    <p><strong>Its an open-source project.</strong></p>
-    <p>The project is developed on Github and actively maintained. All installers are build on Travis CI and released to Github.</p>
-    <p>WPN-XM is open-source and MIT licensed.</p>
-    <p><strong>What does WPN-XM stand for?</strong><br/>
-       WPN-XM is an abbreviation formed from the initials of software component names.</p>
-    <ul>
-      <li><strong>W</strong> - Windows (operating system)</li>
-      <li><strong>P</strong> - PHP (scripting &amp; programming language)</li>
-      <li><strong>N</strong> - NGINX (web server)</li>
-      <li><strong>X</strong> - XDebug (debugger)</li>
-      <li><strong>M</strong> - MariaDB (database)</li>
-    </ul>
-    <p><strong>WPN-XM is simple yet powerful.</strong></p>
-  </div>
-
-  <div class="span-7 rounded inset-panel mc-is">
-    <h3 id="components">Registry Status</h3>
-    <ul id="registry-list" class="unstyled-list big-and-bold">
-      <!-- This element (registry-list) is populated by populateRegistryList(). -->
-    </ul>
-  </div>
-
-  <div class="span-8 last rounded inset-panel mc-is textshadow">
-    <h3 id="download">Downloads</h3>
-
-    <div class="download-innerbox rounded inset-panel">
-
-      <div class="centered pad">
-        The latest release is
-        <div id="current-release">
-          <div id="version">WPN-XM <span itemprop="softwareVersion">v0.8.3</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="centered">
-      <p>
-        <table class="inset-panel tg">
-          <tr>
-            <th width="110px">Installer Type</th>
-            <th class="tg-hnao" colspan="6">PHP</th>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="tg-hnao" colspan="2">5.5</td>
-            <td class="tg-hnao" colspan="2">5.6</td>
-            <td class="tg-hnao" colspan="2">7.0</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td class="tg-hnao">x86</td>
-            <td class="tg-hnao">x64</td>
-            <td class="tg-hnao">x86</td>
-            <td class="tg-hnao">x64</td>
-            <td class="tg-hnao">x86</td>
-            <td class="tg-hnao">x64</td>
-          </tr>
-          <tr>
-            <td class="tg-hnao">Webinstaller</td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Webinstaller-Setup-php55-w32.exe" title="WPNXM-0.8.3-Webinstaller-Setup-php55-w32" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Webinstaller-Setup-php55-w64.exe" title="WPNXM-0.8.3-Webinstaller-Setup-php55-w64" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Webinstaller-Setup-php56-w32.exe" title="WPNXM-0.8.3-Webinstaller-Setup-php56-w32" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Webinstaller-Setup-php56-w64.exe" title="WPNXM-0.8.3-Webinstaller-Setup-php56-w64" class="download-icon">&#40;</a></td>
-          </tr>
-          <tr>
-            <td class="tg-hnao">Lite</td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Lite-Setup-php55-w32.exe" title="WPNXM-0.8.3-Lite-Setup-php55-w32" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Lite-Setup-php55-w64.exe" title="WPNXM-0.8.3-Lite-Setup-php55-w64" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Lite-Setup-php56-w32.exe" title="WPNXM-0.8.3-Lite-Setup-php56-w32" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Lite-Setup-php56-w64.exe" title="WPNXM-0.8.3-Lite-Setup-php56-w64" class="download-icon">&#40;</a></td>
-          </tr>
-          <tr>
-            <td class="tg-hnao">LiteRC</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-LiteRC-Setup-php70-w32.exe" title="WPNXM-0.8.3-LiteRC-Setup-php70-w32" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-LiteRC-Setup-php70-w64.exe" title="WPNXM-0.8.3-LiteRC-Setup-php70-w64" class="download-icon">&#40;</a></td>
-          </tr>
-          <tr>
-            <td class="tg-hnao">Standard</td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Standard-Setup-php55-w32.exe" title="WPNXM-0.8.3-Standard-Setup-php55-w32" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Standard-Setup-php55-w64.exe" title="WPNXM-0.8.3-Standard-Setup-php55-w64" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Standard-Setup-php56-w32.exe" title="WPNXM-0.8.3-Standard-Setup-php56-w32" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Standard-Setup-php56-w64.exe" title="WPNXM-0.8.3-Standard-Setup-php56-w64" class="download-icon">&#40;</a></td>
-          </tr>
-          <tr>
-            <td class="tg-hnao">Full</td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Full-Setup-php55-w32.exe" title="WPNXM-0.8.3-Full-Setup-php55-w32" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Full-Setup-php55-w64.exe" title="WPNXM-0.8.3-Full-Setup-php55-w64" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Full-Setup-php56-w32.exe" title="WPNXM-0.8.3-Full-Setup-php56-w32" class="download-icon">&#40;</a></td>
-            <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.3/WPNXM-0.8.3-Full-Setup-php56-w64.exe" title="WPNXM-0.8.3-Full-Setup-php56-w64" class="download-icon">&#40;</a></td>
-          </tr>
-        </table>
-      </p>
-      <a class="btn bold" href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.8.3">
-        Release Notes <small>(<span>26th June 2015</span>)</small>
-      </a>
-      <a class="btn bold" href="https://raw.github.com/WPN-XM/WPN-XM/master/changelog.txt">Changelog</a>
-      <br/>
-      <a id="git" href="https://github.com/WPN-XM/WPN-XM/"> Source Repository</a>
-    </div>
-
-  </div>
-
-  <hr>
-
-   <div id="donate" class="span-21 rounded inset-panel mc-is">
-    <h3 id="donate">Patron, thank you for donating!</h3>
-    <p>
-      The WPN-XM Sever Stack is an open source product, provided to the community free of charge.
-      Many man hours of blood, sweat and tears and sleepless nights have gone into it in order to deliver you a quality product.
-      If you like it, please give us a donation.
-      You are welcome to send cash donations mediated by the following services:
-    </p>
-
-    <div class="left" style="margin-left: 3em">
-    <h4>Donate via PayPal</h4>
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-      <div class="prepend-top">
-        <input type="hidden" name="charset" value="utf-8">
-        <input type="hidden" name="item_name" value="WPN-XM Server Stack (Donation)">
-        <input type="hidden" name="business" value="jakoch@web.de">
-        <input type="hidden" name="return" value="http://wpn-xm.org/">
-        <input type="hidden" name="cancel_return" value="http://wpn-xm.org/" >
-        <input type="hidden" name="undefined_quantity" value="0">
-        <input type="hidden" name="cmd" value="_donations">
-        <input type="hidden" name="hosted_button_id" value="QDKDE6GHTD894">
-
-        <div style="margin-top: 10px; margin-bottom: 15px; width: 200px;">
-          Amount: <input name="amount" type="text" style="text-align: right;" value="10" maxlength="10" size="4">
-          <select name="currency_code">
-            <option value="EUR">EUR</option>
-            <option value="USD">USD</option>
-            <option value="GBP">GBP</option>
-            <option value="CHF">CHF</option>
-            <option value="AUD">AUD</option>
-            <option value="HKD">HKD</option>
-            <option value="CAD">CAD</option>
-            <option value="JPY">JPY</option>
-            <option value="NZD">NZD</option>
-            <option value="SGD">SGD</option>
-            <option value="SEK">SEK</option>
-            <option value="DKK">DKK</option>
-            <option value="PLN">PLN</option>
-            <option value="NOK">NOK</option>
-            <option value="HUF">HUF</option>
-            <option value="CZK">CZK</option>
-            <option value="ILS">ILS</option>
-            <option value="MXN">MXN</option>
-          </select>
-        </div>
-
-        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
-               name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
-        <img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-      </div>
-      </form>
-    </div>
-
-    <div class="left" style="margin-right: 3em">
-      <h4>Donate via Gratipay</h4>
-      <script data-gratipay-username="jakoch" data-gratipay-widget="button" src="//grtp.co/v1.js"></script>
-    </div>
-
-    <div class="left" style="margin-right: 3em">
-      <h4>Donate via Flattr</h4>
-      <script id='fbctg0s'>(function(i){var f,s=document.getElementById(i);f=document.createElement('iframe');
-        f.src='//api.flattr.com/button/view/?uid=WPNXM&url=http%3A%2F%2Fwpn-xm.org%2F';
-        f.title='Flattr';f.height=62;f.width=55;f.style.borderWidth=0;s.parentNode.insertBefore(f,s);})('fbctg0s');</script>
-    </div>
-
-    <div class="right">
-      <h4>Donate via Bitcoin</h4>
-      <a href="bitcoin:12BfFmg1WaSTdoRAEm2fGP6E3PU8JhxHPL?label=Donation%20for%20WPN-XM%20Server%20Stack%20-%20http%3A%2F%2Fwpn-xm.org%2F">
-        <i>12BfFmg1WaSTdoRAEm2fGP6E3PU8JhxHPL</i>
-      </a>
-      <br/>
-      <img alt="Donate with Bitcoin" src="/images/bitcoin-donate-qr-code.png" width="256" height="256" />
-    </div>
-
-  </div>
-
-  <hr>
-
-  <!-- Google Ads -->
-  <div class="span-21 inset-panel mc-is">
-    <div style="margin: auto; height: 90px; width: 728px;">
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <!-- WPN-XM Leaderboard, 728x90, Erstellt 8.11.11 -->
-      <ins class="adsbygoogle"
-           style="display:inline-block;width:728px;height:90px"
-           data-ad-client="ca-pub-8272564713803494"
-           data-ad-slot="1380654938"></ins>
-      <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="span-7">
-    <div class="span-6 rounded inset-panel mc-is">
-      <h3 id="contributors">Contributors</h3>
-      <ul class="unstyled-list">
-        <li><a href="https://github.com/jakoch">Jens-André Koch (lead)</a></li>
-        <li><a href="https://github.com/ylemoigne">Yann Le Moigne</a></li>
-        <li><a href="https://github.com/tobiasfichtner">Tobias Fichtner</a></li>
-        <li><a href="https://github.com/dawinterfeldt">Daniel Winterfeldt</a></li>
-        <li><a href="https://github.com/luciotato">Lucio M. Tato</a></li>
-        <li><a href="https://github.com/petervdb">Peter Vandenberghe</a></li>
-        <li>&nbsp;</li>
-        <li><p><strong>You?</strong></p></li>
-      </ul>
-      <h3 id="getinvolved">Get involved..</h3>
-      <p>You're welcome to contribute to this project (help on coding, improving documentation, creating and updating translations, testing preview releases or helping other users.).</p>
-      <p>You can also support the project in other ways, such as adding your ideas on open issues or blogging about WPN-XM ;-).</p>
-      <p>The source-code is located over at <a href="https://github.com/WPN-XM/">GitHub</a>.</p>
-      <p>Feel free to contact us and get involved in the development of WPN-XM.</p></p>
-      <h3 id="sponsors">Sponsors</h3>
-      <p><a href="https://www.jetbrains.com/">JetBrains</a> sponsors the WPN-XM project with licenses for <a href="https://www.jetbrains.com/phpstorm/">PhpStorm</a>.</p>
-    </div>
-  </div>
-
-  <div class="span-5">
-    <div class="span-5 rounded inset-panel mc-is">
-       <h3 id="using">Using WPN-XM?</h3>
-       <p><strong>Let us know how you're using WPN-XM and we might feature you or your company as an example!</strong><br/>
-       <a href="mailto:jakoch@wpn-xm.org?subject=I'm%20using%20WPN-XM">Get in touch</a> →</p>
-    </div>
-
-    <div class="span-5 rounded inset-panel mc-is">
-      <h3 id="wiki">Wiki</h3>
-      <p>Many common questions are answered at the  <a href="https://github.com/WPN-XM/WPN-XM/wiki/">WPN-XM Wiki</a>.</p>
-    </div>
-
-    <div class="span-5 last rounded inset-panel mc-is">
-      <h3 id="mail">Mailing List</h3>
-      <p>Need some help? Please feel free to bug us on the <a href="http://groups.google.com/group/wpn-xm/">WPN-XM mailing list</a>.</p>
-
-      <div class="inset-panel">
-        <b>Join WPN-XM Google Group</b>
-        <form action="http://groups.google.com/group/wpn-xm/boxsubscribe">
-          <input title="pre set language" type="hidden" name="hl" value="en" />
-          E-Mail: <input title="Enter your email" type="text" name="email" />
-          <input title="Join WPN-XM Google Group Button" type="submit" name="sub" value="Join" />
-        </form>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="span-8 last rounded inset-panel right mc-is">
-    <h3 id="twitter">Twitter</h3>
-        <!-- Twitter Profile Widget -->
-        <a class="twitter-timeline"  href="https://twitter.com/WPNXM/" data-widget-id="352661237504557056">Tweets von @WPNXM</a>
-        <script>
-          !function(d,s,id){
-            var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
-            if(!d.getElementById(id)){
-              js=d.createElement(s); js.id=id; js.src=p+"://platform.twitter.com/widgets.js";
-              fjs.parentNode.insertBefore(js,fjs);
-            }
-          }(document,"script","twitter-wjs");
-        </script>
-  </div>
-
-  <hr>
-
-  <div class="span-23 slider-wrapper rounded mc-is">
-      <h3 id="download">Downloads</h3>
-      <div id="downloads-list">
-        <!-- This element (downloads-list) is populated by populateDownloadList(). -->
-      </div>
-  </div>
-
-  <!--
-  <div class="span-10 rounded inset-panel mc-is">
-    <h3 id="ads1">Ads</h3>
-    <div class="google_ad_1">
-    <script type="text/javascript"><!--
-    google_ad_client = "ca-pub-8272564713803494";
-    /* WPN-XM Medium Rectangle, 300x250px, created 8.11.11 */
-    google_ad_slot = "6323071524";
-    google_ad_width = 300;
-    google_ad_height = 250;
-    //--><!--</script>
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
-    </div>
-  </div> -->
-
-  <hr>
-
-  <div class="span-21 last rounded inset-panel mc-is">
-
-    <h3 id="imprint">Legal Information (Imprint / Impressum )</h3>
-
-    <div class="span-13">
-      <h4>Verantwortungsbereich</h4>
-      <p>Die nachstehenden Informationen enthalten die nach deutschen Gesetzen vorgesehenen Pflichtangaben zur Anbieterkennzeichnung, sowie wichtige rechtliche Hinweise zur Internetpräsenz des WPN-XM Projekts : "http://www.wpn-xm.org".</p>
-      <h4>Herausgeber / Anbieter nach § 5 Telemediengesetz (TMG):</h4>
-      <p>Anbieter dieser Internetpräsenz ist im Rechtssinne das Entwicklerteam von WPN-XM.</p>
-      <p>Inhaltlich Verantwortlicher ist: Jens-André Koch.</p>
-      <p>All products names, company names, brand names, trademarks and logos are the property of their respective owners.</p>
-    </div>
-
-    <div class="span-7 last rounded inset-panel">
-      <h4>Kontakt</h4>
-      <p>Adresse:
-         <br/><span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Jens-André Koch</span> </span>
-         <br/> Jahnstraße 36 <br/> 17033 Neubrandenburg <br/> Bundesrepublik Deutschland</p>
-      <p>Telefon: (DE) 0172 - 966-0273 <br/>
-        <small>(Der Anruf ins Funknetz ist kostenpflichtig. Es entfallen Verbindungsentgelte gemäß der jeweiligen Gebührentabelle der verwendeten Telefongesellschaft.)</small></p>
-      <p>Email: jakoch[at]web.de</p>
-    </div>
-
-  </div>
-
-  <!-- <div class="span-21"><hr/></div>
-  <footer role="contentinfo" class="span-21 footer rounded">
-    Page maintained by <a href="http://jens-andre-koch.de">Jens-André Koch.</a><br/>
-    Layout forked from Scott Chacon's <a href="http://git-scm.com/">git-scm.com</a>.
-    Style forked from Christopher M. Eppstein's <a href="http://compass-style.org/">Compass-Style</a> light.
-  </footer> -->
-
-</div>
-
-<!-- Google Analytics -->
-<script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-26811143-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-</script>
-<script src="/js/jquery.zeroclipboard.min.js"></script>
-<script src="/js/socialite.min.js"></script>
-<script src="/js/socialite.github.js"></script>
-<script type="text/javascript">
-$.ajax({
-  type : "GET",
-  url : "http://wpn-xm.org/updatecheck.php?s=all",
-  success: function(data){
-    populateRegistryList(data);
-  }
-});
-$.ajax({
-  type : "GET",
-  url : "http://wpn-xm.org/downloads.php?type=only-body",
-  success: function(data){
-    populateDownloadList(data);
-  }
-});
-
-function populateDownloadList(data) {
-  $('#downloads-list').append(data);
-}
-
-function populateRegistryList(data) {
-  var elem = $('#registry-list');
-  var items = [];
-
-  $.each(data, function (id, option) {
-    items.push('<li><a href="' + option.website + '">' + option.name + '</a> <small>' + option.latest.version + '</small></li>');
-  });
-
-  elem.html('<li style="color: #999999;"><span id="windows-icon"> Windows </span><small>w32 & w64</small></li>');
-  elem.append(items.join(''));
-};
-
-$(document).ready(function() {
-  Socialite.load($('.sellout-buttons'));
-});
-
-/*
-   ZeroClipboard is used to copy the file-hashes for downloads to the clipboard.
-   The text to copy is set by the HTML data-attribute "zclip-text" on DOM elements using class="zclip".
-*/
-jQuery(document).ready(function($) {
-  $("body")
-    .on("copy", ".zclip", function(/* ClipboardEvent */ e) {
-      e.clipboardData.clearData();
-      e.clipboardData.setData("text/plain", $(this).data("zclip-text"));
-      e.preventDefault();
-    });
-});
-</script>
-</body></html>
+  </body>
+</html>
