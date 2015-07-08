@@ -184,7 +184,7 @@ function render_github_releases()
 
                 // download button for installer, filesize, downloadcounter
                 $html .= '<tr><td colspan="2">';
-                $html .= '<table border=1 width="100%">';
+                $html .= '<table border="0" width="100%">';
                 $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $asset['browser_download_url'] . '">' . $asset['name'] . '</a></th>';
                 $html .= '<tr><td>';
                 $html .= '<div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div>&nbsp;';
