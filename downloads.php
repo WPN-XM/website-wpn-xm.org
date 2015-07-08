@@ -8,7 +8,6 @@
  * This source file is subject to the terms of the MIT license.
  * For full copyright and license information, view the bundled LICENSE file.
  */
-
 /**
  * Downloads Listing Script for wpn-xm.org
  * ---------------------------------------
@@ -102,11 +101,11 @@ function get_github_releases()
 
     if (file_exists($cache_file) && (filemtime($cache_file) > (time() - (7 * 24 * 60 * 60)))) {
         // Use cache file, when not older than 7 days.
-       $data = file_get_contents($cache_file);
+        $data = file_get_contents($cache_file);
     } else {
         // The cache is out-of-date. Load the JSON data from Github.
-       $data = curl_request();
-       file_put_contents($cache_file, $data, LOCK_EX);
+        $data = curl_request();
+        file_put_contents($cache_file, $data, LOCK_EX);
     }
 
     $array = json_decode($data, true);
@@ -142,10 +141,9 @@ function render_github_releases()
 
     $html = '';
 
-    foreach($releases as $release)
-    {
+    foreach ($releases as $release) {
         // skip our first release - only commits, no downloads
-        if($release['tag_name'] === '0.2.0') {
+        if ($release['tag_name'] === '0.2.0') {
             continue;
         }
 
@@ -153,27 +151,26 @@ function render_github_releases()
 
         if ($release['prerelease'] === false) {
             $html .= '<tr>'
-                  . '<td width="50%" style="vertical-align: middle;">'
-                  . '<h2 style="text-align: left;">' . $release['name'] . '&nbsp;'
-                  . '<small class="btn btn-sm" title="Release Date">Release Date<br><span class="bold">' . date('d M Y', strtotime($release['created_at'])) . '</span></small>'
-                  . '&nbsp;'
-                  . '<small class="btn btn-sm" title="Total Downloads">Downloads<br><span class="bold">' . get_total_downloads($release) . '</span></small>'
-                  . '</h2>'
-                  . '</td>';
+                . '<td width="50%" style="vertical-align: middle;">'
+                . '<h2 style="text-align: left;">' . $release['name'] . '&nbsp;'
+                . '<small class="btn btn-sm" title="Release Date">Release Date<br><span class="bold">' . date('d M Y', strtotime($release['created_at'])) . '</span></small>'
+                . '&nbsp;'
+                . '<small class="btn btn-sm" title="Total Downloads">Downloads<br><span class="bold">' . get_total_downloads($release) . '</span></small>'
+                . '</h2>'
+                . '</td>';
 
             // release notes, e.g. https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3
             $release_notes = '<a class="btn btn-large btn-info"'
-                    . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-' . $release['tag_name'] . '">Release Notes</a>';
+                . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-' . $release['tag_name'] . '">Release Notes</a>';
 
             // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/0.5.2/changelog.txt
             $changelog = '<a class="btn btn-large btn-info"'
-                    . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $release['tag_name'] . '/changelog.txt">Changelog</a>';
+                . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $release['tag_name'] . '/changelog.txt">Changelog</a>';
 
             // component list with version numbers
-
             // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
             $github_tag = '<a class="btn btn-large btn-info"'
-                    . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $release['tag_name'] . '">Github Tag</a>';
+                . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $release['tag_name'] . '">Github Tag</a>';
 
             // print release notes, changelog, github tag once per version
             $html .= '<td style="vertical-align: middle;">' . $release_notes . '&nbsp;' . $changelog . '&nbsp;' . $github_tag . '</td>';
@@ -259,20 +256,19 @@ foreach (glob('./downloads/*.exe') as $filename) {
 
     // release notes, e.g. https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3
     $details['release_notes'] = '<a class="btn btn-large btn-info"'
-            . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v' . $details['version'] . '">Release Notes</a>';
+        . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v' . $details['version'] . '">Release Notes</a>';
 
     // put "v" in front to get a properly versionized tag, starting from version "0.8.0"
     $version = (version_compare($details['version'], '0.8.0')) ? $details['version'] : 'v' . $details['version'];
 
     // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/0.5.2/changelog.txt
     $details['changelog'] = '<a class="btn btn-large btn-info"'
-            . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $version . '/changelog.txt">Changelog</a>';
+        . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $version . '/changelog.txt">Changelog</a>';
 
     // component list with version numbers
-
     // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
     $details['github_tag'] = '<a class="btn btn-large btn-info"'
-            . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $version . '">Github Tag</a>';
+        . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $version . '">Github Tag</a>';
 
     // date
     $details['date'] = date('d.m.Y', filectime($filename));
@@ -305,30 +301,30 @@ $downloads['latest_version']              = $downloads[0]['version'];
 $downloads['latest_version_release_date'] = $downloads[0]['date'];
 
 /*
-    Example Downloads Array
+  Example Downloads Array
 
-    link, release_notes, changelog, github_tag are HTML anchor tags.
+  link, release_notes, changelog, github_tag are HTML anchor tags.
 
-    array (
-      39 =>
-      array (
-        'file' => 'WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe',
-        'size' => '1.59 MB',
-        'version' => '0.8.0',
-        'installer' => 'Webinstaller',
-        'phpversion' => 'php56',
-        'platform' => 'w64',
-        'md5' => '6ae27511a06bfbc98472283b30565913',
-        'sha1' => '7258ed16afe86611572e1b5ea9f879b41adf4be1',
-        'download_url' => 'http://wpn-xm.org/downloads/WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe',
-        'link' => '<a href="http://wpn-xm.org/downloads/WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe">WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe</a>',
-        'release_notes' => '<a class="btn btn-large btn-info"href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.8.0">Release Notes</a>',
-        'changelog' => '<a class="btn btn-large btn-info"href="https://github.com/WPN-XM/WPN-XM/blob/v0.8.0/changelog.txt">Changelog</a>',
-        'github_tag' => '<a class="btn btn-large btn-info"href="https://github.com/WPN-XM/WPN-XM/tree/v0.8.0">Github Tag</a>',
-        'date' => '20.09.2014',
-      ),
+  array (
+  39 =>
+  array (
+  'file' => 'WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe',
+  'size' => '1.59 MB',
+  'version' => '0.8.0',
+  'installer' => 'Webinstaller',
+  'phpversion' => 'php56',
+  'platform' => 'w64',
+  'md5' => '6ae27511a06bfbc98472283b30565913',
+  'sha1' => '7258ed16afe86611572e1b5ea9f879b41adf4be1',
+  'download_url' => 'http://wpn-xm.org/downloads/WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe',
+  'link' => '<a href="http://wpn-xm.org/downloads/WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe">WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe</a>',
+  'release_notes' => '<a class="btn btn-large btn-info"href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.8.0">Release Notes</a>',
+  'changelog' => '<a class="btn btn-large btn-info"href="https://github.com/WPN-XM/WPN-XM/blob/v0.8.0/changelog.txt">Changelog</a>',
+  'github_tag' => '<a class="btn btn-large btn-info"href="https://github.com/WPN-XM/WPN-XM/tree/v0.8.0">Github Tag</a>',
+  'date' => '20.09.2014',
+  ),
 
-*/
+ */
 
 // ----- GET
 // accept "type" as a get parameter, e.g. index.php?type=json
@@ -340,7 +336,6 @@ if (!empty($type) && ($type === 'json')) {
     echo json_encode($downloads);
 } else {
     // send html page
-
     // load software components registry
     $registry = include __DIR__ . '/registry/wpnxm-software-registry.php';
 
@@ -473,9 +468,9 @@ function render_component_list_for_installer($installer_name)
         $html .= '<tr><td colspan="3">Components (' . $number_of_components . ')<p>';
 
         //if($number_of_components >= 10) {
-            $html .= render_component_list_multi_column($registry, $installerRegistry);
+        $html .= render_component_list_multi_column($registry, $installerRegistry);
         //} else {
-          //  $html .= render_component_list_comma_separated($registry, $installerRegistry, $number_of_components);
+        //  $html .= render_component_list_comma_separated($registry, $installerRegistry, $number_of_components);
         //}
 
         $html .= '</p></td></tr>';
@@ -499,17 +494,17 @@ function render_component_list_multi_column($registry, $installerRegistry)
             continue;
         }
 
-        $version   = $component[3];
+        $version = $component[3];
 
         // php extension - they are appended to the extension html fragment
         if (false !== strpos($shortName, 'phpext_')) {
-            $name = str_replace('PHP Extension ', '', $registry[ $shortName ]['name']);
+            $name = str_replace('PHP Extension ', '', $registry[$shortName]['name']);
             $extensions_html .= render_component_li($name, $version);
             continue;
         }
 
         // normal component
-        $name = $registry[ $shortName ]['name'];
+        $name = $registry[$shortName]['name'];
         $html .= render_component_li($name, $version);
     }
     unset($installerRegistry);
@@ -535,12 +530,12 @@ function render_component_list_comma_separated($registry, $installerRegistry, $n
         }
 
         if (false !== strpos($component[0], 'phpext_')) {
-            $name = str_replace('PHP Extension ', '', $registry[ $component[0] ]['name']);
+            $name = str_replace('PHP Extension ', '', $registry[$component[0]]['name']);
             $extensions_html .= '<span class="bold">' . $name . '</span> ' . $version;
             continue;
         }
 
-        $name = $registry[ $shortName ]['name'];
+        $name = $registry[$shortName]['name'];
 
         $html .= '<span style="font-weight:bold;">' . $name . '</span> ' . $version;
         $html .= ($i + 1 !== $number_of_components) ? ', ' : '';
@@ -617,6 +612,21 @@ function render_header()
     <!--[if lt IE 9]>
         <script src="/js/html5shiv.js"></script>
     <![endif]-->
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-26811143-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
 </head>
 <body>
 EOD;

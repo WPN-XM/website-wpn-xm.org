@@ -34,8 +34,22 @@ function render_component_tables($render_components)
         . '<br>You have to install these components manually.'
         . '<br>Please follow the installation instructions of the specific component.'
         . '<br>This collection of download links is provided with the intention to save you some time.'
-        . '</p>'
-        . '</div></div></div>';
+        . '</p></div>'
+        . '</div>'
+        . '<div class="panel-footer">
+        <!-- Google Ads -->
+            <div class="pull-right" style="height: 90px; width: 728px;">
+              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+              <!-- WPN-XM Leaderboard, 728x90, Erstellt 8.11.11 -->
+              <ins class="adsbygoogle"
+                   style="display:inline-block;width:728px;height:90px"
+                   data-ad-client="ca-pub-8272564713803494"
+                   data-ad-slot="1380654938"></ins>
+              <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+              </script>
+            </div>'
+        . '</div><!-- End: Row-->';
 
     $html .= '<div class="row">'
         . '<div class="download-components col-md-6">'
@@ -212,6 +226,21 @@ function render_header()
     <!--[if lt IE 9]>
         <script src="/js/html5shiv.js"></script>
     <![endif]-->
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-26811143-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script');
+          ga.type = 'text/javascript';
+          ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
   <style>
   div.download-components h2 {
    font-size:18px;
