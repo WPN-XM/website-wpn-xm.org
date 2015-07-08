@@ -37,7 +37,7 @@ function render_component_tables($render_components)
         . '</p></div>'
         . '<div class="panel-footer" style="min-height: 90px;>
         <!-- Google Ads -->
-            <div class="pull-right" style="height: 90px; width: 728px;">
+            <div style="height: 90px; width: 728px;">
               <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
               <!-- WPN-XM Leaderboard, 728x90, Erstellt 8.11.11 -->
               <ins class="adsbygoogle"
