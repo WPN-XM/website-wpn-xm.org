@@ -48,6 +48,7 @@
     <link rel="apple-touch-icon" sizes="152x152" href="images/touch/apple-touch-icon-152x152.png" />
     <!-- Bootstrap CSS Framework -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
     <!-- Javascripts -->
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="js/bootstrap.min.js"></script>    
@@ -102,184 +103,7 @@
       "softwareVersion": "0.8.4",
       "url": "http://wpn-xm.org/index.html"
       }
-    </script>
-    <style>
-      .github-ribbon{position: absolute; top: 0; left: 0; border: 0;z-index: 9999;}
-      body{background:#ECECEC;color:#333;font-family:'Roboto','Lucida Grande',Arial,sans-serif;font-size:16px;text-rendering:optimizeLegibility;
-           padding-top: 120px; position: relative;
-      }
-
-      div#logo {
-          background:url("images/wpn-xm-logo.png") no-repeat scroll 0 0 transparent;
-          /*box-shadow: 0 0 0 1px #b6bdc3;*/
-          min-height: 85px;
-          background-position-x: center;
-          background-position: center;
-      }
-
-      /*    yo, man.. SVG. looking sharp and nice in Chrome, but nowhere else.
-            incompatibilities... in 2015! WTF! And Flash is still alive. WTF!
-            div#logo{
-                background:url("images/wpnxm-logo.svg") no-repeat scroll 0 0 transparent; 
-                box-shadow: 0 0 0 10px #b6bdc3;
-      
-                 just to get an apsect ratio same as the SVG's: 
-                padding-top: 13%;
-      
-                background-size: auto auto;
-                background-size: 480px 140px;
-                background-repeat: no-repeat;
-                background-position-x: center;
-                // if small display, shrink, but do not cut off
-                min-height: 125px;
-            }*/
-
-      h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong{color:#D40408;}
-      h2 {font-family:Verdana;font-size:25px;text-align:center;padding-bottom:15px;text-shadow:0px 1px 0 #FFF;}
-      hr { border-bottom: 1px solid #BBBBBB; box-shadow: 0 1px 0 white;}
-
-      .bold{font-weight:bold;}
-      .centered{text-align:center;}
-      .center {
-          float: none;
-          margin-left: auto;
-          margin-right: auto;
-      }
-
-      .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
-          margin-left: -15px;
-          margin-top: -11px;
-      }
-      .navbar-inverse {
-          border-color: #ccc;
-      }
-
-      /*#nav-brand {
-          padding-top: 5px;
-      }*/
-
-      .sellout-buttons > div{display:block;float:left;margin:0;padding:6px;}
-
-      .banner {
-          padding: 15px 20px;
-          color: #777;
-          background-color: #fafafa;
-          border-top: 1px solid #fff;
-          border-bottom: 1px solid #e5e5e5;
-          margin-top: 5em;
-          margin-bottom: 5em;
-      }
-
-      .unstyled-list{list-style-image:none;list-style-type:none;margin:0 0.25em 0.25em 0;padding-left:10px;}
-
-      /*.show-grid [class^=col-] {
-          padding-top: 10px;
-          padding-bottom: 10px;
-          background-color: #eee;
-          background-color: rgba(86,61,124,.15);
-          border: 1px solid #ddd;
-          border: 1px solid rgba(86,61,124,.2);
-      }*/
-
-      /* latin */
-      @font-face {
-          font-family: 'Open Sans';
-          font-style: normal;
-          font-weight: 400;
-          src: local('Open Sans'), local('OpenSans'), url('fonts/roboto/Roboto-Regular.ttf') format('truetype');
-          /*unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;*/
-      }
-
-      /* Carousel Slider */
-      .slider-wrapper{width:832px;padding:7px;background-color:#FAFAFA;border:1px solid rgba(70, 70, 70, 0.3);border-radius:5px 5px 5px 5px;margin-bottom:1.5em;box-shadow:1px 1px 15px #DDD;}
-      .slider-background{z-index:7;top:0px;left:0px;height:300px;overflow:hidden;border:1px solid #AAA;background:#ECECEC;}
-      .carousel{position:relative;margin-bottom:18px;line-height:1;}
-      /*.carousel-inner{width:100%;text-align:center;height:100%;}*/
-      .carousel .item{display:none;position:relative;opacity:0.8;}
-      .carousel .active,
-      .carousel .next,
-      .carousel .prev{display:block;}
-      .carousel .active{left:0;}
-      .carousel .next,
-      .carousel .prev{position:absolute;top:0;width:100%;}
-      .carousel .next{left:100%;}
-      .carousel .prev{left:-100%;}
-      .carousel .next.left,
-      .carousel .prev.right{left:0;}
-      .carousel .active.left{left:-100%;}
-      .carousel .active.right{left:100%;}
-      .carousel-control{position:absolute;top:250px;left:15px;width:40px;height:40px;margin-top:-20px;font-size:60px;font-weight:100;line-height:30px;color:#ffffff;text-align:center;background:#222222;border:3px solid #ffffff;-moz-border-radius:23px;border-radius:23px;opacity:0.5;filter:alpha(opacity=50);}
-      .carousel-control.right{left:auto;right:15px;}
-      .carousel-control:hover{color:#ffffff;text-decoration:none;opacity:0.9;filter:alpha(opacity=90);}
-      .carousel-caption{position:absolute;left:0;right:0;bottom:0;padding:10px 15px 5px;background:#333333;background:rgba(0, 0, 0, 0.75);}
-      .carousel-caption h4,
-      .carousel-caption p{color:#ffffff;margin:0px;padding:5px;}
-      .carousel-indicators{top:15px;left:970px;height:15px;}
-      .carousel-indicators li{display:block;float:left;margin-left:5px;background-color:#ccc;background-color:rgba(180,180,180,.25);border-radius:10px;border:1px solid #999999;}
-      .carousel-indicators li .active{background-color:#fff;}
-
-/*      .carousel.carousel-kenburns .item{
-          -o-transition-duration:1.75s;
-          -ms-transition-duration:1.75s;
-          -moz-transition-duration:1.75s;
-          -webkit-transition-duration:1.75s;
-          -o-transform:scale(1.0);
-          -ms-transform:scale(1.0);
-          -moz-transform:scale(1.0);
-          -webkit-transform:scale(1.0);
-
-          -webkit-transition: 0.6s ease-in-out top;
-          -moz-transition: 0.6s ease-in-out top;
-          -ms-transition: 0.6s ease-in-out top;
-          -o-transition: 0.6s ease-in-out top;
-          transition: 0.6s ease-in-out top;
-      }*/
-      .carousel.carousel-kenburns .carousel-inner > .active{
-          -o-transition-duration:2s;
-          -ms-transition-duration:2s;
-          -moz-transition-duration:2s;
-          -webkit-transition-duration:2s;
-          -webkit-transform:scale(0.85) translateY(-40%);
-          -moz-transform:scale(0.90) translateY(-40%);
-          -ms-transform:scale(0.90) translateY(-40%);
-          -o-transform:scale(0.90) translateY(-40%);
-          transform:scale(0.90) translateY(-40%);
-          -webkit-transform-origin:bottom left;
-          -moz-transform-origin:bottom left;
-          -ms-transform-origin:bottom left;
-          -o-transform-origin:bottom left;
-          transform-origin:bottom left;
-      }
-
-      .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next, .carousel-control .icon-prev {      
-          margin-top: -16px;
-      }
-      
-      .navbar-inverse {
-          background: linear-gradient(to bottom, #505050, #383838);
-          background: -webkit-linear-gradient(top, #505050, #383838);
-          background: -webkit-gradient(linear, left top, left bottom, from(#505050), to(#383838));          
-          -webkit-box-shadow: inset 0 1px 0 #6e6e6e,0 2px 2px rgba(0,0,0,0.4);
-          box-shadow: inset 0 1px 0 #6e6e6e,0 2px 2px rgba(0,0,0,0.4);
-          border-top: 1px solid black;
-          border-bottom: 1px solid black;
-      }
-      .navbar-inverse .navbar-nav>li>a {
-        color: #bdbdbd;
-      }
-
-      /* Download Mini Matrix Table */
-      .tg{border-collapse:collapse;border-spacing:0;border-color:#999;margin:0px auto;}
-      .tg td{padding:3px 6px; text-align: center;}
-      .tg .tg-hnao{text-align:center;font-size:14px;}
-
-      /* Buttons */
-      .btn{-moz-border-bottom-colors:none;-moz-border-left-colors:none;-moz-border-right-colors:none;-moz-border-top-colors:none;background-color:#F5F5F5;background-image:linear-gradient(to bottom, #FFFFFF, #E6E6E6);background-repeat:repeat-x;border-color:#BBBBBB #BBBBBB #A2A2A2;border-image:none;border-radius:4px 4px 4px 4px;border-style:solid;border-width:1px;box-shadow:0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);color:#333333;cursor:pointer;display:inline-block;font-size:13px;line-height:18px;margin-bottom:0;padding:4px 12px;text-align:center;text-shadow:0 1px 1px rgba(255, 255, 255, 0.75);vertical-align:middle;}
-      .btn-info{background-color:#49AFCD;background-image:linear-gradient(to bottom, #5BC0DE, #2F96B4);background-repeat:repeat-x;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);color:#FFFFFF;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);}
-      .btn-success{background-color:#5BB75B;background-image:linear-gradient(to bottom, #62C462, #51A351);background-repeat:repeat-x;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);color:#FFFFFF;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);}
-      .btn-large{border-radius:6px 6px 6px 6px;font-size:16.25px;padding:9px 14px;}
-      .btn-mini{border-radius:3px 3px 3px 3px;font-size:9.75px;padding:1px 6px;}
-    </style>
+    </script>    
   </head>
 
   <!-- Activate the ScrollSpy for the NavBar -->
@@ -336,7 +160,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Downloads <span class="caret"></span></a>
               <ul class="dropdown-menu">                
                 <li><a href="#section-installer-download-table">Installation Wizards</a></li>
-                <li><a href="#section-components-download-table">Web Components</a></li>
+                <li><a href="components.php">Web Components</a></li>
               </ul>
             </li>            
             <li class="dropdown">
@@ -434,7 +258,7 @@
       </div>
 
 
-      <div class="col-md-8 col-md-offset-2" style="margin-bottom: 3em;">
+      <div class="col-md-8 col-md-offset-2" style="margin-top: 3em; margin-bottom: 3em;">
         <!-- Social Buttons-->
         <div class="sellout-buttons"> 
           <a class="socialite github-watch" href="https://github.com/WPN-XM/WPN-XM/" data-user="WPN-XM" data-repo="WPN-XM" data-type="watch" data-count="true" data-size="large">
@@ -799,7 +623,7 @@
 
         <div class="panel panel-default" id="section-imprint">
           <div class="panel-heading">
-            <h3 id="imprint">Legal Information <small>Imprint | Impressum</small></h3>
+            <h3 id="imprint"><font style="color:red;">§</font> Legal Information <small>Imprint | Impressum</small></h3>
           </div>
           <div class="panel-body">
             <h4>Verantwortungsbereich</h4>
