@@ -591,24 +591,31 @@ function render_header()
   <meta name="geo.position" content="53.560348;13.249941" />
   <meta name="ICBM" content="53.560348, 13.249941" />
   <!-- Facebook OpenGraph -->
-  <meta property="og:url" content="http://wpn-xm.org/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
-  <meta property="og:description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
-
-  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png" />
-  <link rel="apple-touch-icon" sizes="57x57" href="images/touch/apple-touch-icon-57x57.png" />
-  <link rel="apple-touch-icon" sizes="60x60" href="images/touch/apple-touch-icon-60x60.png" />
-  <link rel="apple-touch-icon" sizes="72x72" href="images/touch/apple-touch-icon-72x72.png" />
-  <link rel="apple-touch-icon" sizes="76x76" href="images/touch/apple-touch-icon-76x76.png" />
-  <link rel="apple-touch-icon" sizes="114x114" href="images/touch/apple-touch-icon-114x114.png" />
-  <link rel="apple-touch-icon" sizes="120x120" href="images/touch/apple-touch-icon-120x120.png" />
-  <link rel="apple-touch-icon" sizes="144x144" href="images/touch/apple-touch-icon-144x144.png" />
-  <link rel="apple-touch-icon" sizes="152x152" href="images/touch/apple-touch-icon-152x152.png" />
-
-
-  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+    <meta property="og:url" content="http://wpn-xm.org/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
+    <meta property="og:description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
+    <!-- Favicon & Touch-Icons -->
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="images/touch/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="images/touch/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="images/touch/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="images/touch/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="images/touch/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="images/touch/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="images/touch/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="images/touch/apple-touch-icon-152x152.png" />
+    <!-- Bootstrap CSS Framework -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- Javascripts -->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>    
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="/js/html5shiv.js"></script>
+    <![endif]-->
 </head>
 <body>
 EOD;

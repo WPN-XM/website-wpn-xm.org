@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
   <head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#">
     <meta charset="utf-8" />
-    <title>WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows&reg; platform.</title>
+    <title>WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform.</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Google Site Verification -->
@@ -140,18 +140,11 @@
     <!-- Top Navigation Bar -->
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner" id="section-home">
       <div class="container" id="top-nav">
-        <div class="navbar-header">
-          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <!-- Logo -->
-          <a class="navbar-brand" href="#">
-            <img alt="WPN-XM" src="images/logo-transparent.png"/>
-          </a>
-        </div>
+        <!-- Logo -->
+        <a class="navbar-brand" href="#">
+          <img alt="WPN-XM" src="images/logo-transparent.png"/>
+        </a>
+        <!-- Menu Items -->
         <nav class="collapse navbar-collapse" role="navigation" id="navigation-bar">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#section-home">Home</a></li>
@@ -204,7 +197,7 @@
 
     <div class="container" id="content">
 
-      <div class="col-md-12" id="section-home">
+      <div class="col-md-12">
         <div class="row">
           <div class="col-md-1"></div>
           <div class="col-md-10">
@@ -292,127 +285,125 @@
     <div class="container show-grid">
 
       <div class="row">
+        <div class="col-md-2">
 
-        <div class="row">
-          <div class="col-md-2">
-
-            <!-- Registry Status -->
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 id="components">Registry</h4>
-              </div>
-              <div class="panel-body">
-                <ul id="registry-list" class="unstyled-list big-and-bold">
-                  <!-- This element (registry-list) is populated by populateRegistryList(). -->
-                </ul>
-              </div>
+          <!-- Registry Status -->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 id="components">Registry</h4>
             </div>
-
+            <div class="panel-body">
+              <ul id="registry-list" class="unstyled-list big-and-bold">
+                <!-- This element (registry-list) is populated by populateRegistryList(). -->
+              </ul>
+            </div>
           </div>
-          <div class="col-md-6">
 
-            <!-- About -->
-            <div class="panel panel-default" id="section-about">
-              <div class="panel-heading">
-                <h4 id="about">What is WPN-XM?</h4>
-              </div>
-              <div class="panel-body">
-                <p><strong>WPN-XM is a free &amp; open source web server solution stack for professional PHP development on the Windows platform.</strong></p>
-                <p>In order to develop PHP web applications, a programmer needs to use an operating system, web server, database and PHP as programming language.
-                  If your operating system is Windows, then this solution stack might be the right choice for you.</p>
-                <p>WPN-XM is a selection of software components bundled and preconfigured in an easy to install software distribution to create a professional PHP development environment. The base of the stack consists of NGINX as the web server, MariaDB as the database and PHP as the scripting and programming language.</p>
-                <p>WPN-XM provides a webinterface for server administration and a server control panel (tray application) which makes starting and stopping of servers easy.</p>
-                <p><strong>It is a modern web stack leveraging state-of-the-art components.</strong></p>
-                <p>The stack has a "Software Components Registry", which is a database of all software components provided by the project.
-                  The registry is maintained via the "Registry Updater", which allows crawling vendor websites for latest versions of their software products and updating the registry accordingly. The registry is exposed via our Web API.</p>
-                <p>All software packages are available for selective download.</p>
-                <p><strong>Its an open-source project.</strong></p>
-                <p>The project is developed on Github and actively maintained. All installers are build on Travis CI and released to Github.</p>
-                <p>WPN-XM is open-source and MIT licensed.</p>
-                <p><strong>What does WPN-XM stand for?</strong><br/>
-                  WPN-XM is simply an abbreviation formed from the initials of software component names.</p>
-                <ul>
-                  <li><strong>W</strong> - Windows (operating system)</li>
-                  <li><strong>P</strong> - PHP (scripting &amp; programming language)</li>
-                  <li><strong>N</strong> - NGINX (web server)</li>
-                  <li><strong>X</strong> - XDebug (debugger)</li>
-                  <li><strong>M</strong> - MariaDB/MongoDB (sql/nosql database)</li>
-                </ul>
-                <p><strong>WPN-XM is simple yet powerful.</strong></p>
-              </div>
+        </div>
+        <div class="col-md-6">
+
+          <!-- About -->
+          <div class="panel panel-default" id="section-about">
+            <div class="panel-heading">
+              <h4 id="about">What is WPN-XM?</h4>
             </div>
+            <div class="panel-body">
+              <p><strong>WPN-XM is a free &amp; open source web server solution stack for professional PHP development on the Windows platform.</strong></p>
+              <p>In order to develop PHP web applications, a programmer needs to use an operating system, web server, database and PHP as programming language.
+                If your operating system is Windows, then this solution stack might be the right choice for you.</p>
+              <p>WPN-XM is a selection of software components bundled and preconfigured in an easy to install software distribution to create a professional PHP development environment. The base of the stack consists of NGINX as the web server, MariaDB as the database and PHP as the scripting and programming language.</p>
+              <p>WPN-XM provides a webinterface for server administration and a server control panel (tray application) which makes starting and stopping of servers easy.</p>
+              <p><strong>It is a modern web stack leveraging state-of-the-art components.</strong></p>
+              <p>The stack has a "Software Components Registry", which is a database of all software components provided by the project.
+                The registry is maintained via the "Registry Updater", which allows crawling vendor websites for latest versions of their software products and updating the registry accordingly. The registry is exposed via our Web API.</p>
+              <p>All software packages are available for selective download.</p>
+              <p><strong>Its an open-source project.</strong></p>
+              <p>The project is developed on Github and actively maintained. All installers are build on Travis CI and released to Github.</p>
+              <p>WPN-XM is open-source and MIT licensed.</p>
+              <p><strong>What does WPN-XM stand for?</strong><br/>
+                WPN-XM is simply an abbreviation formed from the initials of software component names.</p>
+              <ul>
+                <li><strong>W</strong> - Windows (operating system)</li>
+                <li><strong>P</strong> - PHP (scripting &amp; programming language)</li>
+                <li><strong>N</strong> - NGINX (web server)</li>
+                <li><strong>X</strong> - XDebug (debugger)</li>
+                <li><strong>M</strong> - MariaDB/MongoDB (sql/nosql database)</li>
+              </ul>
+              <p><strong>WPN-XM is simple yet powerful.</strong></p>
+            </div>
+          </div>
 
-            <hr/>
+          <hr/>
 
-            <div class="panel panel-default" id="section-donate">
-              <div class="panel-heading">
-                <h3 id="donate">Thank you for donating!</h3>
-              </div>
-              <div class="panel-body">
+          <div class="panel panel-default" id="section-donate">
+            <div class="panel-heading">
+              <h3 id="donate">Thank you for donating!</h3>
+            </div>
+            <div class="panel-body">
 
-                <p>
-                  The WPN-XM Sever Stack is an open source product, provided to the community free of charge.
-                  Many sleepless nights have gone into it, in order to deliver you a quality product.
-                  If you like it, please give us a donation.
-                </p>
-                <p>
-                  You are welcome to send cash donations mediated by the following services:
-                </p>
+              <p>
+                The WPN-XM Sever Stack is an open source product, provided to the community free of charge.
+                Many sleepless nights have gone into it, in order to deliver you a quality product.
+                If you like it, please give us a donation.
+              </p>
+              <p>
+                You are welcome to send cash donations mediated by the following services:
+              </p>
 
-                <div class="list-group">
+              <div class="list-group">
 
-                  <div class="list-group-item">
-                    <h4>Donate via PayPal</h4>
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                <div class="list-group-item">
+                  <h4>Donate via PayPal</h4>
+                  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 
-                      <input type="hidden" name="charset" value="utf-8"/>
-                      <input type="hidden" name="item_name" value="WPN-XM Server Stack (Donation)"/>
-                      <input type="hidden" name="business" value="jakoch@web.de"/>
-                      <input type="hidden" name="return" value="http://wpn-xm.org/"/>
-                      <input type="hidden" name="cancel_return" value="http://wpn-xm.org/"/>
-                      <input type="hidden" name="undefined_quantity" value="0"/>
-                      <input type="hidden" name="cmd" value="_donations"/>
-                      <input type="hidden" name="hosted_button_id" value="QDKDE6GHTD894"/>
+                    <input type="hidden" name="charset" value="utf-8"/>
+                    <input type="hidden" name="item_name" value="WPN-XM Server Stack (Donation)"/>
+                    <input type="hidden" name="business" value="jakoch@web.de"/>
+                    <input type="hidden" name="return" value="http://wpn-xm.org/"/>
+                    <input type="hidden" name="cancel_return" value="http://wpn-xm.org/"/>
+                    <input type="hidden" name="undefined_quantity" value="0"/>
+                    <input type="hidden" name="cmd" value="_donations"/>
+                    <input type="hidden" name="hosted_button_id" value="QDKDE6GHTD894"/>
 
-                      <div style="margin-top: 10px; margin-bottom: 15px; width: 200px;">
-                        Amount: <input name="amount" type="text" style="text-align: right;" value="10" maxlength="10" size="4">
-                          <select name="currency_code">
-                            <option value="EUR">EUR</option>
-                            <option value="USD">USD</option>
-                            <option value="GBP">GBP</option>
-                            <option value="CHF">CHF</option>
-                            <option value="AUD">AUD</option>
-                            <option value="HKD">HKD</option>
-                            <option value="CAD">CAD</option>
-                            <option value="JPY">JPY</option>
-                            <option value="NZD">NZD</option>
-                            <option value="SGD">SGD</option>
-                            <option value="SEK">SEK</option>
-                            <option value="DKK">DKK</option>
-                            <option value="PLN">PLN</option>
-                            <option value="NOK">NOK</option>
-                            <option value="HUF">HUF</option>
-                            <option value="CZK">CZK</option>
-                            <option value="ILS">ILS</option>
-                            <option value="MXN">MXN</option>
-                          </select>
-                      </div>
+                    <div style="margin-top: 10px; margin-bottom: 15px; width: 200px;">
+                      Amount: <input name="amount" type="text" style="text-align: right;" value="10" maxlength="10" size="4">
+                        <select name="currency_code">
+                          <option value="EUR">EUR</option>
+                          <option value="USD">USD</option>
+                          <option value="GBP">GBP</option>
+                          <option value="CHF">CHF</option>
+                          <option value="AUD">AUD</option>
+                          <option value="HKD">HKD</option>
+                          <option value="CAD">CAD</option>
+                          <option value="JPY">JPY</option>
+                          <option value="NZD">NZD</option>
+                          <option value="SGD">SGD</option>
+                          <option value="SEK">SEK</option>
+                          <option value="DKK">DKK</option>
+                          <option value="PLN">PLN</option>
+                          <option value="NOK">NOK</option>
+                          <option value="HUF">HUF</option>
+                          <option value="CZK">CZK</option>
+                          <option value="ILS">ILS</option>
+                          <option value="MXN">MXN</option>
+                        </select>
+                    </div>
 
-                      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
-                             name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal."/>
-                      <img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+                           name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal."/>
+                    <img alt="" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"/>
 
-                    </form>
-                  </div>
+                  </form>
+                </div>
 
-                  <div class="list-group-item">
-                    <h4>Donate via Gratipay</h4>
-                    <script data-gratipay-username="jakoch" data-gratipay-widget="button" src="//grtp.co/v1.js"></script>
-                  </div>
+                <div class="list-group-item">
+                  <h4>Donate via Gratipay</h4>
+                  <script data-gratipay-username="jakoch" data-gratipay-widget="button" src="//grtp.co/v1.js"></script>
+                </div>
 
-                  <div class="list-group-item">
-                    <h4>Donate via Flattr</h4>
-                    <script id='fbctg0s'>(function (i) {
+                <div class="list-group-item">
+                  <h4>Donate via Flattr</h4>
+                  <script id='fbctg0s'>(function (i) {
                   var f, s = document.getElementById(i);
                   f = document.createElement('iframe');
                   f.src = '//api.flattr.com/button/view/?uid=WPNXM&url=http%3A%2F%2Fwpn-xm.org%2F';
@@ -422,154 +413,153 @@
                   f.style.borderWidth = 0;
                   s.parentNode.insertBefore(f, s);
               })('fbctg0s');</script>
-                  </div>
+                </div>
 
-                  <div class="list-group-item">
-                    <h4>Donate via Bitcoin</h4>
-                    <a href="bitcoin:12BfFmg1WaSTdoRAEm2fGP6E3PU8JhxHPL?label=Donation%20for%20WPN-XM%20Server%20Stack%20-%20http%3A%2F%2Fwpn-xm.org%2F">
-                      <i>12BfFmg1WaSTdoRAEm2fGP6E3PU8JhxHPL</i>
-                    </a>
-                    <img alt="Donate with Bitcoin" src="images/bitcoin-donate-qr-code.png" width="256" height="256" />
-                  </div>
+                <div class="list-group-item">
+                  <h4>Donate via Bitcoin</h4>
+                  <a href="bitcoin:12BfFmg1WaSTdoRAEm2fGP6E3PU8JhxHPL?label=Donation%20for%20WPN-XM%20Server%20Stack%20-%20http%3A%2F%2Fwpn-xm.org%2F">
+                    <i>12BfFmg1WaSTdoRAEm2fGP6E3PU8JhxHPL</i>
+                  </a>
+                  <img alt="Donate with Bitcoin" src="images/bitcoin-donate-qr-code.png" width="256" height="256" />
+                </div>
 
-                </div>      
+              </div>      
 
-              </div>                           
-            </div>
-
-            <hr/>
-
-            <div class="panel panel-default" id="section-getinvolved">
-              <div class="panel-body">
-                <h4>Get involved..</h4>                                
-                <p>Creating and maintaing a project is a lot of work. You're welcome to contribute to this project.</p>
-                <p>You may help on coding, improving documentation, creating and updating translations, testing preview releases or helping other users.</p>
-                <p>You can also support the project in other ways, such as adding your ideas on open issues or blogging about WPN-XM ;-).</p>
-                <p>Our source-code is located over at <a href="https://github.com/WPN-XM/">GitHub</a>.</p>
-                <p>Feel free to contact us and get involved in the development of WPN-XM.</p>
-                <img src="images/git-flow.svg" alt="git-flow" width="auto">
-              </div>
-            </div>
-
-            <div class="list-group">                            
-              <div class="list-group-item">
-                <h4 class="list-group-item-heading">Using WPN-XM?</h4>
-                <p class="list-group-item-text">Let us know how you're using WPN-XM and we might feature you or your company as an example!
-                  <a href="mailto:jakoch@wpn-xm.org?subject=I'm%20using%20WPN-XM">Get in touch</a>
-                </p>                            
-              </div>
-              <div  class="list-group-item">
-                <h4 class="list-group-item-heading" id="wiki">Wiki</h4>
-                <p class="list-group-item-text">
-                  Many common questions are answered at the  <a href="https://github.com/WPN-XM/WPN-XM/wiki/">WPN-XM Wiki</a>.</p>
-              </div>
-              <div  class="list-group-item">
-                <h4>Sponsors</h3>
-                  <p><a href="https://www.jetbrains.com/">JetBrains</a> sponsors the WPN-XM project with licenses for <a href="https://www.jetbrains.com/phpstorm/">PhpStorm</a>.</p>
-              </div>
-            </div>
-
+            </div>                           
           </div>
 
-          <div class="col-md-4">
+          <hr/>
 
-            <!-- Download Box -->                
-            <div class="panel panel-default" id="section-installer-download-box">
-              <div class="panel-heading">
-                <div class="centered">
-                  The latest release is
-                  <div id="current-release">
-                    <div class="bold" id="version">WPN-XM <span itemprop="softwareVersion">v0.8.4</span></div>
-                  </div>
-                </div>                              
-              </div>
-              <div class="panel-body">
-
-                <table class="tg">
-                  <tr>
-                    <th class="tg-hnao" width="110px">Installer</th>
-                    <th class="tg-hnao" colspan="6">PHP</th>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td class="tg-hnao" colspan="2">5.5</td>
-                    <td class="tg-hnao" colspan="2">5.6</td>
-                    <td class="tg-hnao" colspan="2">7.0</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td class="tg-hnao">x86</td>
-                    <td class="tg-hnao">x64</td>
-                    <td class="tg-hnao">x86</td>
-                    <td class="tg-hnao">x64</td>
-                    <td class="tg-hnao">x86</td>
-                    <td class="tg-hnao">x64</td>
-                  </tr>
-                  <tr>
-                    <td class="tg-hnao">Webinstaller</td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php55-w32.exe" title="WPNXM-0.8.4-Webinstaller-Setup-php55-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php55-w64.exe" title="WPNXM-0.8.4-Webinstaller-Setup-php55-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php56-w32.exe" title="WPNXM-0.8.4-Webinstaller-Setup-php56-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php56-w64.exe" title="WPNXM-0.8.4-Webinstaller-Setup-php56-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                  </tr>
-
-
-                  <tr>
-                    <td class="tg-hnao">Lite</td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php55-w32.exe" title="WPNXM-0.8.4-Lite-Setup-php55-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php55-w64.exe" title="WPNXM-0.8.4-Lite-Setup-php55-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php56-w32.exe" title="WPNXM-0.8.4-Lite-Setup-php56-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php56-w64.exe" title="WPNXM-0.8.4-Lite-Setup-php56-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-hnao">LiteRC</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-LiteRC-Setup-php70-w32.exe" title="WPNXM-0.8.4-LiteRC-Setup-php70-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-LiteRC-Setup-php70-w64.exe" title="WPNXM-0.8.4-LiteRC-Setup-php70-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-hnao">Standard</td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php55-w32.exe" title="WPNXM-0.8.4-Standard-Setup-php55-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php55-w64.exe" title="WPNXM-0.8.4-Standard-Setup-php55-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php56-w32.exe" title="WPNXM-0.8.4-Standard-Setup-php56-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php56-w64.exe" title="WPNXM-0.8.4-Standard-Setup-php56-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-hnao">Full</td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php55-w32.exe" title="WPNXM-0.8.4-Full-Setup-php55-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php55-w64.exe" title="WPNXM-0.8.4-Full-Setup-php55-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php56-w32.exe" title="WPNXM-0.8.4-Full-Setup-php56-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                    <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php56-w64.exe" title="WPNXM-0.8.4-Full-Setup-php56-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
-                  </tr>
-                </table>
-
-              </div>
-              <div class="panel-footer centered">
-                <a class="btn bold" href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.8.4">Release Notes <small>(<span>28th June 2015</span>)</small></a>
-                <a class="btn bold" href="https://raw.github.com/WPN-XM/WPN-XM/master/changelog.txt">Changelog</a>
-              </div>
+          <div class="panel panel-default" id="section-getinvolved">
+            <div class="panel-body">
+              <h4>Get involved..</h4>                                
+              <p>Creating and maintaing a project is a lot of work. You're welcome to contribute to this project.</p>
+              <p>You may help on coding, improving documentation, creating and updating translations, testing preview releases or helping other users.</p>
+              <p>You can also support the project in other ways, such as adding your ideas on open issues or blogging about WPN-XM ;-).</p>
+              <p>Our source-code is located over at <a href="https://github.com/WPN-XM/">GitHub</a>.</p>
+              <p>Feel free to contact us and get involved in the development of WPN-XM.</p>
+              <img src="images/git-flow.svg" alt="git-flow" width="auto">
             </div>
-
-            <div class="panel panel-default">                    
-              <!-- Twitter Profile Widget -->
-              <a class="twitter-timeline"  href="https://twitter.com/WPNXM/" data-widget-id="352661237504557056">Tweets von @WPNXM</a>
-              <script>
-                !function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-                    if (!d.getElementById(id)) {
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = p + "://platform.twitter.com/widgets.js";
-                        fjs.parentNode.insertBefore(js, fjs);
-                    }
-                }(document, "script", "twitter-wjs");
-              </script>
-            </div>
-
           </div>
+
+          <div class="list-group">                            
+            <div class="list-group-item">
+              <h4 class="list-group-item-heading">Using WPN-XM?</h4>
+              <p class="list-group-item-text">Let us know how you're using WPN-XM and we might feature you or your company as an example!
+                <a href="mailto:jakoch@wpn-xm.org?subject=I'm%20using%20WPN-XM">Get in touch</a>
+              </p>                            
+            </div>
+            <div  class="list-group-item">
+              <h4 class="list-group-item-heading" id="wiki">Wiki</h4>
+              <p class="list-group-item-text">
+                Many common questions are answered at the  <a href="https://github.com/WPN-XM/WPN-XM/wiki/">WPN-XM Wiki</a>.</p>
+            </div>
+            <div  class="list-group-item">
+              <h4>Sponsors</h3>
+                <p><a href="https://www.jetbrains.com/">JetBrains</a> sponsors the WPN-XM project with licenses for <a href="https://www.jetbrains.com/phpstorm/">PhpStorm</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+          <!-- Download Box -->                
+          <div class="panel panel-default" id="section-installer-download-box">
+            <div class="panel-heading">
+              <div class="centered">
+                The latest release is
+                <div id="current-release">
+                  <div class="bold" id="version">WPN-XM <span itemprop="softwareVersion">v0.8.4</span></div>
+                </div>
+              </div>                              
+            </div>
+            <div class="panel-body">
+
+              <table class="tg">
+                <tr>
+                  <th class="tg-hnao" width="110px">Installer</th>
+                  <th class="tg-hnao" colspan="6">PHP</th>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td class="tg-hnao" colspan="2">5.5</td>
+                  <td class="tg-hnao" colspan="2">5.6</td>
+                  <td class="tg-hnao" colspan="2">7.0</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td class="tg-hnao">x86</td>
+                  <td class="tg-hnao">x64</td>
+                  <td class="tg-hnao">x86</td>
+                  <td class="tg-hnao">x64</td>
+                  <td class="tg-hnao">x86</td>
+                  <td class="tg-hnao">x64</td>
+                </tr>
+                <tr>
+                  <td class="tg-hnao">Webinstaller</td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php55-w32.exe" title="WPNXM-0.8.4-Webinstaller-Setup-php55-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php55-w64.exe" title="WPNXM-0.8.4-Webinstaller-Setup-php55-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php56-w32.exe" title="WPNXM-0.8.4-Webinstaller-Setup-php56-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Webinstaller-Setup-php56-w64.exe" title="WPNXM-0.8.4-Webinstaller-Setup-php56-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                </tr>
+
+
+                <tr>
+                  <td class="tg-hnao">Lite</td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php55-w32.exe" title="WPNXM-0.8.4-Lite-Setup-php55-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php55-w64.exe" title="WPNXM-0.8.4-Lite-Setup-php55-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php56-w32.exe" title="WPNXM-0.8.4-Lite-Setup-php56-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Lite-Setup-php56-w64.exe" title="WPNXM-0.8.4-Lite-Setup-php56-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                </tr>
+                <tr>
+                  <td class="tg-hnao">LiteRC</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-LiteRC-Setup-php70-w32.exe" title="WPNXM-0.8.4-LiteRC-Setup-php70-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-LiteRC-Setup-php70-w64.exe" title="WPNXM-0.8.4-LiteRC-Setup-php70-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                </tr>
+                <tr>
+                  <td class="tg-hnao">Standard</td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php55-w32.exe" title="WPNXM-0.8.4-Standard-Setup-php55-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php55-w64.exe" title="WPNXM-0.8.4-Standard-Setup-php55-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php56-w32.exe" title="WPNXM-0.8.4-Standard-Setup-php56-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Standard-Setup-php56-w64.exe" title="WPNXM-0.8.4-Standard-Setup-php56-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                </tr>
+                <tr>
+                  <td class="tg-hnao">Full</td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php55-w32.exe" title="WPNXM-0.8.4-Full-Setup-php55-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php55-w64.exe" title="WPNXM-0.8.4-Full-Setup-php55-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php56-w32.exe" title="WPNXM-0.8.4-Full-Setup-php56-w32"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                  <td><a href="https://github.com/WPN-XM/WPN-XM/releases/download/v0.8.4/WPNXM-0.8.4-Full-Setup-php56-w64.exe" title="WPNXM-0.8.4-Full-Setup-php56-w64"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a></td>
+                </tr>
+              </table>
+
+            </div>
+            <div class="panel-footer centered">
+              <a class="btn bold" href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.8.4">Release Notes <small>(<span>28th June 2015</span>)</small></a>
+              <a class="btn bold" href="https://raw.github.com/WPN-XM/WPN-XM/master/changelog.txt">Changelog</a>
+            </div>
+          </div>
+
+          <div class="panel panel-default">                    
+            <!-- Twitter Profile Widget -->
+            <a class="twitter-timeline"  href="https://twitter.com/WPNXM/" data-widget-id="352661237504557056">Tweets von @WPNXM</a>
+            <script>
+              !function (d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                  if (!d.getElementById(id)) {
+                      js = d.createElement(s);
+                      js.id = id;
+                      js.src = p + "://platform.twitter.com/widgets.js";
+                      fjs.parentNode.insertBefore(js, fjs);
+                  }
+              }(document, "script", "twitter-wjs");
+            </script>
+          </div>
+
         </div>
       </div>
 
@@ -591,7 +581,7 @@
                    data-ad-client="ca-pub-8272564713803494"
                    data-ad-slot="1380654938"></ins>
               <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
+              (adsbygoogle = window.adsbygoogle || []).push({});
               </script>
             </div>
 

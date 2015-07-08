@@ -192,10 +192,10 @@ table#authors tr td{font-size:120%;}
 
 .centered{text-align:center;}
 .left{float:left;}
-.unstyled-list{list-style-image:none;list-style-type:none;margin:0 0.25em 0.25em 0;padding-left:10px;}
+
 big-and-bold a:focus, a:hover{color:#FB292D;}
 big-and-bold a{color:#333333;}
-.big-and-bold{font-size:14px;font-weight:bold;text-align:left;}
+.big-and-bold{font-size:12px;font-weight:bold;text-align:left;}
 .bold{font-weight:bold;}
 
 a{-moz-transition:color 0.2s ease-out 0s;outline:medium none;text-decoration:none;}
