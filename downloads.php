@@ -181,13 +181,12 @@ function render_github_releases()
 
                 // download button for installer, filesize, downloadcounter
                 $html .= '<tr><td colspan="2">';
-                $html .= '<table border="0" width="100%">';
-                $html .= '<th rowspan="2" width="66%">';
-                $html .= '<a class="btn btn-sm btn-success" href="' . $asset['browser_download_url'] . '"><span class="glyphicon glyphicon-cloud-download"></span> ' . $asset['name'] . '</a></th>';
-                $html .= '<tr><td>';
-                $html .= '<div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div>&nbsp;';
-                $html .= '<div class="btn btn-small bold" title="Downloads">' . $asset['download_count'] . '</div>';
-                $html .= '</td></tr></table>';
+                $html .= '<a class="btn btn-large btn-success" href="' . $asset['browser_download_url'] . '">';
+                $html .= '<span class="glyphicon glyphicon-cloud-download"></span> ' . $asset['name'] . '</a>';
+                $html .= '';
+                $html .= '&nbsp;<div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div>';
+                $html .= '&nbsp;<div class="btn btn-small bold" title="Downloads">' . $asset['download_count'] . '</div>';
+                $html .= '';
 
                 // component list for the installer
                 $html .= render_component_list_for_installer($asset['name']);
