@@ -221,7 +221,7 @@ function render_header()
     <link href="css/style.css" rel="stylesheet" />
     <!-- Javascripts -->
     <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>    
+    <script src="js/bootstrap.min.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
         <script src="/js/html5shiv.js"></script>
@@ -306,7 +306,7 @@ function render_header()
 <body>
  <!-- "Fork me on Github" Ribbon -->
     <a href="https://github.com/WPN-XM/WPN-XM">
-      <img width="149" height="149" alt="Fork WPN-XM on GitHub" 
+      <img width="149" height="149" alt="Fork WPN-XM on GitHub"
            src="images/fork-me-on-github.png" class="github-ribbon" />
     </a>
 
@@ -324,37 +324,37 @@ function render_header()
             <li><a href="index.html#section-about">About</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Downloads <span class="caret"></span></a>
-              <ul class="dropdown-menu">                
-                <li><a href="index.html#section-installer-download-table">Installation Wizards</a></li>
+              <ul class="dropdown-menu">
+                <li><a href="index.html#section-download-installation-wizards">Installation Wizards</a></li>
                 <li><a href="components.php">Web Components</a></li>
               </ul>
-            </li>            
+            </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community <span class="caret"></span></a>
-              <ul class="dropdown-menu">                                       
+              <ul class="dropdown-menu">
                 <!--<li><a href="#">Forum</a></li>-->
-                <li><a href="https://groups.google.com/forum/#!forum/wpn-xm">Mailinglist</a></li>                         
+                <li><a href="https://groups.google.com/forum/#!forum/wpn-xm">Mailinglist</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
-              <ul class="dropdown-menu">                                       
+              <ul class="dropdown-menu">
                 <!--<li><a href="#section-docu-manual">Manual</a></li>-->
                 <li><a href="https://github.com/WPN-XM/WPN-XM/wiki">Wiki</a></li>
               </ul>
             </li>
-            <li><a href="index.html#section-donate">Donate</a></li> 
-            <li><a href="index.html#section-getinvolved">Get Involved</a></li> 
+            <li><a href="index.html#section-donate">Donate</a></li>
+            <li><a href="index.html#section-getinvolved">Get Involved</a></li>
             <li><a href="index.html#section-imprint">Imprint</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">   
+          <ul class="nav navbar-nav navbar-right">
             <li><a href="https://github.com/WPN-XM/WPN-XM/issues/new">Report Issue</a></li>
             <li class="dropdown">
               <a id="git" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 Github <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="https://github.com/WPN-XM/WPN-XM/">WPN-XM Build Tools</a></li>                                 
+                <li><a href="https://github.com/WPN-XM/WPN-XM/">WPN-XM Build Tools</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="https://github.com/WPN-XM/registry">Registry</a></li>
                 <li><a href="https://github.com/WPN-XM/updater">Updater</a></li>
