@@ -606,10 +606,7 @@ function render_header()
   <link rel="apple-touch-icon" sizes="144x144" href="images/touch/apple-touch-icon-144x144.png" />
   <link rel="apple-touch-icon" sizes="152x152" href="images/touch/apple-touch-icon-152x152.png" />
 
-  <!-- Blueprint CSS Framework -->
-  <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
-  <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
-  <!--[if IE]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+
   <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
 </head>
 <body>
