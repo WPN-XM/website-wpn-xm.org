@@ -48,6 +48,7 @@ function render_component_tables($render_components)
               (adsbygoogle = window.adsbygoogle || []).push({});
               </script>
             </div>'
+        . '</div><!-- End: Panel -->'
         . '</div><!-- End: Row-->';
 
     $html .= '<div class="row">'
