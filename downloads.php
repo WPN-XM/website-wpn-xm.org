@@ -155,7 +155,7 @@ function render_github_releases()
                 . '<h2 style="text-align: left;">' . $release['name'] . '&nbsp;'
                 . '<small class="btn btn-sm" title="Release Date">Release Date<br><span class="bold">' . date('d M Y', strtotime($release['created_at'])) . '</span></small>'
                 . '&nbsp;'
-                . '<small class="btn btn-sm" title="Total Downloads">Downloads<br><span class="bold">' . get_total_downloads($release) . '</span></small>'
+                . '<small class="btn btn-sm" title="Total Downloads">Downloads<br><span class="bold installer-downloads">' . get_total_downloads($release) . '</span></small>'
                 . '</h2>'
                 . '</td>';
 

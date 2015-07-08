@@ -570,7 +570,7 @@
         <div class="panel panel-default" id="section-download-installation-wizards">
           <div class="panel-heading" style="overflow: hidden; min-height: 90px;">
 
-            <h3 id="download" class="pull-left">Downloads</h3>
+            <h3 id="download" class="pull-left">Downloads</h3><small class="btn btn-small total-amount-downloads">&nbsp;</small>
 
             <!-- Google Ads -->
             <div class="pull-right" style="height: 90px; width: 728px;">
@@ -709,8 +709,17 @@
       }
       ;
 
+      function calculateTotalDownloads() {
+          var total = 0;
+          $('span.installer-downloads').each(function () {
+              total += parseInt($(this).text());
+          });
+          $('small.total-amount-downloads').html(total);
+      }
+
       $(document).ready(function () {
           Socialite.load($('.sellout-buttons'));
+          calculateTotalDownloads();
       });
 
       /*
