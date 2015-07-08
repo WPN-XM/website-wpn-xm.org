@@ -694,6 +694,7 @@
 
       function populateDownloadList(data) {
           $('#downloads-list').append(data);
+          calculateTotalDownloads();
       }
 
       function populateRegistryList(data) {
@@ -718,8 +719,7 @@
       }
 
       $(document).ready(function () {
-          Socialite.load($('.sellout-buttons'));
-          calculateTotalDownloads();
+          Socialite.load($('.sellout-buttons'));          
       });
 
       /*
