@@ -35,7 +35,6 @@ function render_component_tables($render_components)
         . '<br>Please follow the installation instructions of the specific component.'
         . '<br>This collection of download links is provided with the intention to save you some time.'
         . '</p></div>'
-        . '</div>'
         . '<div class="panel-footer">
         <!-- Google Ads -->
             <div class="pull-right" style="height: 90px; width: 728px;">
