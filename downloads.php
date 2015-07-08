@@ -153,11 +153,11 @@ function render_github_releases()
 
         if ($release['prerelease'] === false) {
             $html .= '<tr>'
-                  . '<td width="50%" style="vertical-align: bottom;">'
-                  . '<h2>' . $release['name'] . '&nbsp;'
-                  . '<small class="btn btn-default" title="Release Date">Release Date<br><span class="bold">' . date('d M Y', strtotime($release['created_at'])) . '</span></small>'
+                  . '<td width="50%" style="vertical-align: middle;">'
+                  . '<h2 style="text-align: left;">' . $release['name'] . '&nbsp;'
+                  . '<small class="btn btn-sm" title="Release Date">Release Date<br><span class="bold">' . date('d M Y', strtotime($release['created_at'])) . '</span></small>'
                   . '&nbsp;'
-                  . '<small class="btn btn-default" title="Total Downloads">Downloads<br><span class="bold">' . get_total_downloads($release) . '</span></small>'
+                  . '<small class="btn btn-sm" title="Total Downloads">Downloads<br><span class="bold">' . get_total_downloads($release) . '</span></small>'
                   . '</h2>'
                   . '</td>';
 
@@ -176,7 +176,7 @@ function render_github_releases()
                     . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $release['tag_name'] . '">Github Tag</a>';
 
             // print release notes, changelog, github tag once per version
-            $html .= '<td>' . $release_notes . '&nbsp;' . $changelog . '&nbsp;' . $github_tag . '</td>';
+            $html .= '<td style="vertical-align: middle;">' . $release_notes . '&nbsp;' . $changelog . '&nbsp;' . $github_tag . '</td>';
             $html .= '</tr>';
 
             foreach ($release['assets'] as $idx => $asset) {
@@ -185,7 +185,8 @@ function render_github_releases()
                 // download button for installer, filesize, downloadcounter
                 $html .= '<tr><td colspan="2">';
                 $html .= '<table border="0" width="100%">';
-                $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $asset['browser_download_url'] . '">' . $asset['name'] . '</a></th>';
+                $html .= '<th rowspan="2" width="66%">';
+                $html .= '<a class="btn btn-sm btn-success" href="' . $asset['browser_download_url'] . '"><span class="glyphicon glyphicon-cloud-download"></span> ' . $asset['name'] . '</a></th>';
                 $html .= '<tr><td>';
                 $html .= '<div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div>&nbsp;';
                 $html .= '<div class="btn btn-small bold" title="Downloads">' . $asset['download_count'] . '</div>';
@@ -369,12 +370,12 @@ if (!empty($type) && ($type === 'json')) {
             $version = $download['version'];
 
             $html .= '<tr>';
-            $html .= '<td width="50%" style="vertical-align: bottom;">';
+            $html .= '<td width="50%" style="vertical-align: middle;">';
             $html .= '<h2>WPИ-XM v' . $version . '&nbsp;<small>' . date('d M Y', strtotime($download['date'])) . '</small></h2>';
             $html .= '</td>';
 
             // print release notes, changelog, github tag once per version
-            $html .= '<td>';
+            $html .= '<td style="vertical-align: middle;">';
             $html .= $download['release_notes'] . '&nbsp;';
             $html .= $download['changelog'] . '&nbsp;';
             $html .= $download['github_tag'];
