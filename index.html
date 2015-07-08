@@ -570,7 +570,15 @@
         <div class="panel panel-default" id="section-download-installation-wizards">
           <div class="panel-heading" style="overflow: hidden; min-height: 90px;">
 
-            <h3 id="download" class="pull-left">Downloads</h3><small class="btn btn-small total-amount-downloads">&nbsp;</small>
+            <h3 id="download" class="pull-left">
+              Downloads
+              <br/>
+              <small class="btn btn-sm" title="Total Downloads">
+                Total Downloads
+                <br/>
+                <span class="bold total-amount-downloads">&nbsp;</span>
+              </small>
+            </h3>
 
             <!-- Google Ads -->
             <div class="pull-right" style="height: 90px; width: 728px;">
@@ -719,7 +727,7 @@
       }
 
       $(document).ready(function () {
-          Socialite.load($('.sellout-buttons'));          
+          Socialite.load($('.sellout-buttons'));
       });
 
       /*
