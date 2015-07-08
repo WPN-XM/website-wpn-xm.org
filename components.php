@@ -26,27 +26,28 @@ echo '</div></body></html>';
 
 function render_component_tables($render_components)
 {
-    $html = '<div class="span-20 inset-panel mc-is">'
-        . '<h3 id="download">Software Components for Web Development on Windows</h2>'
-        . '<p style="font-size: 16px;">'
+    $html = '<div class="panel panel-default">'
+        . '<div class="panel-heading"><h2 id="download">Software Components for Web Development on Windows</h2></div>'
+        . '<div class="panel-body"><p style="font-size: 16px;">'
         . 'All software components of the WPN-XM software registry are available for selective download.'
         . '<br>You will always download directly from the software vendor.'
         . '<br>You have to install these components manually.'
         . '<br>Please follow the installation instructions of the specific component.'
-        . '<br>This collection of download links is provided to save you some time.'
+        . '<br>This collection of download links is provided with the intention to save you some time.'
         . '</p>'
-        . '</div></div>'
-        . '<div style="width: 1111px; margin: 0 auto; display: flex;">'
-        . '<div class="download-components span-14">'
+        . '</div></div></div>';
+
+    $html .= '<div class="row">'
+        . '<div class="download-components col-md-6">'
         . '<h2>Software Components</h2>'
-        . '<table border=1 style="width: auto">'
+        . '<table border=1 class="table table-condensed table-hover">'
         . '<thead><th>Software Component</th><th>Versions</th><th>Latest Version</th></thead>'
         . $render_components['components']
         . '</table></div>';
 
-    $html .= '<div class="download-components download-extensions span-13">'
+    $html .= '<div class="download-components download-extensions col-md-6">'
         . '<h2>PHP Extensions</h2>'
-        . '<table border=1>'
+        . '<table border=1 class="table table-condensed table-hover">'
         . '<thead><th>PHP Extension</th><th>Versions</th><th>Latest Version</th></thead>'
         . $render_components['extensions']
         . '</table></div>'
@@ -77,10 +78,10 @@ function render_tr_for_php_extension($component)
     $name = str_replace('PHP Extension ', '', $component['name']);
 
     $html = '<tr>'
-          . '<td><a href="' . $component['website'] . '">' . $name . '</a>' . '</td>'
-          . '<td>' . render_version_dropdown_for_extension($component) . '</td>'
-          . '<td>' . $component['latest']['version'] . '</td>'
-          . '</tr>';
+        . '<td><a href="' . $component['website'] . '"><strong>' . $name . '</strong></a>' . '</td>'
+        . '<td>' . render_version_dropdown_for_extension($component) . '</td>'
+        . '<td>' . $component['latest']['version'] . '</td>'
+        . '</tr>';
 
     return $html;
 }
@@ -122,10 +123,10 @@ function render_version_dropdown_for_extension($component)
 function render_tr_for_normal_component($component)
 {
     $html = '<tr>'
-          . '<td><a href="' . $component['website'] . '">' . $component['name'] . '</a>' . '</td>'
-          . '<td>' . render_version_dropdown($component) . '</td>'
-          . '<td><a href="' . $component['latest']['url'] . '">' . $component['latest']['version'] . '</a></td>'
-          . '</tr>';
+        . '<td><a href="' . $component['website'] . '"><strong>' . $component['name'] . '</strong></a>' . '</td>'
+        . '<td>' . render_version_dropdown($component) . '</td>'
+        . '<td><a href="' . $component['latest']['url'] . '">' . $component['latest']['version'] . '</a></td>'
+        . '</tr>';
 
     return $html;
 }
@@ -274,25 +275,85 @@ function render_header()
   </style>
 </head>
 <body>
-<div class="container showgrids">
+ <!-- "Fork me on Github" Ribbon -->
+    <a href="https://github.com/WPN-XM/WPN-XM">
+      <img width="149" height="149" alt="Fork WPN-XM on GitHub" 
+           src="images/fork-me-on-github.png" class="github-ribbon" />
+    </a>
 
-  <nav role="navigation" id="main-nav" class="span-21 toolbar black">
-    <ul>
-      <li class="vcard"><a itemprop="url" rel="home" href="index.html" class="fn org url uid">Home</a></li>
-      <li><a rel="about" href="index.html#about">About</a></li>
-      <li><a rel="help" href="https://groups.google.com/forum/?fromgroups#!forum/wpn-xm">Mailing List</a></li>
-      <li><a rel="get-involved" href="index.html#getinvolved">Get Involved</a></li>
-      <li><a rel="install" href="https://github.com/WPN-XM/WPN-XM/wiki/">Wiki</a></li>
-      <li><a rel="install" href="https://github.com/WPN-XM/WPN-XM/issues/">Issues</a></li>
-      <li><a rel="donate" href="index.html#donate">Donate</a></li>
-      <li><a rel="imprint" href="index.html#imprint">Imprint</a></li>
-    </ul>
-  </nav>
+    <!-- Top Navigation Bar -->
+    <header class="navbar navbar-inverse navbar-fixed-top" role="banner" id="section-home">
+      <div class="container" id="top-nav">
+        <!-- Logo -->
+        <a class="navbar-brand" href="#">
+          <img alt="WPN-XM" src="images/logo-transparent.png"/>
+        </a>
+        <!-- Menu Items -->
+        <nav class="collapse navbar-collapse" role="navigation" id="navigation-bar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#section-home">Home</a></li>
+            <li><a href="#section-about">About</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Downloads <span class="caret"></span></a>
+              <ul class="dropdown-menu">                
+                <li><a href="#section-installer-download-table">Installation Wizards</a></li>
+                <li><a href="components.php">Web Components</a></li>
+              </ul>
+            </li>            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community <span class="caret"></span></a>
+              <ul class="dropdown-menu">                                       
+                <!--<li><a href="#">Forum</a></li>-->
+                <li><a href="#">Mailinglist</a></li>                         
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
+              <ul class="dropdown-menu">                                       
+                <!--<li><a href="#section-docu-manual">Manual</a></li>-->
+                <li><a href="https://github.com/WPN-XM/WPN-XM/wiki">Wiki</a></li>
+              </ul>
+            </li>
+            <li><a href="#section-donate">Donate</a></li> 
+            <li><a href="#section-getinvolved">Get Involved</a></li> 
+            <li><a href="#section-imprint">Imprint</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">   
+            <li><a href="https://github.com/WPN-XM/WPN-XM/issues/new">Report Issue</a></li>
+            <li class="dropdown">
+              <a id="git" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Github <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="https://github.com/WPN-XM/WPN-XM/">WPN-XM Build Tools</a></li>                                 
+                <li role="separator" class="divider"></li>
+                <li><a href="https://github.com/WPN-XM/registry">Registry</a></li>
+                <li><a href="https://github.com/WPN-XM/updater">Updater</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="https://github.com/WPN-XM/webinterface">Webinterface</a></li>
+                <li><a href="https://github.com/WPN-XM/server-control-panel">Server Control Panel</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-  <div class="span-21 header">
-    <h1 id="logo">WPИ-XM</h1>
-    <h2><strong itemprop="name">WPИ-XM</strong> is a free and open-source web server solution stack for professional PHP development on the Windows<small><sup>&reg;</sup></small> platform.</h2>
-  </div>
+    <div class="container" id="content">
+
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+
+            <!-- Logo -->
+            <div class="header">
+              <div id="logo"></div>
+              <h1 style="visibility:hidden; line-height: 1px;" >WPN-XM</h1>
+              <h2><strong itemprop="name">WPИ-XM</strong> is a free and open-source web server solution stack for professional PHP development on the Windows<small><sup>&reg;</sup></small> platform.</h2>
+            </div>
+
+            <hr/>
 
 
 EOD;
