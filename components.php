@@ -315,17 +315,17 @@ function render_header()
       <div class="container" id="top-nav">
         <!-- Logo -->
         <a class="navbar-brand" href="#">
-          <img alt="WPN-XM" src="images/logo-transparent.png"/>
+          <img alt="WPN-XM" src="images/logo-transparent.png" width="74" heigth="59" />
         </a>
         <!-- Menu Items -->
         <nav class="collapse navbar-collapse" role="navigation" id="navigation-bar">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#section-home">Home</a></li>
-            <li><a href="#section-about">About</a></li>
+            <li class="active"><a href="index.html#section-home">Home</a></li>
+            <li><a href="index.html#section-about">About</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Downloads <span class="caret"></span></a>
               <ul class="dropdown-menu">                
-                <li><a href="#section-installer-download-table">Installation Wizards</a></li>
+                <li><a href="index.html#section-installer-download-table">Installation Wizards</a></li>
                 <li><a href="components.php">Web Components</a></li>
               </ul>
             </li>            
@@ -333,7 +333,7 @@ function render_header()
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community <span class="caret"></span></a>
               <ul class="dropdown-menu">                                       
                 <!--<li><a href="#">Forum</a></li>-->
-                <li><a href="#">Mailinglist</a></li>                         
+                <li><a href="https://groups.google.com/forum/#!forum/wpn-xm">Mailinglist</a></li>                         
               </ul>
             </li>
             <li class="dropdown">
@@ -343,9 +343,9 @@ function render_header()
                 <li><a href="https://github.com/WPN-XM/WPN-XM/wiki">Wiki</a></li>
               </ul>
             </li>
-            <li><a href="#section-donate">Donate</a></li> 
-            <li><a href="#section-getinvolved">Get Involved</a></li> 
-            <li><a href="#section-imprint">Imprint</a></li>
+            <li><a href="index.html#section-donate">Donate</a></li> 
+            <li><a href="index.html#section-getinvolved">Get Involved</a></li> 
+            <li><a href="index.html#section-imprint">Imprint</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">   
             <li><a href="https://github.com/WPN-XM/WPN-XM/issues/new">Report Issue</a></li>
