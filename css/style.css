@@ -64,7 +64,7 @@ hr { border-bottom: 1px solid #BBBBBB; box-shadow: 0 1px 0 white;}
     margin-bottom: 5em;
 }
 
-.unstyled-list{list-style-image:none;list-style-type:none;margin:0 0.25em 0.25em 0;}
+.unstyled-list{list-style-image:none;list-style-type:none;margin:0 0.25em 0.25em 0;padding:0px;}
 
 /*.show-grid [class^=col-] {
     padding-top: 10px;
