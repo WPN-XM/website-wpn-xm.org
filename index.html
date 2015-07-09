@@ -673,10 +673,9 @@
           s.parentNode.insertBefore(ga, s);
       })();
     </script>
-    <script src="js/jquery.zeroclipboard.min.js"></script>
+
     <script src="js/socialite.min.js"></script>
     <script src="js/socialite.github.js"></script>
-
     <script type="text/javascript">
       // this is a ScollTo() function with an additional scrolling offset
       $(".navbar li a[href^='#']").on('click', function (event) {
@@ -734,19 +733,6 @@
 
       $(document).ready(function () {
           Socialite.load($('.sellout-buttons'));
-      });
-
-      /*
-       ZeroClipboard is used to copy the file-hashes for downloads to the clipboard.
-       The text to copy is set by the HTML data-attribute "zclip-text" on DOM elements using class="zclip".
-       */
-      jQuery(document).ready(function ($) {
-          $("body")
-                  .on("copy", ".zclip", function (/* ClipboardEvent */ e) {
-                      e.clipboardData.clearData();
-                      e.clipboardData.setData("text/plain", $(this).data("zclip-text"));
-                      e.preventDefault();
-                  });
       });
     </script>
   </body>
