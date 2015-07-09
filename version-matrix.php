@@ -54,6 +54,9 @@ $wizardRegistries = sortWizardRegistries($wizardRegistries);
 /**
  * Sort Wizard registries from low to high version number,
  * with -next- registries at the bottom.
+ *
+ * @param $wizardRegistries
+ * @return array
  */
 function sortWizardRegistries($wizardRegistries)
 {
@@ -75,6 +78,10 @@ function sortWizardRegistries($wizardRegistries)
     return $wizardRegistries;
 }
 
+/**
+ * @param $registries
+ * @return int
+ */
 function countNextRegistries($registries)
 {
     $cnt = 0;
@@ -88,11 +95,20 @@ function countNextRegistries($registries)
     return $cnt;
 }
 
+/**
+ * @param $a
+ * @param $b
+ * @return mixed
+ */
 function versionCompare($a, $b)
 {
     return version_compare($a['constraints']['version'], $b['constraints']['version'], '>=');
 }
 
+/**
+ * @param $array
+ * @return array
+ */
 function fixArraySoftwareAsKey($array)
 {
     $out = [];
@@ -103,6 +119,11 @@ function fixArraySoftwareAsKey($array)
     }
     return $out;
 }
+
+/**
+ * @param array $array
+ * @return array
+ */
 function dropNumericKeys(array $array)
 {
     foreach ($array as $key => $value) {
@@ -113,16 +134,32 @@ function dropNumericKeys(array $array)
     return $array;
 }
 
+/**
+ * @param $var
+ * @param null $defaultValue
+ * @return null
+ */
 function issetOrDefault($var, $defaultValue = null)
 {
     return (isset($var) === true) ? $var : $defaultValue;
 }
 
+/**
+ * @param array $array
+ * @param $key
+ * @param null $defaultValue
+ * @return null
+ */
 function issetArrayKeyOrDefault(array $array, $key, $defaultValue = null)
 {
     return (isset($array[$key]) === true) ? $array[$key] : $defaultValue;
 }
 
+/**
+ * @param $registry
+ * @param $software
+ * @return string
+ */
 function getVersion($registry, $software)
 {
     if (isset($registry[$software]) === true) {
@@ -131,6 +168,10 @@ function getVersion($registry, $software)
     return '&nbsp;';
 }
 
+/**
+ * @param array $wizardRegistries
+ * @return string
+ */
 function renderTableHeader(array $wizardRegistries)
 {
     $header = '';
@@ -140,6 +181,11 @@ function renderTableHeader(array $wizardRegistries)
     return $header;
 }
 
+/**
+ * @param array $wizardRegistries
+ * @param $software
+ * @return string
+ */
 function renderTableCells(array $wizardRegistries, $software)
 {
     $cells = '';

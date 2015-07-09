@@ -24,11 +24,21 @@ class Registry implements ArrayAccess
         $this->loadRegistry();
     }
 
+    /**
+     * @param $software
+     * @param $version
+     * @param null $bitsize
+     * @param null $phpVersion
+     * @return mixed
+     */
     public function getUrl($software, $version, $bitsize = null, $phpVersion = null)
     {
         return $this->registry[$software][$version][$bitsize][$phpVersion];
     }
 
+    /**
+     * @return array|mixed
+     */
     public function loadRegistry()
     {
         // load software components registry
@@ -44,6 +54,9 @@ class Registry implements ArrayAccess
 
     /**
      * Does the requested software exists in our registry?
+     *
+     * @param $software
+     * @return bool
      */
     public function softwareExists($software)
     {
@@ -52,17 +65,34 @@ class Registry implements ArrayAccess
 
     /**
      * Does the requested version of a software exist in our registry?
+     *
+     * @param $software
+     * @param $version
+     * @return bool
      */
     public function versionExists($software, $version)
     {
         return (!empty($version) && array_key_exists($version, $this->registry[$software]));
     }
 
+    /**
+     * @param $software
+     * @param $version
+     * @param $bitsize
+     * @param $phpVersion
+     * @return bool
+     */
     public function extensionHasPhpVersion($software, $version, $bitsize, $phpVersion)
     {
         return array_key_exists($phpVersion, $this->registry[$software][$version][$bitsize]);
     }
 
+    /**
+     * @param $software
+     * @param $bitsize
+     * @param $phpVersion
+     * @return bool
+     */
     public function extensionLatestVersionHasPHPVersion($software, $bitsize, $phpVersion)
     {
         return array_key_exists($phpVersion, $this->registry[$software]['latest']['url'][$bitsize]);
@@ -70,6 +100,9 @@ class Registry implements ArrayAccess
 
     /**
      * Is the software a PHP extension?
+     *
+     * @param $software
+     * @return bool
      */
     public function softwareIsPHPExtension($software)
     {
@@ -81,6 +114,9 @@ class Registry implements ArrayAccess
      * given "name", "major.minor" "phpVersion" and "bitsize".
      *
      * $registry['phpext_xdebug']['1.2.1']['x86']['5.5.*']
+     *
+     * @param $software
+     * @return string
      */
     public function getLatestVersion($software)
     {
@@ -95,6 +131,9 @@ class Registry implements ArrayAccess
 
     /**
      * Returns the version array for a component from the registry.
+     *
+     * @param $component
+     * @return mixed
      */
     public function getVersions($component)
     {
@@ -106,6 +145,13 @@ class Registry implements ArrayAccess
         return $component;
     }
 
+    /**
+     * @param $software
+     * @param $version
+     * @param $bitsize
+     * @param $phpVersion
+     * @return string
+     */
     public function getPhpVersionInRange($software, $version, $bitsize, $phpVersion)
     {
         $array      = $this->registry[$software][$version][$bitsize];
@@ -122,8 +168,7 @@ class Registry implements ArrayAccess
      *
      * @param array Only the versions array for this component from the registry.
      * @param string A version number, setting the minimum (>=).
-     * @param string A version number, setting the maximum (<).
-     *
+     * @param string A version number, setting the maximum (<).     *
      * @return string Returns the latest version of a component given a min max version constraint.
      */
     public function getLatestVersionOfRange($versions, $minConstraint = null, $maxConstraint = null)
@@ -158,22 +203,37 @@ class Registry implements ArrayAccess
 
     /**
      * ArrayAccess for Registry.
+     *
+     * @param mixed $offset
+     * @param mixed $value
+     * @return bool
      */
     public function offsetSet($offset, $value)
     {
         return true;
     }
 
+    /**
+     * @param mixed $offset
+     * @return bool
+     */
     public function offsetExists($offset)
     {
         return isset($this->registry[$offset]);
     }
 
+    /**
+     * @param mixed $offset
+     */
     public function offsetUnset($offset)
     {
         unset($this->registry[$offset]);
     }
 
+    /**
+     * @param mixed $offset
+     * @return null
+     */
     public function offsetGet($offset)
     {
         return isset($this->registry[$offset]) ? $this->registry[$offset] : null;
@@ -196,6 +256,9 @@ class Request
         }
     }
 
+    /**
+     *
+     */
     public function processGet()
     {
         // $_GET['s'] = software component
@@ -242,20 +305,27 @@ class Response
     public $url    = '';
     public $header = '';
 
+    /**
+     * @param $url
+     */
     public function setUrl($url)
     {
         $this->url = $url;
     }
 
+    /**
+     * @param $header
+     */
     public function setHeader($header)
     {
         $this->header = $header;
     }
 
     /**
+     *
      * Redirect to the target url.
      *
-     * @param string $url
+     * @param null|string $url
      */
     public function redirect($url = null)
     {
@@ -274,6 +344,9 @@ class Response
         }
     }
 
+    /**
+     *
+     */
     public function send()
     {
         if (defined('PHPUNIT_TESTSUITE') === 1) {
@@ -305,6 +378,11 @@ class Component
     public $request;
     public $response;
 
+    /**
+     * @param $request
+     * @param $response
+     * @param $registry
+     */
     public function __construct($request, $response, $registry)
     {
         $this->response = $response;
@@ -312,6 +390,9 @@ class Component
         $this->registry = $registry;
     }
 
+    /**
+     *
+     */
     public function redirectTo()
     {
         // re-assign vars to shorter ones

@@ -2,14 +2,24 @@
 
 class GetTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @param $url
+     */
+    public function setGetRequest($url)
+    {
+        $query = parse_url($url, PHP_URL_QUERY);
+        parse_str($query, $array);
+        $_GET = $array;
+    }
+
     public function testRequestLatestVersion()
     {
         $url = 'http://wpn-xm.org/get.php?s=nginx';
 
         $this->setGetRequest($url);
- 
+
         include dirname(__DIR__) . '/get.php';
-        
+
         $this->assertEquals(
             'http://nginx.org/download/nginx-1.9.0.zip',
             $handler->response->url
@@ -108,12 +118,5 @@ class GetTest extends PHPUnit_Framework_TestCase
 
         $this->assertContains("http://windows.php.net/downloads/releases/", $handler->response->url);
         $this->assertContains("5.6", $handler->response->url);
-    }
-
-    public function setGetRequest($url)
-    {
-        $query = parse_url($url, PHP_URL_QUERY);
-        parse_str($query, $array);
-        $_GET = $array;
     }
 }
