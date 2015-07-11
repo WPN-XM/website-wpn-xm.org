@@ -233,12 +233,7 @@
                 </div>
               </div>
             </div>
-            <script type="text/javascript">
-              $(".carousel").carousel({
-                  interval: 4400
-              });
-            </script>
-          </div>
+            </div>
           <div class="col-md-1"></div>
         </div>
       </div>
@@ -640,7 +635,7 @@
             </address>
           </div>
           <!-- Keywords -->
-          <div style="visibility:hidden">
+          <div style="visibility:hidden; height:0;">
             <ul>
               <li>web server software free</li>
               <li>free web server software</li>
@@ -745,6 +740,11 @@
       }
 
       $(document).ready(function () {
+          // start bootstrap carousel
+          $(".carousel").carousel({
+              interval: 4000
+          });
+          // load social buttons
           Socialite.load($('.sellout-buttons'));
       });
     </script>
