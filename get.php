@@ -415,7 +415,7 @@ class Component
          */
         if ($this->registry->softwareIsPHPExtension($software)) {
             if ($this->registry->versionExists($software, $version) &&
-                $this->registry->extensionsHasPhpVersion($software, $version, $bitsize, $phpVersion)) {
+                $this->registry->extensionHasPhpVersion($software, $version, $bitsize, $phpVersion)) {
 
                 // return download url for specific version, e.g. $registry['phpext_xdebug']['1.2.1']['x86']['5.5']
                 $url = $this->registry[$software][$version][$bitsize][$phpVersion];
