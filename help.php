@@ -61,6 +61,8 @@ $wizardTypes = [
     // from v0.8.0 on
     'standard' => 'Standard',
     'full'     => 'Full',
+    // from v0.8.5 on
+    'literc'   => 'LiteRC',
 ];
 
 if (!empty($type) && !empty($version) && !empty($language) && !empty($page)) {
