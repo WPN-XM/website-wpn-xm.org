@@ -99,7 +99,7 @@ function get_github_releases()
 {
     $cache_file = __DIR__ . '/downloads/github-releases-cache.json';
 
-    if (file_exists($cache_file) && (filemtime($cache_file) > (time() - (7 * 24 * 60 * 60)))) {
+    if (file_exists($cache_file) && (filemtime($cache_file) > (time() - (1 * 24 * 60 * 60)))) {
         // Use cache file, when not older than 7 days.
         $data = file_get_contents($cache_file);
     } else {
@@ -606,7 +606,7 @@ function render_header()
     <link href="css/style.css" rel="stylesheet" />
     <!-- Javascripts -->
     <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>    
+    <script src="js/bootstrap.min.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
         <script src="/js/html5shiv.js"></script>
