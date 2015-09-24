@@ -143,8 +143,8 @@
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner" id="section-home">
       <div class="container" id="top-nav">
         <!-- Logo -->
-        <a class="navbar-brand" href="#">
-          <img alt="WPN-XM" src="images/logo-transparent.png" width="74" height="59" />
+        <a class="navbar-brand" href="#" style="width: 104px">
+          <img alt="WPN-XM" src="images/logo-transparent.png" width="74" height="59" style="display: none; opacity: 1;"/>
         </a>
         <!-- Menu Items -->
         <nav class="collapse navbar-collapse" role="navigation" id="navigation-bar">
@@ -763,6 +763,17 @@
           });
           // load social buttons
           Socialite.load($('.sellout-buttons'));
+
+          $(window).scroll(function(){
+              var scrollTop = $(this).scrollTop();
+
+              if (scrollTop > 210) {
+                  $('a.navbar-brand img').fadeIn(400);
+              } else {
+                  $('a.navbar-brand img').stop().fadeOut(400);
+              }
+          });
+
       });
     </script>
   </body>
