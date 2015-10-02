@@ -5,3 +5,5 @@
 # Allow access to all files
 User-agent: *
 Disallow:
+
+Sitemap: http://wpn-xm.org/sitemap.xml
