@@ -49,23 +49,44 @@ function render_component_tables($render_components)
               </script>
             </div>'
         . '</div><!-- End: Panel -->'
-        . '</div><!-- End: Row-->';
+        . '</div><!-- End: Row -->';
 
     $html .= '<div class="row">'
         . '<div class="download-components col-md-6">'
-        . '<h2>Software Components</h2>'
+        . '<div class="panel panel-default">'
+        . '<div class="panel-heading"><h4>Software Components</h4></div>'
+        . '<div class="panel-body">'
         . '<table border=1 class="table table-condensed table-hover">'
         . '<thead><th>Software Component</th><th>Versions</th><th>Latest Version</th></thead>'
         . $render_components['components']
-        . '</table></div>';
+        . '</table></div></div></div>';
 
     $html .= '<div class="download-components download-extensions col-md-6">'
-        . '<h2>PHP Extensions</h2>'
+        . '<div class="panel panel-default">'
+        . '<div class="panel-heading"><h4>PHP Extensions</h4></div>'
+        . '<div class="panel-body">'
         . '<table border=1 class="table table-condensed table-hover">'
         . '<thead><th>PHP Extension</th><th>Versions</th><th>Latest Version</th></thead>'
         . $render_components['extensions']
-        . '</table></div>'
-        . '</div>';
+        . '</table>'
+        . '</div></div>'; // end - body
+
+ $html .= '<div class="alert alert-info" role="alert">
+            <p>
+            <strong>You may find more PHP Extensions for Windows here:</strong><br>
+            <div class="btn-group" role="group" aria-label="php-version-lifetime">
+              <a class="btn btn-default" href="https://pecl.php.net/">pecl.php.net</a>
+              <a class="btn btn-default" href="http://windows.php.net/downloads/pecl/">windows.php.net/downloads/pecl</a>
+            </div>
+            </p>
+            <p>
+            <strong>PHP Versions</strong><br>
+             <div class="btn-group" role="group" aria-label="php-version-lifetime">
+              <a class="btn btn-default" href="http://php.net/supported-versions.php">Supported</a>
+              <a class="btn btn-default" href="http://php.net/eol.php">Unsupported (EndOfLife)</a>
+            </p>
+            </div>
+          </div>';
 
     return $html;
 }
@@ -102,6 +123,11 @@ function render_tr_for_php_extension($component)
 
 function render_version_dropdown_for_extension($component)
 {
+    // skip APC, it was only available up to PHP5.4 EOL
+    if($component['name'] === 'PHP Extension APC') {
+      return 'Was available up to PHP v5.4 (EOL).';
+    }
+
     unset($component['name'], $component['website'], $component['latest']);
 
     krsort($component);
@@ -110,6 +136,10 @@ function render_version_dropdown_for_extension($component)
     foreach ($component as $version => $bitsizes) {
         foreach ($bitsizes as $bitsize => $php_versions) {
             foreach ($php_versions as $php_version => $url) {
+                // skip data for PHP 5.4 (EOL)
+                if($php_version === '5.4' || $php_version === '5.4.0') {
+                   continue;
+                }
                 $v[$bitsize][$php_version][$version] = $url;
             }
         }
