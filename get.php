@@ -76,6 +76,9 @@ class Registry implements ArrayAccess
     }
 
     /**
+     * Check, that a specific version of a "PHP Extension" (software + version + bitsize)
+     * is available for a certain "PHP version".
+     * 
      * @param $software
      * @param $version
      * @param $bitsize
@@ -88,6 +91,8 @@ class Registry implements ArrayAccess
     }
 
     /**
+     * Check, if the "latest version" of a PHP extensions is available for a certain "PHP version".
+     * 
      * @param $software
      * @param $bitsize
      * @param $phpVersion
@@ -154,10 +159,9 @@ class Registry implements ArrayAccess
      */
     public function getPhpVersionInRange($software, $version, $bitsize, $phpVersion)
     {
-        $array      = $this->registry[$software][$version][$bitsize];
-        $phpVersion = $this->getLatestVersionOfRange($array, $phpVersion . '.0', $phpVersion . '.99');
-
-        return $phpVersion;
+        $array = $this->registry[$software][$version][$bitsize];
+        
+        return $this->getLatestVersionOfRange($array, $phpVersion . '.0', $phpVersion . '.99');
     }
 
     /**
@@ -359,15 +363,6 @@ class Response
     }
 }
 
-### Script ####
-
-$request  = new Request();
-$response = new Response();
-$registry = new Registry();
-
-$component = new Component($request, $response, $registry);
-$component->redirectTo();
-
 /**
  * Find component in registry.
  * Redirect to download url.
@@ -466,3 +461,12 @@ class Component
         }
     }
 }
+
+/* Finally... some script to execute. Whoa. */
+
+$request  = new Request();
+$response = new Response();
+$registry = new Registry();
+
+$component = new Component($request, $response, $registry);
+$component->redirectTo();
