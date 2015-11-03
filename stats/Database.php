@@ -64,7 +64,6 @@ class Database
 
     public function insertDownload($url, $component, $version, $bitsize, $phpversion, $referer)
     {
-       echo 'insert';
         $query = "INSERT INTO downloads (url, component, version, bitsize, phpversion, date, referer)
           VALUES (:url, :component, :version, :bitsize, :phpversion, (strftime('%Y-%m-%d %H:%M:%f','now','localtime')), :referer)";
 
@@ -78,7 +77,6 @@ class Database
         $stmt->bindParam(':referer', $referer);
 
         $stmt->execute();
-        echo 'insert';
     }
 
     public function closeDatabaseConnection()
