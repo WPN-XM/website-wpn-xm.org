@@ -69,12 +69,12 @@ class Database
 
         $stmt = $this->db->prepare($query);
 
-        $stmt->bindParam(':url', $url);
-        $stmt->bindParam(':component', $component);
-        $stmt->bindParam(':version', $version);
-        $stmt->bindParam(':bitsize', $bitsize);
-        $stmt->bindParam(':phpversion', $phpversion);
-        $stmt->bindParam(':referer', $referer);
+        $stmt->bindParam(':url', $url, PDO::PARAM_STR);
+        $stmt->bindParam(':component', $component, PDO::PARAM_STR);
+        $stmt->bindParam(':version', $version, PDO::PARAM_STR);
+        $stmt->bindParam(':bitsize', $bitsize, PDO::PARAM_STR, 3);
+        $stmt->bindParam(':phpversion', $phpversion, PDO::PARAM_STR);
+        $stmt->bindParam(':referer', $referer, PDO::PARAM_STR);
 
         $stmt->execute();
     }
