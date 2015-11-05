@@ -37,22 +37,29 @@ $v = (!empty($v)) ? $v : '0.0.0';
 
 // request all software components with name/website/latestversion as JSON
 if (!empty($s) && $s === 'all') {
+    $data = reduceRegistry($registry);
+    sendJsonResponse($data);
+}
 
-    // reduce the registry (drop all version numbers and their URLs, but keep name/website/latestversion)
+/**
+ * Returns a reduced registry array.
+ * This drops all version numbers and their URLs.
+ * And returns only name, website, latest version and url for each component.
+ */
+function reduceRegistry($registry)
+{
     $data = [];
     foreach ($registry as $software => $details) {
-        $data[$software]['name']    = isset($details['name']) ? $details['name'] : '';
-        $data[$software]['website'] = isset($details['website']) ? $details['website'] : '';
+        $data[$software]['name']    = $details['name'];
+        $data[$software]['website'] = $details['website'];
         $data[$software]['latest']  = $details['latest'];
     }
-
-    sendJsonResponse($data);
+    return $data;
 }
 
 // does the requested software exist in our registry?
 if (!empty($s) && array_key_exists($s, $registry)) {
     if (version_compare($v, $registry[$s]['latest']['version'], '<')) {
-        // prepare json data
        $data = [
             'software'       => $s,
             'your_version'   => $v,
@@ -61,7 +68,6 @@ if (!empty($s) && array_key_exists($s, $registry)) {
             'message'        => 'You are running an old version of ' . $s . ' and should update immediately.',
         ];
     } else {
-        // prepare json data
         $data = ['message' => 'You are running the latest version.'];
     }
 
