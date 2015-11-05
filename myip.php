@@ -14,8 +14,4 @@
  */
 $ip = $_SERVER['HTTP_X_REAL_IP'];
 
-if (preg_match('/^\d+\.\d+\.\d+\.\d+$/', $ip) === 1) {
-    echo $ip;
-} else {
-    echo '0.0.0.0';
-}
+echo (preg_match('/^\d+\.\d+\.\d+\.\d+$/', $ip) === 1) ? $ip : '0.0.0.0';
