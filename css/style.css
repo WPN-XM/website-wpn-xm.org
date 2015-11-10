@@ -212,3 +212,63 @@ th, td, caption{padding:4px 10px 4px 15px;}
     column-gap: 15px; columns: 4;
 }
 ul {list-style-type:none;}
+
+div.download-components h2 {
+ font-size:18px;
+ margin:10px 0;
+}
+div.download-components table {
+  border: 1px solid #DDDEDE;
+  box-shadow: 0 1px 0 white;
+  background: #F7F7F8;
+  width: 100%;
+}
+div.download-components td,
+div.download-components th {
+  text-align:center;
+  padding: 3px 8px 3px 8px;
+  border-right: 1px solid #DDDEDE;
+  border-bottom: 1px solid #DDDEDE;
+  box-shadow: 0 2px 0 white;
+  margin:0;
+}
+div.download-components th {
+  background-color:transparent!important;
+  color:inherit!important;
+}
+div.download-components td:first-child,
+div.download-components th:first-child {
+  text-align:left;
+  width:50%;
+}
+div.download-components td:nth-child(2) {
+  text-align: right;
+}
+div.download-components tr:last-child td {
+  border-bottom: none;
+  box-shadow: none;
+}
+div.download-components td:last-child,
+div.download-components th:last-child  {
+  border-right:none;
+}
+
+div.download-components td:first-child,
+div.download-components th:first-child {
+  text-align:left;
+  width:15%;
+}
+div.download-extensions td:nth-child(2) {
+  width: 70%;
+  text-align: right;
+}
+
+div.download-components td a {
+  color: rgb(80, 80, 80);
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+}
+div.download-components select {
+  margin: 0;
+}
