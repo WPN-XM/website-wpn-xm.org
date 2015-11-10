@@ -16,40 +16,77 @@
 // WPNXM Software Registry
 $registry = include __DIR__ . '/registry/wpnxm-software-registry.php';
 
+// Installer Registries
+$installerRegistries = getInstallerRegistries($registry);
+
+include __DIR__ . '/view/header.php';
+?>
+    <body style="padding-top: 0px;">
+        <div class="page-header">
+          <h1>Version Comparison Matrix</h1>
+        </div>
+        <p>
+            The table is a "version comparison matrix" for all software components shipped by all our installation wizards.
+            This allows a user to quickly notice, if a certain software is packaged and which version.
+        </p>
+        <table id="version-matrix" class="table table-condensed table-bordered table-version-matrix"
+               style="width: auto !important; padding: 0px; vertical-align: middle; background-color: #fefefe;">
+            <thead>
+                <tr>
+                    <th>Software Components (<?php echo count($registry); ?>)</th>
+                    <?php echo renderTableHeader($installerRegistries); ?>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            foreach ($registry as $software => $data) {
+                echo '<tr><td>' . $software . '</td>' . renderTableCells($installerRegistries, $software) . '</tr>';
+            }
+            ?>
+            </tbody>
+        </table>
+    </body>
+</html>
+
+<?php
+
 /*
  * Installation Wizard Registries
  * - fetch the registry files
  * - split filenames to get version constraints (e.g. version, lite, php5.4, w32, w64)
  * - restructure the arrays for sorting and better iteration
  */
-$wizardFiles = glob(__DIR__ . '/registry/*.json');
+function getInstallerRegistries()
+{
+    $wizardFiles = glob(__DIR__ . '/registry/*.json');
 
-if (empty($wizardFiles) === true) {
-    exit('No JSON registries found.');
-}
-
-$wizardRegistries = [];
-foreach ($wizardFiles as $file) {
-    $name = basename($file, '.json');
-
-    if (substr_count($name, '-') === 2) {
-        preg_match('/(?<installer>.*)-(?<version>.*)-(?<bitsize>.*)/i', $name, $parts);
+    if (empty($wizardFiles) === true) {
+        exit('No JSON registries found.');
     }
 
-    if (substr_count($name, '-') === 3) {
-        preg_match('/(?<installer>.*)-(?<version>.*)-(?<phpversion>.*)-(?<bitsize>.*)/i', $name, $parts);
+    $wizardRegistries = [];
+    foreach ($wizardFiles as $file) {
+        $name = basename($file, '.json');
+
+        if (substr_count($name, '-') === 2) {
+            preg_match('/(?<installer>.*)-(?<version>.*)-(?<bitsize>.*)/i', $name, $parts);
+        }
+
+        if (substr_count($name, '-') === 3) {
+            preg_match('/(?<installer>.*)-(?<version>.*)-(?<phpversion>.*)-(?<bitsize>.*)/i', $name, $parts);
+        }
+
+        $parts                                  = dropNumericKeys($parts);
+        $wizardRegistries[$name]['constraints'] = $parts;
+        unset($parts);
+
+        // load registry
+        $registryContent                     = issetOrDefault(json_decode(file_get_contents($file), true), []);
+        $wizardRegistries[$name]['registry'] = fixArraySoftwareAsKey($registryContent);
     }
 
-    $parts                                  = dropNumericKeys($parts);
-    $wizardRegistries[$name]['constraints'] = $parts;
-    unset($parts);
-
-    // load registry
-    $registryContent                     = issetOrDefault(json_decode(file_get_contents($file), true), []);
-    $wizardRegistries[$name]['registry'] = fixArraySoftwareAsKey($registryContent);
+    return sortWizardRegistries($wizardRegistries);
 }
-
-$wizardRegistries = sortWizardRegistries($wizardRegistries);
 
 /**
  * Sort Wizard registries from low to high version number,
@@ -73,9 +110,7 @@ function sortWizardRegistries($wizardRegistries)
     }
 
     // append (to bottom)
-    $wizardRegistries = array_merge($wizardRegistries, $nextRegistries);
-
-    return $wizardRegistries;
+    return array_merge($wizardRegistries, $nextRegistries);
 }
 
 /**
@@ -84,15 +119,13 @@ function sortWizardRegistries($wizardRegistries)
  */
 function countNextRegistries($registries)
 {
-    $cnt = 0;
-
+    $i = 0;
     foreach ($registries as $registry) {
         if ($registry['constraints']['version'] === 'next') {
-            $cnt = $cnt + 1;
+            $i += 1;
         }
     }
-
-    return $cnt;
+    return $i;
 }
 
 /**
@@ -174,11 +207,11 @@ function getVersion($registry, $software)
  */
 function renderTableHeader(array $wizardRegistries)
 {
-    $header = '';
+    $html = '';
     foreach ($wizardRegistries as $wizardName => $wizardRegistry) {
-        $header .= '<th>' . $wizardName . '</th>';
+        $html .= '<th>' . $wizardName . '</th>';
     }
-    return $header;
+    return $html;
 }
 
 /**
@@ -188,31 +221,15 @@ function renderTableHeader(array $wizardRegistries)
  */
 function renderTableCells(array $wizardRegistries, $software)
 {
-    $cells = '';
+    $html = '';
     foreach ($wizardRegistries as $wizardName => $wizardRegistry) {
         // normal versions
         if (isset($wizardRegistry['registry'][$software]) === true) {
-            $cells .= '<td class="version-number">' . $wizardRegistry['registry'][$software] . '</td>';
+            $html .= '<td class="version-number">' . $wizardRegistry['registry'][$software] . '</td>';
         } else {
-            $cells .= '<td>&nbsp;</td>';
+            $html .= '<td>&nbsp;</td>';
         }
     }
 
-    return $cells;
+    return $html;
 }
-
-?>
-
-<table id="version-matrix" class="table table-condensed table-bordered table-version-matrix" style="width: auto !important; padding: 0px; vertical-align: middle;">
-<thead>
-    <tr>
-        <th>Software Components (<?php echo count($registry); ?>)</th>
-        <?php echo renderTableHeader($wizardRegistries); ?>
-    </tr>
-</thead>
-<?php
-foreach ($registry as $software => $data) {
-    echo '<tr><td>' . $software . '</td>' . renderTableCells($wizardRegistries, $software) . '</tr>';
-}
-?>
-</table>
