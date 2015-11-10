@@ -108,9 +108,7 @@ function get_github_releases()
         file_put_contents($cache_file, $data, LOCK_EX);
     }
 
-    $array = json_decode($data, true);
-
-    return $array;
+    return json_decode($data, true);
 }
 
 function get_github_releases_tag($release_tag)
