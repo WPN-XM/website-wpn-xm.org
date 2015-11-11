@@ -85,17 +85,21 @@ function render_tables($splitRegistry)
         . '</div></div>'; // end - body
 
     $html .= '<div class="alert alert-info" role="alert">
-            <p><strong>You may find more PHP Extensions for Windows here:</strong><br>
-            <div class="btn-group" role="group" aria-label="php-version-lifetime">
-              <a class="btn btn-default" href="https://pecl.php.net/">pecl.php.net</a>
-              <a class="btn btn-default" href="http://windows.php.net/downloads/pecl/">windows.php.net/downloads/pecl</a>
-            </div>
+            <p>
+              <strong>You may find more PHP Extensions for Windows here:</strong>
+              <br/>
+              <div class="btn-group" role="group" aria-label="php-version-lifetime">
+                <a class="btn btn-default" href="https://pecl.php.net/">pecl.php.net</a>
+                <a class="btn btn-default" href="http://windows.php.net/downloads/pecl/">windows.php.net/downloads/pecl</a>
+              </div>
             </p>
-            <p><strong>PHP Versions</strong><br>
-            <div class="btn-group" role="group" aria-label="php-version-lifetime">
-              <a class="btn btn-default" href="http://php.net/supported-versions.php">Supported</a>
-              <a class="btn btn-default" href="http://php.net/eol.php">Unsupported (EndOfLife)</a>
-            </p>
+            <p>
+              <strong>PHP Versions</strong>
+              <br/>
+              <div class="btn-group" role="group" aria-label="php-version-lifetime">
+                <a class="btn btn-default" href="http://php.net/supported-versions.php">Supported</a>
+                <a class="btn btn-default" href="http://php.net/eol.php">Unsupported (EndOfLife)</a>
+              </p>
             </div>
           </div>';
 
