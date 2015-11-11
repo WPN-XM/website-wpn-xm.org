@@ -349,5 +349,10 @@ $s = new GithubReleaseStats();
 include __DIR__ . '/view/footer_scripts.php';
 include __DIR__ . '/view/highchart_scripts.php';
 ?>
+
+</div><!-- container -->
+</div><!-- col-md-12 -->
+</div><!-- row -->
+</div><!-- col-md-10 -->
 </body>
 </html>
