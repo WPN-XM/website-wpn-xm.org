@@ -68,7 +68,7 @@ function render_tables($splitRegistry)
         . '<div class="panel-heading"><h4>Software Components</h4></div>'
         . '<div class="panel-body">'
         . '<table class="table table-condensed table-hover">'
-        . '<thead><th>Software Component</th><th>Versions</th><th>Latest Version</th></thead>'
+        . '<thead><tr><th>Software Component</th><th>Versions</th><th>Latest Version</th></tr></thead>'
         . '<tbody>'
         . $splitRegistry['components']
         . '</tbody></table></div></div></div>';
@@ -78,7 +78,7 @@ function render_tables($splitRegistry)
         . '<div class="panel-heading"><h4>PHP Extensions</h4></div>'
         . '<div class="panel-body">'
         . '<table class="table table-condensed table-hover">'
-        . '<thead><th>PHP Extension</th><th>Versions</th><th>Latest Version</th></thead>'
+        . '<thead><tr><th>PHP Extension</th><th>Versions</th><th>Latest Version</th></tr></thead>'
         . '<tbody>'
         . $splitRegistry['extensions']
         . '</tbody></table>'
