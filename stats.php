@@ -304,12 +304,13 @@ $s = new GithubReleaseStats();
 			<td>Number of Released Installers</td>
 			<td><?=$s['total_installers_released']?></td>
 		</tr>
-			<td>Total number of Downloads</td>
-			<td><?=$s['total_downloads']?></td>
-		</tr>
 		<tr>
 			<td>Number of Installers Released by Installer Version</td>
 			<td><?=StatsTable::render('installers-released-per-version-datatable', $s['installers_released_per_version'])?></td>
+		</tr>
+		<tr>
+			<td>Total number of Downloads</td>
+			<td><strong><?=$s['total_downloads']?></strong></td>
 		</tr>
 		<tr>
 			<td>Total Downloads by PHP Version</td>
