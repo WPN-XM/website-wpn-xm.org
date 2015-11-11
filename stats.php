@@ -243,18 +243,18 @@ class StatsTable
 		return $html;
 	}
 
-	static function renderMatrix($array)
+	static function renderMatrix($table_id, $array)
 	{
 		$php_versions = array_keys($array['v0.8.6']);
 
-		$html = '<table id="downloads-phpversion-datatable-compact" class="table table-bordered table-hover table-condensed">';
+		$html = '<table id="' . $table_id . '" class="table table-bordered table-hover table-condensed">';
 
 		$html .= '<thead><tr><th>Installer Version</th>';#<th>Total Downloads</th>
 		foreach($php_versions as $phpversion) {
 			$html .= '<th>' . $phpversion . '</th>';
 		}
 		$html .= '</tr></thead>';
-		$html .= '<tbody><tr>';
+		$html .= '<tbody>';
 
 		foreach($array as $key => $values)
 		{
@@ -318,11 +318,11 @@ $s = new GithubReleaseStats();
 		</tr>
 		<tr>
 			<td>Number of Installer Downloads by PHP Version</td>
-			<td><?=StatsTable::renderMatrix($s['downloads_per_installer_version']);?></td>
+			<td><?=StatsTable::renderMatrix('downloads-by-installer-and-php-version', $s['downloads_per_installer_version']);?></td>
 		</tr>
 		<tr>
 			<td>Release Dates and Development times</td>
-			<td><?=StatsTable::renderMatrix($s['release_dates_and_development_time']);?></td>
+			<td><?=StatsTable::renderMatrix('release-dates-and-dev-times', $s['release_dates_and_development_time']);?></td>
 		</tr>
 	</table>
 </div> <!-- close panel -->

@@ -15,7 +15,7 @@ $(document).ready(function () {
 	    	text: 'Number of Installation Wizard Downloads by Installer Version with PHP Version share'
 	    },
         data: {
-	    	table: 'downloads-phpversion-datatable-compact'
+	    	table: 'downloads-by-installer-and-php-version'
 	    },
 	    plotOptions: {
             column: {
