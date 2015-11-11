@@ -292,7 +292,6 @@ include __DIR__ . '/view/header.php';
 include __DIR__ . '/view/topnav.php';
 $s = new GithubReleaseStats();
 ?>
-<body>
 
 <div class="panel panel-default">
 	<div class="panel-heading"><h4>Project Statistics</h4></div>
