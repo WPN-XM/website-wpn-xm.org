@@ -202,11 +202,11 @@ function render_version_dropdown($component)
 
 function render_header()
 {
-    include __DIR__ . '/view/header.php';
-    include __DIR__ . '/view/topnav.php';
+    require __DIR__ . '/view/header.php';
+    require __DIR__ . '/view/topnav.php';
 }
 
 function render_footer_scripts()
 {
-    include __DIR__ . '/view/footer_scripts.php';
+    require __DIR__ . '/view/footer_scripts.php';
 }

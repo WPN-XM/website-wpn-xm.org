@@ -288,8 +288,8 @@ class HighchartHelper
  * ---------- cut here ----------
  */
 
-include __DIR__ . '/view/header.php';
-include __DIR__ . '/view/topnav.php';
+require __DIR__ . '/view/header.php';
+require __DIR__ . '/view/topnav.php';
 $s = new GithubReleaseStats();
 ?>
 
@@ -346,8 +346,8 @@ $s = new GithubReleaseStats();
 </div>
 
 <?php
-include __DIR__ . '/view/footer_scripts.php';
-include __DIR__ . '/view/highchart_scripts.php';
+require __DIR__ . '/view/footer_scripts.php';
+require __DIR__ . '/view/highchart_scripts.php';
 ?>
 
 </div><!-- container -->
