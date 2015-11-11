@@ -15,9 +15,11 @@
  * The script provides a json response to a update-check request
  * for individual or all components of the WPN-XM Server Stack.
  *
- * Example request:
- * 1) updatecheck.php?s=nginx&v=1.2.1
- * 2) updatecheck.php?s=all
+ * Example requests:
+ * 1) updatecheck.php?s=nginx
+ *    When you don't specify the URL parameter "v", then "v" will be "0.0.0" (fallback).
+ * 2) updatecheck.php?s=nginx&v=1.2.1
+ * 3) updatecheck.php?s=all
  */
 
 // load software components registry
