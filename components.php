@@ -128,7 +128,7 @@ function render_tr_for_php_extension($component)
     $html = PHP_EOL . '<tr>'
         . '<td><a href="' . $component['website'] . '"><strong>' . $name . '</strong></a>' . '</td>'
         . '<td>' . render_version_dropdown_for_extension($component) . '</td>'
-        . '<td>' . $component['latest']['version'] . '</td>'
+        . '<td><span class="label label-primary">' . $component['latest']['version'] . '</span></td>'
         . '</tr>' . PHP_EOL;
 
     return $html;
@@ -161,7 +161,7 @@ function render_version_dropdown_for_extension($component)
     // render
     $html = '';
     foreach ($v as $bitsize => $php_version) {
-        $html .= '<span class="left">' . $bitsize . '</span>';
+        $html .= '<span class="label label-default left">' . $bitsize . '</span>';
         foreach ($php_version as $php_v => $urls) {
             $html .= ' ' . $php_v;
             $html .= PHP_EOL .' <select onchange="if (this.value) window.location.href=this.value">';
