@@ -136,6 +136,11 @@ function render_tr_for_php_extension($component)
 
 function render_version_dropdown_for_extension($component)
 {
+    // skip APC, it was only available up to PHP5.4 EOL
+    if($component['name'] === 'PHP Extension APC') {
+      return 'Was available up to PHP v5.4 (EOL).';
+    }
+
     unset($component['name'], $component['website'], $component['latest']);
 
     krsort($component);
@@ -144,6 +149,10 @@ function render_version_dropdown_for_extension($component)
     foreach ($component as $version => $bitsizes) {
         foreach ($bitsizes as $bitsize => $php_versions) {
             foreach ($php_versions as $php_version => $url) {
+                // skip data for PHP 5.4 (EOL)
+                if($php_version === '5.4' || $php_version === '5.4.0') {
+                   continue;
+                }
                 $v[$bitsize][$php_version][$version] = $url;
             }
         }
