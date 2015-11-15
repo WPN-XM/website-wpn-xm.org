@@ -87,16 +87,17 @@ function render_tables($splitRegistry)
     $html .= '<div class="alert alert-info" role="alert">
             <div>
               <strong>You may find more PHP Extensions for Windows here:</strong><br/>
-              <div class="btn-group" role="group" aria-label="php-version-lifetime">
+              <div class="btn-group" role="group" aria-label="php-extension-downloads">
                 <a class="btn btn-default" href="https://pecl.php.net/">pecl.php.net</a>
                 <a class="btn btn-default" href="http://windows.php.net/downloads/pecl/">windows.php.net/downloads/pecl</a>
               </div>
             </div>
+            <br>
             <div>
-              <strong>PHP Versions</strong><br/>
+              <strong>PHP Version Lifetime</strong><br/>
               <div class="btn-group" role="group" aria-label="php-version-lifetime">
-                <a class="btn btn-default" href="http://php.net/supported-versions.php">Supported</a>
-                <a class="btn btn-default" href="http://php.net/eol.php">Unsupported (EndOfLife)</a>
+                <a class="btn btn-default" href="http://php.net/supported-versions.php">Supported Versions</a>
+                <a class="btn btn-default" href="http://php.net/eol.php">Unsupported Versions (End Of Life)</a>
               </div>
             </div>
           </div>';
