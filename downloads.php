@@ -333,6 +333,8 @@ if (!empty($type) && ($type === 'json')) {
     echo json_encode($downloads);
 } else {
     // send html page
+    header('Content-Type: text/html; charset=utf-8');
+
     // load software components registry
     $registry = include __DIR__ . '/registry/wpnxm-software-registry.php';
 
@@ -341,19 +343,41 @@ if (!empty($type) && ($type === 'json')) {
         header('HTTP/1.0 404 Not Found');
     }
 
-    // send with header (downloads.php) or without header (downloads.php?type=only-body)
-    if (!empty($type) && ($type === 'only-body')) {
-        $html = '';
-    } else {
-        $html = render_header();
-    }
+    require __DIR__ . '/view/header.php';
+    require __DIR__ . '/view/topnav.php';
 
     unset($downloads['versions'], $downloads['latest_version'], $downloads['latest_version_release_date']);
     $version = '0.0.0';
 
-    $html .= '<table style="width:auto; min-width:900px">';
+?>
 
-    $html .= render_github_releases();
+    <div class="row">
+
+            <div class="panel panel-default" id="section-download-installation-wizards">
+              <div class="panel-heading" style="overflow: hidden; min-height: 90px;">
+
+                <h3 id="download" class="pull-left">Downloads <small class="btn btn-sm bold total-amount-downloads"></small></h3>
+
+                <!-- Google Ads -->
+                <div class="pull-right" style="height: 90px; width: 728px;">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                  <!-- WPИ-XM Leaderboard, 728x90, Erstellt 8.11.11 -->
+                  <ins class="adsbygoogle"
+                       style="display:inline-block;width:728px;height:90px"
+                       data-ad-client="ca-pub-8272564713803494"
+                       data-ad-slot="1380654938"></ins>
+                  <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+                  </script>
+                </div>
+
+              </div>
+              <div class="panel-body" id="downloads-list">
+                <table style="width:auto; min-width:900px">
+
+<?php
+    $html = render_github_releases();
+    $html .= '</div></div></div>';
 
     foreach ($downloads as $download) {
 
@@ -391,7 +415,21 @@ if (!empty($type) && ($type === 'json')) {
     }
     $html .= '</table><br/>';
 
-    header('Content-Type: text/html; charset=utf-8');
+    $html .= '<script>
+                function calculateTotalDownloads() {
+                  var total = 0;
+                  $(\'span.installer-downloads\').each(function () {
+                      total += parseInt($(this).text());
+                  });
+                  $(\'small.total-amount-downloads\').html(total);
+                }
+                calculateTotalDownloads();
+              </script>';
+
+    require __DIR__ . '/view/footer_scripts.php';
+
+    $html .= '</div></div></div></body></html>';
+
     echo $html;
 }
 
@@ -496,13 +534,13 @@ function render_component_list_multi_column($registry, $installerRegistry)
         // php extension - they are appended to the extension html fragment
         if (false !== strpos($shortName, 'phpext_')) {
             $name = str_replace('PHP Extension ', '', $registry[$shortName]['name']);
-            $extensions_html .= render_component_li($name, $version);
+            $extensions_html .= '<li><span class="bold">' . $name . '</span> ' . $version . '</li>';
             continue;
         }
 
         // normal component
         $name = $registry[$shortName]['name'];
-        $html .= render_component_li($name, $version);
+        $html .= '<li><span class="bold">' . $name . '</span> ' . $version . '</li>';
     }
     unset($installerRegistry);
 
@@ -542,89 +580,4 @@ function render_component_list_comma_separated($registry, $installerRegistry, $n
     $html .= $extensions_html;
 
     return $html;
-}
-
-function render_component_li($name, $version)
-{
-    return '<li><span class="bold">' . $name . '</span> ' . $version . '</li>';
-}
-
-function render_header()
-{
-    return <<<EOD
-<!DOCTYPE html>
-<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
-<head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#">
-  <meta charset="utf-8" />
-  <title>WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows&reg; platform.</title>
-  <meta http-equiv="x-ua-compatible" content="IE=EmulateIE7" />
-  <!-- Google Site Verification -->
-  <meta name="google-site-verification" content="OxwcTMUNiYu78EIEA2kq-vg_CoTyhGL-YVKXieCObDw" />
-  <meta name="Googlebot" content="index,follow">
-  <meta name="Author" content="Jens-Andre Koch" />
-  <meta name="Copyright" content="(c) 2011-onwards Jens-Andre Koch." />
-  <meta name="Publisher" content="Koch Softwaresystemtechnik" />
-  <meta name="Rating" content="general" />
-  <meta name="page-type" content="Homepage, Website" />
-  <meta name="robots" content="index, follow, all, noodp" />
-  <meta name="Description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
-  <meta name="keywords" content="WPN-XM, free, open-source, server, NGINX, PHP, Windows, MariaDb, MongoDb, Adminer, XDebug, WAMP, WIMP, WAMPP, LAMP" />
-  <!-- avgthreatlabs.com Site Verification -->
-  <meta name="avgthreatlabs-verification" content="247b6d3c405a91491b1fea8e89fb3b779f164a5f" />
-  <!-- DC -->
-  <meta name="DC.Title" content="WPN-XM" />
-  <meta name="DC.Creator" content="Jens-Andre Koch" />
-  <meta name="DC.Publisher" content="Koch Softwaresystemtechnik" />
-  <meta name="DC.Type" content="Service" />
-  <meta name="DC.Format" content="text/html" />
-  <meta name="DC.Language" content="en" />
-  <!-- Geo -->
-  <meta name="geo.region" content="DE-MV" />
-  <meta name="geo.placename" content="Neubrandenburg" />
-  <meta name="geo.position" content="53.560348;13.249941" />
-  <meta name="ICBM" content="53.560348, 13.249941" />
-  <!-- Facebook OpenGraph -->
-    <meta property="og:url" content="http://wpn-xm.org/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
-    <meta property="og:description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
-    <!-- Favicon & Touch-Icons -->
-    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
-    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="images/touch/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="images/touch/apple-touch-icon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="images/touch/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="images/touch/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="images/touch/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="images/touch/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="images/touch/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="images/touch/apple-touch-icon-152x152.png" />
-    <!-- Bootstrap CSS Framework -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
-    <!-- Javascripts -->
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-        <script src="/js/html5shiv.js"></script>
-    <![endif]-->
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-26811143-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function () {
-          var ga = document.createElement('script');
-          ga.type = 'text/javascript';
-          ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-</head>
-<body>
-EOD;
 }
