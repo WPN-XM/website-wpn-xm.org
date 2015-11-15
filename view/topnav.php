@@ -20,7 +20,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Downloads <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="index.html#section-download-installation-wizards">Installation Wizards</a></li>
+                <li><a href="downloads.php">Installation Wizards</a></li>
                 <li><a href="components.php">Web Components</a></li>
                 <li><a href="stats.php">Project Statistics</a></li>
               </ul>
