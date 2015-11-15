@@ -25,11 +25,11 @@ echo render_header();
       </div>
       <div class="panel-body">
         <p style="font-size: 16px;">
-          All software components of the WPN-XM software registry are available for selective download
-          <br>You will always download directly from the software vendor
-          <br>You have to install these components manually
-          <br>Please follow the installation instructions of the specific component
-          <br>This collection of download links is provided with the intention to save you some time
+          All software components of the WPN-XM software registry are available for selective download.
+          <br>You will always download directly from the software vendor.
+          <br>You have to install these components manually.
+          <br>After downloading, go to the appropriate manual and follow the installation instructions.
+          <br>This collection of download links is provided with the intention to save you some time.
         </p>
       </div>
       <div class="panel-footer" style="min-height: 90px;">
