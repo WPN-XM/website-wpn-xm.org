@@ -252,19 +252,19 @@ foreach (glob('./downloads/*.exe') as $filename) {
     $details['link'] = '<a href="' . $details['download_url'] . '">' . $file . '</a>';
 
     // release notes, e.g. https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3
-    $details['release_notes'] = '<a class="btn btn-large btn-info"'
+    $details['release_notes'] = '<a class="btn btn-large btn-info" '
         . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v' . $details['version'] . '">Release Notes</a>';
 
     // put "v" in front to get a properly versionized tag, starting from version "0.8.0"
     $version = (version_compare($details['version'], '0.8.0')) ? $details['version'] : 'v' . $details['version'];
 
     // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/0.5.2/changelog.txt
-    $details['changelog'] = '<a class="btn btn-large btn-info"'
+    $details['changelog'] = '<a class="btn btn-large btn-info" '
         . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $version . '/changelog.txt">Changelog</a>';
 
     // component list with version numbers
     // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
-    $details['github_tag'] = '<a class="btn btn-large btn-info"'
+    $details['github_tag'] = '<a class="btn btn-large btn-info" '
         . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $version . '">Github Tag</a>';
 
     // date
