@@ -356,7 +356,9 @@ if (!empty($type) && ($type === 'json')) {
             <div class="panel panel-default" id="section-download-installation-wizards">
               <div class="panel-heading" style="overflow: hidden; min-height: 90px;">
 
-                <h3 id="download" class="pull-left">Downloads<br><small class="label label-default bold total-amount-downloads"></small></h3>
+                <h3 id="download" class="pull-left">Downloads<br>
+                    <small class="label label-default bold total-amount-downloads" title="Total downloads"></small>
+                </h3>
 
                 <!-- Google Ads -->
                 <div class="pull-right" style="height: 90px; width: 728px;">
