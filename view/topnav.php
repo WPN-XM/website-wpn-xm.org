@@ -30,6 +30,9 @@
               <ul class="dropdown-menu">
                 <!--<li><a href="#">Forum</a></li>-->
                 <li><a href="https://groups.google.com/forum/#!forum/wpn-xm">Mailinglist</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="https://github.com/WPN-XM/WPN-XM/blob/master/CODE_OF_CONDUCT.md#contributor-code-of-conduct">Code of Conduct</a></li>
+                <li><a href="https://github.com/WPN-XM/WPN-XM/blob/master/CONTRIBUTING.md#contributing-to-the-wpn-xm-server-stack">Contributing</a></li>
               </ul>
             </li>
             <li class="dropdown">
