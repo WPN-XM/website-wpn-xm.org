@@ -161,9 +161,10 @@ function render_github_releases()
             $release_notes = '<a class="btn btn-large btn-info"'
                 . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-' . $release['tag_name'] . '">Release Notes</a>';
 
-            // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/0.5.2/changelog.txt
+            // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/master/CHANGELOG.md#v085---2015-07-12
+            $hash = '#' . str_replace('.', '', $release['tag_name']) . '---' . date('Y-m-d', strtotime($release['created_at']));
             $changelog = '<a class="btn btn-large btn-info"'
-                . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $release['tag_name'] . '/changelog.txt">Changelog</a>';
+                . 'href="https://github.com/WPN-XM/WPN-XM/blob/master/CHANGELOG.md' . $hash . '">Changelog</a>';
 
             // component list with version numbers
             // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
@@ -258,12 +259,9 @@ foreach (glob('./downloads/*.exe') as $filename) {
     // put "v" in front to get a properly versionized tag, starting from version "0.8.0"
     $version = (version_compare($details['version'], '0.8.0')) ? $details['version'] : 'v' . $details['version'];
 
-    // changelog, e.g. https://github.com/WPN-XM/WPN-XM/changelog.md#010---2015-10-06
-    $dateTime = DateTime::createFromFormat("Ymd\THis\Z H:i:s O", $details['created_at']);
-    $date = $dateTime->format("Y-m-d");
-
+    // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/0.5.2/changelog.txt
     $details['changelog'] = '<a class="btn btn-large btn-info" '
-        . 'href="https://github.com/WPN-XM/WPN-XM/changelog.md#' . $version . '---' . $date . '">Changelog</a>';
+        . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $version . '/changelog.txt">Changelog</a>';
 
     // component list with version numbers
     // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
