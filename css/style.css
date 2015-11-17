@@ -210,6 +210,7 @@ th, td, caption{padding:4px 10px 4px 15px;}
     -webkit-column-count:4; -moz-column-count: 4; -ms-column-count: 4;-o-column-count:4;column-count: 4;
     -webkit-column-gap: 15px; -moz-column-gap: 15px; -ms-column-gap: 15px;-o-column-gap: 15px;
     column-gap: 15px; columns: 4;
+    margin-top: 10px; margin-bottom: 10px;
 }
 ul {list-style-type:none;}
 

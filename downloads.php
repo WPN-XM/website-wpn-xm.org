@@ -258,9 +258,12 @@ foreach (glob('./downloads/*.exe') as $filename) {
     // put "v" in front to get a properly versionized tag, starting from version "0.8.0"
     $version = (version_compare($details['version'], '0.8.0')) ? $details['version'] : 'v' . $details['version'];
 
-    // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/0.5.2/changelog.txt
+    // changelog, e.g. https://github.com/WPN-XM/WPN-XM/changelog.md#010---2015-10-06
+    $dateTime = DateTime::createFromFormat("Ymd\THis\Z H:i:s O", $details['created_at']);
+    $date = $dateTime->format("Y-m-d");
+
     $details['changelog'] = '<a class="btn btn-large btn-info" '
-        . 'href="https://github.com/WPN-XM/WPN-XM/blob/' . $version . '/changelog.txt">Changelog</a>';
+        . 'href="https://github.com/WPN-XM/WPN-XM/changelog.md#' . $version . '---' . $date . '">Changelog</a>';
 
     // component list with version numbers
     // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
@@ -502,7 +505,7 @@ function render_component_list_for_installer($installer_name)
 
         $number_of_components = count($installerRegistry);
 
-        $html .= '<tr><td colspan="3">Components (' . $number_of_components . ')<p>';
+        $html .= '<tr><td colspan="3">Components (' . $number_of_components . ')<br>';
 
         //if($number_of_components >= 10) {
         $html .= render_component_list_multi_column($registry, $installerRegistry);
@@ -510,7 +513,7 @@ function render_component_list_for_installer($installer_name)
         //  $html .= render_component_list_comma_separated($registry, $installerRegistry, $number_of_components);
         //}
 
-        $html .= '</p></td></tr>';
+        $html .= '</td></tr>';
     }
 
     return $html;
