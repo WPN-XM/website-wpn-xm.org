@@ -59,3 +59,10 @@
           });
       });
     </script>
+    <!-- cookiechoices.org -->
+    <script src="js/cookiechoices/cookiechoices.js"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function(event) {
+        cookieChoices.showCookieConsentBar('In order to give you a better service this website uses cookies. By continuing to browse the site you are agreeing to our use of cookies.', 'Got it!');
+      });
+    </script>
