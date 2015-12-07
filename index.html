@@ -3,9 +3,9 @@
   <head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#">
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-    <meta name="MobileOptimized" content="width" />
-    <meta name="HandheldFriendly" content="true" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
     <title>WPN-XM - web server solution stack for PHP development on Windows.</title>
     <!-- Google Site Verification -->
     <meta name="google-site-verification" content="OxwcTMUNiYu78EIEA2kq-vg_CoTyhGL-YVKXieCObDw" />
@@ -113,26 +113,13 @@
   <body data-spy="scroll" data-target="#top-nav">
     <!-- Facebook Widget -->
     <div id="fb-root"></div>
-    <script>
-      window.fbAsyncInit = function () {
-          FB.init({
-              appId: '1398546803746885',
-              xfbml: true,
-              version: 'v2.2'
-          });
-      };
-
-      (function (d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) {
-              return;
-          }
-          js = d.createElement(s);
-          js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js";
-          fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/de_DE/sdk.js#xfbml=1&version=v2.5&appId=1398546803746885";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 
     <!-- "Fork me on Github" Ribbon -->
     <a href="https://github.com/WPN-XM/WPN-XM">
@@ -140,22 +127,23 @@
     </a>
 
     <!-- Top Navigation Bar -->
-    <header class="navbar navbar-inverse navbar-fixed-top" role="banner" id="section-home">
+    <header class="navbar navbar-inverse navbar-fixed-top" id="section-home">
       <div class="container" id="top-nav">
         <!-- Logo -->
         <a class="navbar-brand" href="#" style="width: 104px">
           <img alt="WPN-XM" src="images/logo-transparent.png" width="74" height="59" style="display: none; opacity: 1;" title="WPN-XM Server Stack"/>
         </a>
         <!-- Menu Items -->
-        <nav class="collapse navbar-collapse" role="navigation" id="navigation-bar">
+        <nav class="collapse navbar-collapse" id="navigation-bar">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#section-home">Home</a></li>
             <li><a href="#section-about">About</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Downloads <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#section-download-installation-wizards">Installation Wizards</a></li>
+                <li><a href="downloads.php">Installation Wizards</a></li>
                 <li><a href="components.php">Web Components</a></li>
+                <li><a href="stats.php">Project Statistics</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -163,6 +151,9 @@
               <ul class="dropdown-menu">
                 <!--<li><a href="#">Forum</a></li>-->
                 <li><a href="https://groups.google.com/forum/#!forum/wpn-xm">Mailinglist</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="https://github.com/WPN-XM/WPN-XM/blob/master/CODE_OF_CONDUCT.md#contributor-code-of-conduct">Code of Conduct</a></li>
+                <li><a href="https://github.com/WPN-XM/WPN-XM/blob/master/CONTRIBUTING.md#contributing-to-the-wpn-xm-server-stack">Contributing</a></li>
               </ul>
             </li>
             <li class="dropdown">
@@ -273,7 +264,7 @@
       <div class="container centered">
         WPИ-XM v0.8.6 has been released <span class="glyphicon glyphicon-arrow-down"></span>
         <strong>
-          <a href="https://github.com/WPN-XM/WPN-XM/blob/master/changelog.txt">See what's new</a>
+          <a href="https://github.com/WPN-XM/WPN-XM/blob/master/CHANGELOG.md#v086---2015-08-21">See what's new</a>
         </strong>
       </div>
     </div>
@@ -354,7 +345,6 @@
 
               <p>
                 The WPИ-XM Sever Stack is an open source product, provided to the community free of charge.
-                Many sleepless nights have gone into it, in order to deliver you a quality product.
                 If you like it, please give us a donation.
               </p>
               <p>
@@ -376,7 +366,7 @@
                     <input type="hidden" name="cmd" value="_donations"/>
                     <input type="hidden" name="hosted_button_id" value="QDKDE6GHTD894"/>
 
-                    <div style="margin-top: 10px; margin-bottom: 15px; width: 200px;">
+                    <div style="margin-top: 10px; margin-bottom: 15px;">
                       Amount: <input name="amount" type="text" style="text-align: right;" value="10" maxlength="10" size="4">
                         <select name="currency_code">
                           <option value="EUR">EUR</option>
@@ -414,28 +404,20 @@
 
                 <div class="list-group-item">
                   <h4>Donate via Flattr</h4>
-                  <script id='fbctg0s'>(function (i) {
-                  var f, s = document.getElementById(i);
-                  f = document.createElement('iframe');
-                  f.src = '//button.flattr.com/view/?uid=WPNXM&url=http%3A%2F%2Fwpn-xm.org%2F';
-                  f.title = 'Flattr';
-                  f.height = 62;
-                  f.width = 55;
-                  f.style.borderWidth = 0;
-                  s.parentNode.insertBefore(f, s);
-              })('fbctg0s');</script>
+                  <script type="text/javascript">
+                  /* <![CDATA[ */
+                      (function() {
+                          var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+                          s.type = 'text/javascript';
+                          s.async = true;
+                          s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
+                          t.parentNode.insertBefore(s, t);
+                      })();
+                  /* ]]> */</script>
+                  <a class="FlattrButton" style="display:none;" href="http://wpn-xm.org/"></a>
                 </div>
 
-                <!--<div class="list-group-item">
-                  <h4>Donate via Bitcoin</h4>
-                  <a href="bitcoin:12BfFmg1WaSTdoRAEm2fGP6E3PU8JhxHPL?label=Donation%20for%20WPN-XM%20Server%20Stack%20-%20http%3A%2F%2Fwpn-xm.org%2F">
-                    <i>12BfFmg1WaSTdoRAEm2fGP6E3PU8JhxHPL</i>
-                  </a>
-                  <img alt="Donate with Bitcoin" src="images/bitcoin-donate-qr-code.png" width="256" height="256" />
-                </div>-->
-
                 <div class="list-group-item">
-                  <p>It's not all about money</p>
                   <p>We really appreciate if you donate money, however, manpower is also needed!</p>
                   <p>You're welcome to contribute to this project!</p>
                 </div>
@@ -565,7 +547,7 @@
             </div>
             <div class="panel-footer centered">
               <a class="btn bold" href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.8.6">Release Notes <small>(<span>28th June 2015</span>)</small></a>
-              <a class="btn bold" href="https://raw.github.com/WPN-XM/WPN-XM/master/changelog.txt">Changelog</a>
+              <a class="btn bold" href="https://github.com/WPN-XM/WPN-XM/blob/master/CHANGELOG.md#v086---2015-08-21">Changelog</a>
             </div>
           </div>
 
@@ -594,35 +576,6 @@
                   }
               }(document, "script", "twitter-wjs");
             </script>
-          </div>
-        </div>
-      </div>
-
-      <hr/>
-
-      <div class="row">
-
-        <div class="panel panel-default" id="section-download-installation-wizards">
-          <div class="panel-heading" style="overflow: hidden; min-height: 90px;">
-
-            <h3 id="download" class="pull-left">Downloads <small class="btn btn-sm bold total-amount-downloads"></small></h3>
-
-            <!-- Google Ads -->
-            <div class="pull-right" style="height: 90px; width: 728px;">
-              <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-              <!-- WPИ-XM Leaderboard, 728x90, Erstellt 8.11.11 -->
-              <ins class="adsbygoogle"
-                   style="display:inline-block;width:728px;height:90px"
-                   data-ad-client="ca-pub-8272564713803494"
-                   data-ad-slot="1380654938"></ins>
-              <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
-            </div>
-
-          </div>
-          <div class="panel-body" id="downloads-list">
-            <!-- This element (downloads-list) is populated by populateDownloadList(). -->
           </div>
         </div>
       </div>
@@ -699,12 +652,22 @@
           s.parentNode.insertBefore(ga, s);
       })();
     </script>
+    <!-- End Google Analytics -->
+    <!-- Google Tag Manager
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5FQQ8G"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5FQQ8G');</script>-->
+    <!-- End Google Tag Manager -->
     <!-- Javascripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
     <script src="js/socialite.min.js"></script>
     <script src="js/socialite.github.js"></script>
@@ -729,18 +692,6 @@
               populateRegistryList(data);
           }
       });
-      $.ajax({
-          type: "GET",
-          url: "http://wpn-xm.org/downloads.php?type=only-body",
-          success: function (data) {
-              populateDownloadList(data);
-          }
-      });
-
-      function populateDownloadList(data) {
-          $('#downloads-list').append(data);
-          calculateTotalDownloads();
-      }
 
       function populateRegistryList(data) {
           var elem = $('#registry-list');
@@ -752,14 +703,6 @@
 
           elem.html('<li style="color: #999999;"><span id="windows-icon"> Windows </span><small>w32 & w64</small></li>');
           elem.append(items.join(''));
-      }
-
-      function calculateTotalDownloads() {
-          var total = 0;
-          $('span.installer-downloads').each(function () {
-              total += parseInt($(this).text());
-          });
-          $('small.total-amount-downloads').html(total);
       }
 
       $(document).ready(function () {
@@ -782,5 +725,13 @@
 
       });
     </script>
+     <!-- CookieChoices -->
+    <script src="js/cookiechoices/cookiechoices.js"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function(event) {
+        cookieChoices.showCookieConsentBar('This site uses cookies. By continuing to use this site, you are agreeing to our use of cookies.', 'Got it!');
+      });
+    </script>
+    <!-- End CookieChoices -->
   </body>
 </html>
