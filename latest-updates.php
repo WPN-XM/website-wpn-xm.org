@@ -23,7 +23,10 @@ class GitLog
     private function query()
     {
         chdir(__DIR__ . '/registry/'); // switch to repo folder
-        exec("git log -n 60 --date=short --pretty=format:\"%s#~|~#%ad\"", $this->git_logs);
+        //exec("git log -n 60 --date=short --pretty=format:\"%s#~|~#%ad\"", $this->git_logs);
+
+        // if exec is disabled, write content to text file via cronjob and read file content
+        $this->git_logs = file_get_contents(__DIR__ . '/gitlog.txt');
     }
 
     private function parse()
