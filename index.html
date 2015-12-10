@@ -275,7 +275,12 @@
       <div class="row">
         <div class="col-md-3">
 
-          <!-- Registry Status -->
+          <!-- Registry Latest Updates -->
+          <div id="registry-latest-updates">
+            <!-- This element (rregistry-latest-updates) is populated by populateRegistryLatestUpdates(). -->
+          </div>
+
+          <!-- Registry Versions -->
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 id="components">Registry</h4>
@@ -703,6 +708,19 @@
 
           elem.html('<li style="color: #999999;"><span id="windows-icon"> Windows </span><small>w32 & w64</small></li>');
           elem.append(items.join(''));
+      }
+
+      $.ajax({
+          type: "GET",
+          url: "http://wpn-xm.org/latest-updates.php",
+          success: function (data) {
+              populateRegistryLatestUpdates(data);
+          }
+      });
+
+      function populateRegistryLatestUpdates(data) {
+      {
+          $('#latest-updates').append(data);
       }
 
       $(document).ready(function () {
