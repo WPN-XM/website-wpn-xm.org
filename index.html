@@ -715,6 +715,7 @@
           url: "http://wpn-xm.org/latest-updates.php",
           success: function (data) {
               $('#registry-latest-updates').html(data);
+              activateLatestUpdateNewsBox();
           }
       });
 

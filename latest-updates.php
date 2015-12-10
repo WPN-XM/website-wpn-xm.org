@@ -116,19 +116,19 @@ class LatestUpdates
         return '
         <script src="/js/jquery.bootstrap.newsbox.min.js" type="text/javascript">
         <script type="text/javascript">
-            $(function () {
+            function activateLatestUpdateNewsBox() {
                 $(".newsbox").bootstrapNews({
                     newsPerPage: 2,
                     autoplay: true,
                     pauseOnHover: true,
                     navigation: true,
-                    direction: \'up\',
+                    direction: 'up',
                     newsTickerInterval: 4000,
                     onToDo: function () {
                         //console.log(this);
                     }
                 });
-            });
+            }
         </script>
         ';
     }
