@@ -68,7 +68,7 @@ class LatestUpdates
     public function renderPanel()
     {
         //$html = '<div class="col-md-3">' . "\n";
-        $html .= '<div class="panel panel-default">' . "\n";
+        $html = '<div class="panel panel-default">' . "\n";
         $html .= '<div class="panel-heading"><strong>Lastest Updates</strong></div>' . "\n";
         $html .= '<div class="panel-body">' . "\n";
         $html .= $this->renderLogItems();
