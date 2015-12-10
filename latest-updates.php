@@ -122,7 +122,7 @@ class LatestUpdates
                     autoplay: true,
                     pauseOnHover: true,
                     navigation: true,
-                    direction: 'up',
+                    direction: \'up\',
                     newsTickerInterval: 4000,
                     onToDo: function () {
                         //console.log(this);
