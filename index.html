@@ -714,14 +714,9 @@
           type: "GET",
           url: "http://wpn-xm.org/latest-updates.php",
           success: function (data) {
-              populateRegistryLatestUpdates(data);
+              $('#latest-updates').html(data);
           }
       });
-
-      function populateRegistryLatestUpdates(data) {
-      {
-          $('#latest-updates').append(data);
-      }
 
       $(document).ready(function () {
           // start bootstrap carousel
