@@ -114,8 +114,8 @@ class LatestUpdates
     public function getScript()
     {
         return '
-        <script src="/js/jquery.bootstrap.newsbox.min.js" type="text/javascript">
-        <script type="text/javascript">
+        <script src="/js/jquery.bootstrap.newsbox.min.js" type="text/javascript"></script>
+        <script>
             function activateLatestUpdateNewsBox() {
                 $(".newsbox").bootstrapNews({
                     newsPerPage: 2,
