@@ -22,7 +22,7 @@ class GitLog
 
     private function query()
     {
-        chdir(__DIR__ . '/registry/'); // switch to repo folder
+        //chdir(__DIR__ . '/registry/'); // switch to repo folder
         //exec("git log -n 60 --date=short --pretty=format:\"%s#~|~#%ad\"", $this->git_logs);
 
         // if exec is disabled, write content to text file via cronjob and read file content
@@ -142,7 +142,7 @@ function getLatestUpdatesHtml()
 
 function get_latest_updates()
 {
-    $cache_file = __DIR__ . '/latest-updates.html';
+    $cache_file = __DIR__ . '/downloads/latest-updates.html';
 
     if (file_exists($cache_file) && (filemtime($cache_file) > (time() - (3 * 24 * 60 * 60)))) {
         // Use cache file, when not older than 3 days.
