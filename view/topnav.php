@@ -61,6 +61,8 @@
                 <li role="separator" class="divider"></li>
                 <li><a href="https://github.com/WPN-XM/webinterface">Webinterface</a></li>
                 <li><a href="https://github.com/WPN-XM/server-control-panel">Server Control Panel</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="https://travis-ci.org/WPN-XM">Travis-CI Overview</a></li>
               </ul>
             </li>
           </ul>
