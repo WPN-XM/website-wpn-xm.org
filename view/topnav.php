@@ -28,7 +28,8 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Community <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <!--<li><a href="#">Forum</a></li>-->
+                <li><a href="http://wpn-xm.org/forum/">Forum</a></li>
+                <li role="separator" class="divider"></li>
                 <li><a href="https://groups.google.com/forum/#!forum/wpn-xm">Mailinglist</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="https://github.com/WPN-XM/WPN-XM/blob/master/CODE_OF_CONDUCT.md#contributor-code-of-conduct">Code of Conduct</a></li>
@@ -60,6 +61,8 @@
                 <li role="separator" class="divider"></li>
                 <li><a href="https://github.com/WPN-XM/webinterface">Webinterface</a></li>
                 <li><a href="https://github.com/WPN-XM/server-control-panel">Server Control Panel</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="https://travis-ci.org/WPN-XM">Travis-CI Overview</a></li>
               </ul>
             </li>
           </ul>
