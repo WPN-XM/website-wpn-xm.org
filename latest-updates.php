@@ -69,7 +69,7 @@ class LatestUpdates
     {
         //$html = '<div class="col-md-3">' . "\n";
         $html = '<div class="panel panel-default">' . "\n";
-        $html .= '<div class="panel-heading"><h4 id="latest-updates">Lastest Updates</h4></div>' . "\n";
+        $html .= '<div class="panel-heading"><h4 id="latest-updates">Latest Updates</h4></div>' . "\n";
         $html .= '<div class="panel-body">' . "\n";
         $html .= $this->renderLogItems();
         $html .= '</div>' . "\n";
