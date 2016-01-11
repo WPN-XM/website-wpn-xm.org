@@ -68,14 +68,7 @@ function getInstallerRegistries()
     foreach ($wizardFiles as $file) {
         $name = basename($file, '.json');
 
-        if (substr_count($name, '-') === 2) {
-            preg_match('/(?<installer>.*)-(?<version>.*)-(?<bitsize>.*)/i', $name, $parts);
-        }
-
-        if (substr_count($name, '-') === 3) {
-            preg_match('/(?<installer>.*)-(?<version>.*)-(?<phpversion>.*)-(?<bitsize>.*)/i', $name, $parts);
-        }
-
+        $parts                                  = getPartsOfInstallerFilename($name);
         $parts                                  = dropNumericKeys($parts);
         $wizardRegistries[$name]['constraints'] = $parts;
         unset($parts);
@@ -86,6 +79,19 @@ function getInstallerRegistries()
     }
 
     return sortWizardRegistries($wizardRegistries);
+}
+
+function getPartsOfInstallerFilename($name)
+{
+    if (substr_count($name, '-') === 3) {
+        preg_match('/(?<installer>.*)-(?<version>.*)-(?<phpversion>.*)-(?<bitsize>.*)/i', $name, $parts);
+        return $parts;
+    }
+
+    if (substr_count($name, '-') === 2) {
+        preg_match('/(?<installer>.*)-(?<version>.*)-(?<bitsize>.*)/i', $name, $parts);
+        return $parts;
+    }
 }
 
 /**
