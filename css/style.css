@@ -12,7 +12,7 @@ div#logo {
 }
 
 /*    yo, man.. SVG. looking sharp and nice in Chrome, but nowhere else.
-      incompatibilities... in 2015! WTF! And Flash is still alive. WTF!
+      incompatibilities... in 2016! WTF!
       div#logo{
           background:url("../images/wpnxm-logo.svg") no-repeat scroll 0 0 transparent;
           box-shadow: 0 0 0 10px #b6bdc3;
@@ -262,6 +262,7 @@ div.download-components th:first-child {
 div.download-extensions td:nth-child(2) {
   width: 70%;
   text-align: right;
+  font-size: 14px;
 }
 
 div.download-components td a {
@@ -272,4 +273,5 @@ div.download-components td a {
 }
 div.download-components select {
   margin: 0;
+  font-size: 12px;
 }
