@@ -2,12 +2,13 @@
 
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - 2015 Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2016 Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
  * For full copyright and license information, view the bundled LICENSE file.
  */
+
 /**
  * Downloads Listing Script for wpn-xm.org
  * ---------------------------------------
@@ -297,32 +298,6 @@ $downloads['versions'] = array_unique($versions);
 // add "latest" as array key, referring to the latest version of WPN-XM
 $downloads['latest_version']              = $downloads[0]['version'];
 $downloads['latest_version_release_date'] = $downloads[0]['date'];
-
-/*
-  Example Downloads Array
-
-  link, release_notes, changelog, github_tag are HTML anchor tags.
-
-  array (
-  39 =>
-  array (
-  'file' => 'WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe',
-  'size' => '1.59 MB',
-  'version' => '0.8.0',
-  'installer' => 'Webinstaller',
-  'phpversion' => 'php56',
-  'platform' => 'w64',
-  'md5' => '6ae27511a06bfbc98472283b30565913',
-  'sha1' => '7258ed16afe86611572e1b5ea9f879b41adf4be1',
-  'download_url' => 'http://wpn-xm.org/downloads/WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe',
-  'link' => '<a href="http://wpn-xm.org/downloads/WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe">WPNXM-0.8.0-Webinstaller-Setup-php56-w64.exe</a>',
-  'release_notes' => '<a class="btn btn-large btn-info"href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.8.0">Release Notes</a>',
-  'changelog' => '<a class="btn btn-large btn-info"href="https://github.com/WPN-XM/WPN-XM/blob/v0.8.0/changelog.txt">Changelog</a>',
-  'github_tag' => '<a class="btn btn-large btn-info"href="https://github.com/WPN-XM/WPN-XM/tree/v0.8.0">Github Tag</a>',
-  'date' => '20.09.2014',
-  ),
-
- */
 
 // ----- GET
 // accept "type" as a get parameter, e.g. index.php?type=json

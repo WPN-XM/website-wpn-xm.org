@@ -2,7 +2,7 @@
 
 /**
  * WPИ-XM Server Stack
- * Copyright © 2010 - 2015 Jens-André Koch <jakoch@web.de>
+ * Copyright © 2010 - 2016 Jens-André Koch <jakoch@web.de>
  * http://wpn-xm.org/
  *
  * This source file is subject to the terms of the MIT license.
@@ -15,6 +15,18 @@
  * The script provides a header response to a software and version request
  * in form of a header redirection to the download url.
  */
+
+$request  = new Request();
+$response = new Response();
+$registry = new Registry();
+require_once __DIR__ . '/stats/Database.php';
+$database = new Database();
+
+$component = new Component($request, $response, $registry, $database);
+$component->redirectTo();
+
+/** ------------------- */
+
 class Registry implements ArrayAccess
 {
     public $registry;
@@ -511,14 +523,3 @@ class Component
         $this->database->insertDownload($url, $component, $version, $bitsize, $phpVersion, $this->request->getReferer());
     }
 }
-
-/* Finally... some script to execute. Whoa. */
-
-$request  = new Request();
-$response = new Response();
-$registry = new Registry();
-require_once __DIR__ . '/stats/Database.php';
-$database = new Database();
-
-$component = new Component($request, $response, $registry, $database);
-$component->redirectTo();
