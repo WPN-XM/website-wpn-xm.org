@@ -144,7 +144,7 @@ function render_version_dropdown_for_extension($component)
 
     unset($component['name'], $component['website'], $component['latest']);
 
-    krsort($component);
+    $component = sortVersionsHighToLow($component);
 
     // restructure the array
     foreach ($component as $version => $bitsizes) {
@@ -198,7 +198,7 @@ function render_version_dropdown($component)
 
     unset($component['name'], $component['website'], $component['latest']);
 
-    asort($component);
+    $component = sortVersionsHighToLow($component);
 
     $html = PHP_EOL . '<select onchange="if (this.value) window.location.href=this.value">';
     $html .= '<option value="" selected disabled>Please select a version...</option>';
@@ -220,4 +220,16 @@ function render_header()
 function render_footer_scripts()
 {
     require __DIR__ . '/view/footer_scripts.php';
+}
+
+function sortVersionsHighToLow($versions)
+{
+    uasort($versions, function($a, $b) {
+        if(is_array($a)) {
+          return;
+        }
+        return version_compare($a, $b);
+    });
+
+    return array_reverse($versions, true);
 }
