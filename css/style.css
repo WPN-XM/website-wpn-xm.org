@@ -41,6 +41,7 @@ div#downloads-list { font-size: 12px; }
     margin-left: auto;
     margin-right: auto;
 }
+.left{float:left;}
 
 .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
     margin-left: -15px;
@@ -48,6 +49,10 @@ div#downloads-list { font-size: 12px; }
 }
 .navbar-inverse {
     border-color: #ccc;
+}
+
+.navbar {
+  font-size: 14px;
 }
 
 /*#nav-brand {
@@ -176,7 +181,6 @@ div#downloads-list { font-size: 12px; }
 .btn-large{border-radius:6px 6px 6px 6px;font-size:16.25px;padding:9px 14px;}
 .btn-mini{border-radius:3px 3px 3px 3px;font-size:9.75px;padding:1px 6px;}
 
-
 .textshadow {text-shadow: 0 1px 1px #FFFFFF;}
 
 #widget-twitter{text-shadow:none;}
@@ -191,9 +195,6 @@ table tr td{vertical-align:top;}
 table.data-table tr td{vertical-align:top;}
 table.data-table tr td h3{background:#B5463F;color:#fff;padding:5px;}
 table#authors tr td{font-size:120%;}
-
-.centered{text-align:center;}
-.left{float:left;}
 
 big-and-bold a:focus, a:hover{color:#FB292D;}
 big-and-bold a{color:#333333;}

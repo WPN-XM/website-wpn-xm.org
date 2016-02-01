@@ -43,6 +43,7 @@
                 <li><a href="https://github.com/WPN-XM/WPN-XM/wiki">Wiki</a></li>
               </ul>
             </li>
+            <li><a href="support.php">Support</a></li>
             <li><a href="index.html#section-donate">Donate</a></li>
             <li><a href="index.html#section-getinvolved">Get Involved</a></li>
             <li><a href="index.html#section-imprint">Imprint</a></li>
@@ -77,6 +78,7 @@
           <div class="col-md-1"></div>
           <div class="col-md-10">
 
+            <?php if(defined('RENDER_WPNXM_HEADER_LOGO') && RENDER_WPNXM_HEADER_LOGO !== false) { ?>
             <!-- Logo -->
             <div class="header">
               <div id="logo"></div>
@@ -85,3 +87,4 @@
             </div>
 
             <hr/>
+            <?php } ?>
