@@ -320,6 +320,7 @@ if (!empty($type) && ($type === 'json')) {
     }
 
     require __DIR__ . '/view/header.php';
+    define('RENDER_WPNXM_HEADER_LOGO', true);
     require __DIR__ . '/view/topnav.php';
 
     unset($downloads['versions'], $downloads['latest_version'], $downloads['latest_version_release_date']);
