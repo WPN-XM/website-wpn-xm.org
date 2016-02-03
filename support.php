@@ -34,7 +34,7 @@ echo render_header();
                 <div class="col-lg-8">
                     <h3>Questions and Answers</h3>
                     <p>
-                        Feel free to ask on Stack Overflow.
+                        Feel free to ask on StackOverflow.
                         Please tag your question with: <span class="label label-default">wpn-xm</span> and <span class="label label-default">php</span>.
                     </p>
                         <a href="https://stackoverflow.com/questions/ask/?tags=wpn-xm+php" class="btn btn-default button-link" target="_blank" role="button">
