@@ -3,7 +3,7 @@
   <head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#">
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="MobileOptimized" content="width">
     <meta name="HandheldFriendly" content="true">
     <title>WPN-XM - web server solution stack for PHP development on Windows.</title>
@@ -127,14 +127,30 @@
     </a>
 
     <!-- Top Navigation Bar -->
-    <header class="navbar navbar-inverse navbar-fixed-top" id="section-home">
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="section-home">
+
       <div class="container" id="top-nav">
-        <!-- Logo -->
-        <a class="navbar-brand" href="#" style="width: 104px">
-          <img alt="WPN-XM" src="images/logo-transparent.png" width="74" height="59" style="display: none; opacity: 1;" title="WPN-XM Server Stack"/>
-        </a>
+
+          <div class="navbar-header">
+            <!-- Mobile Nav Burger -->
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse" data-target="#navigation-bar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <!-- Logo -->
+            <a class="navbar-brand" href="#">
+              <span class="brand-name">WPN-XM Server Stack</span>
+              <img class="brand-icon" alt="WPN-XM" title="WPN-XM Icon"
+                   src="images/logo-transparent.png" width="74" height="59"
+                   style="display: none; opacity: 1;"/>
+            </a>
+          </div>
+
         <!-- Menu Items -->
-        <nav class="collapse navbar-collapse" id="navigation-bar">
+        <div class="collapse navbar-collapse" id="navigation-bar">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#section-home">Home</a></li>
             <li><a href="#section-about">About</a></li>
@@ -188,9 +204,9 @@
               </ul>
             </li>
           </ul>
-        </nav>
+        </div>
       </div>
-    </header>
+    </nav>
 
     <div class="container" id="content">
 

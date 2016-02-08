@@ -1,6 +1,7 @@
-.github-ribbon{position: absolute; top: 0; left: 0; border: 0;z-index: 9999;}
-body{background:#ECECEC;color:#333;font-family:'Roboto','Lucida Grande',Arial,sans-serif;font-size:16px;text-rendering:optimizeLegibility;
-     padding-top: 120px; position: relative;
+body{
+  background:#ECECEC;color:#333;
+  font-family:'Roboto','Lucida Grande',Arial,sans-serif;font-size:16px;text-rendering:optimizeLegibility;
+  padding-top: 120px; position: relative;
 }
 
 div#logo {
@@ -44,20 +45,39 @@ div#downloads-list { font-size: 12px; }
 .left{float:left;}
 
 .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
-    margin-left: -15px;
-    margin-top: -11px;
+    margin-left: -150px;
+    margin-top: -1px;
 }
 .navbar-inverse {
     border-color: #ccc;
 }
-
 .navbar {
   font-size: 14px;
 }
+.navbar-brand {
+  width: 250px;
+}
+.navbar-brand > .brand-name {
+  margin-left: -65px;
+}
+.navbar-brand > .brand-icon {
+  display: none; opacity: 1; position: relative; top: -9px; float:right;
+}
+/* hide fork me on github */
+.github-ribbon{position: absolute; top: 0; left: 0; border: 0;z-index: 9999; }
 
-/*#nav-brand {
-    padding-top: 5px;
-}*/
+@media screen and (max-width: 760px) {
+  .github-ribbon{ visibility: hidden; }
+  .navbar-brand {
+    width: auto !important;
+  }
+  .navbar-brand > .brand-name {
+    margin-left: 225px !important;
+  }
+  .navbar-brand > .brand-icon {
+    left: -260px;
+  }
+}
 
 .sellout-buttons > div{display:block;float:left;margin:0;padding:6px;}
 
@@ -73,22 +93,11 @@ div#downloads-list { font-size: 12px; }
 
 .unstyled-list{list-style-image:none;list-style-type:none;margin:0 0.25em 0.25em 0;padding:0px;}
 
-/*.show-grid [class^=col-] {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #eee;
-    background-color: rgba(86,61,124,.15);
-    border: 1px solid #ddd;
-    border: 1px solid rgba(86,61,124,.2);
-}*/
-
-/* latin */
 @font-face {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
     src: local('Open Sans'), local('OpenSans'), url('fonts/roboto/Roboto-Regular.ttf') format('truetype');
-    /*unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;*/
 }
 
 /* Carousel Slider */
