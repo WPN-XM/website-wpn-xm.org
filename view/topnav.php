@@ -1,6 +1,6 @@
 <!-- Activate the ScrollSpy for the NavBar -->
 <body data-spy="scroll" data-target="#top-nav">
- 
+
   <!-- "Fork me on Github" Ribbon -->
   <a href="https://github.com/WPN-XM/WPN-XM">
     <img width="149" height="149" alt="Fork WPN-XM on GitHub" src="images/fork-me-on-github.png" class="github-ribbon" />
@@ -32,8 +32,8 @@
       <!-- Menu Items -->
       <div class="collapse navbar-collapse" id="navigation-bar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#section-home">Home</a></li>
-          <li><a href="#section-about">About</a></li>
+          <li class="active"><a href="/#section-home">Home</a></li>
+          <li><a href="/#section-about">About</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Downloads <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -61,9 +61,9 @@
             </ul>
           </li>
           <li><a href="support.php">Support</a></li>
-          <li><a href="#section-donate">Donate</a></li>
-          <li><a href="#section-getinvolved">Get Involved</a></li>
-          <li><a href="#section-imprint">Imprint</a></li>
+          <li><a href="/#section-donate">Donate</a></li>
+          <li><a href="/#section-getinvolved">Get Involved</a></li>
+          <li><a href="/#section-imprint">Imprint</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="https://github.com/WPN-XM/WPN-XM/issues/new">Report Issue</a></li>
