@@ -58,7 +58,7 @@ include __DIR__ . '/view/header.php';
  */
 function getInstallerRegistries()
 {
-    $wizardFiles = glob(__DIR__ . '/registry/*.json');
+    $wizardFiles = InstallerRegistries::getAll();
 
     if (empty($wizardFiles) === true) {
         exit('No JSON registries found.');
@@ -79,6 +79,34 @@ function getInstallerRegistries()
     }
 
     return sortWizardRegistries($wizardRegistries);
+}
+
+class InstallerRegistries
+{
+    public static function getAll()
+    {
+        $files = self::recursiveFind(__DIR__ . '/registry/installer', '#^.+\.json#i');
+
+        if (empty($files)) {
+            throw new \Exception('No JSON registries found.');
+        }
+
+        return $files;
+    }
+
+    private static function recursiveFind($folder, $regexp)
+    {
+        $dir = new \RecursiveDirectoryIterator($folder, \RecursiveDirectoryIterator::SKIP_DOTS);
+        $iterator = new \RecursiveIteratorIterator($dir);
+        $files = new \RegexIterator($iterator, $regexp, \RegexIterator::GET_MATCH);
+
+        $fileList = array();
+        foreach($files as $file) {
+            $fileList[] = $file[0];
+        }
+
+        return $fileList;
+    }
 }
 
 function getPartsOfInstallerFilename($name)
