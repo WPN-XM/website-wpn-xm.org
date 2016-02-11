@@ -16,17 +16,6 @@
  * in form of a header redirection to the download url.
  */
 
-$request  = new Request();
-$response = new Response();
-$registry = new Registry();
-require_once __DIR__ . '/stats/Database.php';
-$database = new Database();
-
-$component = new Component($request, $response, $registry, $database);
-$component->redirectTo();
-
-/** ------------------- */
-
 class Registry implements ArrayAccess
 {
     public $registry;
@@ -523,3 +512,14 @@ class Component
         $this->database->insertDownload($url, $component, $version, $bitsize, $phpVersion, $this->request->getReferer());
     }
 }
+
+/** ------------------- */
+
+$request  = new Request();
+$response = new Response();
+$registry = new Registry();
+require_once __DIR__ . '/stats/Database.php';
+$database = new Database();
+
+$component = new Component($request, $response, $registry, $database);
+$component->redirectTo();
