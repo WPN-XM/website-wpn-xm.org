@@ -200,7 +200,7 @@ function render_version_dropdown($component)
 
     $component = sortVersionsHighToLow($component);
 
-    $html = PHP_EOL . '<select onchange="if (this.value) window.location.href=this.value">';
+    $html = PHP_EOL . '<select>';
     $html .= '<option value="" selected disabled>Please select a version...</option>';
     foreach ($component as $version => $url) {
         $html .= '<option value="' . $url . '">' . $version . '</option>';
@@ -220,6 +220,15 @@ function render_header()
 function render_footer_scripts()
 {
     require __DIR__ . '/view/footer_scripts.php';
+
+    echo '<script>
+    // bind "change" event of all select boxes (dropdowns)
+    $("select").change(function(){
+       if (this.value) {
+        window.location.href=this.value;
+       }
+    });
+    </script>';
 }
 
 function sortVersionsHighToLow($versions)
