@@ -65,9 +65,9 @@ function render_tables($splitRegistry)
     $html .= '<div class="row">'
         . '<div class="download-components col-md-6">'
         . '<div class="panel panel-default">'
-        . '<div class="panel-heading"><h4>Software Components</h4></div>'
+        . '<div class="panel-heading"><h4>Software Components <small id="software-components-counter">(0)</small></h4></div>'
         . '<div class="panel-body">'
-        . '<table class="table table-condensed table-hover">'
+        . '<table class="table table-condensed table-hover" id="software-components">'
         . '<thead><tr><th>Software Component</th><th>Versions</th><th>Latest Version</th></tr></thead>'
         . '<tbody>'
         . $splitRegistry['components']
@@ -75,9 +75,9 @@ function render_tables($splitRegistry)
 
     $html .= '<div class="download-components download-extensions col-md-6">'
         . '<div class="panel panel-default">'
-        . '<div class="panel-heading"><h4>PHP Extensions</h4></div>'
+        . '<div class="panel-heading"><h4>PHP Extensions <small id="php-extensions-counter">(0)</small></h4></div>'
         . '<div class="panel-body">'
-        . '<table class="table table-condensed table-hover">'
+        . '<table class="table table-condensed table-hover" id="php-extensions">'
         . '<thead><tr><th>PHP Extension</th><th>Versions</th><th>Latest Version</th></tr></thead>'
         . '<tbody>'
         . $splitRegistry['extensions']
@@ -165,7 +165,7 @@ function render_version_dropdown_for_extension($component)
         $html .= '<span class="label label-default left">' . $bitsize . '</span>';
         foreach ($php_version as $php_v => $urls) {
             $html .= ' ' . $php_v;
-            $html .= PHP_EOL .' <select onchange="if (this.value) window.location.href=this.value">';
+            $html .= PHP_EOL .' <select>';
             $html .= '<option value="" selected disabled>Select..</option>';
             foreach ($urls as $ver => $url) {
                 $html .= '<option value="' . $url . '">' . $ver . '</option>';
@@ -228,6 +228,10 @@ function render_footer_scripts()
         window.location.href=this.value;
        }
     });
+    // update Counter for PHP Extensions
+    $("#php-extensions-counter").html( "("+ $("table#php-extensions > tbody > tr").length +")" );
+    // update Counter for Software Components
+    $("#software-components-counter").html( "("+ $("table#software-components > tbody > tr").length +")" );
     </script>';
 }
 
