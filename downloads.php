@@ -469,7 +469,7 @@ function render_component_list_for_installer($installer_name)
         // PHP version dot fix
         $phpversion = str_replace(['php5', 'php7'], ['php5.', 'php7.'], $phpversion);
 
-        $registry_file = __DIR__ . '/registry/' . strtolower($download['installer']) . '-' . $download['version'] . $phpversion . $platform . '.json';
+        $registry_file = __DIR__ . '/registry/installer/v'.$download['version'].'/'. strtolower($download['installer']) . '-' . $download['version'] . $phpversion . $platform . '.json';
 
         if (!is_file($registry_file)) {
             return '</p></td></tr>';
