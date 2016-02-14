@@ -90,6 +90,7 @@ function render_tables($splitRegistry)
               <div class="btn-group" role="group" aria-label="php-extension-downloads">
                 <a class="btn btn-default" href="https://pecl.php.net/">pecl.php.net</a>
                 <a class="btn btn-default" href="http://windows.php.net/downloads/pecl/">windows.php.net/downloads/pecl</a>
+                <a class="btn btn-default" href="https://github.com/gophp7/gophp7-ext/wiki/extensions-catalog">goPHP7 Extension Catalog</a>
               </div>
             </div>
             <br>
