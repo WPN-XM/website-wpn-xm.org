@@ -124,6 +124,7 @@
     }
 
     function _showCookieConsent(cookieText, dismissText, linkText, linkHref, isDialog) {
+      if (_shouldDisplayConsent()) {
         _removeCookieConsent();
         var consentElement = (isDialog) ?
             _createDialogElement(cookieText, dismissText, linkText, linkHref) :
@@ -132,6 +133,7 @@
         fragment.appendChild(consentElement);
         document.body.appendChild(fragment.cloneNode(true));
         document.getElementById(dismissLinkId).onclick = _dismissLinkClick;
+      }
     }
 
     function showCookieConsentBar(cookieText, dismissText, linkText, linkHref) {
