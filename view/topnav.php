@@ -50,6 +50,7 @@
               <li><a href="https://groups.google.com/forum/#!forum/wpn-xm">Mailinglist</a></li>
               <li role="separator" class="divider"></li>
               <li><a href="https://github.com/WPN-XM/WPN-XM/blob/master/CODE_OF_CONDUCT.md#contributor-code-of-conduct">Code of Conduct</a></li>
+              <li><a href="index.html#section-getinvolved">Get Involved</a></li>
               <li><a href="https://github.com/WPN-XM/WPN-XM/blob/master/CONTRIBUTING.md#contributing-to-the-wpn-xm-server-stack">Contributing</a></li>
             </ul>
           </li>
@@ -62,7 +63,6 @@
           </li>
           <li><a href="support.php">Support</a></li>
           <li><a href="index.html#section-donate">Donate</a></li>
-          <li><a href="index.html#section-getinvolved">Get Involved</a></li>
           <li><a href="index.html#section-imprint">Imprint</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
