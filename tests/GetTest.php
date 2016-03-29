@@ -52,8 +52,8 @@ class GetTest extends PHPUnit_Framework_TestCase
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_phalcon&p=5.4');
 
-        $this->assertEquals(
-            'https://static.phalconphp.com/www/files/phalcon_x86_VC9_php5.4.0_2.1.0_nts.zip',
+        $this->assertRegExp(
+            '#https://static.phalconphp.com/www/files/phalcon_x86_VC9_php(\d+\.\d+\.\d+)_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
             $this->response->url
         );
     }
@@ -62,8 +62,8 @@ class GetTest extends PHPUnit_Framework_TestCase
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_phalcon&p=5.4.0');
 
-        $this->assertEquals(
-            'https://static.phalconphp.com/www/files/phalcon_x86_VC9_php5.4.0_2.1.0_nts.zip',
+        $this->assertRegExp(
+            '#https://static.phalconphp.com/www/files/phalcon_x86_VC9_php(\d+\.\d+\.\d+)_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
             $this->response->url
         );
     }
@@ -72,12 +72,23 @@ class GetTest extends PHPUnit_Framework_TestCase
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_phalcon&p=5.5');
 
-        $this->assertEquals(
-            'https://static.phalconphp.com/www/files/phalcon_x86_vc11_php5.5.0_2.1.0_nts.zip',
+        $this->assertRegExp(
+            '#https://static.phalconphp.com/www/files/phalcon_x86_vc11_php(\d+\.\d+\.\d+)_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
             $this->response->url
         );
     }
+    
+    public function testRequest_PHPExtension_Wincache_MajorMinorPatchWhatever()
+    {
+        // this is a request for the latest version for "PHP 5.5" + "x86" => 1.3.7.9
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_wincache');
 
+        $this->assertEquals(
+            'http://windows.php.net/downloads/pecl/releases/wincache/1.3.7.9/php_wincache-1.3.7.9-5.5-nts-VC11-x86.zip',
+            $this->response->url
+        );
+    }
+    
     public function testRequest_PHPExtension_Trader_LatestVersion_54()
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_trader&p=5.4');
@@ -86,7 +97,8 @@ class GetTest extends PHPUnit_Framework_TestCase
             'http://windows.php.net/downloads/pecl/releases/trader/0.4.0/php_trader-0.4.0-5.4-nts-VC9-x86.zip',
             $this->response->url
         );
-    }
+    }    
+    
 
     public function testRequest_PHP_LatestVersion_54()
     {

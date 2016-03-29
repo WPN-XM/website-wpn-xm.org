@@ -19,10 +19,9 @@ class RegistryTest extends PHPUnit_Framework_TestCase
 
     public function testGetLatestVersion_for_PHP_Extension()
     {
-        $version  = $this->registry->getLatestVersion('phpext_phalcon');
-        //$this->assertEquals('2.1.0', $version);
-        $this->assertTrue(is_string($version));
-        $this->assertTrue(2 == substr_count($version, '.'));
+        $version  = $this->registry->getLatestVersion('phpext_phalcon');        
+        $this->assertTrue(is_string($version));        
+        $this->assertRegExp('#(\d+\.\d+\.\d+(.RC\d+)?)#i',$version);
     }
 
     public function testGetPhpVersionInRange_using_PhpVersion_MajorMinor()
@@ -50,7 +49,7 @@ class RegistryTest extends PHPUnit_Framework_TestCase
     public function testGetLatestVersionOfRange()
     {
         $software = 'phpext_phalcon';
-        $version  = '2.1.0';
+        $version  = '2.0.10';
         $bitsize  = 'x86';
         $array    = $this->registry->registry[$software][$version][$bitsize];
         $phpVersion = '5.5';
