@@ -161,8 +161,24 @@ class Registry implements ArrayAccess
     public function getPhpVersionInRange($software, $version, $bitsize, $phpVersion)
     {
         $array = $this->registry[$software][$version][$bitsize];
-
+        
+        // reduce "major.minor.patch" to "major.minor"
+        if(substr_count($phpVersion, '.') == 2) {            
+            $phpVersion = $this->getMajorMinorVersion($phpVersion);
+        }
+        
         return $this->getLatestVersionOfRange($array, $phpVersion . '.0', $phpVersion . '.99');
+    }
+    
+    /**
+     * Returns the "major.minor" part of a "major.minor.patch" version.
+     * 
+     * @param string $version "major.minor.patch" Version
+     * @return string "major.minor" Version
+     */
+    public function getMajorMinorVersion($version)
+    {
+        return substr($version, 0, strrpos($version, '.'));
     }
 
     /**
@@ -260,9 +276,12 @@ class Request
     public $phpVersion;
     public $bitsize;
 
+    private $defaultPHPversion = '5.5';
+    private $defaultBitsize    = 'x86';
+
     public function __construct()
     {
-        if (defined('PHPUNIT_TESTSUITE') === 1) {
+        if (defined('PHPUNIT_TESTSUITE')) {
             $this->processGetDuringTesting();
         } else {
             $this->processGet();
@@ -283,10 +302,10 @@ class Request
         $this->version = ($version === 'latest') ? null : $version;
 
         // $_GET['p'] = php version, default version is php 5.5
-        $this->phpVersion = ($phpVersion = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_STRING)) ? $phpVersion : '5.5';
+        $this->phpVersion = ($phpVersion = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_STRING)) ? $phpVersion : $this->defaultPHPversion;
 
         // $_GET['bitsize'] = php bitsize for extensions, default version is x86
-        $this->bitsize = ($bitsize = filter_input(INPUT_GET, 'bitsize', FILTER_SANITIZE_STRING)) ? $bitsize : 'x86';
+        $this->bitsize = ($bitsize = filter_input(INPUT_GET, 'bitsize', FILTER_SANITIZE_STRING)) ? $bitsize : $this->defaultBitsize;
     }
 
     /**
@@ -301,14 +320,14 @@ class Request
             $this->version = ($version === 'latest') ? null : $version;
         }
 
-        $this->phpVersion = '5.5';
+        $this->phpVersion = $this->defaultPHPversion;
         if (isset($_GET['p'])) {
-            $this->phpVersion = ($phpVersion = filter_var($_GET['p'], FILTER_SANITIZE_STRING)) ? $phpVersion : '5.5';
+            $this->phpVersion = ($phpVersion = filter_var($_GET['p'], FILTER_SANITIZE_STRING)) ? $phpVersion : $this->defaultPHPversion;
         }
 
-        $this->bitsize = 'x86';
+        $this->bitsize = $this->defaultBitsize;
         if (isset($_GET['bitsize'])) {
-            $this->bitsize = ($bitsize = filter_var($_GET['bitsize'], FILTER_SANITIZE_STRING)) ? $bitsize : 'x86';
+            $this->bitsize = ($bitsize = filter_var($_GET['bitsize'], FILTER_SANITIZE_STRING)) ? $bitsize : $this->defaultBitsize;
         }
     }
 
@@ -368,7 +387,7 @@ class Response
 
         $this->header = 'Location: ' . $this->url;
 
-        if (defined('PHPUNIT_TESTSUITE') === 1) {
+        if (defined('PHPUNIT_TESTSUITE')) {
             #echo $this->header;
             return;
         } else {
@@ -382,7 +401,7 @@ class Response
      */
     public function send()
     {
-        if (defined('PHPUNIT_TESTSUITE') === 1) {
+        if (defined('PHPUNIT_TESTSUITE')) {
             #echo $this->header;
             return;
         } else {
@@ -437,8 +456,9 @@ class Component
 
         /*
          * If the software component is a PHP extension, then
-         * we have to take the "phpVersion" and "bitsize" into account when fetching the url.
-         * The "version" to "url" relationship has two levels more: "version" to "bizsize" to phpVersion" to "url".
+         * we have to take the "phpVersion" and "bitsize" into account when fetching the URL.
+         * The "version" to "url" relationship has two levels more: 
+         * "version" -> "bizsize" -> "phpVersion" -> "url".
          */
         if ($this->registry->softwareIsPHPExtension($software)) {
 
@@ -453,7 +473,7 @@ class Component
 
                 // special handling for phpext_phalcon, because it has a PHP "patch level" version constraint.
                 // (while all other PHP extensions have only a "major.minor" version constraint.)
-                $version    = $this->registry->getLatestVersion($software);
+                $version    = $this->registry->getLatestVersion($software);                
                 $phpVersion = $this->registry->getPhpVersionInRange($software, $version, $bitsize, $phpVersion);
                 $url        = $this->registry[$software][$version][$bitsize][$phpVersion];
                 $this->trackDownloadEvent($url, $software, $version, $bitsize, $phpVersion);
@@ -514,12 +534,14 @@ class Component
 }
 
 /** ------------------- */
+if (!defined('PHPUNIT_TESTSUITE'))
+{    
+    $request  = new Request();
+    $response = new Response();
+    $registry = new Registry();
+    require_once __DIR__ . '/stats/Database.php';
+    $database = new Database();
 
-$request  = new Request();
-$response = new Response();
-$registry = new Registry();
-require_once __DIR__ . '/stats/Database.php';
-$database = new Database();
-
-$component = new Component($request, $response, $registry, $database);
-$component->redirectTo();
+    $component = new Component($request, $response, $registry, $database);
+    $component->redirectTo();
+}
