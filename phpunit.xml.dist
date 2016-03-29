@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
 <phpunit
-    backupGlobals               = "false"
-    backupStaticAttributes      = "false"
     colors                      = "true"
     convertErrorsToExceptions   = "true"
     convertNoticesToExceptions  = "true"
     convertWarningsToExceptions = "true"
-    forceCoversAnnotation       = "false"
-    processIsolation            = "true"
     stopOnError                 = "false"
     stopOnFailure               = "false"
     stopOnIncomplete            = "false"
@@ -27,16 +23,16 @@
     </php>
 
     <testsuite name="WPN-XM Website Test Suite">
-        <directory>./</directory>
+        <directory>./tests/</directory>
     </testsuite>
 
     <filter>
-            <whitelist processUncoveredFilesFromWhitelist="false">>
-                <directory suffix=".php">./</directory>
-                <exclude>
-                    <directory suffix=".php">../vendor/</directory>
-                </exclude>
-            </whitelist>
+        <whitelist processUncoveredFilesFromWhitelist="false">>
+            <directory suffix=".php">./tests/</directory>
+            <exclude>
+                <directory suffix=".php">../vendor/</directory>
+            </exclude>
+        </whitelist>
     </filter>
 
     <logging>
