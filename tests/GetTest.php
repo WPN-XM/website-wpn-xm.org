@@ -31,10 +31,7 @@ class GetTest extends PHPUnit_Framework_TestCase
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=nginx');
 
-        // the latest version number will change with the next update of the registry
-        //$this->assertEquals('http://nginx.org/download/nginx-1.9.11.zip', $this->response->url);
-        
-        // lets test the pattern latest version number
+        $this->assertContains('http://nginx.org/download/nginx-', $this->response->url);
         $this->assertEquals(1, preg_match('#nginx-(\d+.\d+.\d+).zip#i', $this->response->url));
     }
 
@@ -78,9 +75,10 @@ class GetTest extends PHPUnit_Framework_TestCase
         );
     }
     
-    public function testRequest_PHPExtension_Wincache_MajorMinorPatchWhatever()
-    {
-        // this is a request for the latest version for "PHP 5.5" + "x86" => 1.3.7.9
+    public function testRequest_PHPExtension_Wincache_LatestVersion()
+    {        
+        // we are testing because of the Major.Minor.Patch.Whatever version number
+        // this is a request for the latest version with "default PHP version" and "default bitsize"       
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_wincache');
 
         $this->assertEquals(
@@ -89,7 +87,39 @@ class GetTest extends PHPUnit_Framework_TestCase
         );
     }
     
-    public function testRequest_PHPExtension_Trader_LatestVersion_54()
+    public function testRequest_PHPExtension_Wincache_LatestVersion_MajorMinor_56_x64()
+    {             
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_wincache&p=5.6&bitsize=x64');
+
+        $this->assertEquals(
+            'http://windows.php.net/downloads/pecl/releases/wincache/1.3.7.9/php_wincache-1.3.7.9-5.6-nts-VC11-x64.zip',
+            $this->response->url
+        );
+    }
+    
+    public function testRequest_PHPQA_SpecificVersion()
+    {
+        // request for "PHP QA 7.0.1RC1" with default bitsize "x86"
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=php-qa&v=7.0.1RC1');
+       
+        $this->assertEquals(
+            'http://windows.php.net/downloads/qa/archives/php-7.0.1RC1-nts-Win32-VC14-x86.zip',
+            $this->response->url
+        );
+    }
+    
+    public function testRequest_PHPQA_LatestVersion_MajorMinorRange_56()
+    {
+        // request for "latest version" of "PHP 5.6.*" (range) with default bitsize "x86"
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=php-qa&p=5.6');
+       
+        $this->assertEquals(
+            'http://windows.php.net/downloads/qa/archives/php-5.6.11RC1-nts-Win32-VC11-x86.zip',
+            $this->response->url
+        );
+    }
+    
+    public function testRequest_PHPExtension_Trader_LatestVersion_MajorMinor_54()
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_trader&p=5.4');
 
@@ -98,9 +128,8 @@ class GetTest extends PHPUnit_Framework_TestCase
             $this->response->url
         );
     }    
-    
 
-    public function testRequest_PHP_LatestVersion_54()
+    public function testRequest_PHP_LatestVersion_MajorMinor_54()
     {
         $url = 'http://wpn-xm.org/get.php?s=php&p=5.4';
         $this->setGetRequest($url);
@@ -109,7 +138,7 @@ class GetTest extends PHPUnit_Framework_TestCase
         $this->assertContains("5.4", $this->response->url);
     }
 
-    public function testRequest_PHP_LatestVersion_56()
+    public function testRequest_PHP_LatestVersion_MajorMinor_56()
     {
         $url = 'http://wpn-xm.org/get.php?s=php&p=5.6';
 
