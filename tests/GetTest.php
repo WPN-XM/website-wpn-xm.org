@@ -131,8 +131,7 @@ class GetTest extends PHPUnit_Framework_TestCase
 
     public function testRequest_PHP_LatestVersion_MajorMinor_54()
     {
-        $url = 'http://wpn-xm.org/get.php?s=php&p=5.4';
-        $this->setGetRequest($url);
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=5.4');
 
         $this->assertContains("http://windows.php.net/downloads/releases/", $this->response->url);
         $this->assertContains("5.4", $this->response->url);
@@ -140,11 +139,31 @@ class GetTest extends PHPUnit_Framework_TestCase
 
     public function testRequest_PHP_LatestVersion_MajorMinor_56()
     {
-        $url = 'http://wpn-xm.org/get.php?s=php&p=5.6';
-
-        $this->setGetRequest($url);
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=5.6');
 
         $this->assertContains("http://windows.php.net/downloads/releases/", $this->response->url);
         $this->assertContains("5.6", $this->response->url);
+    }
+    
+    public function testRequest_PHP_DefaultVersion_Major_7()
+    {
+        // p=7 is invalid; the default PHP version is set instead
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=7');
+        
+        $this->assertContains("http://windows.php.net/downloads/", $this->response->url);        
+        $this->assertEquals(1, preg_match('#php-(\d+.\d+.\d+)-nts-#i', $this->response->url));
+        $this->assertContains("5.", $this->response->url);        
+    }
+    
+    public function testRequest_PHPExtension_XDebug_DefaultVersion_Major_7()
+    {
+        // p=7 is invalid; the default PHP version is set instead
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_xdebug&p=7');
+
+        var_dump($this->response->url);
+        $this->assertContains("http://windows.php.net/downloads/pecl/releases/xdebug/", $this->response->url);        
+        $this->assertEquals(1, preg_match('#php_xdebug-(.*)-5.5-nts-VC11-x86.zip#i', $this->response->url));
+        $this->assertContains("5.5", $this->response->url); 
+               
     }
 }

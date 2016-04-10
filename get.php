@@ -307,32 +307,48 @@ class Request
         $this->version = ($version === 'latest') ? null : $version;
 
         // $_GET['p'] = php version, default version is php 5.5
-        $this->phpVersion = ($phpVersion = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_STRING)) ? $phpVersion : $this->defaultPHPversion;
+        if(isset($_GET['p']) && preg_match('#\d.\d[.\d]?#', $_GET['p'])) {
+        	$this->phpVersion = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_STRING);
+        } else {
+        	$this->phpVersion = $this->defaultPHPversion;
+        }
 
         // $_GET['bitsize'] = php bitsize for extensions, default version is x86
-        $this->bitsize = ($bitsize = filter_input(INPUT_GET, 'bitsize', FILTER_SANITIZE_STRING)) ? $bitsize : $this->defaultBitsize;
+        if (isset($_GET['bitsize']) && ($_GET['bitsize'] === 'x86' || $_GET['bitsize'] === 'x64')) {
+			$this->bitsize = filter_input(INPUT_GET, 'bitsize', FILTER_SANITIZE_STRING);
+        } else {
+            $this->bitsize = $this->defaultBitsize;
+        }
     }
 
     /**
-     * Same as above, but using filter_var() in order to set and modify the $_GET superglobal during testing.
+     * Same as above, but using filter_var() instead of filter_input(),
+     * in order to set and modify the $_GET superglobal during testing.
      */
     public function processGetDuringTesting()
     {
+        // $_GET['s'] = software component
         $this->software = filter_var($_GET['s'], FILTER_SANITIZE_STRING);
 
+        // $_GET['v'] = version
         if (isset($_GET['v'])) {
-            $version       = filter_var($_GET['v'], FILTER_SANITIZE_STRING);
+            $version = filter_var($_GET['v'], FILTER_SANITIZE_STRING);
+            // unset any latest version requests, because we return "latest version" by default
             $this->version = ($version === 'latest') ? null : $version;
         }
 
-        $this->phpVersion = $this->defaultPHPversion;
-        if (isset($_GET['p'])) {
-            $this->phpVersion = ($phpVersion = filter_var($_GET['p'], FILTER_SANITIZE_STRING)) ? $phpVersion : $this->defaultPHPversion;
+        // $_GET['p'] = php version, default version is php 5.5
+        if(isset($_GET['p']) && preg_match('#\d.\d[.\d]?#', $_GET['p'])) {
+        	$this->phpVersion = filter_var($_GET['p'], FILTER_SANITIZE_STRING);
+        } else {
+        	$this->phpVersion = $this->defaultPHPversion;
         }
 
-        $this->bitsize = $this->defaultBitsize;
-        if (isset($_GET['bitsize'])) {
-            $this->bitsize = ($bitsize = filter_var($_GET['bitsize'], FILTER_SANITIZE_STRING)) ? $bitsize : $this->defaultBitsize;
+        // $_GET['bitsize'] = php bitsize for extensions, either "x86" or "x64", default version is "x86"
+        if (isset($_GET['bitsize']) && ($_GET['bitsize'] === 'x86' || $_GET['bitsize'] === 'x64')) {
+			$this->bitsize = filter_var($_GET['bitsize'], FILTER_SANITIZE_STRING);
+        } else {
+            $this->bitsize = $this->defaultBitsize;
         }
     }
 
@@ -507,7 +523,7 @@ class Component
                                 $version = $_version;
                             }
                         }
-                    }                    
+                    }         
                     $url = $this->registry[$software][$version][$bitsize][$phpVersion];
                     $this->trackDownloadEvent($url, $software, $version, $bitsize, $phpVersion);
                     $this->response->redirect($url);
