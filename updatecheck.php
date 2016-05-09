@@ -50,7 +50,7 @@ if ($s === 'all') {
 elseif (array_key_exists($s, $registry)) {
     if (version_compare($v, $registry[$s]['latest']['version'], '<')) {
        $data = [
-            'update_available'  => 1,
+            'update_available'  => true,
             'software'          => $s,
             'your_version'      => $v,
             'latest_version'    => $registry[$s]['latest']['version'],
@@ -59,7 +59,7 @@ elseif (array_key_exists($s, $registry)) {
         ];
     } else {
         $data = [
-            'update_available'  => 0,
+            'update_available'  => false,
             'message'           => 'You are running the latest version.'
         ];
     }
@@ -76,7 +76,7 @@ elseif (array_key_exists($s, $registry)) {
  */
 function cleanSoftwareString($version)
 {
-    return preg_replace("/[^a-zA-Z0-9-_]+/", "", $version); 
+    return preg_replace("/[^a-zA-Z0-9-_]+/", "", $version);
 }
 
 /**
@@ -84,7 +84,7 @@ function cleanSoftwareString($version)
  */
 function cleanVersionString($version)
 {
-    return preg_replace("/[^a-zA-Z0-9-+.]+/", "", $version); 
+    return preg_replace("/[^a-zA-Z0-9-+.]+/", "", $version);
 }
 
 /**
