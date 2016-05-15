@@ -52,6 +52,7 @@ elseif (array_key_exists($s, $registry)) {
        $data = [
             'update_available'  => true,
             'software'          => $s,
+            'software_name'     => $registry[$s]['name'],
             'your_version'      => $v,
             'latest_version'    => $registry[$s]['latest']['version'],
             'url'               => $registry[$s]['latest']['url'],
