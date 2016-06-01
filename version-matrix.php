@@ -23,7 +23,7 @@ include __DIR__ . '/view/header.php';
 ?>
     <body style="padding-top: 0px;">
         <div class="page-header">
-          <h1>Version Comparison Matrix</h1>
+          <h1>Version Comparison Matrix</h1><small>List of Component Versions in WPN-XM Releases</small>
         </div>
         <p>
             The table is a "version comparison matrix" for all software components shipped by all our installation wizards.
