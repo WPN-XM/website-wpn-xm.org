@@ -54,7 +54,7 @@ echo render_header();
 <?php
 // WPNXM Software Registry
 $registry = include __DIR__ . '/registry/wpnxm-software-registry.php';
-echo render_tables(split_registry_into_component_and_extensions($registry));
+echo render_tables(split_registry_into_components_and_extensions($registry));
 render_footer_scripts();
 echo '</div></div></div></div></div></body></html>';
 
@@ -106,7 +106,7 @@ function render_tables($splitRegistry)
     return $html;
 }
 
-function split_registry_into_component_and_extensions($registry)
+function split_registry_into_components_and_extensions($registry)
 {
     $html            = '';
     $html_extensions = '';
@@ -147,12 +147,14 @@ function render_version_dropdown_for_extension($component)
 
     $component = sortVersionsHighToLow($component);
 
+    $eol_php_versions = ['5.4', '5.4.0', '5.5', '5.5.0'];
+
     // restructure the array
     foreach ($component as $version => $bitsizes) {
         foreach ($bitsizes as $bitsize => $php_versions) {
             foreach ($php_versions as $php_version => $url) {
-                // skip data for PHP 5.4 (EOL)
-                if($php_version === '5.4' || $php_version === '5.4.0') {
+                // skip data for EOL PHP versions
+                if(in_array($php_version, $eol_php_versions) {
                    continue;
                 }
                 $v[$bitsize][$php_version][$version] = $url;
