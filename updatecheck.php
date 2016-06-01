@@ -35,12 +35,52 @@ $s = filter_input(INPUT_GET, 's', FILTER_SANITIZE_STRING);
 // $_GET['v'] = your current version
 $v = filter_input(INPUT_GET, 'v', FILTER_SANITIZE_STRING);
 // fallback, if no version was set - this makes requests without "v" parameter possible
-$v = (!empty($v)) ? $v : '0.0.0';
+$v = (!empty($v)) ? cleanVersionString($v) : '0.0.0';
+
+if (!empty($s)) {
+    $s = cleanSoftwareString($s);
+}
 
 // request all software components with name/website/latestversion as JSON
-if (!empty($s) && $s === 'all') {
+if ($s === 'all') {
     $data = reduceRegistry($registry);
     sendJsonResponse($data);
+}
+// does the requested software exist in our registry?
+elseif (array_key_exists($s, $registry)) {
+    if (version_compare($v, $registry[$s]['latest']['version'], '<')) {
+       $data = [
+            'software'       => $s,
+            'your_version'   => $v,
+            'latest_version' => $registry[$s]['latest']['version'],
+            'url'            => $registry[$s]['latest']['url'],
+            'message'        => 'You are running an old version of ' . $s . ' and should update immediately.',
+        ];
+    } else {
+        $data = ['message' => 'You are running the latest version.'];
+    }
+
+    sendJsonResponse($data);
+} else {
+    echo 'Request Error. Specify parameters "s" and "v".';
+}
+
+// ----------------------------------------------------------------------------
+
+/**
+ * Cleans the version string using a character whitelist.
+ */
+function cleanSoftwareString($version)
+{
+    return preg_replace("/[^a-zA-Z0-9-_]+/", "", $version); 
+}
+
+/**
+ * Cleans the version string using a character whitelist.
+ */
+function cleanVersionString($version)
+{
+    return preg_replace("/[^a-zA-Z0-9-+.]+/", "", $version); 
 }
 
 /**
@@ -57,25 +97,6 @@ function reduceRegistry($registry)
         $data[$software]['latest']  = $details['latest'];
     }
     return $data;
-}
-
-// does the requested software exist in our registry?
-if (!empty($s) && array_key_exists($s, $registry)) {
-    if (version_compare($v, $registry[$s]['latest']['version'], '<')) {
-       $data = [
-            'software'       => $s,
-            'your_version'   => $v,
-            'latest_version' => $registry[$s]['latest']['version'],
-            'url'            => $registry[$s]['latest']['url'],
-            'message'        => 'You are running an old version of ' . $s . ' and should update immediately.',
-        ];
-    } else {
-        $data = ['message' => 'You are running the latest version.'];
-    }
-
-    sendJsonResponse($data);
-} else {
-    echo 'Request Error. Specify parameters "s" and "v".';
 }
 
 /**
