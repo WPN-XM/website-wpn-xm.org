@@ -154,7 +154,7 @@ function render_version_dropdown_for_extension($component)
         foreach ($bitsizes as $bitsize => $php_versions) {
             foreach ($php_versions as $php_version => $url) {
                 // skip data for EOL PHP versions
-                if(in_array($php_version, $eol_php_versions) {
+                if(in_array($php_version, $eol_php_versions)) {
                    continue;
                 }
                 $v[$bitsize][$php_version][$version] = $url;
