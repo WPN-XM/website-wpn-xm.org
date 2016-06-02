@@ -521,6 +521,7 @@ class Component
                                 $version = $_version;
                             }
                         }
+                    }
                     $url = $this->registry[$software][$version][$bitsize][$phpVersion];
                     $this->trackDownloadEvent($url, $software, $version, $bitsize, $phpVersion);
                     $this->response->redirect($url);
