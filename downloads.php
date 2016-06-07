@@ -493,6 +493,14 @@ function render_component_list_for_installer($installer_name)
     return $html;
 }
 
+function updateDeprecatedSoftwareRegistryKeyNames($software)
+{
+    if ($software === 'wpnxmscp')     { return 'wpnxm-scp';     }
+    if ($software === 'wpnxmscp-x64') { return 'wpnxm-scp-x64'; }
+
+    return $software;
+}
+
 function render_component_list_multi_column($registry, $installerRegistry)
 {
     $html = '';
@@ -502,6 +510,8 @@ function render_component_list_multi_column($registry, $installerRegistry)
 
     foreach ($installerRegistry as $i => $component) {
         $shortName = $component[0];
+
+        $shortName = updateDeprecatedSoftwareRegistryKeyNames($shortName);
 
         // skip - components removed from registry, still in 0.7.0 and breaking it
         if (in_array($shortName, ['phpext_xcache', 'junction'])) {

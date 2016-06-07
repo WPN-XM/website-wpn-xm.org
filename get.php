@@ -459,8 +459,10 @@ class Component
      */
     public function updateDeprecatedSoftwareRegistryKeyNames($software)
     {
-        if($software === 'wpnxmscp')     { return 'wpnxm-scp';     }
-        if($software === 'wpnxmscp-x64') { return 'wpnxm-scp-x64'; }
+        if ($software === 'wpnxmscp')     { return 'wpnxm-scp';     }
+        if ($software === 'wpnxmscp-x64') { return 'wpnxm-scp-x64'; }
+
+        return $software;
     }
 
     public function redirectTo()
