@@ -140,7 +140,7 @@ function render_version_dropdown_for_extension($component)
 {
     // skip APC, it was only available up to PHP5.4 EOL
     if($component['name'] === 'PHP Extension APC') {
-      return 'Was available up to PHP v5.4 (EOL).';
+      return '<span class="label label-info">Was available up to PHP v5.4 (EOL). Replaced by APCu.</span>';
     }
 
     unset($component['name'], $component['website'], $component['latest']);
@@ -161,6 +161,10 @@ function render_version_dropdown_for_extension($component)
             }
         }
     }
+
+	if(empty($v)) {
+		return '<span class="label label-danger">No Versions found for PHP 5.6+ !</span>';
+	}
 
     // render
     $html = '';

@@ -1,0 +1,18 @@
+#
+# .travis.yml - configuration file for the travis continuous integration service
+#
+# see http://about.travis-ci.org/docs/user/languages/php for more hints
+#
+language: php
+
+php: [7.0]
+
+sudo: false
+
+cache:
+  directory:
+    - $HOME/.composer/cache/files
+
+script:
+  # lint (parallel)
+  - find . -name "*.php" -print0 | xargs -0 -n1 -P8 php -l | grep -v '^No syntax errors detected' ; test $? -eq 1

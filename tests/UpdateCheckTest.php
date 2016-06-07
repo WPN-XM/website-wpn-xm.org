@@ -27,7 +27,7 @@ class GetTest extends PHPUnit_Framework_TestCase
           array("5.22.2.1",                     "5.22.2.1"),    // Perl
           // not ok and cleaned
           array("",                             "1.2.3§$&"),
-          array("",                             "1.2.3h°!\"§$%&/()=?<>|;:");
+          array("",                             "1.2.3h°!\"§$%&/()=?<>|;:"),
         );
     }
 

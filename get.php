@@ -336,7 +336,7 @@ class Request
         $this->version = ($version === 'latest') ? null : $version;
 
         // $_GET['p'] = php version, default version is php 5.5
-        if(isset($_GET['p']) && (is_numeric($_GET['p']{1}) && ($_GET['p']{2} === '.')) {
+        if(isset($_GET['p']) && (is_numeric($_GET['p']{1}) && ($_GET['p']{2} === '.'))) {
         	$this->phpVersion = filter_var(INPUT_GET, 'p', FILTER_SANITIZE_STRING);
         } else {
         	$this->phpVersion = $this->defaultPHPversion;
@@ -533,6 +533,7 @@ class Component
                                 $version = $_version;
                             }
                         }
+                    }
                     $url = $this->registry[$software][$version][$bitsize][$phpVersion];
                     $this->trackDownloadEvent($url, $software, $version, $bitsize, $phpVersion);
                     $this->response->redirect($url);
