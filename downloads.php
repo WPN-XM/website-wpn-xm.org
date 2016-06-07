@@ -479,7 +479,7 @@ function render_component_list_for_installer($installer_name)
 
         $number_of_components = count($installerRegistry);
 
-        $html .= '<tr><td colspan="3">Components (' . $number_of_components . ')<br>';
+        $html .= '<tr><td colspan="3">The following ' . $number_of_components . ' Components are included:<br>';
 
         //if($number_of_components >= 10) {
         $html .= render_component_list_multi_column($registry, $installerRegistry);
