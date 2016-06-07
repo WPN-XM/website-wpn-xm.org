@@ -453,6 +453,16 @@ class Component
         $this->database = $database;
     }
 
+    /**
+     * This function helps to keep backwards compatibility for webinstallers,
+     * which still use download requests with old software key names.
+     */
+    public function updateDeprecatedSoftwareRegistryKeyNames($software)
+    {
+        if($software === 'wpnxmscp')     { return 'wpnxm-scp';     }
+        if($software === 'wpnxmscp-x64') { return 'wpnxm-scp-x64'; }
+    }
+
     public function redirectTo()
     {
         // re-assign vars to shorter ones
@@ -460,6 +470,8 @@ class Component
         $version    = $this->request->version;
         $phpVersion = $this->request->phpVersion;
         $bitsize    = $this->request->bitsize;
+
+        $software = $this->updateDeprecatedSoftwareRegistryKeyNames($software);
 
         if (!defined('PHPUNIT_TESTSUITE')) {
             if (!$this->registry->softwareExists($software)) {
