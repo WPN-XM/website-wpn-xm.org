@@ -236,6 +236,18 @@ class Registry implements ArrayAccess
     }
 
     /**
+     * This function helps to keep backwards compatibility for webinstallers,
+     * which still use download requests with old software key names.
+     */
+    public static function updateDeprecatedSoftwareRegistryKeyNames($software)
+    {
+        if ($software === 'wpnxmscp')     { return 'wpnxm-scp';     }
+        if ($software === 'wpnxmscp-x64') { return 'wpnxm-scp-x64'; }
+
+        return $software;
+    }
+
+    /**
      * ArrayAccess for Registry.
      *
      * @param mixed $offset
@@ -453,18 +465,6 @@ class Component
         $this->database = $database;
     }
 
-    /**
-     * This function helps to keep backwards compatibility for webinstallers,
-     * which still use download requests with old software key names.
-     */
-    public function updateDeprecatedSoftwareRegistryKeyNames($software)
-    {
-        if ($software === 'wpnxmscp')     { return 'wpnxm-scp';     }
-        if ($software === 'wpnxmscp-x64') { return 'wpnxm-scp-x64'; }
-
-        return $software;
-    }
-
     public function redirectTo()
     {
         // re-assign vars to shorter ones
@@ -473,7 +473,7 @@ class Component
         $phpVersion = $this->request->phpVersion;
         $bitsize    = $this->request->bitsize;
 
-        $software = $this->updateDeprecatedSoftwareRegistryKeyNames($software);
+        $software = Registry::updateDeprecatedSoftwareRegistryKeyNames($software);
 
         if (!defined('PHPUNIT_TESTSUITE')) {
             if (!$this->registry->softwareExists($software)) {
