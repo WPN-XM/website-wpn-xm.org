@@ -230,8 +230,9 @@ if (!is_dir(__DIR__ . '/downloads')) {
 $downloads = [];
 $details   = [];
 
-# scan folder for files
-foreach (glob('./downloads/*.exe') as $filename) {
+# scan folder for installers 
+$installerExecutables = glob('./downloads/*.exe');
+foreach ($installerExecutables as $filename) {
 
     // file
     $file            = str_replace('./downloads/', '', $filename);
