@@ -24,6 +24,7 @@ class GithubReleaseStats implements ArrayAccess
 		$this->get_release_stats();
 		$this->get_downloads_by_php_version();
 		$this->get_release_dates_and_development_time();
+		$this->calculate_project_age();
 	}
 
 	function load_github_releases_data()
@@ -69,7 +70,7 @@ class GithubReleaseStats implements ArrayAccess
 	function get_downloads_by_php_version()
 	{
 		// map "phpversion of filename" to "pretty php version"
-		$php_versions = ['php54' => 'PHP 5.4', 'php55' => 'PHP 5.5', 'php56' => 'PHP 5.6', 'php70' => 'PHP 7.0'];
+		$php_versions = ['php54' => 'PHP 5.4', 'php55' => 'PHP 5.5', 'php56' => 'PHP 5.6', 'php70' => 'PHP 7.0', 'php71' => 'PHP 7.1'];
 		foreach($php_versions as $phpversion) {
 	        $downloads[$phpversion] = 0;
 		}
@@ -126,26 +127,16 @@ class GithubReleaseStats implements ArrayAccess
 		$releaseDates = [];
 	    foreach ($releases as $release) {
 	    	$versions[] = GithubReleaseStatsHelpers::fix_version_name($release['tag_name']);
-
-	    	$date = DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $release['created_at']);
-	    	$releaseDates[] = $date->format('Y-m-d');
+	    	$releaseDates[] = DateTimeHelper::formatGithubDate($release['created_at']);
 	    }
 
 	    // add today with version "in dev" to calc the days from the last release
 	    $versions[] = 'next_version_in_development_since';
 	    $releaseDates[] = date('Y-m-d');
 
-		usort($releaseDates, 'self::usort_helper_sort_by_utc_time');
+		usort($releaseDates, 'DateTimeHelper::usort_helper_sort_by_utc_time');
 
 	    return array_combine($versions, $releaseDates);
-	}
-
-	static function usort_helper_sort_by_utc_time($a, $b)
-	{
-	    $adate = date_create_from_format("Y-m-d", $a);
-	    $bdate = date_create_from_format("Y-m-d", $b);
-	    if ($adate === $bdate) { return 0; }
-	    return ($adate < $bdate) ? -1 : 1;
 	}
 
 	static function calculate_days_between_releases($dates)
@@ -154,18 +145,10 @@ class GithubReleaseStats implements ArrayAccess
 		$days = [];
 		for($i = 0; $i < count($dates); $i++) {
 			if(isset($dates[$i+1])) {
-			     $days[] = self::get_days_between_dates($dates[$i], $dates[$i+1]);
+			     $days[] = DateTimeHelper::getDaysBetweenDates($dates[$i], $dates[$i+1]);
 		    }
 		}
 		return $days;
-	}
-
-	static function get_days_between_dates($date1, $date2)
-	{
-		$datetime1 = new DateTime($date1);
-		$datetime2 = new DateTime($date2);
-		$interval = $datetime1->diff($datetime2);
-		return $interval->format('%R%a days');
 	}
 
 	function get_release_dates_and_development_time()
@@ -191,6 +174,16 @@ class GithubReleaseStats implements ArrayAccess
 		$this->stats['release_dates_and_development_time'] = $r;
 	}
 
+	function calculate_project_age()
+	{
+		$startDate = '15.11.2011';	
+		$this->stats['project_started_date'] 	= DateTimeHelper::formatDate($startDate, 'd.m.Y', 'F d, Y');
+		$this->stats['project_age'] 		= DateTimeHelper::formatDateDiff($startDate);
+		$this->stats['project_birthday'] 		= DateTimeHelper::getNextBirthday($startDate, 'F d, Y');
+		$this->stats['project_daysto_birthday'] = ltrim(DateTimeHelper::getDaysBetweenDates(date('r'), $this->stats['project_birthday']),'+');
+		$this->stats['project_age_at_birthday'] = DateTimeHelper::getYearsBetweenDates($startDate, $this->stats['project_birthday']);
+	}
+
 	/**
 	 * ArrayAccess
 	 */
@@ -210,6 +203,127 @@ class GithubReleaseStats implements ArrayAccess
 	function offsetGet($offset) {
         return isset($this->stats[$offset]) ? $this->stats[$offset] : null;
     }
+}
+
+class DateTimeHelper
+{
+	public static function formatDate($dateString, $fromFormat = 'Y-m-d', $toFormat = 'd-m-Y')
+	{
+		return date_format(date_create_from_format($fromFormat, $dateString), $toFormat);
+	}
+
+	public static function formatGithubDate($githubDate)
+    {
+    	$date = DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $githubDate);
+    	return $date->format('Y-m-d');
+    }
+
+	public static function usort_helper_sort_by_utc_time($a, $b)
+	{
+	    $adate = date_create_from_format("Y-m-d", $a);
+	    $bdate = date_create_from_format("Y-m-d", $b);
+	    if ($adate === $bdate) { return 0; }
+	    return ($adate < $bdate) ? -1 : 1;
+	}
+
+	public static function getInterval($date1, $date2, $intervalFormat = null)
+	{
+		$datetime1 = new DateTime($date1);
+		$datetime2 = new DateTime($date2);
+		$interval = $datetime1->diff($datetime2);
+		return $interval->format($intervalFormat);
+	}
+
+	public static function getDaysBetweenDates($date1, $date2)
+	{
+		return self::getInterval($date1, $date2, '%R%a days');
+	}
+
+	public static function getYearsBetweenDates($date1, $date2)
+	{
+		return self::getInterval($date1, $date2, '%y years');		
+	}
+
+	/** 
+	 * Format a date difference interval.
+	 * Uses the two biggest interval parts automatically. 
+	 * 
+	 * @param DateTime $start 
+	 * @param DateTime|null $end 
+	 * @return string 
+	 */ 
+	public static function formatDateDiff($start, $end = null)
+	{ 
+	    if(!($start instanceof DateTime)) { 
+	        $start = new DateTime($start); 
+	    } 
+	    
+	    if($end === null) { 
+	        $end = new DateTime(); 
+	    } 
+	    
+	    if(!($end instanceof DateTime)) { 
+	        $end = new DateTime($start); 
+	    } 
+	    
+	    $interval = $end->diff($start); 
+	    $usePlural = function($nb,$str) {
+	    	return $nb > 1 ? $str . 's' : $str;
+	    };
+	    
+	    $format = array(); 
+	    if($interval->y !== 0) { 
+	        $format[] = '%y ' . $usePlural($interval->y, 'year'); 
+	    } 
+	    if($interval->m !== 0) { 
+	        $format[] = '%m ' . $usePlural($interval->m, 'month'); 
+	    } 
+	    if($interval->d !== 0) { 
+	        $format[] = '%d ' . $usePlural($interval->d, 'day'); 
+	    } 
+	    if($interval->h !== 0) { 
+	        $format[] = '%h ' . $usePlural($interval->h, 'hour'); 
+	    } 
+	    if($interval->i !== 0) { 
+	        $format[] = '%i ' . $usePlural($interval->i, 'minute'); 
+	    } 
+	    if($interval->s !== 0) { 
+	        if(!count($format)) { 
+	            return 'less than a minute ago'; 
+	        } else { 
+	            $format[] = '%s ' . $usePlural($interval->s, 'second'); 
+	        } 
+	    } 
+	    
+	    // use the two biggest parts 
+	    if(count($format) > 1) { 
+	        $format = array_shift($format) . ' and ' . array_shift($format); 
+	    } else { 
+	        $format = array_pop($format); 
+	    } 
+	    
+	    return $interval->format($format); 
+	} 
+
+	/**
+	 * Get next birthday.
+     *
+     * @param birthday
+     * @param DateTime format, e.g. 'd.m.Y'. Returns DateTime object, when false.
+     * @return string|object Formatted date or DateTime object.
+	 */
+	public static function getNextBirthday($birthday, $format = 'Y-m-d')
+	{
+	    $date = new DateTime($birthday);
+	    $date->modify('+' . date('Y') - $date->format('Y') . ' years');
+	    if($date < new DateTime()) {
+	        $date->modify('+1 year');
+	    }
+	    if($format === false) {
+	    	return $date;
+	    }	    
+	    return $date->format($format);
+	}
 }
 
 class GithubReleaseStatsHelpers
@@ -287,7 +401,7 @@ class HighchartHelper
 /**
  * ---------- cut here ----------
  */
-
+define('RENDER_WPNXM_HEADER_LOGO', true);
 require __DIR__ . '/view/header.php';
 require __DIR__ . '/view/topnav.php';
 $s = new GithubReleaseStats();
@@ -295,6 +409,24 @@ $s = new GithubReleaseStats();
 
 <div class="panel panel-default">
 	<div class="panel-heading"><h4>Project Statistics</h4></div>
+	<table class="table table-bordered table-condensed">
+	    <tr>
+	        <td>The project was started on <?=$s['project_started_date']?>. That was <?=$s['project_age']?> ago.</td>
+	    </tr>
+	    <tr>
+	    	<td>
+    		<?php if($s['project_daysto_birthday'] === '0 days') { ?>
+				<h3 style="text-align:center">Hooray! It's my birthday. I just turned <?=$s['project_age_at_birthday']?>.<img src="images/birthday.jpg"/></h3>
+    		<?php } else { ?>
+        		The project will turn <?=$s['project_age_at_birthday']?> old on <?=$s['project_birthday']?>. That's in <?=$s['project_daysto_birthday']?>.
+        	<?php } ?> 
+	        </td>      
+	    </tr>
+	</table>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading"><h4>Releases</h4></div>
 	<table class="table table-bordered table-condensed">
 		<tr>
 			<td>Number of Releases</td>
