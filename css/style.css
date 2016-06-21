@@ -285,3 +285,8 @@ div.download-components select {
   margin: 0;
   font-size: 12px;
 }
+
+#compare-installers-table th:not(:first-child), td:not(:first-child) {
+    text-align:center; 
+    vertical-align:middle;
+}
