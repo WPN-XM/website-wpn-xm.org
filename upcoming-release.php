@@ -123,7 +123,7 @@ class UpcomingReleaseBox
         $this->currentVersion = $currentVersion;
         $this->nextVersion  = $nextVersion;
         
-        $this->compareInstallersUrl = sprintf('compare-installers.php?from=%s&to=%s', $this->currentVersion, $this->nextVersion);        
+        $this->compareInstallersUrl = 'compare-installers.php'; //sprintf('compare-installers.php?versionA=%s&versionB=%s', $this->currentVersion, 'next');        
         $this->openIssueUrl = sprintf('https://github.com/WPN-XM/WPN-XM/issues?q=is:open+is:issue+milestone:%s', $this->nextVersion);
         
         $lastUpdatedBadgeRenderer = new LastUpdatedBadgeRenderer($this->nextInstallersLastUpdatedDate);
