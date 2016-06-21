@@ -21,7 +21,7 @@ class UpcomingReleaseDataCollector
     public function getNextVersion()
     {
         // get all milestones from github        
-        $milestonesJson = $this->doRequest('https://api.github.com/repos/wpn-xm/wpn-xm/milestones');
+        /*$milestonesJson = $this->doRequest('https://api.github.com/repos/wpn-xm/wpn-xm/milestones');
         $milestones = json_decode($milestonesJson, true);  
         
         // get sorted titles (re-index array by title and return only the sorted keys)
@@ -30,7 +30,8 @@ class UpcomingReleaseDataCollector
         sort($milestonesTitles);
        
         // return lowest milestone 
-        return $milestonesTitles[0];
+        return $milestonesTitles[0];*/
+        return 'v0.8.7';
     }
     
     public function getCurrentVersion()
