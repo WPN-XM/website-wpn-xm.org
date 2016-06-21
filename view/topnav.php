@@ -39,6 +39,8 @@
             <ul class="dropdown-menu">
               <li><a href="downloads.php">Installation Wizards</a></li>
               <li><a href="components.php">Web Components</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="compare-installers.php">Compare Installers</a></li>
               <li><a href="stats.php">Project Statistics</a></li>
             </ul>
           </li>
