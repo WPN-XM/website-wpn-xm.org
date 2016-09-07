@@ -128,7 +128,7 @@ function render_tr_for_php_extension($component)
     $name = str_replace('PHP Extension ', '', $component['name']);
 
     $html = PHP_EOL . '<tr>'
-        . '<td><a href="' . $component['website'] . '"><strong>' . $name . '</strong></a>' . '</td>'
+        . '<td><a id="#' . $component['name'] . '" href="' . $component['website'] . '"><strong>' . $name . '</strong></a>' . '</td>'
         . '<td>' . render_version_dropdown_for_extension($component) . '</td>'
         . '<td><span class="label label-primary">' . $component['latest']['version'] . '</span></td>'
         . '</tr>' . PHP_EOL;
@@ -188,7 +188,7 @@ function render_version_dropdown_for_extension($component)
 function render_tr_for_normal_component($component)
 {
     $html = PHP_EOL . '<tr>'
-        . '<td><a href="' . $component['website'] . '"><strong>' . $component['name'] . '</strong></a>' . '</td>'
+        . '<td><a id="#' . $component['name'] . '" href="' . $component['website'] . '"><strong>' . $component['name'] . '</strong></a>' . '</td>'
         . '<td>' . render_version_dropdown($component) . '</td>'
         . '<td><a href="' . $component['latest']['url'] . '">' . $component['latest']['version'] . '</a></td>'
         . '</tr>' . PHP_EOL;
