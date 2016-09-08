@@ -234,6 +234,10 @@ function render_footer_scripts()
     require __DIR__ . '/view/footer_scripts.php';
 
     echo '<script>
+    if(document.location.hash) {
+        var id = document.location.hash.substring(1);
+        window.scrollTo(0, $("#"+id).offset().top-70);
+    };
     // bind "change" event of all select boxes (dropdowns)
     $("select").change(function(){
        if (this.value) {
