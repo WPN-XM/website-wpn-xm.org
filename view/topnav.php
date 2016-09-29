@@ -59,9 +59,12 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Documentation <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <!--<li><a href="#section-docu-manual">Manual</a></li>-->
-              <li><a href="https://github.com/WPN-XM/WPN-XM/wiki">Wiki</a></li>
-            </ul>
+                <li><a href="http://wpn-xm.github.io/docs/">Overview</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="http://wpn-xm.github.io/docs/user-manual/en/">User-Manual (en)</a></li>                
+                <li><a href="http://wpn-xm.github.io/docs/faq/">FAQ</a></li>  
+                <li><a href="https://github.com/WPN-XM/WPN-XM/wiki">Wiki</a></li>
+              </ul>
           </li>
           <li><a href="support.php">Support</a></li>
           <li><a href="index.html#section-donate">Donate</a></li>
