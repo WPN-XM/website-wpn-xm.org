@@ -16,8 +16,8 @@
     <meta name="Rating" content="general" />
     <meta name="page-type" content="Homepage, Website" />
     <meta name="robots" content="index, follow, all, noodp" />
-    <meta name="Description" content="WPN-XM - is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
-    <meta name="keywords" content="WPN-XM, free, open-source, server, NGINX, PHP, Windows, MariaDb, MongoDb, Adminer, XDebug, WAMP, WIMP, WAMPP, LAMP" />
+    <meta name="Description" content="WPN-XM - is an open-source web server solution stack for professional PHP development on the Windows platform." />
+    <meta name="keywords" content="WPN-XM, open-source, server, NGINX, PHP, Windows, MariaDb, MongoDb, Adminer, XDebug, WAMP, WIMP, WAMPP, LAMP" />
     <!-- avgthreatlabs.com Site Verification -->
     <meta name="avgthreatlabs-verification" content="247b6d3c405a91491b1fea8e89fb3b779f164a5f" />
     <!-- DC -->
@@ -38,12 +38,12 @@
     <meta property="og:url" content="http://wpn-xm.org/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="WPN-XM" />
-    <meta property="og:description" content="Is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
+    <meta property="og:description" content="Is an open-source web server solution stack for professional PHP development on the Windows platform." />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@WPNXM" />
     <meta name="twitter:title" content="WPN-XM" />
-    <meta name="twitter:description" content="Is a free and open-source web server solution stack for professional PHP development on the Windows platform." />
+    <meta name="twitter:description" content="Is an open-source web server solution stack for professional PHP development on the Windows platform." />
     <meta name="twitter:image" content="https://pbs.twimg.com/profile_images/2645607232/76b6095850bb649a002b35b45e601f59_400x400.png" />
     <!-- Favicon & Touch-Icons -->
     <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
