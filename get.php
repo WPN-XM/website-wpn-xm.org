@@ -110,6 +110,20 @@ class Registry implements ArrayAccess
     }
 
     /**
+     * Check, if the "latest version" of a PHP extensions is available for a certain "bitsize".
+     * Some PHP extensions (for instance ICE) do not release for x86 and x64.
+     *
+     * @param $software
+     * @param $bitsize
+     * @param $phpVersion
+     * @return bool
+     */
+    public function extensionLatestVersionHasBitsize($software, $bitsize)
+    {
+        return array_key_exists($bitsize, $this->registry[$software]['latest']['url']);
+    }
+
+    /**
      * Is the software a PHP extension?
      *
      * @param $software
@@ -241,8 +255,8 @@ class Registry implements ArrayAccess
      */
     public static function updateDeprecatedSoftwareRegistryKeyNames($software)
     {
-        if ($software === 'wpnxmscp')     { return 'wpnxm-scp';     }
-        if ($software === 'wpnxmscp-x64') { return 'wpnxm-scp-x64'; }
+        if ($software == 'wpnxmscp')     { return 'wpnxm-scp';     }
+        if ($software == 'wpnxmscp-x64') { return 'wpnxm-scp-x64'; }
 
         return $software;
     }
@@ -293,7 +307,7 @@ class Request
     public $phpVersion;
     public $bitsize;
 
-    private $defaultPHPversion = '5.5';
+    private $defaultPHPversion = '5.6';
     private $defaultBitsize    = 'x86';
 
     public function __construct()
@@ -316,9 +330,9 @@ class Request
         // $_GET['v'] = version
         $version = filter_input(INPUT_GET, 'v', FILTER_SANITIZE_STRING);
         // unset any latest version requests, because we return "latest version" by default
-        $this->version = ($version === 'latest') ? null : $version;
+        $this->version = ($version == 'latest') ? null : $version;
 
-        // $_GET['p'] = php version, default version is php 5.5
+        // $_GET['p'] = php version, default version is php 5.6
         if(isset($_GET['p']) && (substr_count($_GET['p'], '.') >= 1)) {
         	$this->phpVersion = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_STRING);
         } else {
@@ -326,7 +340,7 @@ class Request
         }
 
         // $_GET['bitsize'] = php bitsize for extensions, default version is x86
-        if (isset($_GET['bitsize']) && ($_GET['bitsize'] === 'x86' || $_GET['bitsize'] === 'x64')) {
+        if (isset($_GET['bitsize']) && ($_GET['bitsize'] == 'x86' || $_GET['bitsize'] == 'x64')) {
 			$this->bitsize = filter_input(INPUT_GET, 'bitsize', FILTER_SANITIZE_STRING);
         } else {
             $this->bitsize = $this->defaultBitsize;
@@ -340,23 +354,25 @@ class Request
     public function processGetDuringTesting()
     {
         // $_GET['s'] = software component
-        $this->software = filter_var(INPUT_GET, 's', FILTER_SANITIZE_STRING);
-
+        $this->software = filter_var($_GET['s'], FILTER_SANITIZE_STRING);
+       
         // $_GET['v'] = version
-        $version = filter_var(INPUT_GET, 'v', FILTER_SANITIZE_STRING);
-        // unset any latest version requests, because we return "latest version" by default
-        $this->version = ($version === 'latest') ? null : $version;
+        if(isset($_GET['v'])) {
+            $version = filter_var($_GET['v'], FILTER_SANITIZE_STRING);
+            // unset any latest version requests, because we return "latest version" by default
+            $this->version = ($version == 'latest') ? null : $version;
+        }
 
         // $_GET['p'] = php version, default version is php 5.5
-        if(isset($_GET['p']) && (is_numeric($_GET['p']{1}) && ($_GET['p']{2} === '.'))) {
-        	$this->phpVersion = filter_var(INPUT_GET, 'p', FILTER_SANITIZE_STRING);
+        if(isset($_GET['p']) && (substr_count($_GET['p'], '.') >= 1)) {
+        	$this->phpVersion = filter_var($_GET['p'], FILTER_SANITIZE_STRING);
         } else {
         	$this->phpVersion = $this->defaultPHPversion;
         }
 
         // $_GET['bitsize'] = php bitsize for extensions, either "x86" or "x64", default version is "x86"
-        if (isset($_GET['bitsize']) && ($_GET['bitsize'] === 'x86' || $_GET['bitsize'] === 'x64')) {
-			$this->bitsize = filter_var(INPUT_GET, 'bitsize', FILTER_SANITIZE_STRING);
+        if(isset($_GET['bitsize']) && ($_GET['bitsize'] == 'x86' || $_GET['bitsize'] == 'x64')) {
+			$this->bitsize = filter_var($_GET['bitsize'], FILTER_SANITIZE_STRING);
         } else {
             $this->bitsize = $this->defaultBitsize;
         }
@@ -505,7 +521,8 @@ class Component
             // the specific version does not exist. 
             // return latest version with default PHP version and default bitsize instead,
             // e.g. $registry['phpext_xdebug']['latest']['url']['x86']['5.5']
-            elseif ($this->registry->extensionLatestVersionHasPhpVersion($software, $bitsize, $phpVersion))
+            elseif ($this->registry->extensionLatestVersionHasBitsize($software, $bitsize) &&
+                    $this->registry->extensionLatestVersionHasPhpVersion($software, $bitsize, $phpVersion))
             {               
                 $url     = $this->registry[$software]['latest']['url'][$bitsize][$phpVersion];
                 $version = $this->registry[$software]['latest']['version'];
