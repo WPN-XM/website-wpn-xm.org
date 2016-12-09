@@ -68,11 +68,11 @@ elseif (array_key_exists($s, $registry)) {
 // ----------------------------------------------------------------------------
 
 /**
- * Cleans the version string using a character whitelist.
+ * Cleans the software string using a character whitelist.
  */
 function cleanSoftwareString($version)
 {
-    return preg_replace("/[^a-zA-Z0-9-_]+/", "", $version); 
+    return preg_replace("#[^a-zA-Z0-9\-\_]+#", '', $version); 
 }
 
 /**
@@ -80,7 +80,7 @@ function cleanSoftwareString($version)
  */
 function cleanVersionString($version)
 {
-    return preg_replace("/[^a-zA-Z0-9-+.]+/", "", $version); 
+    return preg_replace("#[^a-zA-Z0-9\.\-\+]+#", '', $version); 
 }
 
 /**

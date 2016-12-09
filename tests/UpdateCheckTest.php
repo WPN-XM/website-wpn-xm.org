@@ -26,8 +26,8 @@ class UpdateCheckTest extends PHPUnit_Framework_TestCase
           array("0.9.8ze",                      "0.9.8ze"),     // OpenSSL
           array("5.22.2.1",                     "5.22.2.1"),    // Perl
           // not ok and cleaned
-          array("",                             "1.2.3§$&"),
-          array("",                             "1.2.3h°!\"§$%&/()=?<>|;:"),
+          array("1.2.3",                        "1.2.3§$&"),
+          array("1.2.3h",                       "1.2.3h°!\"§$%&/()=?<>|;:"),
         );
     }
 
@@ -36,7 +36,7 @@ class UpdateCheckTest extends PHPUnit_Framework_TestCase
      */ 
     public function testCleanVersionString($expected, $versionString)
     {
-        $cleanVersionString = cleanSoftwareString($versionString);
+        $cleanVersionString = cleanVersionString($versionString);
         $this->assertEquals($expected, $cleanVersionString);
     }
 
