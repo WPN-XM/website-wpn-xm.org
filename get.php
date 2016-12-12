@@ -553,9 +553,11 @@ class Component
                             }
                         }
                     }
-                    $url = $this->registry[$software][$version][$bitsize][$phpVersion];
-                    $this->trackDownloadEvent($url, $software, $version, $bitsize, $phpVersion);
-                    $this->response->redirect($url);
+                    if($this->registry->bitsizeExists($software, $version, $bitsize)) {
+                        $url = $this->registry[$software][$version][$bitsize][$phpVersion];
+                        $this->trackDownloadEvent($url, $software, $version, $bitsize, $phpVersion);
+                        $this->response->redirect($url);
+                    }
             }
             else {
                 // fall-through to "not found"
