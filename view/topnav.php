@@ -1,11 +1,6 @@
 <!-- Activate the ScrollSpy for the NavBar -->
 <body data-spy="scroll" data-target="#top-nav">
 
-  <!-- "Fork me on Github" Ribbon -->
-  <a href="https://github.com/WPN-XM/WPN-XM">
-    <img width="149" height="149" alt="Fork WPN-XM on GitHub" src="images/fork-me-on-github.png" class="github-ribbon" />
-  </a>
-
   <!-- Top Navigation Bar -->
   <nav class="navbar navbar-inverse navbar-fixed-top" id="section-home">
 

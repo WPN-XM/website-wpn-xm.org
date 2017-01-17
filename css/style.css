@@ -63,11 +63,8 @@ div#downloads-list { font-size: 12px; }
 .navbar-brand > .brand-icon {
   display: none; opacity: 1; position: relative; top: -9px; float:right;
 }
-/* hide fork me on github */
-.github-ribbon{position: absolute; top: 0; left: 0; border: 0;z-index: 9999; }
 
 @media screen and (max-width: 760px) {
-  .github-ribbon{ visibility: hidden; }
   .navbar-brand {
     width: auto !important;
   }
