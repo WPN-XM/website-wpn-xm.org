@@ -141,7 +141,7 @@ class UpcomingReleaseBox
             <!-- List group -->
             <ul class="list-group">
               <li class="list-group-item centered">It\'s work in progress.</li>
-              <li class="list-group-item"><strong>Todo</strong>
+              <li class="list-group-item"><strong>Open Issues</strong>
                 <a class="btn bold pull-right" href="'.$this->openIssueUrl.'">Open Issues</a>
               </li>
               <li class="list-group-item"><strong>Done</strong>
