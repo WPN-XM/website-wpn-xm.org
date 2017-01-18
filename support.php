@@ -108,10 +108,14 @@ echo render_header();
 
     </div>
 </div>
-
 <?php
 echo render_footer_scripts();
+?>
+</div></div>
+</body>
+</html>
 
+<?php
 function render_header()
 {
     require __DIR__ . '/view/header.php';
