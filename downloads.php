@@ -376,7 +376,7 @@ if (!empty($type) && ($type === 'json')) {
             $html .= $download['changelog'] . '&nbsp;';
             $html .= $download['github_tag'];
             $html .= '</td>';
-            $html .= '</tr>';
+            $html .= '</tr>'. PHP_EOL;
         }
 
         // download details
@@ -386,14 +386,14 @@ if (!empty($type) && ($type === 'json')) {
         $html .= '<tr><td><div class="btn btn-mini bold">' . $download['size'] . '</div></td><td>';
         $html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>&nbsp;';
         $html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button>';
-        $html .= '</td></tr>';
+        $html .= '</td></tr>'. PHP_EOL;
 
         $html .= render_component_list_for_installer($download['file']);
 
-        $html .= '</table>';
+        $html .= '</table>'. PHP_EOL;
         $html .= '</td></tr>';
     }
-    $html .= '</table><br/>';
+    $html .= '</table><br/>'. PHP_EOL;;
 
     $html .= '<script>
                 function calculateTotalDownloads() {
@@ -504,7 +504,7 @@ function updateDeprecatedSoftwareRegistryKeyNames($software)
 
 function render_component_list_multi_column($registry, $installerRegistry)
 {
-    $html = '';
+    $html = '' . PHP_EOL;
     $html .= '<ul class="multi-column-list">';
 
     $extensions_html = '<li>PHP Extension(s):</li>';
@@ -535,7 +535,7 @@ function render_component_list_multi_column($registry, $installerRegistry)
     unset($installerRegistry);
 
     $html .= $extensions_html;
-    $html .= '</ul>';
+    $html .= '</ul>'. PHP_EOL;
 
     return $html;
 }
