@@ -152,7 +152,7 @@ function render_github_releases()
             $html .= '<tr>'
                 . '<td width="50%" style="vertical-align: middle;">'
                 . '<h2 style="text-align: left;">' . $release['name'] . '&nbsp;'
-                . '<small class="btn btn-sm" title="Release Date">Release Date<br><span class="bold">' . date('d M Y', strtotime($release['created_at'])) . '</span></small>'
+                . '<small class="btn btn-sm" title="Release Date">Release Date<br><b>' . date('d M Y', strtotime($release['created_at'])) . '</b></small>'
                 . '&nbsp;'
                 . '<small class="btn btn-sm" title="Total Downloads">Downloads<br><span class="bold installer-downloads">' . get_total_downloads($release) . '</span></small>'
                 . '</h2>'
@@ -525,13 +525,13 @@ function render_component_list_multi_column($registry, $installerRegistry)
         // php extension - they are appended to the extension html fragment
         if (false !== strpos($shortName, 'phpext_')) {
             $name = str_replace('PHP Extension ', '', $registry[$shortName]['name']);
-            $extensions_html .= '<li><span class="bold">' . $name . '</span> ' . $version . '</li>';
+            $extensions_html .= '<li><b>' . $name . '</b> ' . $version . '</li>';
             continue;
         }
 
         // normal component
         $name = $registry[$shortName]['name'];
-        $html .= '<li><span class="bold">' . $name . '</span> ' . $version . '</li>';
+        $html .= '<li><b>' . $name . '</b> ' . $version . '</li>';
     }
     unset($installerRegistry);
 
@@ -557,13 +557,13 @@ function render_component_list_comma_separated($registry, $installerRegistry, $n
 
         if (false !== strpos($component[0], 'phpext_')) {
             $name = str_replace('PHP Extension ', '', $registry[$component[0]]['name']);
-            $extensions_html .= '<span class="bold">' . $name . '</span> ' . $version;
+            $extensions_html .= '<b>' . $name . '</b> ' . $version;
             continue;
         }
 
         $name = $registry[$shortName]['name'];
 
-        $html .= '<span style="font-weight:bold;">' . $name . '</span> ' . $version;
+        $html .= '<b>' . $name . '</b> ' . $version;
         $html .= ($i + 1 !== $number_of_components) ? ', ' : '';
     }
     unset($installerRegistry);
