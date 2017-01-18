@@ -45,31 +45,31 @@ class InstallerCompareViewRenderer
         $dropdownsA = InstallerSelectionRenderer::getDropdowns("A", $this->versionA, $this->installerNameA);
         $dropdownsB = InstallerSelectionRenderer::getDropdowns("B", $this->versionB, $this->installerNameB);
         
-        $html = '<div class="col-md-10 center">' . PHP_EOL;
-        $html .= '<div class="panel panel-default">' . PHP_EOL;
-        $html .= '<div class="panel-heading bold">Please select the two installers you want to compare with each other!</div>' . PHP_EOL;
-        $html .= '<div class="panel-body">' . PHP_EOL;
-        $html .= '<table class="table table-condensed">' . PHP_EOL;       
-        $html .= '<thead>' . PHP_EOL;
-        $html .= '<tr><th colspan="2">Installer A</th><th colspan="2">Installer B</th></tr>' . PHP_EOL;
-        $html .= '<tr><th colspan="2">'.$dropdownsA.'</th><th colspan="2">'.$dropdownsB.'</th></tr>' . PHP_EOL;
-        $html .= '</thead>' . PHP_EOL;
-        $html .= '</tbody></table>' . PHP_EOL;
+        $html = '<div class="col-md-10 center">'
+        $html .= '<div class="panel panel-default">';
+        $html .= '<div class="panel-heading bold">Please select the two installers you want to compare with each other!</div>';
+        $html .= '<div class="panel-body">';
+        $html .= '<table class="table table-condensed">';        
+        $html .= '<thead>';
+        $html .= '<tr><th colspan="2">Installer A</th><th colspan="2">Installer B</th></tr>';
+        $html .= '<tr><th colspan="2">'.$dropdownsA.'</th><th colspan="2">'.$dropdownsB.'</th></tr>';
+        $html .= '</thead>';
+        $html .= '</table>';
         $html .= '<p>
                     The table below shows you the comparison between these two installers.<br>
                     For each installer, you see the software components shipped and the versions.<br>
                     The change column indicates, when a software was added, updated or removed.<br>                    
                     This allows you to quickly notice changes between installers.                    
-                  </p>' . PHP_EOL;
-        $html .= '</div>' . PHP_EOL;
+                  </p>';
+        $html .= '</div>';
         $html .= '<div class="panel-footer">                 
                   <p>
                     To see differences between all installers you can also use the
                     <a class="btn btn-sm" href="version-matrix.php">Version Matrix</a>.
                 </p>
-              </div>' . PHP_EOL;
-        $html .= '</div>' . PHP_EOL;
-        $html .= '</div>' . PHP_EOL;        
+              </div>';
+        $html .= '</div>';
+        $html .= '</div>';        
         return $html;
     }
     
