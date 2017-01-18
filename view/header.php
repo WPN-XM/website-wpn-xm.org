@@ -3,9 +3,9 @@
   <head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# website: https://ogp.me/ns/website#">
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-    <meta name="MobileOptimized" content="width">
-    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <meta name="MobileOptimized" content="width" />
+    <meta name="HandheldFriendly" content="true" />
     <title>WPN-XM - The server stack for PHP development on Windows.</title>
     <!-- Google Site Verification -->
     <meta name="google-site-verification" content="OxwcTMUNiYu78EIEA2kq-vg_CoTyhGL-YVKXieCObDw" />
@@ -26,9 +26,9 @@
     <meta name="DC.Format" content="text/html" />
     <meta name="DC.Language" content="en" />
     <!-- dcterms -->
-    <meta name="dcterms.dateCopyrighted" content="2011">
-    <meta name="dcterms.rights" content="(c) 2011 - onwards Jens-Andre Koch.">
-    <meta name="dcterms.rightsHolder" content="Jens A. Koch">
+    <meta name="dcterms.dateCopyrighted" content="2011" />
+    <meta name="dcterms.rights" content="(c) 2011 - onwards Jens-Andre Koch." />
+    <meta name="dcterms.rightsHolder" content="Jens A. Koch" />
     <!-- Geo -->
     <meta name="geo.region" content="DE-MV" />
     <meta name="geo.placename" content="Neubrandenburg" />
