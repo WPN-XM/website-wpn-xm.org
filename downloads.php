@@ -507,7 +507,7 @@ function render_component_list_multi_column($registry, $installerRegistry)
     $html = '';
     $html .= '<ul class="multi-column-list">';
 
-    $extensions_html = 'PHP Extension(s): ';
+    $extensions_html = '<li>PHP Extension(s):</li>';
 
     foreach ($installerRegistry as $i => $component) {
         $shortName = $component[0];
