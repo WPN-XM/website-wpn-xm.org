@@ -52,8 +52,10 @@ class InstallerCompareViewRenderer
         $html .= '<table class="table table-condensed">';        
         $html .= '<thead>';
         $html .= '<tr><th colspan="2">Installer A</th><th colspan="2">Installer B</th></tr>';
-        $html .= '<tr><th colspan="2">'.$dropdownsA.'</th><th colspan="2">'.$dropdownsB.'</th></tr>';
         $html .= '</thead>';
+        $html .= '<tbody>';
+        $html .= '<tr><td colspan="2">'.$dropdownsA.'</td><td colspan="2">'.$dropdownsB.'</td></tr>';
+        $html .= '</tbody>';
         $html .= '</table>';
         $html .= '<p>
                     The table below shows you the comparison between these two installers.<br>
@@ -61,15 +63,14 @@ class InstallerCompareViewRenderer
                     The change column indicates, when a software was added, updated or removed.<br>                    
                     This allows you to quickly notice changes between installers.                    
                   </p>';
-        $html .= '</div>';
+        $html .= '</div>'; // close panel-body
         $html .= '<div class="panel-footer">                 
                   <p>
                     To see differences between all installers you can also use the
                     <a class="btn btn-sm" href="version-matrix.php">Version Matrix</a>.
                 </p>
               </div>';
-        $html .= '</div>';
-        $html .= '</div>';        
+        $html .= '</div></div>'; // close panel-default, md-10 center  
         return $html;
     }
     
@@ -88,7 +89,7 @@ class InstallerCompareViewRenderer
         $html .= '<tbody>';
         $html .= $this->renderTableBody();                
         $html .= '</tbody></table>';
-        $html .= '</div></div></div>';        
+        $html .= '</div></div></div>'; // close panel-body, panel-default, md-10 center       
         return $html;
     }
             
