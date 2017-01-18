@@ -26,10 +26,10 @@ class InstallerCompareViewRenderer
         ?>
         <div class="col-md-10 center">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h2 class="centered">Compare Installers <small>Installer Software &amp; Version Changelog</small></h2>                  
-                </div>
-                
+                <div class="panel-heading centered">
+                  <h2>Compare Installers</h2> 
+                  <p>Installer Software &amp; Version Changelog</p>
+                </div>                
             </div>
         </div>
         <?php 
