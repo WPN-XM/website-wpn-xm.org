@@ -27,7 +27,7 @@ class InstallerCompareViewRenderer
         <div class="col-md-10 center">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h2 class="centered">Compare Installers<small></br>Installer Software &amp; Version Changelog</small></h1>                  
+                  <h2 class="centered">Compare Installers <small>Installer Software &amp; Version Changelog</small></h1>                  
                 </div>
                 
             </div>
