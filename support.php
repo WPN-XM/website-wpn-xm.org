@@ -20,7 +20,7 @@ echo render_header();
     <div class="col-lg-12 centered">
         <div class="row">
             <div class="col-lg-12 centered">
-                <h2>Support</h1>
+                <h2>Support</h2>
                 <h3>We provide comprehensive help and support.</h3>
                 <h4>Feel free to contact us through one of the following channels:</h4>
             </div>
@@ -37,6 +37,7 @@ echo render_header();
                         Feel free to ask on StackOverflow.
                         Please tag your question with: <span class="label label-default">wpn-xm</span> and <span class="label label-default">php</span>.
                     </p>
+                    <p>
                         <a href="https://stackoverflow.com/questions/ask/?tags=wpn-xm+php" class="btn btn-default button-link" target="_blank" role="button">
                             <i class="fa fa-stack-overflow"></i>&nbsp;&nbsp;Ask Question on StackOverflow</a>
                     </p>
