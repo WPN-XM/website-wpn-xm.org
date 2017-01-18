@@ -51,10 +51,10 @@ class InstallerCompareViewRenderer
         $html .= '<div class="panel-body">';
         $html .= '<table class="table table-condensed">';        
         $html .= '<thead>';
-        $html .= '<tr><th colspan="2">Installer A</th><th colspan="2">Installer B</th></tr>';
+        $html .= '<tr><th>Installer A</th><th>Installer B</th></tr>';
         $html .= '</thead>';
         $html .= '<tbody>';
-        $html .= '<tr><td colspan="2">'.$dropdownsA.'</td><td colspan="2">'.$dropdownsB.'</td></tr>';
+        $html .= '<tr><td>'.$dropdownsA.'</td><td>'.$dropdownsB.'</td></tr>';
         $html .= '</tbody>';
         $html .= '</table>';
         $html .= '<p>
