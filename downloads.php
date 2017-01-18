@@ -186,10 +186,11 @@ function render_github_releases()
                 $html .= '';
                 $html .= '&nbsp;<div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div>';
                 $html .= '&nbsp;<div class="btn btn-small bold" title="Downloads">' . $asset['download_count'] . '</div>';
-                $html .= '';
+                $html .= '</td></tr>';
 
                 // component list for the installer
                 $html .= render_component_list_for_installer($asset['name']);
+
             }
 
             $html .= '</td></tr>';
@@ -383,10 +384,10 @@ if (!empty($type) && ($type === 'json')) {
         $html .= '<td colspan="2">';
         $html .= '<table width="100%">';
         $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $download['download_url'] . '">' . $download['file'] . '</a></th>';
-        $html .= '<tr><td><div class="btn btn-mini bold">' . $download['size'] . '</div></td><td>';
-        $html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>&nbsp;';
-        $html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button>';
-        $html .= '</td></tr>'. PHP_EOL;
+        $html .= '<tr><td><div class="btn btn-mini bold">' . $download['size'] . '</div></td>';
+        //$html .= '<td><button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>&nbsp;';
+        //$html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button></td>';
+        $html .= '</tr>'. PHP_EOL;
 
         $html .= render_component_list_for_installer($download['file']);
 
