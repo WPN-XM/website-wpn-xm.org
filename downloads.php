@@ -505,9 +505,9 @@ function updateDeprecatedSoftwareRegistryKeyNames($software)
 function render_component_list_multi_column($registry, $installerRegistry)
 {
     $html = '';
-    $html .= '<ul id="multi-column-list">';
+    $html .= '<ul class="multi-column-list">';
 
-    $extensions_html = '<br>PHP Extension(s): ';
+    $extensions_html = 'PHP Extension(s): ';
 
     foreach ($installerRegistry as $i => $component) {
         $shortName = $component[0];
