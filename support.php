@@ -80,6 +80,7 @@ echo render_header();
                     <p>
                         You might also discuss WPN-XM or PHP related issues in our community forums.
                     </p>
+                    <p>
                         <a href="https://forum.wpn-xm.org/" class="btn btn-default button-link" target="_blank" role="button">
                             <i class="fa fa-comments"></i>&nbsp;&nbsp;Community Forums</a>
                     </p>
@@ -111,7 +112,7 @@ echo render_header();
 <?php
 echo render_footer_scripts();
 ?>
-</div></div>
+</div></div></div>
 </body>
 </html>
 
