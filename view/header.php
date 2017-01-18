@@ -11,7 +11,6 @@
     <meta name="google-site-verification" content="OxwcTMUNiYu78EIEA2kq-vg_CoTyhGL-YVKXieCObDw" />
     <meta name="Googlebot" content="index,follow" />
     <meta name="Author" content="Jens A. Koch" />
-    <meta name="Publisher" content="Koch Softwaresystemtechnik" />
     <meta name="Rating" content="general" />
     <meta name="page-type" content="Homepage, Website" />
     <meta name="robots" content="index, follow, all, noodp" />
