@@ -35,7 +35,8 @@ class InstallerCompareViewRenderer
         <?php 
         $html = $this->renderSelectionPanel();
         $html .= $this->renderComparisonPanel();
-        $html .= $this->renderScriptSection();        
+        $html .= $this->renderScriptSection();    
+        $html .= '</div></div></div>';   
         $html .= '</body></html>';        
         return $html;
     }
