@@ -45,7 +45,7 @@ class InstallerCompareViewRenderer
         $dropdownsA = InstallerSelectionRenderer::getDropdowns("A", $this->versionA, $this->installerNameA);
         $dropdownsB = InstallerSelectionRenderer::getDropdowns("B", $this->versionB, $this->installerNameB);
         
-        $html = '<div class="col-md-10 center">'
+        $html = '<div class="col-md-10 center">';
         $html .= '<div class="panel panel-default">';
         $html .= '<div class="panel-heading bold">Please select the two installers you want to compare with each other!</div>';
         $html .= '<div class="panel-body">';
