@@ -159,17 +159,17 @@ function render_github_releases()
                 . '</td>';
 
             // release notes, e.g. https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3
-            $release_notes = '<a class="btn btn-large btn-info"'
+            $release_notes = '<a class="btn btn-large btn-info" '
                 . 'href="https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-' . $release['tag_name'] . '">Release Notes</a>';
 
             // changelog, e.g. https://github.com/WPN-XM/WPN-XM/blob/master/CHANGELOG.md#v085---2015-07-12
             $hash = '#' . str_replace('.', '', $release['tag_name']) . '---' . date('Y-m-d', strtotime($release['created_at']));
-            $changelog = '<a class="btn btn-large btn-info"'
+            $changelog = '<a class="btn btn-large btn-info" '
                 . 'href="https://github.com/WPN-XM/WPN-XM/blob/master/CHANGELOG.md' . $hash . '">Changelog</a>';
 
             // component list with version numbers
             // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
-            $github_tag = '<a class="btn btn-large btn-info"'
+            $github_tag = '<a class="btn btn-large btn-info" '
                 . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $release['tag_name'] . '">Github Tag</a>';
 
             // print release notes, changelog, github tag once per version
