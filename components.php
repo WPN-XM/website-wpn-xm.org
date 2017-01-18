@@ -18,7 +18,7 @@
 echo render_header();
 ?>
 
-  <div class="col-md-12">
+  <div class="col-md-13">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h2 id="download">Software Components for Web Development on Windows</h2>
