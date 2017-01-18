@@ -11,7 +11,6 @@
     <meta name="google-site-verification" content="OxwcTMUNiYu78EIEA2kq-vg_CoTyhGL-YVKXieCObDw" />
     <meta name="Googlebot" content="index,follow" />
     <meta name="Author" content="Jens A. Koch" />
-    <meta name="Copyright" content="(c) 2010-onwards Jens A. Koch." />
     <meta name="Publisher" content="Koch Softwaresystemtechnik" />
     <meta name="Rating" content="general" />
     <meta name="page-type" content="Homepage, Website" />
@@ -27,6 +26,10 @@
     <meta name="DC.Type" content="Service" />
     <meta name="DC.Format" content="text/html" />
     <meta name="DC.Language" content="en" />
+    <!-- dcterms -->
+    <meta name="dcterms.dateCopyrighted" content="2011">
+    <meta name="dcterms.rights" content="(c) 2011 - onwards Jens-Andre Koch.">
+    <meta name="dcterms.rightsHolder" content="Jens A. Koch">
     <!-- Geo -->
     <meta name="geo.region" content="DE-MV" />
     <meta name="geo.placename" content="Neubrandenburg" />
