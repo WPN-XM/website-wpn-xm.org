@@ -56,9 +56,9 @@ class InstallerCompareViewRenderer
         $html .= '</thead>';
         $html .= '</tbody></table>';
         $html .= '<p>
-                    The table below shows you the comparison between these two installers.</br>
-                    For each installer, you see the software components shipped and the versions.</br>
-                    The change column indicates, when a software was added, updated or removed.</br>                    
+                    The table below shows you the comparison between these two installers.<br>
+                    For each installer, you see the software components shipped and the versions.<br>
+                    The change column indicates, when a software was added, updated or removed.<br>                    
                     This allows you to quickly notice changes between installers.                    
                   </p>';
         $html .= '</div>';

@@ -150,7 +150,7 @@ class UpcomingReleaseBox
               <li class="list-group-item"><strong>Installer Registries</strong>
                 <a class="btn bold pull-right" href="'.$this->compareInstallersUrl.'">Compare Installers</a>
               </li>
-              <li class="list-group-item">The software components for the upcoming release were last updated on:</br>
+              <li class="list-group-item">The software components for the upcoming release were last updated on:<br>
                 <div class="centered">'.$this->nextInstallersLastUpdatedDate.' '.$this->lastUpdatedBadge.'</div>                
               </li>
             </ul>
