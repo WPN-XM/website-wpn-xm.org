@@ -55,7 +55,7 @@ class InstallerCompareViewRenderer
         $html .= '<tr><th>Installer A</th><th>Installer B</th></tr>';
         $html .= '</thead>';
         $html .= '<tbody>';
-        $html .= '<tr><td>'.$dropdownsA.'</td><td>'.$dropdownsB.'</td></tr>';
+        $html .= '<tr><td>'.$dropdownsA.'</td><td class="pull-left">'.$dropdownsB.'</td></tr>';
         $html .= '</tbody>';
         $html .= '</table>';
         $html .= '<p>
