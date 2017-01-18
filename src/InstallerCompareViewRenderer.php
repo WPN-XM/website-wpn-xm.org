@@ -81,8 +81,8 @@ class InstallerCompareViewRenderer
         $html .= '<div class="panel-body">'; 
         $html .= '<table id="compare-installers-table" class="table table-bordered table-condensed table-hover">';
         $html .= '<thead>';
-        $html .= '<tr><th></th><th>Installer A</th><th>Installer B</th><th></th></tr>';
-        $html .= '<tr><th></th><th>'.$this->installerNameA.'</th><th>'.$this->installerNameB.'</th><th></th></tr>';
+        $html .= '<tr><th>&nbsp;</th><th>Installer A</th><th>Installer B</th><th>&nbsp;</th></tr>';
+        $html .= '<tr><th>&nbsp;</th><th>'.$this->installerNameA.'</th><th>'.$this->installerNameB.'</th><th>&nbsp;</th></tr>';
         $html .= '<tr><th>Software</th><th>Version</th><th>Version</th><th>Changed?</th></tr>';
         $html .= '</thead>';
         $html .= '<tbody>';
