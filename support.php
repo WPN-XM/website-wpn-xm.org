@@ -112,7 +112,7 @@ echo render_header();
 <?php
 echo render_footer_scripts();
 ?>
-</div></div></div>
+</div></div></div></div>
 </body>
 </html>
 
