@@ -179,14 +179,14 @@ function render_github_releases()
                 unset($asset['uploader'], $asset['url'], $asset['label'], $asset['content_type'], $asset['updated_at']);
 
                 // download button for installer, filesize, downloadcounter
-                $html .= '<tr>';
-                $html .= '<td colspan="2">';
+                $html .= '<tr><td>';
                 $html .= '  <a class="btn btn-large btn-success" href="' . $asset['browser_download_url'] . '">';
                 $html .= '  <i class="glyphicon glyphicon-cloud-download"></i> ' . $asset['name'] . '</a>';
-                $html .= '</td>';
-                $html .= '<td><div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div></td>';
-                $html .= '<td><div class="btn btn-small bold" title="Downloads">' . $asset['download_count'] . '</div></td>';
-                $html .= '</tr>';
+                $html .= '  &nbsp;';
+                $html .= '  <div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div>';
+                $html .= '  &nbsp;';
+                $html .= '  <div class="btn btn-small bold" title="Downloads">' . $asset['download_count'] . '</div>';
+                $html .= '</td></tr>';
 
                 // component list with version numbers for the installer
                 $html .= render_component_list_for_installer($asset['name']);
