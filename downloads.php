@@ -149,8 +149,10 @@ function render_github_releases()
         unset($release['author']);
 
         if ($release['prerelease'] === false) {
-            $html .= '<tr>'
-                . '<td class="release-cell">'
+            
+            $html .= '<tr>'; // row for new release
+
+            $html .= '<td class="release-cell">'
                 . '<h2 style="text-align: left;">' . $release['name'] . '&nbsp;'
                 . '<small class="btn btn-sm" title="Release Date">Release Date<br><b>' . date('d M Y', strtotime($release['created_at'])) . '</b></small>'
                 . '&nbsp;'
@@ -173,12 +175,13 @@ function render_github_releases()
 
             // print release notes, changelog, github tag once per version
             $html .= '<td style="vertical-align: middle;">' . $release_notes . '&nbsp;' . $changelog . '&nbsp;' . $github_tag . '</td>';
-            $html .= '</tr>';
+            $html .= '</tr>'; // row for new release
 
-            foreach ($release['assets'] as $idx => $asset) {
+            foreach ($release['assets'] as $idx => $asset) 
+            {
                 unset($asset['uploader'], $asset['url'], $asset['label'], $asset['content_type'], $asset['updated_at']);
 
-                // download button for installer, filesize, downloadcounter
+                // download button for installer, filesize, download counter
                 $html .= '<tr><td colspan="2">';
                 $html .= '  <a class="btn btn-large btn-success" href="' . $asset['browser_download_url'] . '">';
                 $html .= '  <i class="glyphicon glyphicon-cloud-download"></i> ' . $asset['name'] . '</a>';
@@ -193,7 +196,7 @@ function render_github_releases()
 
             }
 
-            $html .= '</td></tr>';
+            //$html .= '</td></tr>';
         }
     }
     return $html;
@@ -389,10 +392,10 @@ if (!empty($type) && ($type === 'json')) {
         //$html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button></td>';
         $html .= '</tr>'. PHP_EOL;
 
-        $html .= render_component_list_for_installer($download['file']);
+        //$html .= render_component_list_for_installer($download['file']);
 
         $html .= '</table>'. PHP_EOL;
-        $html .= '</td></tr>';
+        $html .= '</td></tr>'. PHP_EOL;
     }
     $html .= '</table><br/>'. PHP_EOL;;
 
@@ -407,7 +410,7 @@ if (!empty($type) && ($type === 'json')) {
                 calculateTotalDownloads();
               </script>';
 
-    require __DIR__ . '/view/footer_scripts.php';
+    //require __DIR__ . '/view/footer_scripts.php';
 
     $html .= '</div></div></div></body></html>';
 
