@@ -179,7 +179,7 @@ function render_github_releases()
                 unset($asset['uploader'], $asset['url'], $asset['label'], $asset['content_type'], $asset['updated_at']);
 
                 // download button for installer, filesize, downloadcounter
-                $html .= '<tr><td>';
+                $html .= '<tr><td colspan="2">';
                 $html .= '  <a class="btn btn-large btn-success" href="' . $asset['browser_download_url'] . '">';
                 $html .= '  <i class="glyphicon glyphicon-cloud-download"></i> ' . $asset['name'] . '</a>';
                 $html .= '  &nbsp;';
