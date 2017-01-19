@@ -154,9 +154,11 @@ function render_github_releases()
 
             $html .= '<td class="release-cell">'
                 . '<h2 style="text-align: left;">' . $release['name'] . '&nbsp;'
-                . '<small class="btn btn-sm" title="Release Date">Release Date<br><b>' . date('d M Y', strtotime($release['created_at'])) . '</b></small>'
+                . '<small class="btn btn-sm" title="Release Date">Release Date<br>'
+                . '<b>' . date('d M Y', strtotime($release['created_at'])) . '</b></small>'
                 . '&nbsp;'
-                . '<small class="btn btn-sm" title="Total Downloads">Downloads<br><span class="bold installer-downloads">' . get_total_downloads($release) . '</span></small>'
+                . '<small class="btn btn-sm" title="Total Downloads">Downloads<br>'
+                . '<span class="bold installer-downloads">' . get_total_downloads($release) . '</span></small>'
                 . '</h2>'
                 . '</td>';
 
@@ -391,7 +393,7 @@ if (!empty($type) && ($type === 'json')) {
         //$html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button></td>';
         $html .= '</tr>'. PHP_EOL;
 
-        //$html .= render_component_list_for_installer($download['file']);
+        $html .= render_component_list_for_installer($download['file']);
 
         $html .= '</table>'. PHP_EOL;
         $html .= '</td></tr>'. PHP_EOL;
@@ -402,7 +404,7 @@ if (!empty($type) && ($type === 'json')) {
     $html .= '<script>
                 function calculateTotalDownloads() {
                   var total = 0;
-                  $(\'span.installer-downloads\').each(function () {
+                  $(\'div.installer-downloads\').each(function () {
                       total += parseInt($(this).text());
                   });
                   $(\'small.total-amount-downloads\').html(total);
@@ -410,7 +412,7 @@ if (!empty($type) && ($type === 'json')) {
                 calculateTotalDownloads();
               </script>';
 
-    //require __DIR__ . '/view/footer_scripts.php';
+    require __DIR__ . '/view/footer_scripts.php';
 
     $html .= '</div></div></div></body></html>';
 
