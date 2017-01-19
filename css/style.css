@@ -221,6 +221,10 @@ th, td, caption{padding:4px 10px 4px 15px;}
 }
 ul {list-style-type:none;}
 
+td.release-cell {
+  width:50%; 
+  vertical-align: middle;
+}
 div.download-components h2 {
  font-size:18px;
  margin:10px 0;
