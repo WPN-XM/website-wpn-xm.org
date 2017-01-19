@@ -376,10 +376,15 @@ if (!empty($type) && ($type === 'json')) {
         if ($version !== $download['version']) {
             $version = $download['version'];
 
-            $html .= '<tr>';
-            $html .= '<td class="release-cell">';
-            $html .= '<h2>WPИ-XM v' . $version . '&nbsp;<small>' . date('d M Y', strtotime($download['date'])) . '</small></h2>';
-            $html .= '</td>';
+             $html .= '<td class="release-cell">'
+                . '<h2 style="text-align: left;">WPИ-XM v' . $version . '&nbsp;'
+                . '<small class="btn btn-sm" title="Release Date">Release Date<br>'
+                . '<b>' . date('d M Y', strtotime($download['created_at'])) . '</b></small>'
+                . '&nbsp;'
+                //. '<small class="btn btn-sm" title="Total Downloads">Downloads<br>'
+                //. '<span class="bold installer-downloads">' . get_total_downloads($release) . '</span></small>'
+                . '</h2>'
+                . '</td>';
 
             // print release notes, changelog, github tag once per version
             $html .= '<td style="vertical-align: middle;">';
