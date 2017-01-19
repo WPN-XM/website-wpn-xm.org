@@ -138,7 +138,7 @@ function render_github_releases()
 {
     $releases = get_github_releases();
 
-    $html = '<table>';
+    $html = '';
 
     foreach ($releases as $release) {
         // skip our first release - only commits, no downloads
@@ -167,7 +167,6 @@ function render_github_releases()
             $changelog = '<a class="btn btn-large btn-info" '
                 . 'href="https://github.com/WPN-XM/WPN-XM/blob/master/CHANGELOG.md' . $hash . '">Changelog</a>';
 
-            // component list with version numbers
             // link to github tag, e.g. https://github.com/WPN-XM/WPN-XM/tree/0.5.2
             $github_tag = '<a class="btn btn-large btn-info" '
                 . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $release['tag_name'] . '">Github Tag</a>';
@@ -180,15 +179,16 @@ function render_github_releases()
                 unset($asset['uploader'], $asset['url'], $asset['label'], $asset['content_type'], $asset['updated_at']);
 
                 // download button for installer, filesize, downloadcounter
-                $html .= '<tr><td colspan="2">';
-                $html .= '<a class="btn btn-large btn-success" href="' . $asset['browser_download_url'] . '">';
-                $html .= '<span class="glyphicon glyphicon-cloud-download"></span> ' . $asset['name'] . '</a>';
-                $html .= '';
-                $html .= '&nbsp;<div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div>';
-                $html .= '&nbsp;<div class="btn btn-small bold" title="Downloads">' . $asset['download_count'] . '</div>';
-                $html .= '</td></tr>';
+                $html .= '<tr>'
+                $html .= '<td colspan="2">';
+                $html .= '  <a class="btn btn-large btn-success" href="' . $asset['browser_download_url'] . '">';
+                $html .= '  <i class="glyphicon glyphicon-cloud-download"></i> ' . $asset['name'] . '</a>';
+                $html .= '</td>';
+                $html .= '<td><div class="btn btn-small bold" title="Filesize">' . filesize_formatted($asset['size']) . '</div></td>';
+                $html .= '<td><div class="btn btn-small bold" title="Downloads">' . $asset['download_count'] . '</div></td>';
+                $html .= '</tr>';
 
-                // component list for the installer
+                // component list with version numbers for the installer
                 $html .= render_component_list_for_installer($asset['name']);
 
             }
@@ -334,11 +334,10 @@ if (!empty($type) && ($type === 'json')) {
 
             <div class="panel panel-default" id="section-download-installation-wizards">
               <div class="panel-heading" style="overflow: hidden; min-height: 90px;">
-
-                <h3 id="download" class="pull-left">Downloads<br>
+                <!-- Total Downloads -->
+                <h3 id="download" class="pull-left centered">Downloads<br>
                     <small class="label label-default bold total-amount-downloads" title="Total downloads"></small>
                 </h3>
-
                 <!-- Google Ads -->
                 <div class="pull-right" style="height: 90px; width: 728px;">
                   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -351,10 +350,11 @@ if (!empty($type) && ($type === 'json')) {
                   (adsbygoogle = window.adsbygoogle || []).push({});
                   </script>
                 </div>
-
               </div>
               <div class="panel-body" id="downloads-list">
-                <table style="width:auto; min-width:900px">
+
+              <!-- Downloads Table -->
+              <table style="width:auto; min-width:900px">
 
 <?php
     $html = render_github_releases();
