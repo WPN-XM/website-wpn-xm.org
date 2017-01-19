@@ -457,40 +457,40 @@ function render_component_list_for_installer($installer_name)
 
     $download = get_installer_details($installer_name);
 
-    $html = '';
-
     // Components
     if ('webinstaller' === strtolower($download['installer'])) {
-        $html .= '<tr><td colspan="3">Latest Components fetched from the Web</td></tr>';
-    } else {
-        $platform = isset($download['platform']) ? '-' . $download['platform'] : '';
+       return '<tr><td colspan="3">Latest Components fetched from the Web</td></tr>';
+    } 
 
-        // set PHP version starting from 0.8.0 on
-        $phpversion = isset($download['phpversion']) ? '-' . $download['phpversion'] : '';
+    $html = '';
 
-        // PHP version dot fix
-        $phpversion = str_replace(['php5', 'php7'], ['php5.', 'php7.'], $phpversion);
+    $platform = isset($download['platform']) ? '-' . $download['platform'] : '';
 
-        $registry_file = __DIR__ . '/registry/installer/v'.$download['version'].'/'. strtolower($download['installer']) . '-' . $download['version'] . $phpversion . $platform . '.json';
+    // set PHP version starting from 0.8.0 on
+    $phpversion = isset($download['phpversion']) ? '-' . $download['phpversion'] : '';
 
-        if (!is_file($registry_file)) {
-            return '</p></td></tr>';
-        }
+    // PHP version dot fix
+    $phpversion = str_replace(['php5', 'php7'], ['php5.', 'php7.'], $phpversion);
 
-        $installerRegistry = json_decode(file_get_contents($registry_file));
+    $registry_file = __DIR__ . '/registry/installer/v'.$download['version'].'/'. strtolower($download['installer']) . '-' . $download['version'] . $phpversion . $platform . '.json';
 
-        $number_of_components = count($installerRegistry);
-
-        $html .= '<tr><td colspan="3">The following ' . $number_of_components . ' Components are included:<br>';
-
-        //if($number_of_components >= 10) {
-        $html .= render_component_list_multi_column($registry, $installerRegistry);
-        //} else {
-        //  $html .= render_component_list_comma_separated($registry, $installerRegistry, $number_of_components);
-        //}
-
-        $html .= '</td></tr>';
+    if (!is_file($registry_file)) {
+        return '</p></td></tr>';
     }
+
+    $installerRegistry = json_decode(file_get_contents($registry_file));
+
+    $number_of_components = count($installerRegistry);
+
+    $html .= '<tr><td colspan="3">The following ' . $number_of_components . ' Components are included:<br>';
+
+    //if($number_of_components >= 10) {
+    $html .= render_component_list_multi_column($registry, $installerRegistry);
+    //} else {
+    //  $html .= render_component_list_comma_separated($registry, $installerRegistry, $number_of_components);
+    //}
+
+    $html .= '</td></tr>';    
 
     return $html;
 }
