@@ -404,7 +404,7 @@ if (!empty($type) && ($type === 'json')) {
     $html .= '<script>
                 function calculateTotalDownloads() {
                   var total = 0;
-                  $(\'div.installer-downloads\').each(function () {
+                  $(\'span.installer-downloads\').each(function () {
                       total += parseInt($(this).text());
                   });
                   $(\'small.total-amount-downloads\').html(total);
