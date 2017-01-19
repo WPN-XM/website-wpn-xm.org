@@ -361,7 +361,6 @@ if (!empty($type) && ($type === 'json')) {
 
 <?php
     $html = render_github_releases();
-    $html .= '</div></div></div>';
 
     foreach ($downloads as $download) {
 
@@ -370,7 +369,7 @@ if (!empty($type) && ($type === 'json')) {
             $version = $download['version'];
 
             $html .= '<tr>';
-            $html .= '<td width="50%" style="vertical-align: middle;">';
+            $html .= '<td class="release-cell">';
             $html .= '<h2>WPИ-XM v' . $version . '&nbsp;<small>' . date('d M Y', strtotime($download['date'])) . '</small></h2>';
             $html .= '</td>';
 
@@ -384,7 +383,7 @@ if (!empty($type) && ($type === 'json')) {
         }
 
         // download details
-        $html .= '<td colspan="2">';
+        $html .= '<tr><td colspan="2">';
         $html .= '<table width="100%">';
         $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $download['download_url'] . '">' . $download['file'] . '</a></th>';
         $html .= '<tr><td><div class="btn btn-mini bold">' . $download['size'] . '</div></td>';
@@ -397,7 +396,8 @@ if (!empty($type) && ($type === 'json')) {
         $html .= '</table>'. PHP_EOL;
         $html .= '</td></tr>'. PHP_EOL;
     }
-    $html .= '</table><br/>'. PHP_EOL;;
+
+    $html .= '</table><br/>'. PHP_EOL;
 
     $html .= '<script>
                 function calculateTotalDownloads() {
