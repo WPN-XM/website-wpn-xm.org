@@ -379,7 +379,7 @@ if (!empty($type) && ($type === 'json')) {
              $html .= '<td class="release-cell">'
                 . '<h2 style="text-align: left;">WPИ-XM v' . $version . '&nbsp;'
                 . '<small class="btn btn-sm" title="Release Date">Release Date<br>'
-                . '<b>' . date('d M Y', strtotime($download['created_at'])) . '</b></small>'
+                . '<b>' . date('d M Y', strtotime($download['date'])) . '</b></small>'
                 . '&nbsp;'
                 //. '<small class="btn btn-sm" title="Total Downloads">Downloads<br>'
                 //. '<span class="bold installer-downloads">' . get_total_downloads($release) . '</span></small>'
