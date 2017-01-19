@@ -376,7 +376,7 @@ if (!empty($type) && ($type === 'json')) {
         if ($version !== $download['version']) {
             $version = $download['version'];
 
-             $html .= '<td class="release-cell">'
+             $html .= '<tr><td class="release-cell">'
                 . '<h2 style="text-align: left;">WPИ-XM v' . $version . '&nbsp;'
                 . '<small class="btn btn-sm" title="Release Date">Release Date<br>'
                 . '<b>' . date('d M Y', strtotime($download['date'])) . '</b></small>'
