@@ -12,7 +12,6 @@
     <meta name="Googlebot" content="index,follow" />
     <meta name="Author" content="Jens A. Koch" />
     <meta name="Rating" content="general" />
-    <meta name="page-type" content="Homepage, Website" />
     <meta name="robots" content="index, follow, all, noodp" />
     <meta name="Description" content="WPN-XM is a server stack for PHP development on Windows." />
     <meta name="keywords" content="WPN-XM, open-source, server, NGINX, PHP, Windows, MariaDb, MongoDb, Adminer, XDebug, WAMP, WIMP, WAMPP, LAMP" />
