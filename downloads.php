@@ -138,7 +138,7 @@ function render_github_releases()
 {
     $releases = get_github_releases();
 
-    $html = '';
+    $html = '<table>';
 
     foreach ($releases as $release) {
         // skip our first release - only commits, no downloads
