@@ -150,7 +150,7 @@ function render_github_releases()
 
         if ($release['prerelease'] === false) {
             $html .= '<tr>'
-                . '<td width="50%" style="vertical-align: middle;">'
+                . '<td class="release-cell">'
                 . '<h2 style="text-align: left;">' . $release['name'] . '&nbsp;'
                 . '<small class="btn btn-sm" title="Release Date">Release Date<br><b>' . date('d M Y', strtotime($release['created_at'])) . '</b></small>'
                 . '&nbsp;'
