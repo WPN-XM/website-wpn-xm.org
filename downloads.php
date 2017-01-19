@@ -362,7 +362,13 @@ if (!empty($type) && ($type === 'json')) {
               <table style="width:auto; min-width:900px">
 
 <?php
+    // the first part of the installer listing are the releases from github
+
     $html = render_github_releases();
+
+    // the second part of the installer listing are our early releases 
+    // from before we used github releases
+    // the installer were manually uploaded to /downloads on the server
 
     foreach ($downloads as $download) {
 
@@ -384,15 +390,17 @@ if (!empty($type) && ($type === 'json')) {
             $html .= '</tr>'. PHP_EOL;
         }
 
-        // download details
+        // download button for installer, filesize, download counter
         $html .= '<tr><td colspan="2">';
-        $html .= '<table width="100%">';
-        $html .= '<th rowspan="2" width="66%"><a class="btn btn-success btn-large" href="' . $download['download_url'] . '">' . $download['file'] . '</a></th>';
-        $html .= '<tr><td><div class="btn btn-mini bold">' . $download['size'] . '</div></td>';
-        //$html .= '<td><button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['md5'] . '">MD5</button>&nbsp;';
-        //$html .= '<button id="copy-to-clipboard" title="Copy hash to clipboard." class="btn btn-mini zclip" data-zclip-text="' . $download['sha1'] . '">SHA-1</button></td>';
-        $html .= '</tr>'. PHP_EOL;
+        $html .= '  <a class="btn btn-large btn-success" href="' . $download['download_url'] . '">';
+        $html .= '  <i class="glyphicon glyphicon-cloud-download"></i> ' . $download['file'] . '</a>';
+        $html .= '  &nbsp;';
+        $html .= '  <div class="btn btn-small bold" title="Filesize">' . $download['size'] . '</div>';
+        //$html .= '  &nbsp;';
+        //$html .= '  <div class="btn btn-small bold" title="Downloads">' . $asset['download_count'] . '</div>';
+        $html .= '</td></tr>';
 
+        // component list with version numbers for the installer
         $html .= render_component_list_for_installer($download['file']);
 
         $html .= '</table>'. PHP_EOL;
