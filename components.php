@@ -62,7 +62,7 @@ function render_tables($splitRegistry)
 {
     $html = '';
 
-    $html .= '<div class="row">'
+    $html .= '<div class="row-components">'
         . '<div class="download-components col-md-6">'
         . '<div class="panel panel-default">'
         . '<div class="panel-heading"><h4>Software Components <small id="software-components-counter">(0)</small></h4></div>'

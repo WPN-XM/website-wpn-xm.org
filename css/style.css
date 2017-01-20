@@ -291,3 +291,8 @@ div.download-components select {
     text-align:center; 
     vertical-align:middle;
 }
+
+.row-components {
+    margin-right: -45px;
+    margin-left: -45px;
+}
