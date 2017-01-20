@@ -153,13 +153,12 @@ function render_github_releases()
             $html .= '<tr>'; // row for new release
 
             $html .= '<td class="release-cell">'
-                . '<h2 style="text-align: left;">' . $release['name'] . '&nbsp;'
-                . '<small class="btn btn-sm" title="Release Date">Release Date<br>'
+                . '<h4 style="text-align: left;">' . $release['name'] . '</h4>'
+                . '&nbsp;<small class="btn btn-sm" title="Release Date">Release Date<br>'
                 . '<b>' . date('d M Y', strtotime($release['created_at'])) . '</b></small>'
                 . '&nbsp;'
                 . '<small class="btn btn-sm" title="Total Downloads">Downloads<br>'
                 . '<span class="bold installer-downloads">' . get_total_downloads($release) . '</span></small>'
-                . '</h2>'
                 . '</td>';
 
             // release notes, e.g. https://github.com/WPN-XM/WPN-XM/wiki/Release-Notes-v0.5.3
@@ -377,13 +376,12 @@ if (!empty($type) && ($type === 'json')) {
             $version = $download['version'];
 
              $html .= '<tr><td class="release-cell">'
-                . '<h2 style="text-align: left;">WPИ-XM v' . $version . '&nbsp;'
-                . '<small class="btn btn-sm" title="Release Date">Release Date<br>'
+                . '<h4 style="text-align: left;">WPИ-XM v' . $version . '</h4>'
+                . '&nbsp;<small class="btn btn-sm" title="Release Date">Release Date<br>'
                 . '<b>' . date('d M Y', strtotime($download['date'])) . '</b></small>'
                 . '&nbsp;'
                 //. '<small class="btn btn-sm" title="Total Downloads">Downloads<br>'
                 //. '<span class="bold installer-downloads">' . get_total_downloads($release) . '</span></small>'
-                . '</h2>'
                 . '</td>';
 
             // print release notes, changelog, github tag once per version
