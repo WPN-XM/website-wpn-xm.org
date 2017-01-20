@@ -32,7 +32,7 @@ div#logo {
 h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong{color:#D40408;}
 h2 { font-family:Verdana;font-size:25px;text-align:center;padding-bottom:15px;text-shadow:0px 1px 0 #FFF;}
 hr { border-bottom: 1px solid #BBBBBB; box-shadow: 0 1px 0 white;}
-
+h3#download { margin-left: 25px; }
 div#downloads-list { font-size: 12px; }
 
 .bold{font-weight:bold;}
