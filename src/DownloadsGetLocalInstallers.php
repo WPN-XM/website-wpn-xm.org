@@ -76,7 +76,7 @@ class DownloadsGetLocalInstallers
                 . 'href="https://github.com/WPN-XM/WPN-XM/tree/' . $version . '">Github Tag</a>';
 
             // date
-            $details['date'] = date('d.m.Y', filectime($filename));
+            $details['date'] = date('d.m.Y', filemtime($filename));
 
             // downloads
             $details['downloads'] = 0;
