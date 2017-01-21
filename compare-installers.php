@@ -20,7 +20,7 @@ function get($key, $defaultValue) {
 }
 
 // --------------------------------------------------------------------------
-// handle "compare-installers.php??action=get-installers&version=x.y.z"
+// handle "compare-installers.php?action=get-installers&version=x.y.z"
 
 $action = get('action', 'default');
 
