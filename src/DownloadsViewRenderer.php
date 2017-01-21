@@ -33,6 +33,7 @@ class DownloadsViewRenderer
     {
         header('Content-Type: text/html; charset=utf-8');
 
+        define('RENDER_WPNXM_PAGE_TITLE', 'WPN-XM - Downloads');
         define('RENDER_WPNXM_HEADER_LOGO', true);
         include __DIR__ . '/../view/header.php';
         include __DIR__ . '/../view/topnav.php';

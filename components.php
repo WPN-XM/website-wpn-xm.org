@@ -224,8 +224,9 @@ function render_version_dropdown($component)
 
 function render_header()
 {
-    require __DIR__ . '/view/header.php';
+    define('RENDER_WPNXM_PAGE_TITLE', 'WPN-XM - Software Components and PHP Extensions');
     define('RENDER_WPNXM_HEADER_LOGO', true);
+    require __DIR__ . '/view/header.php';
     require __DIR__ . '/view/topnav.php';
 }
 

@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
     <meta name="MobileOptimized" content="width" />
     <meta name="HandheldFriendly" content="true" />
+    <?php if(defined('RENDER_WPNXM_PAGE_TITLE') && RENDER_WPNXM_PAGE_TITLE !== false) {?>
+    <title><?php echo RENDER_WPNXM_PAGE_TITLE; ?></title>
+    <?php } else { // render default page title ?>
     <title>WPN-XM - The server stack for PHP development on Windows.</title>
+    <?php } ?>
     <!-- Google Site Verification -->
     <meta name="google-site-verification" content="OxwcTMUNiYu78EIEA2kq-vg_CoTyhGL-YVKXieCObDw" />
     <meta name="Googlebot" content="index,follow" />

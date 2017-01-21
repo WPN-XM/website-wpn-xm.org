@@ -401,6 +401,7 @@ class HighchartHelper
 /**
  * ---------- cut here ----------
  */
+define('RENDER_WPNXM_PAGE_TITLE', 'WPN-XM - Project Statistics');
 define('RENDER_WPNXM_HEADER_LOGO', true);
 require __DIR__ . '/view/header.php';
 require __DIR__ . '/view/topnav.php';
