@@ -4,7 +4,6 @@
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-26811143-1']);
       _gaq.push(['_trackPageview']);
-
       (function () {
           var ga = document.createElement('script');
           ga.type = 'text/javascript';
@@ -15,6 +14,7 @@
       })();
     </script>
     <!-- End Google Analytics -->
+
     <!-- Google Tag Manager
     <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5FQQ8G"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -33,6 +33,7 @@
     <!--[if lt IE 9]>
         <script src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
+
     <script type="text/javascript">
       // this is a ScollTo() function with an additional scrolling offset
       $(".navbar li a[href^='#']").on('click', function (event) {
@@ -59,6 +60,7 @@
           });
       });
     </script>
+
     <!-- cookiechoices.org -->
     <script src="js/cookiechoices/cookiechoices.min.js"></script>
     <script type="text/javascript">

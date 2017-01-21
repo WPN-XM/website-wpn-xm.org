@@ -19,7 +19,7 @@ class InstallerCompareViewRenderer
        
     public function render()
     {  
-        define('RENDER_WPNXM_HEADER_LOGO', true);        
+        define('RENDER_WPNXM_HEADER_LOGO', true);      
         include __DIR__ . '/../view/header.php';
         include __DIR__ . '/../view/topnav.php';
         include __DIR__ . '/../view/footer_scripts.php';
@@ -41,7 +41,7 @@ class InstallerCompareViewRenderer
         return $html;
     }
     
-        public function renderSelectionPanel()
+    public function renderSelectionPanel()
     {
         $dropdownsA = InstallerSelectionRenderer::getDropdowns("A", $this->versionA, $this->installerNameA);
         $dropdownsB = InstallerSelectionRenderer::getDropdowns("B", $this->versionB, $this->installerNameB);
