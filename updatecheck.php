@@ -39,6 +39,7 @@ $v = (!empty($v)) ? cleanVersionString($v) : '0.0.0';
 
 if (!empty($s)) {
     $s = cleanSoftwareString($s);
+    $s = updateDeprecatedSoftwareRegistryKeyNames($s); 
 }
 
 // request all software components with name/website/latestversion as JSON
@@ -81,6 +82,14 @@ function cleanSoftwareString($version)
 function cleanVersionString($version)
 {
     return preg_replace("#[^a-zA-Z0-9\.\-\+]+#", '', $version); 
+}
+
+function updateDeprecatedSoftwareRegistryKeyNames($software)
+{
+    if ($software === 'wpnxmscp')     { return 'wpnxm-scp';     }
+    if ($software === 'wpnxmscp-x64') { return 'wpnxm-scp-x64'; }
+ 
+    return $software;
 }
 
 /**
