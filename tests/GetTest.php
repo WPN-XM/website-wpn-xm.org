@@ -17,13 +17,13 @@ class GetTest extends PHPUnit_Framework_TestCase
 
         require_once dirname(__DIR__) . '/get.php';
 
-        $request  = new Request();
+        $this->request  = new Request();
         $this->response = new Response();
         $registry = new Registry();
         require_once dirname(__DIR__) . '/stats/Database.php';
         $database = new Database();
 
-        $component = new Component($request, $this->response, $registry, $database);
+        $component = new Component($this->request, $this->response, $registry, $database);
         $component->redirectTo();
     }
 
@@ -82,7 +82,7 @@ class GetTest extends PHPUnit_Framework_TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_wincache');
 
         $this->assertRegExp(
-            '#http://windows.php.net/downloads/pecl/releases/wincache/(\d+\.\d+\.\d+.\d+)/php_wincache-(\d+\.\d+\.\d+.\d+)-(\d+.\d+)-nts-VC11-x86.zip#i',
+            '#http://windows.php.net/downloads/pecl/releases/wincache/(\d+\.\d+\.\d+.\d+)/php_wincache-(\d+\.\d+\.\d+.\d+)-'.$this->request->getDefaultPHPVersion().'-nts-VC11-'.$this->request->getDefaultBitsize().'.zip#i',
             $this->response->url
         );
     }
@@ -119,12 +119,12 @@ class GetTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testRequest_PHPExtension_Trader_LatestVersion_MajorMinor_54()
+    public function testRequest_PHPExtension_Trader_LatestVersion_MajorMinor_56()
     {
-        $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_trader&p=5.4');
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_trader&p=5.6');
 
         $this->assertEquals(
-            'http://windows.php.net/downloads/pecl/releases/trader/0.4.0/php_trader-0.4.0-5.4-nts-VC9-x86.zip',
+            'http://windows.php.net/downloads/pecl/releases/trader/0.4.0/php_trader-0.4.0-5.6-nts-vc11-x86.zip',
             $this->response->url
         );
     }
@@ -165,7 +165,7 @@ class GetTest extends PHPUnit_Framework_TestCase
         $this->assertContains("5.6", $this->response->url);
     }
 
-    public function testRequest_PHPExtension_ice_LatestVersion_MajorMinor_56()
+    public function testRequest_PHPExtension_Ice_LatestVersion_MajorMinor_56()
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_ice&p=5.6');
 
@@ -174,7 +174,7 @@ class GetTest extends PHPUnit_Framework_TestCase
         $this->assertContains("5.6", $this->response->url);
     }
 
-    public function testRequest_PHPExtension_ice_For_PHP_70_Bitsize_x64()
+    public function testRequest_PHPExtension_Ice_For_PHP_70_Bitsize_x64()
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_ice&p=7.0&bitsize=x64');
 
@@ -184,11 +184,11 @@ class GetTest extends PHPUnit_Framework_TestCase
         $this->assertContains("x64", $this->response->url);
     }
 
-    public function testRequest_PHPExtension_Imagick_LatestVersion_MajorMinor_54()
+    public function testRequest_PHPExtension_Imagick_LatestVersion_MajorMinor_56()
     {
-        $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_imagick&p=5.4');
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_imagick&p=5.6');
 
-        $this->assertContains("http://windows.php.net/downloads/releases/", $this->response->url);
-        $this->assertContains("5.4", $this->response->url);
+        $this->assertContains("http://windows.php.net/downloads/pecl/releases/imagick", $this->response->url);
+        $this->assertContains("5.6", $this->response->url);
     }
 }

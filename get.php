@@ -397,6 +397,16 @@ class Request
         return $_SERVER['HTTP_USER_AGENT'];
     }
 
+    public function getDefaultPHPVersion()
+    {
+        return $this->defaultPHPversion;
+    }
+
+    public function getDefaultBitsize()
+    {
+        return $this->defaultBitsize;
+    }
+
 }
 
 class Response
@@ -545,11 +555,12 @@ class Component
             // if the latest version doesn't have an entry for this, e.g. "phpext_wincache"
             elseif(empty($version)) {
                     $versions = $this->registry->getVersions($software);
-                    //$versions = array_reverse($versions);
+                    $versions = array_reverse($versions); // latest version first
                     foreach($versions as $_version => $data) {
                         if(isset($data[$bitsize])) {
                             if($this->registry->extensionHasPhpVersion($software, $_version, $bitsize, $phpVersion)) {
                                 $version = $_version;
+                                break;
                             }
                         }
                     }
