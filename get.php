@@ -75,7 +75,7 @@ class Registry implements ArrayAccess
     {
         return (!empty($version) && array_key_exists($version, $this->registry[$software]));
     }
-    
+
     public function bitsizeExists($software, $version, $bitsize)
     {
         return (!empty($bitsize) && array_key_exists($bitsize, $this->registry[$software][$version]));
@@ -180,18 +180,18 @@ class Registry implements ArrayAccess
     public function getPhpVersionInRange($software, $version, $bitsize, $phpVersion)
     {
         $array = $this->registry[$software][$version][$bitsize];
-        
+
         // reduce "major.minor.patch" to "major.minor"
-        if(substr_count($phpVersion, '.') == 2) {            
+        if(substr_count($phpVersion, '.') == 2) {
             $phpVersion = $this->getMajorMinorVersion($phpVersion);
         }
-        
+
         return $this->getLatestVersionOfRange($array, $phpVersion . '.0', $phpVersion . '.99');
     }
-    
+
     /**
      * Returns the "major.minor" part of a "major.minor.patch" version.
-     * 
+     *
      * @param string $version "major.minor.patch" Version
      * @return string "major.minor" Version
      */
@@ -227,7 +227,7 @@ class Registry implements ArrayAccess
             if (strlen($version) === 3) {
                 $version = $version . '.0';
             }
-            
+
             if (version_compare($version, $minConstraint, '>=') === true && version_compare($version, $maxConstraint, '<') === true) {
                 #echo 'Version v' . $version . ' is greater v' . $minConstraint . '(MinConstraint) and smaller v' . $maxConstraint . '(MaxConstraint).<br>';
             } else {
@@ -355,7 +355,7 @@ class Request
     {
         // $_GET['s'] = software component
         $this->software = filter_var($_GET['s'], FILTER_SANITIZE_STRING);
-       
+
         // $_GET['v'] = version
         if(isset($_GET['v'])) {
             $version = filter_var($_GET['v'], FILTER_SANITIZE_STRING);
@@ -476,7 +476,7 @@ class Component
     public function __construct($request, $response, $registry, $database)
     {
         $this->response = $response;
-        $this->request  = $request;        
+        $this->request  = $request;
         $this->registry = $registry;
         $this->database = $database;
     }
@@ -501,59 +501,60 @@ class Component
         /*
          * If the software component is a PHP extension, then
          * we have to take the "phpVersion" and "bitsize" into account when fetching the URL.
-         * The "version" to "url" relationship has two levels more: 
+         * The "version" to "url" relationship has two levels more:
          * "version" -> "bizsize" -> "phpVersion" -> "url".
          */
-       
+
         if ($this->registry->softwareIsPHPExtension($software)) {
 
-            // return download URL for specific version request, 
-            // e.g. $registry['phpext_xdebug']['1.2.1']['x86']['5.5']                
+            // return download URL for specific version request,
+            // e.g. $registry['phpext_xdebug']['1.2.1']['x86']['5.5']
             if ($this->registry->versionExists($software, $version) &&
                 $this->registry->extensionHasPhpVersion($software, $version, $bitsize, $phpVersion))
             {
-                $url = $this->registry[$software][$version][$bitsize][$phpVersion];  
-                
+                $url = $this->registry[$software][$version][$bitsize][$phpVersion];
+
                 $this->trackDownloadEvent($url, $software, $version, $bitsize, $phpVersion);
-                $this->response->redirect($url);                
+                $this->response->redirect($url);
             }
-            
-            // the specific version does not exist. 
+
+            // the specific version does not exist.
             // return latest version with default PHP version and default bitsize instead,
             // e.g. $registry['phpext_xdebug']['latest']['url']['x86']['5.5']
             elseif ($this->registry->extensionLatestVersionHasBitsize($software, $bitsize) &&
                     $this->registry->extensionLatestVersionHasPhpVersion($software, $bitsize, $phpVersion))
-            {               
+            {
                 $url     = $this->registry[$software]['latest']['url'][$bitsize][$phpVersion];
                 $version = $this->registry[$software]['latest']['version'];
-                
+
                 $this->trackDownloadEvent($url, $software, $version, $bitsize, $phpVersion);
                 $this->response->redirect($url);
-            } 
+            }
             elseif ($software === 'phpext_phalcon')
             {
                 // special handling for phpext_phalcon, because it has a PHP "patch level" version constraint.
                 // (while all other PHP extensions have only a "major.minor" version constraint.)
-                $version    = $this->registry->getLatestVersion($software);   
+                $version    = $this->registry->getLatestVersion($software);
                 $phpVersion = $this->registry->getPhpVersionInRange($software, $version, $bitsize, $phpVersion);
                 $url        = $this->registry[$software][$version][$bitsize][$phpVersion];
-                
+
                 $this->trackDownloadEvent($url, $software, $version, $bitsize, $phpVersion);
                 $this->response->redirect($url);
-            } 
-            
+            }
+
             // if the latest version doesn't have an entry for this, e.g. "phpext_wincache"
             elseif(empty($version)) {
                     $versions = $this->registry->getVersions($software);
-                    //$versions = array_reverse($versions);              
-                    foreach($versions as $_version => $data) {                                                
+                    //$versions = array_reverse($versions);
+                    foreach($versions as $_version => $data) {
                         if(isset($data[$bitsize])) {
                             if($this->registry->extensionHasPhpVersion($software, $_version, $bitsize, $phpVersion)) {
                                 $version = $_version;
                             }
                         }
                     }
-                    if($this->registry->bitsizeExists($software, $version, $bitsize)) {
+                    if( $this->registry->versionExists($software, $version) &&
+                        $this->registry->bitsizeExists($software, $version, $bitsize)) {
                         $url = $this->registry[$software][$version][$bitsize][$phpVersion];
                         $this->trackDownloadEvent($url, $software, $version, $bitsize, $phpVersion);
                         $this->response->redirect($url);
@@ -562,8 +563,8 @@ class Component
             else {
                 // fall-through to "not found"
             }
-        } 
-        else 
+        }
+        else
         {
             /*
              * These are simple "version" to "url" relationships.
@@ -577,19 +578,19 @@ class Component
                 $bitsize = $this->registry->getBitsize($software);
                 $this->trackDownloadEvent($url, $software, $version, $bitsize);
                 $this->response->redirect($url);
-            } 
+            }
             elseif (in_array($software, ['php', 'php-x64', 'php-qa', 'php-qa-x64']))
             {
                 // special handling for PHP, because we have to
                 // return the latest patch version (x.y.*) of a "major.minor" PHP version (x.y)
-                $versions = $this->registry[$software];                
+                $versions = $this->registry[$software];
                 $version  = $this->registry->getLatestVersionOfRange($versions, $phpVersion . '.0', $phpVersion . '.99');
-                
+
                 $url      = $this->registry[$software][$version];
                 $this->trackDownloadEvent($url, $software, $version, $bitsize);
                 $this->response->redirect($url);
-            } 
-            else 
+            }
+            else
             {
                 // return latest version url, e.g. $registry['nginx']['latest']['url']
                 $url     = $this->registry[$software]['latest']['url'];
@@ -599,7 +600,7 @@ class Component
                 $this->response->redirect($url);
             }
         }
-                
+
         // software does not exist, download will fail.
         $this->response->setHeader('HTTP/1.0 404 Not Found');
         $this->response->send();
@@ -613,7 +614,7 @@ class Component
 
 /** ------------------- */
 if (!defined('PHPUNIT_TESTSUITE'))
-{    
+{
     $request  = new Request();
     $response = new Response();
     $registry = new Registry();

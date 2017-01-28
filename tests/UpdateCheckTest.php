@@ -12,7 +12,7 @@ class UpdateCheckTest extends PHPUnit_Framework_TestCase
         return array(
           // array($expected, $versionString)
           // ok
-          array("1.2.3",                        "1.2.3"),          
+          array("1.2.3",                        "1.2.3"),
           array("1.2.3h",                       "1.2.3h"),
           array("1.2.3-alpha+001",              "1.2.3-alpha+001"),
           array("1.2.3+20130313144700",         "1.2.3+20130313144700"),
@@ -33,7 +33,7 @@ class UpdateCheckTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider getVersionStrings
-     */ 
+     */
     public function testCleanVersionString($expected, $versionString)
     {
         $cleanVersionString = cleanVersionString($versionString);
@@ -54,10 +54,10 @@ class UpdateCheckTest extends PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider getSoftwareStrings
-     */ 
+     */
     public function testCleanSoftwareString($expected, $softwareString)
     {
-        $cleanSoftwareString = cleanSoftwareString($softwareString);        
+        $cleanSoftwareString = cleanSoftwareString($softwareString);
         $this->assertEquals($expected, $cleanSoftwareString);
     }
 }

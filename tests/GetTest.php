@@ -81,8 +81,8 @@ class GetTest extends PHPUnit_Framework_TestCase
         // this is a request for the latest version with "default PHP version" and "default bitsize"
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_wincache');
 
-        $this->assertEquals(
-            'http://windows.php.net/downloads/pecl/releases/wincache/1.3.7.9/php_wincache-1.3.7.9-5.6-nts-VC11-x86.zip',
+        $this->assertRegExp(
+            '#http://windows.php.net/downloads/pecl/releases/wincache/(\d+\.\d+\.\d+.\d+)/php_wincache-(\d+\.\d+\.\d+.\d+)-(\d+.\d+)-nts-VC11-x86.zip#i',
             $this->response->url
         );
     }
@@ -91,8 +91,8 @@ class GetTest extends PHPUnit_Framework_TestCase
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_wincache&p=5.6&bitsize=x64');
 
-        $this->assertEquals(
-            'http://windows.php.net/downloads/pecl/releases/wincache/1.3.7.9/php_wincache-1.3.7.9-5.6-nts-VC11-x64.zip',
+        $this->assertRegExp(
+            '#http://windows.php.net/downloads/pecl/releases/wincache/(\d+\.\d+\.\d+.\d+)/php_wincache-(\d+\.\d+\.\d+.\d+)-5.6-nts-VC11-x64.zip#i',
             $this->response->url
         );
     }
