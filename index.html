@@ -284,7 +284,7 @@
           </a>
           <div class="fb-like" data-href="http://wpn-xm.org/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true" data-size="large"></div>
           <span class="pull-right">
-            <span id="a2itemwidget"></span> <script type="text/javascript" src="http://api.alternativeto.net/software/wpn-xm/widgetjs/light"></script>
+            <span id="alternativeto-widget"></span></script>
           </span>
         </div>
       </div>
@@ -734,6 +734,16 @@
           url: "http://wpn-xm.org/upcoming-release.php",
           success: function (data) {
               $('#upcoming-release-box').html(data);
+          }
+      });
+
+      // load alternative.to widget
+      $.ajax({
+          type: "GET",
+          dataType: "jsonp",
+          url: "http://api.alternativeto.net/software/wpn-xm/widget/light",
+          success: function (data) {
+            $('#alternativeto-widget').html(data.Widget);              
           }
       });
 
