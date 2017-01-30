@@ -51,8 +51,7 @@
       // this is the fade-in-fade-out of the mini logi in the top-navbar
       $(document).ready(function () {
           $(window).scroll(function(){
-              var scrollTop = $(this).scrollTop();
-              if (scrollTop > 210) {
+              if ($(this).scrollTop() > 210) {
                   $('a.navbar-brand img').fadeIn(400);
               } else {
                   $('a.navbar-brand img').stop().fadeOut(400);
