@@ -48,13 +48,14 @@
           });
       });
 
-      // this is the fade-in-fade-out of the mini logi in the top-navbar
       $(document).ready(function () {
+          // fade-in/fade-out of the brand logo in the top-navbar
           $(window).scroll(function(){
-              if ($(this).scrollTop() > 210) {
-                  $('a.navbar-brand img').fadeIn(400);
+              var logo = $('a.navbar-brand img');
+              if ($(this).scrollTop() > 210 && logo.not(':visible')) {
+                  logo.fadeIn(400);
               } else {
-                  $('a.navbar-brand img').stop().fadeOut(400);
+                  logo.stop().fadeOut(400);
               }
           });
       });
