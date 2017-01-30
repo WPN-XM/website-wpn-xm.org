@@ -53,9 +53,9 @@
           $(window).scroll(function(){
               var logo = $('a.navbar-brand img');
               if ($(this).scrollTop() > 210 && logo.not(':visible')) {
-                  logo.fadeIn(400);
+                  logo.stop().show().animate({opacity: 1}, 800);
               } else {
-                  logo.stop().fadeOut(400);
+                  logo.stop().show().animate({opacity: 0}, 800);
               }
           });
       });
