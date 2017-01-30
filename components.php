@@ -238,7 +238,9 @@ function render_footer_scripts()
     // scroll into view   
     if(document.location.hash) {
         var id = document.location.hash.substring(1);
-        window.scrollTo(0, $("#"+id).offset().top-70);
+        var el = $("#"+id);
+        window.scroll(0, el.offset().top-125);
+        el.fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn();
     };
     // bind "change" event of all select boxes (dropdowns)
     $("select").change(function(){
