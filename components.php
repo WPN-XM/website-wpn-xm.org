@@ -232,8 +232,6 @@ function render_header()
 
 function render_footer_scripts()
 {
-    require __DIR__ . '/view/footer_scripts.php';
-
     echo '<script>
     $(document).ready(function () {
         if(document.location.hash) {
@@ -252,6 +250,8 @@ function render_footer_scripts()
     // update Counter for Software Components
     $("#software-components-counter").html( "("+ $("table#software-components > tbody > tr").length +")" );
     </script>';
+
+    require __DIR__ . '/view/footer_scripts.php';
 }
 
 function sortVersionsHighToLow($versions)
