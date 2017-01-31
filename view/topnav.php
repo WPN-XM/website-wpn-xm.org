@@ -56,7 +56,8 @@
                 <li><a href="http://wpn-xm.github.io/docs/">Overview</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="http://wpn-xm.github.io/docs/user-manual/en/">User-Manual (en)</a></li>                
-                <li><a href="http://wpn-xm.github.io/docs/faq/">FAQ</a></li>  
+                <li><a href="http://wpn-xm.github.io/docs/faq/en/">FAQ (en)</a></li>
+                <li><a href="http://wpn-xm.github.io/docs/faq/de/">FAQ (de)</a></li>  
                 <li><a href="https://github.com/WPN-XM/WPN-XM/wiki">Wiki</a></li>
               </ul>
           </li>
