@@ -702,7 +702,7 @@
 
       $.ajax({
           type: "GET",
-          url: "http://wpn-xm.org/updatecheck.php?s=all",
+          url: "updatecheck.php?s=all",
           success: function (data) {
               populateRegistryList(data);
           }
@@ -722,7 +722,7 @@
 
       $.ajax({
           type: "GET",
-          url: "http://wpn-xm.org/latest-updates.php",
+          url: "latest-updates.php",
           success: function (data) {
               $('#registry-latest-updates').html(data);
               activateLatestUpdateNewsBox();
@@ -731,7 +731,7 @@
 
       $.ajax({
           type: "GET",
-          url: "http://wpn-xm.org/upcoming-release.php",
+          url: "upcoming-release.php",
           success: function (data) {
               $('#upcoming-release-box').html(data);
           }
