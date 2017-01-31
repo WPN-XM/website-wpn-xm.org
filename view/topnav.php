@@ -98,7 +98,7 @@
           <!-- Logo -->
           <div class="header">
             <div id="logo"></div>
-            <h1 style="visibility:hidden; line-height: 1px;" >WPN-XM</h1>
+            <h1 style="visibility:hidden; line-height: 1px;">WPN-XM</h1>
             <h2><strong>WPИ-XM</strong> is a web server stack for PHP development on Windows<small><sup>&reg;</sup></small>.</h2>
           </div>
 
