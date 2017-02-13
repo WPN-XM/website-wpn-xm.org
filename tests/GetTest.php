@@ -145,10 +145,26 @@ class GetTest extends PHPUnit_Framework_TestCase
         $this->assertContains("5.6", $this->response->url);
     }
 
-    public function testRequest_PHP_DefaultVersion_Major_7()
+    public function testRequest_PHP_LatestVersion_MajorMinor_70()
     {
-        // p=7 is invalid; the default PHP version is set instead
-        $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=7');
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=7.0');
+
+        $this->assertContains("http://windows.php.net/downloads/releases/", $this->response->url);
+        $this->assertContains("7.0", $this->response->url);
+    }
+
+    public function testRequest_PHP_LatestVersion_MajorMinor_71()
+    {
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=7.1');
+
+        $this->assertContains("http://windows.php.net/downloads/releases/", $this->response->url);
+        $this->assertContains("7.1", $this->response->url);
+    }
+
+    public function testRequest_PHP_DefaultVersion_Major_99()
+    {
+        // p=99 is invalid; the default PHP version is set instead
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=99');
 
         $this->assertContains("http://windows.php.net/downloads/", $this->response->url);
         $this->assertEquals(1, preg_match('#php-(\d+.\d+.\d+)-nts-#i', $this->response->url));
