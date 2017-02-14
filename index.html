@@ -723,7 +723,7 @@
 
       $.ajax({
           type: "GET",
-          url: "latest-updates.php",
+          url: "//latest-updates.php",
           success: function (data) {
               $('#registry-latest-updates').html(data);
               activateLatestUpdateNewsBox();
@@ -732,7 +732,7 @@
 
       $.ajax({
           type: "GET",
-          url: "upcoming-release.php",
+          url: "//upcoming-release.php",
           success: function (data) {
               $('#upcoming-release-box').html(data);
           }
@@ -742,7 +742,7 @@
       $.ajax({
           type: "GET",
           dataType: "jsonp",
-          url: "api.alternativeto.net/software/wpn-xm/widget/light",
+          url: "//api.alternativeto.net/software/wpn-xm/widget/light",
           success: function (data) {
             $('#alternativeto-widget').html(data.Widget);              
           }
