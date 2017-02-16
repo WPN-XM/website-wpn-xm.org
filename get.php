@@ -390,11 +390,14 @@ class Request
          * "WPN-XM Server Stack - Webinstaller - Version".
          * Only the version is stats relevant, let's ditch the rest.
          */
-        if (false !== strpos($_SERVER['HTTP_USER_AGENT'], 'WPN-XM Server Stack - Webinstaller - ')) {
-            return substr($_SERVER['HTTP_USER_AGENT'], 37);
+        if (isset($_SERVER['HTTP_USER_AGENT'])) {
+            if(false !== strpos($_SERVER['HTTP_USER_AGENT'], 'WPN-XM Server Stack - Webinstaller - ')) {
+                return substr($_SERVER['HTTP_USER_AGENT'], 37);
+            }
+            return $_SERVER['HTTP_USER_AGENT'];
         }
 
-        return $_SERVER['HTTP_USER_AGENT'];
+        return 'HTTP_USER_AGENT not set';
     }
 
     public function getDefaultPHPVersion()
