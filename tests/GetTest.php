@@ -56,7 +56,7 @@ class GetTest extends \PHPUnit\Framework\TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_phalcon&p=5.4');
 
         $this->assertRegExp(
-            '#https://static.phalconphp.com/www/files/phalcon_x86_VC9_php(\d+\.\d+\.\d+)_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
+            '#https://static.phalconphp.com/www/files/phalcon_x86_VC9_php5.4.0_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
             $this->response->url
         );
     }
@@ -66,7 +66,7 @@ class GetTest extends \PHPUnit\Framework\TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_phalcon&p=5.4.0');
 
         $this->assertRegExp(
-            '#https://static.phalconphp.com/www/files/phalcon_x86_VC9_php(\d+\.\d+\.\d+)_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
+            '#https://static.phalconphp.com/www/files/phalcon_x86_VC9_php5.4.0_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
             $this->response->url
         );
     }
@@ -76,7 +76,7 @@ class GetTest extends \PHPUnit\Framework\TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_phalcon&p=5.5');
 
         $this->assertRegExp(
-            '#https://static.phalconphp.com/www/files/phalcon_x86_vc11_php(\d+\.\d+\.\d+)_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
+            '#https://static.phalconphp.com/www/files/phalcon_x86_vc11_php5.5.0_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
             $this->response->url
         );
     }

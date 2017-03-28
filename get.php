@@ -574,7 +574,14 @@ class Component
             {
                 // special handling for phpext_phalcon, because it has a PHP "patch level" version constraint.
                 // (while all other PHP extensions have only a "major.minor" version constraint.)
-                $version    = $this->registry->getLatestVersion($software);
+                if($this->registry->extensionLatestVersionHasBitsize($software, $bitsize) &&
+                    $this->registry->extensionLatestVersionHasPhpVersion($software, $bitsize, $phpVersion)) {
+                    $version = $this->registry->getLatestVersion($software);
+                } else {
+
+                    $version = $this->registry->findLatestVersionForBitsize($software, $bitsize, $phpVersion);
+                }
+
                 $phpVersion = $this->registry->getPhpVersionInRange($software, $version, $bitsize, $phpVersion);
                 $url        = $this->registry[$software][$version][$bitsize][$phpVersion];
 
