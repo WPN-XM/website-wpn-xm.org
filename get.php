@@ -124,6 +124,33 @@ class Registry implements ArrayAccess
     }
 
     /**
+     * Find the latest version of a software for a given bitsize and php version constraint.
+     *
+     * @param $software
+     * @param $bitsize
+     * @param $phpversion PHP versions: accepts PHP versions as Major.Minor and Major.Minor.Patch.
+     */
+    public function findLatestVersionForBitsize($software, $bitsize, $phpVersion)
+    {
+        // @todo
+        // add a zero as patch level to a major.minor PHP version
+        // not good, but i simply don't know how to do the lookup atm, sorry. (probably part of string search)
+        if(substr_count($phpVersion, '.') == 1) {
+            $phpVersion = $phpVersion . '.0';
+        }
+
+        $versions = $this->getVersions($software);
+
+        $versions = array_reverse($versions); // latest version first
+
+        foreach($versions as $_version => $data) {
+            if(isset($data[$bitsize]) && $this->extensionHasPhpVersion($software, $_version, $bitsize, $phpVersion)) {
+                return $_version;
+            }
+        }
+    }
+
+    /**
      * Is the software a PHP extension?
      *
      * @param $software
