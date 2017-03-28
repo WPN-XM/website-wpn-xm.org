@@ -1,6 +1,6 @@
 <?php
 
-class UpdateCheckTest extends PHPUnit_Framework_TestCase
+class UpdateCheckTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {

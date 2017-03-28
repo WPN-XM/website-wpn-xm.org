@@ -2,7 +2,7 @@
 
 require_once dirname(__DIR__) . '/get.php';
 
-class RegistryTest extends PHPUnit_Framework_TestCase
+class RegistryTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {
