@@ -4,7 +4,13 @@ class GetTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp()
     {
-       //
+       if (!extension_loaded('pdo')) {
+            $this->markTestSkipped('This test requires the PHP extensions "PDO"');
+       }
+
+       if (!extension_loaded('pdo_sqlite')) {
+            $this->markTestSkipped('This test requires the PHP extensions "PDO_SQLITE".');
+       }
     }
 
     /**
