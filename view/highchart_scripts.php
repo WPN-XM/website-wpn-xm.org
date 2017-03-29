@@ -12,8 +12,8 @@ $(document).ready(function () {
 	        text: 'Downloads'
 	    },
 	    subtitle: {
-	    	text: 'Number of Installation Wizard Downloads by Installer Version with PHP Version share'
-	    },
+            text: 'Number of Installation Wizard Downloads by Installer Version with PHP Version share'
+        },
         data: {
 	    	table: 'downloads-by-installer-and-php-version'
 	    },
@@ -141,6 +141,44 @@ $(document).ready(function () {
             href: 'http://wpn-xm.org/'
         },
     });
+
+    $('#highchart-container-compare-server-stack-downloads').highcharts({
+        chart: {
+        },
+        title: {
+            text: 'Downloads - Server Stacks for Windows'
+        },
+        subtitle: {
+            text: 'The chart shows the number of downloads per month for multiple server stack projects on Windows.'
+        },
+        yAxis: {
+            title: {
+                text: 'Downloads'
+            },
+            max: 2000000,
+            minorTickInterval: 0.1,
+            tickInterval: 0.1,
+            type: 'logarithmic'
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+               month: '%m %Y'    // 01 2016
+            }
+        },
+        tooltip: {
+          formatter: function() {
+              return '<b>' + this.series.name + '</b><br>' + Highcharts.dateFormat('%m %Y', this.x, 0) + '<br/>' + 'Downloads: ' + this.y;
+          },  
+          crosshairs: true
+          //shared: true
+        },
+        series: [
+            <?php 
+                echo HighchartHelper::render_json_for_serverstack_downloads_comparison_chart(); 
+            ?>
+        ],
+    });    
 
 });
 </script>
