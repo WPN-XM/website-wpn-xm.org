@@ -1,5 +1,7 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
 
 <script>
 $(document).ready(function () {
@@ -61,6 +63,18 @@ $(document).ready(function () {
             text: 'wpn-xm.org',
             href: 'http://wpn-xm.org/'
         },
+        exporting: {
+            chartOptions: {
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                }
+            },
+            fallbackToExportServer: false
+        },
     });
 
     $('#highchart-container-total-downloads').highcharts({
@@ -94,6 +108,18 @@ $(document).ready(function () {
         credits: {
             text: 'wpn-xm.org',
             href: 'http://wpn-xm.org/'
+        },
+        exporting: {
+            chartOptions: {
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                }
+            },
+            fallbackToExportServer: false
         },
     });
 
@@ -140,6 +166,18 @@ $(document).ready(function () {
             text: 'wpn-xm.org',
             href: 'http://wpn-xm.org/'
         },
+        exporting: {
+            chartOptions: {
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                }
+            },
+            fallbackToExportServer: false
+        },
     });
 
     $('#highchart-container-compare-server-stack-downloads').highcharts({
@@ -178,6 +216,18 @@ $(document).ready(function () {
                 echo HighchartHelper::render_json_for_serverstack_downloads_comparison_chart(); 
             ?>
         ],
+        exporting: {
+            chartOptions: {
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                }
+            },
+            fallbackToExportServer: false
+        },
     });    
 
 });
