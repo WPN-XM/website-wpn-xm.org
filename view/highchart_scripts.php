@@ -14,7 +14,7 @@ $(document).ready(function () {
 	        text: 'Downloads'
 	    },
 	    subtitle: {
-            text: 'Number of Installation Wizard Downloads by Installer Version with PHP Version share'
+            text: 'Number of WPN-XM Installation Wizard Downloads by Installer Version with PHP Version share'
         },
         data: {
 	    	table: 'downloads-by-installer-and-php-version'
@@ -82,7 +82,7 @@ $(document).ready(function () {
             text: 'Downloads'
         },
         subtitle: {
-            text: 'Number of Installation Wizard Downloads by Installer Version'
+            text: 'Number of WPN-XM Installation Wizard Downloads by Installer Version'
         },
         chart: {
         	type: 'spline'
@@ -187,7 +187,7 @@ $(document).ready(function () {
             text: 'Downloads - Server Stacks for Windows'
         },
         subtitle: {
-            text: 'The chart shows the number of downloads per month for multiple server stack projects on Windows.'
+            text: 'The number of downloads per month for multiple server stack projects on Windows'
         },
         yAxis: {
             title: {
@@ -210,6 +210,10 @@ $(document).ready(function () {
           },  
           crosshairs: true
           //shared: true
+        },
+        credits: {
+            text: 'wpn-xm.org',
+            href: 'http://wpn-xm.org/'
         },
         series: [
             <?php 
