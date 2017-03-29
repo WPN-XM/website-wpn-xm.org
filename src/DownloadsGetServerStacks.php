@@ -32,13 +32,8 @@ class DownloadsGetServerStacks
             $json  = $this->sourceforge->getJson($project);
 
             $array = json_decode($json, true);    
-            $array = $this->reduceDataSet($array);
-            $array = $this->fixDataSet($array);
             $array = $this->buildHighChartArray($project, $array);
-
             $json  = json_encode($array);
-
-            //file_put_contents(dirname(__DIR__).'/downloads/downloads_serverstack_'.$project.'.json', $json);
 
             // aggregate stats data (series)
             if(empty($seriesJson)) {
@@ -49,31 +44,6 @@ class DownloadsGetServerStacks
         }
 
         file_put_contents(dirname(__DIR__).'/downloads/downloads_serverstacks.json', $seriesJson);
-    }
-
-    private function reduceDataSet($array)
-    {
-        unset(
-            $array['end_date'], 
-            $array['oses'], 
-            $array['countries'], 
-            $array['messages'], 
-            $array['oses_with_downloads'], 
-            $array['oses_by_country'], 
-            $array['summaries'], 
-            $array['geo']
-        );
-
-        return $array;
-    }
-
-    private function fixDataSet($array)
-    {
-       $data = [];
-       foreach($array['downloads'] as $download)  {
-           $data[] = [(strtotime($download[0])*1000), $download[1]];
-       }
-       return $data;
     }
 
     private function buildHighChartArray($project, array $data)
@@ -138,6 +108,13 @@ class SourceForgeStatsApi
         } else {
             // The cache is out-of-date. Load the JSON data from Github.
             $json = self::doRequest($project);
+
+            // reduce the json data set to relevant stuff, before we cache it
+            $array = json_decode($json, true);
+            $array = $this->reduceDataSet($array);
+            $array = $this->fixDataSet($array);
+            $json = json_encode($array);
+
             file_put_contents($cache_file, $json, LOCK_EX);
         }
 
@@ -151,7 +128,48 @@ class SourceForgeStatsApi
         $end_date   = date('Y-m-01', strtotime('-1 month'));
 
         $url = "http://sourceforge.net/projects/$project/files/stats/json?start_date=$start_date&end_date=$end_date";
-        
-        return file_get_contents($url);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL            => $url,
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_FOLLOWLOCATION => 1,
+            CURLOPT_HTTPHEADER     => ['Accept: application/json'],
+            CURLOPT_USERAGENT      => 'wpn-xm.org - stats page',
+        ]);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        return $response;
+    }
+
+    private function reduceDataSet($array)
+    {
+        unset(
+            $array['end_date'], 
+            $array['oses'], 
+            $array['countries'], 
+            $array['messages'], 
+            $array['oses_with_downloads'], 
+            $array['oses_by_country'], 
+            $array['summaries'], 
+            $array['geo']
+        );
+
+        return $array;
+    }
+
+    private function fixDataSet($array)
+    {
+       $data = [];
+       foreach($array['downloads'] as $download)  {
+           $data[] = [(strtotime($download[0])*1000), $download[1]];
+       }
+       return $data;
     }
 }
