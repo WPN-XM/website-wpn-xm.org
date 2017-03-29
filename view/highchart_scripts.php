@@ -135,6 +135,9 @@ $(document).ready(function () {
             verticalAlign: 'middle',
             y: 50
         },
+        subtitle: {
+            text: 'Number of WPN-XM Installation Wizard Downloads by PHP version share'
+        },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.y}</b><br>That are <b>{point.percentage:.1f}%</b> of the total downloads.</b>'
         },
