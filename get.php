@@ -162,23 +162,14 @@ class Registry implements ArrayAccess
     }
 
     /**
-     * Return the latest version of an PHP extensions
-     * given "name", "major.minor" "phpVersion" and "bitsize".
-     *
-     * $registry['phpext_xdebug']['1.2.1']['x86']['5.5.*']
+     * Return the latest version.
      *
      * @param $software
-     * @return string
+     * @return string Value of $registry[$software]['latest']['version']
      */
     public function getLatestVersion($software)
     {
-        $versions = $this->getVersions($software);
-
-        end($versions);
-
-        $latest_version = key($versions);
-
-        return $latest_version;
+        return $this->registry[$software]['latest']['version'];
     }
 
     /**
