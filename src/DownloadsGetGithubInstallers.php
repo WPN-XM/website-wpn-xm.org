@@ -14,11 +14,17 @@
  */
 class DownloadsGetGithubInstallers
 {
+    private $isGithubApiRequest = false;
+
     public function get()
     {
         $downloads = [];
 
-        $releases = self::getGithubReleases();
+        if($this->isGithubApiRequest) {
+            $githubDownloadStatsDatabase = new GithubDownloadStatsDatabase;
+        }
+
+        $releases = $this->getGithubReleases();
 
         foreach ($releases as $release)
         {
@@ -62,6 +68,10 @@ class DownloadsGetGithubInstallers
                     $details['size']         = LocalInstallersHelper::formatFilesize($asset['size']);
                     $details['downloads']    = $asset['download_count'];
 
+                    if($this->isGithubApiRequest) {
+                        $githubDownloadStatsDatabase->insertDownload($asset['name'], $asset['download_count']);
+                    }
+
                     // add download details to downloads array
                     $downloads[] = $details;
                 }
@@ -71,17 +81,19 @@ class DownloadsGetGithubInstallers
         return $downloads;
     }
 
-    public static function getGithubReleases()
+    public function getGithubReleases()
     {
         $cache_file = dirname(__DIR__) . '/downloads/github-releases-cache.json';
 
-        if (file_exists($cache_file) && (filemtime($cache_file) > (time() - (1 * 24 * 60 * 60)))) {
-            // Use cache file, when not older than 7 days.
+        // Use cache file, when not older than 1 day.
+        if (file_exists($cache_file) && (filemtime($cache_file) > (time() - 86400))) { // 1 * 24 * 60 *60           
             $data = file_get_contents($cache_file);
         } else {
             // The cache is out-of-date. Load the JSON data from Github.
             $data = self::curlRequest();
             file_put_contents($cache_file, $data, LOCK_EX);
+
+            $this->isGithubApiRequest = true;
         }
 
         return json_decode($data, true);
