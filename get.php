@@ -657,7 +657,7 @@ if (!defined('PHPUNIT_TESTSUITE'))
     $request  = new Request();
     $response = new Response();
     $registry = new Registry();
-    require_once __DIR__ . '/stats/Database.php';
+    require_once __DIR__ . '/src/Database.php';
     $database = new Database();
 
     $component = new Component($request, $response, $registry, $database);

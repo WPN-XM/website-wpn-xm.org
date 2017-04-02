@@ -30,7 +30,7 @@ class Database
 
     public function connect()
     {
-        $sqliteDatabaseFile = __DIR__ . '/stats.sqlite.db';
+        $sqliteDatabaseFile = dirname(__DIR__) . '/stats/stats.sqlite.db';
 
         try {
             // open the database
