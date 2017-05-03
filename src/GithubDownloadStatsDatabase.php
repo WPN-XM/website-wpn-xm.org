@@ -24,7 +24,7 @@ class GithubDownloadStatsDatabase
     {
         if ($this->db === null) {
             $this->connect();
-            $this->createSchema();
+            //$this->createSchema();
         }
     }
 
