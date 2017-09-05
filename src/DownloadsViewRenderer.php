@@ -9,6 +9,8 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
+include __DIR__ . '/Registry.php';
+
 class DownloadsViewRenderer
 {
     private $downloads = [];
@@ -214,7 +216,7 @@ HTML;
 
     function renderComponentListMultiColumn($installerRegistry)
     {
-        $registry = self::loadRegistry();
+        $registry = Registry::loadRegistry();
 
         $html  = '       <!-- Component List -->' . "\n";
         $html .= '       <ul class="multi-column-list">' . "\n";
@@ -223,24 +225,24 @@ HTML;
 
         foreach ($installerRegistry as $i => $component)
         {
-            $shortName = self::updateDeprecatedSoftwareRegistryKeyNames($component[0]);
+            $software = Registry::updateDeprecatedSoftwareRegistryKeyNames($component[0]);
 
             // skip - components removed from registry, still in 0.7.0 and breaking it
-            if (in_array($shortName, ['phpext_xcache', 'junction'])) {
+            if (Registry::isDeprecatedSoftwareRegistryKeyName($software)) {
                 continue;
             }
 
             $version = $component[3];
 
             // php extension - they are appended to the extension html fragment
-            if (false !== strpos($shortName, 'phpext_')) {
-                $name = str_replace('PHP Extension ', '', $registry[$shortName]['name']);
+            if (false !== strpos($software, 'phpext_')) {
+                $name = str_replace('PHP Extension ', '', $registry[$software]['name']);
                 $extensions_html .= '        <li><b>' . $name . '</b> ' . $version . '</li>' . "\n";
                 continue;
             }
 
             // normal component
-            $name = $registry[$shortName]['name'];
+            $name = $registry[$software]['name'];
             $html .= '        <li><b>' . $name . '</b> ' . $version . '</li>'. "\n";
         }
         unset($installerRegistry);
@@ -253,19 +255,20 @@ HTML;
 
     /*function renderComponentListCommaSeparated($installerRegistry, $number_of_components)
     {
-        $registry = self::loadRegistry();
+        $registry = Registry::loadRegistry();
      *
         $html            = '';
         $extensions_html = ', PHP Extension(s): ';
 
         foreach ($installerRegistry as $i => $component) {
-            $shortName = $component[0];
-            $version   = $component[3];
+            $software = $component[0];
 
-            // skip - removed from registry, still in 0.7.0 and breaking it
-            if ($shortName === 'phpext_xcache') {
+            // skip - components removed from registry, still in 0.7.0 and breaking it
+            if (Registry::isDeprecatedSoftwareRegistryKeyName($software)) {
                 continue;
             }
+
+            $version   = $component[3];
 
             if (false !== strpos($component[0], 'phpext_')) {
                 $name = str_replace('PHP Extension ', '', $registry[$component[0]]['name']);
@@ -273,7 +276,7 @@ HTML;
                 continue;
             }
 
-            $name = $registry[$shortName]['name'];
+            $name = $registry[$software]['name'];
 
             $html .= '<b>' . $name . '</b> ' . $version;
             $html .= ($i + 1 !== $number_of_components) ? ', ' : '';
@@ -284,23 +287,4 @@ HTML;
 
         return $html;
     }*/
-
-    public static function updateDeprecatedSoftwareRegistryKeyNames($software)
-    {
-        if ($software == 'wpnxmscp')     { return 'wpnxm-scp';     }
-        if ($software == 'wpnxmscp-x64') { return 'wpnxm-scp-x64'; }
-
-        return $software; // pass through
-    }
-
-    public static function loadRegistry()
-    {
-        $registry = include dirname(__DIR__) . '/registry/wpnxm-software-registry.php';
-
-        if (!is_array($registry)) {
-            header('HTTP/1.0 404 Not Found');
-        }
-
-        return $registry;
-    }
 }
