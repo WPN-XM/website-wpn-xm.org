@@ -216,7 +216,8 @@ HTML;
 
     function renderComponentListMultiColumn($installerRegistry)
     {
-        $registry = Registry::loadRegistry();
+        $registryObject = new Registry;
+        $registry = $registryObject->loadRegistry();
 
         $html  = '       <!-- Component List -->' . "\n";
         $html .= '       <ul class="multi-column-list">' . "\n";
@@ -225,10 +226,10 @@ HTML;
 
         foreach ($installerRegistry as $i => $component)
         {
-            $software = Registry::updateDeprecatedSoftwareRegistryKeyNames($component[0]);
+            $software = $registryObject->updateDeprecatedSoftwareRegistryKeyNames($component[0]);
 
             // skip - components removed from registry, still in 0.7.0 and breaking it
-            if (Registry::isDeprecatedSoftwareRegistryKeyName($software)) {
+            if ($registryObject->isDeprecatedSoftwareRegistryKeyName($software)) {
                 continue;
             }
 
