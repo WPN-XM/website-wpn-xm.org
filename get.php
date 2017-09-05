@@ -275,6 +275,7 @@ class Registry implements ArrayAccess
     {
         if ($software == 'wpnxmscp')     { return 'wpnxm-scp';     }
         if ($software == 'wpnxmscp-x64') { return 'wpnxm-scp-x64'; }
+        if ($software == 'robomongo')    { return 'robo3t'; }
 
         return $software;
     }
