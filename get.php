@@ -16,7 +16,7 @@
  * in form of a header redirection to the download url.
  */
 
-include __DIR__ . '/src/Registry.php';
+include_once __DIR__ . '/src/Registry.php';
 
 class Request
 {

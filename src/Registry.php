@@ -33,7 +33,7 @@ class Registry implements ArrayAccess
     public function loadRegistry()
     {
         // load software components registry
-        $this->registry = include __DIR__ . '/registry/wpnxm-software-registry.php';
+        $this->registry = include dirname(__DIR__) . '/registry/wpnxm-software-registry.php';
 
         // ensure registry array is available
         if (!is_array($this->registry)) {

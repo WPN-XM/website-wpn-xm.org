@@ -9,7 +9,7 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
-include __DIR__ . '/Registry.php';
+include_once  __DIR__ . '/Registry.php';
 
 class InstallerRegistryComparator
 {
