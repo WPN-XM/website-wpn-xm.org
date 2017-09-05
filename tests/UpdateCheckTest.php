@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
-class UpdateCheckTest extends \PHPUnit\Framework\TestCase
+class UpdateCheckTest extends TestCase
 {
     public function setUp()
     {

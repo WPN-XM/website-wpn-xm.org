@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
-require_once dirname(__DIR__) . '/src/Registry.php';
-
-class RegistryTest extends \PHPUnit\Framework\TestCase
+class RegistryTest extends TestCase
 {
     public function setUp()
     {
-        $this->registry = new Registry();
+        include_once dirname(__DIR__) . '/src/Registry.php';
+
+        $this->registry = new \Registry();
     }
 
     public function testGetLatestVersion()
