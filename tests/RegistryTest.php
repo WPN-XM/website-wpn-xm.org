@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__DIR__) . '/get.php';
+require_once dirname(__DIR__) . '/src/Registry.php';
 
 class RegistryTest extends \PHPUnit\Framework\TestCase
 {
