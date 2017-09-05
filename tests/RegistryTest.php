@@ -1,4 +1,7 @@
 <?php
+declare(strict_types=1);
+
+use PHPUnit\Framework\TestCase;
 
 require_once dirname(__DIR__) . '/src/Registry.php';
 
