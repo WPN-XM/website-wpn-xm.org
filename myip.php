@@ -12,6 +12,21 @@
 /**
  * MyIP - echos the client's IP address.
  */
-$ip = $_SERVER['HTTP_X_REAL_IP'];
+
+function getClientIP() 
+{ 
+    if (isset($_SERVER ['HTTP_X_FORWARDED_FOR'])) { 
+        return $_SERVER ['HTTP_X_FORWARDED_FOR']; 
+    }   
+    if (isset($_SERVER ['HTTP_X_REAL_IP'])) { 
+        return $ip = $_SERVER ['HTTP_X_REAL_IP']; 
+    } 
+    if(isset($_SERVER['REMOTE_ADDR'])) 
+        return $_SERVER['REMOTE_ADDR']; 
+    } 
+    return false; 
+}
+
+$ip = getClientIP();
 
 echo (preg_match('/^\d+\.\d+\.\d+\.\d+$/', $ip) === 1) ? $ip : '0.0.0.0';
