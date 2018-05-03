@@ -51,14 +51,18 @@ if ($s === 'all') {
 elseif (array_key_exists($s, $registry)) {
     if (version_compare($v, $registry[$s]['latest']['version'], '<')) {
        $data = [
-            'software'       => $s,
-            'your_version'   => $v,
+            'update_available' => true,
+            'software' => $s,
+            'your_version' => $v,
             'latest_version' => $registry[$s]['latest']['version'],
-            'url'            => $registry[$s]['latest']['url'],
-            'message'        => 'You are running an old version of ' . $s . ' and should update immediately.',
+            'url' => $registry[$s]['latest']['url'],
+            'message' => 'You are running an old version of ' . $s . ' and should update immediately.',
         ];
     } else {
-        $data = ['message' => 'You are running the latest version.'];
+        $data = [
+            'update_available' => false,
+            'message' => 'You are running the latest version.'
+        ];
     }
 
     sendJsonResponse($data);
