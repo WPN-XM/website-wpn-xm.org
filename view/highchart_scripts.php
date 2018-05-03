@@ -187,10 +187,10 @@ $(document).ready(function () {
         chart: {
         },
         title: {
-            text: 'Downloads - Server Stacks for Windows'
+            text: 'Downloads - PHP Server Stacks for Windows'
         },
         subtitle: {
-            text: 'The number of downloads per month for multiple server stack projects on Windows'
+            text: 'The number of downloads per month of multiple server stack projects on Windows.'
         },
         yAxis: {
             title: {
@@ -210,7 +210,7 @@ $(document).ready(function () {
         tooltip: {
           formatter: function() {
               return '<b>' + this.series.name + '</b><br>' + Highcharts.dateFormat('%m %Y', this.x, 0) + '<br/>' + 'Downloads: ' + this.y;
-          },  
+          },
           crosshairs: true
           //shared: true
         },
@@ -219,8 +219,8 @@ $(document).ready(function () {
             href: 'http://wpn-xm.org/'
         },
         series: [
-            <?php 
-                echo HighchartHelper::render_json_for_serverstack_downloads_comparison_chart(); 
+            <?php
+                echo HighchartHelper::render_json_for_serverstack_downloads_comparison_chart();
             ?>
         ],
         exporting: {
@@ -235,7 +235,7 @@ $(document).ready(function () {
             },
             fallbackToExportServer: false
         },
-    });    
+    });
 
 });
 </script>
