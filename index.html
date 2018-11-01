@@ -706,7 +706,7 @@
 
           $.each(data, function (id, option) {
             var str = '<li><a href="' + option.website + '">' + option.name + '</a>';
-            if(option.includes(latest)) {
+            if(option.includes('latest')) {
               str += '<small>' + option.latest.version + '</small></li>';
             }
             items.push(str);
