@@ -705,7 +705,11 @@
           var items = [];
 
           $.each(data, function (id, option) {
-              items.push('<li><a href="' + option.website + '">' + option.name + '</a> <small>' + option.latest.version + '</small></li>');
+            var str = '<li><a href="' + option.website + '">' + option.name + '</a>';
+            if(option.includes(latest)) {
+              str += '<small>' + option.latest.version + '</small></li>';
+            }
+            items.push(str);
           });
 
           elem.html('<li style="color: #999999;"><span id="windows-icon"> Windows </span><small>w32 & w64</small></li>');
