@@ -107,7 +107,12 @@ function reduceRegistry($registry)
     foreach ($registry as $software => $details) {
         $data[$software]['name']    = $details['name'];
         $data[$software]['website'] = $details['website'];
-        $data[$software]['latest']  = $details['latest'];
+        if(isset($details['latest'])) {
+            $data[$software]['latest'] = $details['latest'];
+        }
+        if(isset($details['alias'])) {
+            $data[$software]['alias'] = $details['alias'];
+        }
     }
     return $data;
 }
