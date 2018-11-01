@@ -117,7 +117,7 @@ function split_registry_into_components_and_extensions($registry)
             continue;
         }
 
-        if($component['alias']) {
+        if(isset($component['alias'])) {
             $html .= render_tr_for_aliased_component($component);
         } else {
             $html .= render_tr_for_normal_component($component);
