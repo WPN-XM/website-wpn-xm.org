@@ -38,8 +38,8 @@ if($action === 'get-installers') {
 // --------------------------------------------------------------------------
 // handle "compare-installers.php?installerA=full-0.8.6-php5.6-w64&installerB=full-next-php5.6-w64"
 
-$installerA  = get('installerA', 'full-0.8.6-php7.0-w64');
-$installerB  = get('installerB', 'full-next-php7.0-w64');
+$installerA  = get('installerA', 'full-0.8.6-php5.6-w64');
+$installerB  = get('installerB', 'full-next-php7.2-w64');
 
 $comparer = new InstallerRegistryComparator;
 $comparer->installerRegistryA = InstallerRegistries::loadRegistry($installerA);
