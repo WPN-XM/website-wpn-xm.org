@@ -117,7 +117,11 @@ function split_registry_into_components_and_extensions($registry)
             continue;
         }
 
-        $html .= render_tr_for_normal_component($component);
+        if($component['alias']) {
+            $html .= render_tr_for_aliased_component($component);
+        } else {
+            $html .= render_tr_for_normal_component($component);
+        }
     }
 
     return ['components' => $html, 'extensions' => $html_extensions];
@@ -188,6 +192,17 @@ function render_version_dropdown_for_extension($component)
 function getAnchor($componentName)
 {
     return strtolower(str_replace([' '],['-'], $componentName));
+}
+
+function render_tr_for_aliased_component($component)
+{
+    $html = PHP_EOL . '<tr>'
+        . '<td><a id="' . getAnchor($component['name']) . '" href="' . $component['website'] . '"><strong>' . $component['name'] . '</strong></a>' . '</td>'
+        . '<td>&nbsp;</td>'
+        . '<td><a href="#' . $component['alias'] . '">' . $component['alias'] . '</a></td>'
+        . '</tr>' . PHP_EOL;
+
+    return $html;
 }
 
 function render_tr_for_normal_component($component)
