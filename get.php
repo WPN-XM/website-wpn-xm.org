@@ -96,7 +96,7 @@ class Request
         }
     }
 
-    function getReferer()
+    public function getReferer()
     {
         if (defined('PHPUNIT_TESTSUITE')) {
             return;
