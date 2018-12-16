@@ -116,7 +116,7 @@ HTML;
         $html .= '  </tr>' . "\n";
 
         foreach($this->downloads as $installer) {
-        if(!isset($release['version'])) { var_dump($release); exit; }
+        if(!isset($release['version'])) { 
             if($installer['version'] == $release['version']) {
                 $html .= $this->renderInstaller($installer);
             }
