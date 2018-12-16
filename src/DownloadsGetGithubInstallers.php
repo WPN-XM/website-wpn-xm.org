@@ -99,7 +99,7 @@ class DownloadsGetGithubInstallers
         return json_decode($data, true);
     }
 
-    public static function getGithubReleasesTag($release_tag)
+    public function getGithubReleasesTag($release_tag)
     {
         $releases = $this->getGithubReleases();
 
