@@ -101,7 +101,7 @@ class DownloadsGetGithubInstallers
 
     public static function getGithubReleasesTag($release_tag)
     {
-        $releases = get_github_releases();
+        $releases = $this->getGithubReleases();
 
         foreach ($releases as $release) {
             if ($release['tag_name'] === $release_tag) {
@@ -112,6 +112,7 @@ class DownloadsGetGithubInstallers
 
     public static function curlRequest()
     {
+        $headers = array();
         $headers[] = 'Accept: application/vnd.github.manifold-preview+json';
 
         $curl = curl_init();
