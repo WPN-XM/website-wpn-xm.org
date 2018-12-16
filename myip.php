@@ -29,4 +29,10 @@ function getClientIP()
 
 $ip = getClientIP();
 
-echo (preg_match('/^\d+\.\d+\.\d+\.\d+$/', $ip) === 1) ? $ip : '0.0.0.0';
+if($ip === false) {
+    echo '0.0.0.0';
+} elseif(preg_match('/^\d+\.\d+\.\d+\.\d+$/', $ip) === 1) {
+    echo $ip;
+} else {
+    echo '0.0.0.0';
+}
