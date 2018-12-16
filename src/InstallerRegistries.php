@@ -34,6 +34,9 @@ class InstallerRegistries
         return $files;
     }
     
+    /**
+     * @return $parts[]
+     */
     public static function getPartsOfInstallerFilename($name)
     {
         if (substr_count($name, '-') === 3) {
