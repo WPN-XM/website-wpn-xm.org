@@ -169,7 +169,7 @@ HTML;
         return $html;
     }
 
-    function renderComponentListForInstaller($installer)
+    public function renderComponentListForInstaller($installer)
     {
         // check installer type: if webinstaller, always latest for all components
         if ('webinstaller' === strtolower($installer['installer'])) {
@@ -214,7 +214,7 @@ HTML;
         return $html;
     }
 
-    function renderComponentListMultiColumn($installerRegistry)
+    public function renderComponentListMultiColumn($installerRegistry)
     {
         $registryObject = new Registry;
         $registry = $registryObject->loadRegistry();
@@ -254,7 +254,7 @@ HTML;
         return $html;
     }
 
-    /*function renderComponentListCommaSeparated($installerRegistry, $number_of_components)
+    /*public function renderComponentListCommaSeparated($installerRegistry, $number_of_components)
     {
         $registry = Registry::loadRegistry();
      *
