@@ -97,7 +97,7 @@ class DownloadsGetLocalInstallers
     }
 
     // ----- Gather some general data for the downloads list
-    function getReleasesAndVersions($downloads)
+    public function getReleasesAndVersions($downloads)
     {
         $releases = [];
 
@@ -141,7 +141,7 @@ class LocalInstallersHelper
      *
      * @return string Formatted Filesize.
      */
-    static function formatFilesize($bytes)
+    public static function formatFilesize($bytes)
     {
         if ($bytes >= 1073741824) {
             return number_format($bytes / 1073741824, 2) . ' GB';
@@ -165,7 +165,7 @@ class LocalInstallersHelper
      *
      * @return string md5 file checksum
      */
-    static function md5_checksum($filename)
+    public static function md5_checksum($filename)
     {
         $md5 = '';
 
@@ -193,7 +193,7 @@ class LocalInstallersHelper
      *
      * @return string sha1 file checksum
      */
-    static function sha1_checksum($filename)
+    public static function sha1_checksum($filename)
     {
         $sha1 = '';
 
@@ -214,7 +214,7 @@ class LocalInstallersHelper
         return $sha1;
     }
 
-    static function getDetailsFromInstallerFilename($installer_filename)
+    public static function getDetailsFromInstallerFilename($installer_filename)
     {
         $details = [];
 
