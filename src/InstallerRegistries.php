@@ -35,7 +35,7 @@ class InstallerRegistries
     }
     
     /**
-     * @return $parts[]
+     * @return array $parts[]
      */
     public static function getPartsOfInstallerFilename($name)
     {
