@@ -81,11 +81,7 @@ class Database
 
     public function closeDatabaseConnection()
     {
-        try {
-            $this->db = null;
-        } catch (PDOException $e) {
-            throw new \Exception('Exception : ' . $e->getMessage());
-        }
+        $this->db = null;        
     }
 
     public function __destruct()
