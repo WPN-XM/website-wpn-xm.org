@@ -180,16 +180,15 @@ class GetTest extends TestCase
         $this->assertContains("5.", $this->response->url);
     }
 
-    // TODO
-    /*public function testRequest_PHP_LatestVersion_MajorMinor_99_InvalidVersionRequest()
+    public function testRequest_PHP_LatestVersion_MajorMinor_99_InvalidVersionRequest()
     {
         // p=9.9 is invalid; the default PHP version is set instead
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=9.9');
 
         $this->assertContains("http://windows.php.net/downloads/", $this->response->url);
         $this->assertEquals(1, preg_match('#php-(\d+.\d+.\d+)-nts-#i', $this->response->url));
-        $this->assertContains("5.", $this->response->url);
-    }*/
+        //$this->assertContains("5.", $this->response->url);
+    }
 
     public function testRequest_PHPExtension_XDebug_DefaultVersion_Major_99()
     {

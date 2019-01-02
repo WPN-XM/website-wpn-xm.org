@@ -325,9 +325,12 @@ class Component
                 $versions = $this->registry[$software];
                 $version  = $this->registry->getLatestVersionOfRange($versions, $phpVersion . '.0', $phpVersion . '.99');
 
-                $url      = $this->registry[$software][$version];
-                $this->trackDownloadEvent($url, $software, $version, $bitsize);
-                $this->response->redirect($url);
+                // make sure this "major.minor" version exists
+                if ($this->registry->versionExists($software, $version)) {
+                    $url      = $this->registry[$software][$version];
+                    $this->trackDownloadEvent($url, $software, $version, $bitsize);
+                    $this->response->redirect($url);
+                }
             }
             else
             {
