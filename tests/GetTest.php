@@ -84,18 +84,6 @@ class GetTest extends TestCase
         );
     }
 
-    public function testRequest_PHPExtension_Wincache_LatestVersion()
-    {
-        // we are testing because of the Major.Minor.Patch.Whatever version number
-        // this is a request for the latest version with "default PHP version" and "default bitsize"
-        $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_wincache');
-
-        $this->assertRegExp(
-            '#http://windows.php.net/downloads/pecl/releases/wincache/(\d+\.\d+\.\d+.\d+)/php_wincache-(\d+\.\d+\.\d+.\d+)-'.$this->request->getDefaultPHPVersion().'-nts-VC11-'.$this->request->getDefaultBitsize().'.zip#i',
-            $this->response->url
-        );
-    }
-
     public function testRequest_PHPExtension_Wincache_LatestVersion_MajorMinor_56_x64()
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_wincache&p=5.6&bitsize=x64');
@@ -112,7 +100,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php-qa&v=7.0.1RC1');
 
         $this->assertEquals(
-            'http://windows.php.net/downloads/qa/archives/php-7.0.1RC1-nts-Win32-VC14-'.$this->request->getDefaultBitsize().'.zip',
+            'http://windows.php.net/downloads/qa/archives/php-7.0.1RC1-nts-Win32-VC14-x86.zip',
             $this->response->url
         );
     }
@@ -123,7 +111,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php-qa&p=5.6');
 
         $this->assertEquals(
-            'http://windows.php.net/downloads/qa/archives/php-5.6.11RC1-nts-Win32-VC11-'.$this->request->getDefaultBitsize().'.zip',
+            'http://windows.php.net/downloads/qa/archives/php-5.6.11RC1-nts-Win32-VC11-x86.zip',
             $this->response->url
         );
     }
@@ -196,17 +184,16 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_xdebug&p=99');
 
         $this->assertContains("http://windows.php.net/downloads/pecl/releases/xdebug/", $this->response->url);
-        $this->assertEquals(1, preg_match('#php_xdebug-(.*)-5.6-nts-VC11-x64.zip#i', $this->response->url));
-        $this->assertContains("5.6", $this->response->url);
+        $this->assertEquals(1, preg_match('#php_xdebug-(.*)-(.*)-nts-VC11-(.*).zip#i', $this->response->url));
     }
 
-    public function testRequest_PHPExtension_Ice_LatestVersion_MajorMinor_56()
+    public function testRequest_PHPExtension_Ice_LatestVersion_MajorMinor_72()
     {
-        $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_ice&p=5.6');
+        $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_ice&p=7.2');
 
-        $this->assertContains("http://www.iceframework.org/dll/ice-1.1.2-php-5.6-nts-vc11-x64.zip", $this->response->url);
-        $this->assertEquals(1, preg_match('#ice-(.*)-5.6-nts-VC11-x64.zip#i', $this->response->url));
-        $this->assertContains("5.6", $this->response->url);
+        $this->assertContains("https://www.iceframework.org/dll/ice-1.4.0-php-7.2-nts-vc15-x64.zip", $this->response->url);
+        $this->assertEquals(1, preg_match('#ice-(.*)-7.2-nts-vc15-x64.zip#i', $this->response->url));
+        $this->assertContains("7.2", $this->response->url);
     }
 
     public function testRequest_PHPExtension_Ice_For_PHP_70_Bitsize_x64()
