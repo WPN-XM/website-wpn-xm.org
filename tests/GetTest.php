@@ -89,7 +89,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_wincache&p=5.6&bitsize=x64');
 
         $this->assertRegExp(
-            '#http://windows.php.net/downloads/pecl/releases/wincache/(\d+\.\d+\.\d+.\d+)/php_wincache-(\d+\.\d+\.\d+.\d+)-5.6-nts-VC11-'.$this->request->getDefaultBitsize().'.zip#i',
+            '#windows.php.net/downloads/pecl/releases/wincache/(\d+\.\d+\.\d+.\d+)/php_wincache-(\d+\.\d+\.\d+.\d+)-5.6-nts-VC11-'.$this->request->getDefaultBitsize().'.zip#i',
             $this->response->url
         );
     }
@@ -100,7 +100,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php-qa&v=7.0.1RC1');
 
         $this->assertEquals(
-            'http://windows.php.net/downloads/qa/archives/php-7.0.1RC1-nts-Win32-VC14-x86.zip',
+            'windows.php.net/downloads/qa/archives/php-7.0.1RC1-nts-Win32-VC14-x86.zip',
             $this->response->url
         );
     }
@@ -111,7 +111,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php-qa&p=5.6');
 
         $this->assertEquals(
-            'http://windows.php.net/downloads/qa/archives/php-5.6.11RC1-nts-Win32-VC11-x86.zip',
+            'windows.php.net/downloads/qa/archives/php-5.6.11RC1-nts-Win32-VC11-x86.zip',
             $this->response->url
         );
     }
@@ -121,7 +121,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_trader&p=5.6');
 
         $this->assertEquals(
-            'http://windows.php.net/downloads/pecl/releases/trader/0.4.0/php_trader-0.4.0-5.6-nts-vc11-'.$this->request->getDefaultBitsize().'.zip',
+            'windows.php.net/downloads/pecl/releases/trader/0.4.0/php_trader-0.4.0-5.6-nts-vc11-'.$this->request->getDefaultBitsize().'.zip',
             $this->response->url
         );
     }
@@ -130,7 +130,7 @@ class GetTest extends TestCase
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=5.4');
 
-        $this->assertContains("http://windows.php.net/downloads/releases/", $this->response->url);
+        $this->assertContains("windows.php.net/downloads/releases/", $this->response->url);
         $this->assertContains("5.4", $this->response->url);
     }
 
@@ -138,7 +138,7 @@ class GetTest extends TestCase
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=5.6');
 
-        $this->assertContains("http://windows.php.net/downloads/releases/", $this->response->url);
+        $this->assertContains("windows.php.net/downloads/releases/", $this->response->url);
         $this->assertContains("5.6", $this->response->url);
     }
 
@@ -146,7 +146,7 @@ class GetTest extends TestCase
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=7.0');
 
-        $this->assertContains("http://windows.php.net/downloads/releases/", $this->response->url);
+        $this->assertContains("windows.php.net/downloads/releases/", $this->response->url);
         $this->assertContains("7.0", $this->response->url);
     }
 
@@ -154,7 +154,7 @@ class GetTest extends TestCase
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=7.1');
 
-        $this->assertContains("http://windows.php.net/downloads/releases/", $this->response->url);
+        $this->assertContains("windows.php.net/downloads/releases/", $this->response->url);
         $this->assertContains("7.1", $this->response->url);
     }
 
@@ -163,9 +163,9 @@ class GetTest extends TestCase
         // p=99 is invalid; the default PHP version is set instead
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=99');
 
-        $this->assertContains("http://windows.php.net/downloads/", $this->response->url);
+        $this->assertContains("windows.php.net/downloads/", $this->response->url);
         $this->assertEquals(1, preg_match('#php-(\d+.\d+.\d+)-nts-#i', $this->response->url));
-        $this->assertContains("5.", $this->response->url);
+        $this->assertContains("7.", $this->response->url);
     }
 
     public function testRequest_PHP_LatestVersion_MajorMinor_99_InvalidVersionRequest()
@@ -173,7 +173,7 @@ class GetTest extends TestCase
         // p=9.9 is invalid; the default PHP version is set instead
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php&p=9.9');
 
-        $this->assertContains("http://windows.php.net/downloads/", $this->response->url);
+        $this->assertContains("windows.php.net/downloads/", $this->response->url);
         $this->assertEquals(1, preg_match('#php-(\d+.\d+.\d+)-nts-#i', $this->response->url));
         //$this->assertContains("5.", $this->response->url);
     }
@@ -183,7 +183,7 @@ class GetTest extends TestCase
         // p=99 is invalid; the default PHP version is set instead
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_xdebug&p=99');
 
-        $this->assertContains("http://windows.php.net/downloads/pecl/releases/xdebug/", $this->response->url);
+        $this->assertContains("windows.php.net/downloads/pecl/releases/xdebug/", $this->response->url);
         $this->assertEquals(1, preg_match('#php_xdebug-(.*)-(.*)-nts-VC11-(.*).zip#i', $this->response->url));
     }
 
@@ -210,7 +210,7 @@ class GetTest extends TestCase
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_imagick&p=5.6');
 
-        $this->assertContains("http://windows.php.net/downloads/pecl/releases/imagick", $this->response->url);
+        $this->assertContains("windows.php.net/downloads/pecl/releases/imagick", $this->response->url);
         $this->assertContains("5.6", $this->response->url);
     }
 }
