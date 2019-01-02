@@ -47,8 +47,7 @@ class DownloadsViewRenderer
 
     public function renderHeader()
     {
-$html = <<<'HTML'
-
+        $html = '
         <!-- Header -->
         <div class="row">
 
@@ -71,8 +70,7 @@ $html = <<<'HTML'
                     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                 </div>
             </div>
-
-HTML;
+        ';
 
         return $html;
     }
