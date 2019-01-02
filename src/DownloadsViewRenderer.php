@@ -228,7 +228,7 @@ HTML;
 
         $number_of_php_extensions = 0;
 
-        $html .= '<div class="collapse multi-collapse" id="multiCollapse-'.$normalized_filename.'">The following ' . $number_of_components . ' Components are included: '. "\n";
+        $html = '<div class="collapse multi-collapse" id="multiCollapse-'.$normalized_filename.'">The following ' . $number_of_components . ' Components are included: '. "\n";
         $html .= '       <!-- Component List for "' . $normalized_filename . '" -->' . "\n";
         $html .= '       <ul class="multi-column-list">' . "\n";
   
