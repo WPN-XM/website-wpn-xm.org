@@ -23,11 +23,11 @@ class DownloadsGetGithubInstallers
     {
         $downloads = [];
 
+        $releases = $this->getGithubReleases();
+
         if($this->isGithubApiRequest) {
             $this->githubDownloadStatsDatabase = new GithubDownloadStatsDatabase();
         }
-
-        $releases = $this->getGithubReleases();
 
         foreach ($releases as $release)
         {
