@@ -101,7 +101,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_wincache&p=5.6&bitsize=x64');
 
         $this->assertRegExp(
-            '#http://windows.php.net/downloads/pecl/releases/wincache/(\d+\.\d+\.\d+.\d+)/php_wincache-(\d+\.\d+\.\d+.\d+)-5.6-nts-VC11-x64.zip#i',
+            '#http://windows.php.net/downloads/pecl/releases/wincache/(\d+\.\d+\.\d+.\d+)/php_wincache-(\d+\.\d+\.\d+.\d+)-5.6-nts-VC11-'.$this->request->getDefaultBitsize().'.zip#i',
             $this->response->url
         );
     }
@@ -112,7 +112,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php-qa&v=7.0.1RC1');
 
         $this->assertEquals(
-            'http://windows.php.net/downloads/qa/archives/php-7.0.1RC1-nts-Win32-VC14-x64.zip',
+            'http://windows.php.net/downloads/qa/archives/php-7.0.1RC1-nts-Win32-VC14-'.$this->request->getDefaultBitsize().'.zip',
             $this->response->url
         );
     }
@@ -123,7 +123,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php-qa&p=5.6');
 
         $this->assertEquals(
-            'http://windows.php.net/downloads/qa/archives/php-5.6.11RC1-nts-Win32-VC11-x64.zip',
+            'http://windows.php.net/downloads/qa/archives/php-5.6.11RC1-nts-Win32-VC11-'.$this->request->getDefaultBitsize().'.zip',
             $this->response->url
         );
     }
@@ -133,7 +133,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_trader&p=5.6');
 
         $this->assertEquals(
-            'http://windows.php.net/downloads/pecl/releases/trader/0.4.0/php_trader-0.4.0-5.6-nts-vc11-x64.zip',
+            'http://windows.php.net/downloads/pecl/releases/trader/0.4.0/php_trader-0.4.0-5.6-nts-vc11-'.$this->request->getDefaultBitsize().'.zip',
             $this->response->url
         );
     }
