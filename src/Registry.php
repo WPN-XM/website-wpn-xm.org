@@ -18,8 +18,8 @@ class Registry implements ArrayAccess
     /**
      * @param $software
      * @param $version
-     * @param null $bitsize
-     * @param null $phpVersion
+     * @param $bitsize
+     * @param $phpVersion
      * @return mixed
      */
     public function getUrl($software, $version, $bitsize = null, $phpVersion = null)
