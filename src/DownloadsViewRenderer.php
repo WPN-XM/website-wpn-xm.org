@@ -263,7 +263,7 @@ HTML;
         if($number_of_php_extensions == 1) {
            $html .= '<li>Included PHP Extension:</li>'. "\n" . $extensions_html;
         }
-        if($number_of_php_extensions >= 1) {
+        elseif($number_of_php_extensions >= 1) {
            $html .= '<li>Included PHP Extensions ('.$number_of_php_extensions.') :</li>'. "\n" . $extensions_html;
         }
         
