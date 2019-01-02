@@ -1,9 +1,9 @@
 # http://robotstxt.org/
 # http://google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
 
-# robots.txt for http://wpn-xm.org/
+# robots.txt for https://wpn-xm.org/
 # Allow access to all files
 User-agent: *
 Disallow:
 
-Sitemap: http://wpn-xm.org/sitemap.xml
+Sitemap: https://wpn-xm.org/sitemap.xml
