@@ -21,7 +21,7 @@ class DownloadsGetGithubInstallers
         $downloads = [];
 
         if($this->isGithubApiRequest) {
-            $githubDownloadStatsDatabase = new GithubDownloadStatsDatabase;
+            $this->githubDownloadStatsDatabase = new GithubDownloadStatsDatabase;
         }
 
         $releases = $this->getGithubReleases();
@@ -69,7 +69,7 @@ class DownloadsGetGithubInstallers
                     $details['downloads']    = $asset['download_count'];
 
                     if($this->isGithubApiRequest) {
-                        $githubDownloadStatsDatabase->insertDownload($asset['name'], $asset['download_count']);
+                        $this->githubDownloadStatsDatabase->insertDownload($asset['name'], $asset['download_count']);
                     }
 
                     // add download details to downloads array
