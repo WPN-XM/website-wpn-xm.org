@@ -47,7 +47,7 @@ class DownloadsViewRenderer
 
     public function renderHeader()
     {
-        $html = <<<'HTML'
+$html = <<<'HTML'
 
         <!-- Header -->
         <div class="row">
@@ -144,7 +144,7 @@ HTML;
 
     public function renderFooter()
     {
-        $html = <<<'HTML'
+$html = <<<'HTML'
     <!-- RenderFooter -->
     <script>
     function calculateTotalDownloads() {
