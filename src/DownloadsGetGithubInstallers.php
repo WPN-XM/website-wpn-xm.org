@@ -17,6 +17,7 @@ require __DIR__ . '/GithubDownloadStatsDatabase.php';
 class DownloadsGetGithubInstallers
 {
     private $isGithubApiRequest = false;
+    private $githubDownloadStatsDatabase;
 
     public function get()
     {
