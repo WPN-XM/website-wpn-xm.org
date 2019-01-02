@@ -25,8 +25,8 @@ class Request
     public $phpVersion;
     public $bitsize;
 
-    private $defaultPHPversion = '5.6';
-    private $defaultBitsize    = 'x86';
+    private $defaultPHPversion = '7.2';
+    private $defaultBitsize    = 'x64';
 
     public function __construct()
     {
