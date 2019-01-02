@@ -188,8 +188,9 @@ HTML;
 
         $file = dirname(__DIR__) . '/registry/installer/v'.$installer['version'].'/' . $filename . '.json';
 
+        $html = '';
+
         if (!is_file($file)) {
-            $html  = '';
             $html .= '  <tr>' . "\n";
             $html .= '     <td colspan="2">Components included: No data.</td>'. "\n";
             $html .= '  </tr>'. "\n";
@@ -245,6 +246,9 @@ HTML;
             // php extension - they are appended to the extension html fragment
             if (false !== strpos($software, 'phpext_')) {
                 $number_of_php_extensions++;
+                if(!isset($extensions_html)) {
+                    $extensions_html = '';
+                }
                 $name = str_replace('PHP Extension ', '', $registry[$software]['name']);
                 $extensions_html .= '        <li><b>' . $name . '</b> ' . $version . '</li>' . "\n";
                 continue;
