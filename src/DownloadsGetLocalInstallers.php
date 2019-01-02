@@ -167,8 +167,6 @@ class LocalInstallersHelper
      */
     public static function md5_checksum($filename)
     {
-        $md5 = '';
-
         $path = pathinfo($filename);
         $dir  = dirname(__DIR__) . '/downloads/checksums/';
         if (!is_dir($dir)) {
@@ -178,10 +176,10 @@ class LocalInstallersHelper
 
         if (is_file($md5ChecksumFile)) {
             return file_get_contents($md5ChecksumFile);
-        } else {
-            $md5 = md5_file($filename);
-            file_put_contents($md5ChecksumFile, $md5);
-        }
+        } 
+
+        $md5 = md5_file($filename);
+        file_put_contents($md5ChecksumFile, $md5);
 
         return $md5;
     }
