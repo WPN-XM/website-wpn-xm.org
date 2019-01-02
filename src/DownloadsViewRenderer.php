@@ -133,8 +133,6 @@ class DownloadsViewRenderer
             . '<i class="glyphicon glyphicon-cloud-download"></i> ' . $installer['name'] . '</a>' . "\n";
         $html .= '      <div class="btn btn-small bold" title="Filesize">' . $installer['size'] . '</div>' . "\n";
         $html .= '      <div class="btn btn-small bold" title="Downloads">' . $installer['downloads'] . '</div>' . "\n";
-        $html .= '    </td>' . "\n";
-        $html .= '  </tr>' . "\n";
 
         $html .= $this->renderComponentListForInstaller($installer);
 
@@ -175,15 +173,20 @@ HTML;
             return '<tr><td colspan="2">Latest Components fetched from the Web</td></tr>';
         }
 
+        /**
+         * build filename from installer details
+         */
+
         $platform = isset($installer['platform']) ? '-' . $installer['platform'] : '';
         // set PHP version starting from 0.8.0 on
         $phpversion = isset($installer['phpversion']) ? '-' . $installer['phpversion'] : '';
         // PHP version dot fix
         $phpversion = str_replace(['php5', 'php7'], ['php5.', 'php7.'], $phpversion);
+        
+        $filename = strtolower($installer['installer']) . '-' . $installer['version'] . $phpversion . $platform;
+        $normalized_filename = str_replace('.', '-', $filename);
 
-        // load installer registry data (json)
-        $file = dirname(__DIR__) . '/registry/installer/v'.$installer['version'].'/'
-            . strtolower($installer['installer']) . '-' . $installer['version'] . $phpversion . $platform . '.json';
+        $file = dirname(__DIR__) . '/registry/installer/v'.$installer['version'].'/' . $filename . '.json';
 
         if (!is_file($file)) {
             $html  = '';
@@ -191,18 +194,22 @@ HTML;
             $html .= '     <td colspan="2">Components included: No data.</td>'. "\n";
             $html .= '  </tr>'. "\n";
             return $html;
-        }
+        } 
 
-        $installerRegistry = json_decode(file_get_contents($file));
+        // load installer registry data (json)
+        $installerRegistry = json_decode(file_get_contents($file));  
 
         $number_of_components = count($installerRegistry);
 
-        $html  = '';
+        $html .= '      <div class="btn btn-small bold" title="collapse-toggle-'.$normalized_filename.'" data-toggle="collapse" data-target="#multiCollapse-'.$normalized_filename.'" aria-expanded="false" aria-controls="multiCollapse-'.$normalized_filename.'">Show Components ('.$number_of_components.')</div>';
+        $html .= '    </td>' . "\n";
+        $html .= '  </tr>' . "\n";     
+
         $html .= '  <tr>' . "\n";
-        $html .= '     <td colspan="2">The following ' . $number_of_components . ' Components are included:<br>' . "\n";
+        $html .= '     <td colspan="2">';
 
         //if($number_of_components >= 10) {
-        $html .= $this->renderComponentListMultiColumn($installerRegistry);
+        $html .= $this->renderComponentListMultiColumn($installerRegistry, $normalized_filename, $number_of_components);
         //} else {
         //  $html .= $this->renderComponentListCommaSeparated($installerRegistry, $number_of_components);
         //}
@@ -213,16 +220,17 @@ HTML;
         return $html;
     }
 
-    public function renderComponentListMultiColumn($installerRegistry)
+    public function renderComponentListMultiColumn($installerRegistry, $normalized_filename,  $number_of_components)
     {
         $registryObject = new Registry;
         $registry = $registryObject->loadRegistry();
 
-        $html  = '       <!-- Component List -->' . "\n";
+        $number_of_php_extensions = 0;
+
+        $html .= '<div class="collapse multi-collapse" id="multiCollapse-'.$normalized_filename.'">The following ' . $number_of_components . ' Components are included: '. "\n";
+        $html .= '       <!-- Component List for "' . $normalized_filename . '" -->' . "\n";
         $html .= '       <ul class="multi-column-list">' . "\n";
-
-        $extensions_html = '        <li>PHP Extension(s):</li>'. "\n";
-
+  
         foreach ($installerRegistry as $i => $component)
         {
             $software = $registryObject->updateDeprecatedSoftwareRegistryKeyNames($component[0]);
@@ -236,20 +244,27 @@ HTML;
 
             // php extension - they are appended to the extension html fragment
             if (false !== strpos($software, 'phpext_')) {
+                $number_of_php_extensions++;
                 $name = str_replace('PHP Extension ', '', $registry[$software]['name']);
                 $extensions_html .= '        <li><b>' . $name . '</b> ' . $version . '</li>' . "\n";
                 continue;
             }
-
+          
             // normal component
             $name = $registry[$software]['name'];
             $html .= '        <li><b>' . $name . '</b> ' . $version . '</li>'. "\n";
         }
         unset($installerRegistry);
 
-        $html .= $extensions_html;
+        if($number_of_php_extensions == 1) {
+           $html .= '<li>Included PHP Extension:</li>'. "\n" . $extensions_html;
+        }
+        if($number_of_php_extensions >= 1) {
+           $html .= '<li>Included PHP Extensions ('.$number_of_php_extensions.') :</li>'. "\n" . $extensions_html;
+        }
+        
         $html .= '      </ul>'. "\n";
-
+        
         return $html;
     }
 
