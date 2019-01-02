@@ -264,7 +264,7 @@ HTML;
            $html .= '<li>Included PHP Extension:</li>'. "\n" . $extensions_html;
         }
         elseif($number_of_php_extensions >= 1) {
-           $html .= '<li>Included PHP Extensions ('.$number_of_php_extensions.') :</li>'. "\n" . $extensions_html;
+           $html .= '<li>Included PHP Extensions ('.$number_of_php_extensions.'):</li>'. "\n" . $extensions_html;
         }
         
         $html .= '      </ul>'. "\n";
