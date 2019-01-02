@@ -16,7 +16,7 @@ class Database
 {
 
     /**
-     * @var resource PDO (Database connection resource object)
+     * @var PDO (Database connection resource object)
      */
     private $db;
 
