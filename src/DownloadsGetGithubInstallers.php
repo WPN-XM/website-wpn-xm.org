@@ -9,20 +9,22 @@
  * For full copyright and license information, view the bundled LICENSE file.
  */
 
+require __DIR__ . '/GithubDownloadStatsDatabase.php';
+
 /**
  * The first part of the installer listing are the releases from Github.
  */
 class DownloadsGetGithubInstallers
 {
-    private $isGithubApiRequest = false;
+    //private $isGithubApiRequest = false;
 
     public function get()
     {
         $downloads = [];
 
-        if($this->isGithubApiRequest) {
+        //if($this->isGithubApiRequest) {
             $this->githubDownloadStatsDatabase = new GithubDownloadStatsDatabase();
-        }
+        //}
 
         $releases = $this->getGithubReleases();
 
@@ -68,9 +70,9 @@ class DownloadsGetGithubInstallers
                     $details['size']         = LocalInstallersHelper::formatFilesize($asset['size']);
                     $details['downloads']    = $asset['download_count'];
 
-                    if($this->isGithubApiRequest) {
+                    //if($this->isGithubApiRequest) {
                         $this->githubDownloadStatsDatabase->insertDownload($asset['name'], $asset['download_count']);
-                    }
+                    //}
 
                     // add download details to downloads array
                     $downloads[] = $details;
