@@ -21,7 +21,7 @@ class DownloadsGetGithubInstallers
         $downloads = [];
 
         if($this->isGithubApiRequest) {
-            $this->githubDownloadStatsDatabase = new GithubDownloadStatsDatabase;
+            $this->githubDownloadStatsDatabase = new GithubDownloadStatsDatabase();
         }
 
         $releases = $this->getGithubReleases();
