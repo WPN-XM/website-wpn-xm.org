@@ -16,7 +16,7 @@ class GithubDownloadStatsDatabase
 {
 
     /**
-     * @var resource PDO (Database connection resource object)
+     * @var PDO (Database connection resource object)
      */
     private $db;
 
@@ -76,15 +76,8 @@ class GithubDownloadStatsDatabase
         $stmt->execute();
     }
 
-    public function closeDatabaseConnection()
-    {
-        $this->db = null;        
-    }
-
     public function __destruct()
     {
-        $this->closeDatabaseConnection();
+        $this->db = null;
     }
 }
-
-new GithubDownloadStatsDatabase;
