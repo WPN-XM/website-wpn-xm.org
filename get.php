@@ -169,7 +169,7 @@ class Response
             #echo $this->header;
             return;
         } else {
-            header($this->header);
+            header($this->header, true, 302);
             exit;
         }
     }
