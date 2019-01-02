@@ -114,9 +114,10 @@ class DownloadsViewRenderer
         $html .= '  </tr>' . "\n";
 
         foreach($this->downloads as $installer) {
-        if(!isset($release['version'])) { 
-            if($installer['version'] == $release['version']) {
-                $html .= $this->renderInstaller($installer);
+            if(!isset($release['version'])) { 
+                if($installer['version'] == $release['version']) {
+                    $html .= $this->renderInstaller($installer);
+                }
             }
         }
 
