@@ -92,7 +92,7 @@ class InstallerRegistryArrayHelper
 
     /**
      * @param $var
-     * @param null $defaultValue
+     * @param $defaultValue
      * @return null
      */
     function issetOrDefault($var, $defaultValue = null)
@@ -103,7 +103,7 @@ class InstallerRegistryArrayHelper
     /**
      * @param array $array
      * @param $key
-     * @param null $defaultValue
+     * @param $defaultValue
      * @return null
      */
     function issetArrayKeyOrDefault(array $array, $key, $defaultValue = null)
