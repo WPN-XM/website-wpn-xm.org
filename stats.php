@@ -15,7 +15,7 @@ class GithubReleaseStats implements ArrayAccess
 
     public $stats;
 
-    function __construct()
+    public function __construct()
     {
         $this->load_github_releases_data();
         $this->get_total_number_of_releases();
@@ -27,37 +27,42 @@ class GithubReleaseStats implements ArrayAccess
         $this->calculate_project_age();
     }
 
-    function load_github_releases_data()
+    public function load_github_releases_data()
     {
-        $this->releases = json_decode(file_get_contents(__DIR__ . '/downloads/github-releases-cache.json'), true);
+        $this->releases = json_decode(file_get_contents(__DIR__.'/downloads/github-releases-cache.json'), true);
     }
 
-    function drop_unwanted_keys()
+    public function drop_unwanted_keys()
     {
         $unwanted_keys = ['body', 'author', 'tarball_url', 'zipball_url', 'upload_url', 'draft', 'prerelease', 'target_commitish', 'id'];
 
-        for($i = 0; $i < $this->stats['total_releases']; $i++) {
-            foreach($unwanted_keys as $key) {
+        for ($i = 0; $i < $this->stats['total_releases']; ++$i) {
+            foreach ($unwanted_keys as $key) {
                 unset($this->releases[$i][$key]);
             }
         }
     }
 
-    function get_total_number_of_releases()
+    public function get_total_number_of_releases()
     {
         $this->stats['total_releases'] = count($this->releases);
     }
 
-    function get_release_stats()
+    public function get_release_stats()
     {
         $this->stats['total_downloads'] = 0;
         $this->stats['installer_downloads'] = [];
 
-        foreach($this->releases as $release) {
+        foreach ($this->releases as $release) {
             $version = GithubReleaseStatsHelpers::fix_version_name($release['tag_name']);
 
-            if(!isset($this->stats['installer_downloads'][$version])) $this->stats['installer_downloads'][$version] = 0;
-            if(!isset($this->stats['installers_released_per_version'][$version])) $this->stats['installers_released_per_version'][$version] = 0;
+            if (!isset($this->stats['installer_downloads'][$version])) {
+                $this->stats['installer_downloads'][$version] = 0;
+            }
+
+            if (!isset($this->stats['installers_released_per_version'][$version])) {
+                $this->stats['installers_released_per_version'][$version] = 0;
+            }
 
             $this->stats['total_downloads'] += array_sum(array_column($release['assets'], 'download_count'));
             $this->stats['installer_downloads'][$version] = array_column($release['assets'], 'download_count', 'name');
@@ -67,11 +72,11 @@ class GithubReleaseStats implements ArrayAccess
         $this->stats['total_installers_released'] = array_sum($this->stats['installers_released_per_version']);
     }
 
-    function get_downloads_by_php_version()
+    public function get_downloads_by_php_version()
     {
         // map "phpversion of filename" to "pretty php version"
         $php_versions = ['php54' => 'PHP 5.4', 'php55' => 'PHP 5.5', 'php56' => 'PHP 5.6', 'php70' => 'PHP 7.0', 'php71' => 'PHP 7.1'];
-        foreach($php_versions as $phpversion) {
+        foreach ($php_versions as $phpversion) {
             $downloads[$phpversion] = 0;
         }
         $downloads = [];
@@ -79,34 +84,34 @@ class GithubReleaseStats implements ArrayAccess
 
         $php_versions_lc = array_keys($php_versions);
 
-        foreach($this->stats['installer_downloads'] as $installer_version => $installer_and_downloads)
-        {
-            if($installer_version === 'v0.2.0') continue;
-
+        foreach ($this->stats['installer_downloads'] as $installer_version => $installer_and_downloads) {
+            if ('v0.2.0' === $installer_version) {
+                continue;
+            }
             $this->stats['downloads_by_installer_version'][$installer_version] = array_sum($installer_and_downloads);
 
-            if(!isset($downloads_installer_php[$installer_version])) {
+            if (!isset($downloads_installer_php[$installer_version])) {
                 $downloads_installer_php[$installer_version] = [];
             }
 
             foreach ($installer_and_downloads as $installer => $dls) {
-                foreach($php_versions_lc as $phpversion) {
+                foreach ($php_versions_lc as $phpversion) {
                     $PHP = $php_versions[$phpversion];
 
                     // downloads by php version
-                    if(!isset($downloads[$PHP])) {
+                    if (!isset($downloads[$PHP])) {
                         $downloads[$PHP] = 0;
                     }
 
                     // downloda by installer and php version
-                    if(!isset($downloads_installer_php[$installer_version][$PHP])) {
+                    if (!isset($downloads_installer_php[$installer_version][$PHP])) {
                         $downloads_installer_php[$installer_version][$PHP] = 0;
                     }
 
-                    if(false !== strpos($installer, $phpversion)) {
+                    if (false !== strpos($installer, $phpversion)) {
                         $downloads[$PHP] += $dls;
                         $downloads_installer_php[$installer_version][$PHP] += $dls;
-                    } elseif($installer_version === 'v0.7.0' and $PHP === 'PHP 5.4') {
+                    } elseif ('v0.7.0' === $installer_version && 'PHP 5.4' === $PHP) {
                         // 0.7.0 was PHP 5.4 only, without correct naming of the installer, so we can't strpos for a PHP version
                         $downloads[$PHP] += $dls;
                         $downloads_installer_php[$installer_version][$PHP] += $dls;
@@ -120,9 +125,11 @@ class GithubReleaseStats implements ArrayAccess
     }
 
     /**
-     * Release Date and Development Time Taken (days_cost)
+     * Release Date and Development Time Taken (days_cost).
+     *
+     * @param mixed $releases
      */
-    static function get_release_dates($releases)
+    public static function get_release_dates($releases)
     {
         $releaseDates = [];
         foreach ($releases as $release) {
@@ -139,19 +146,20 @@ class GithubReleaseStats implements ArrayAccess
         return array_combine($versions, $releaseDates);
     }
 
-    static function calculate_days_between_releases($dates)
+    public static function calculate_days_between_releases($dates)
     {
         $dates = array_values($dates);
         $days = [];
-        for($i = 0; $i < count($dates); $i++) {
-            if(isset($dates[$i+1])) {
-                 $days[] = DateTimeHelper::getDaysBetweenDates($dates[$i], $dates[$i+1]);
+        for ($i = 0; $i < count($dates); ++$i) {
+            if (isset($dates[$i + 1])) {
+                $days[] = DateTimeHelper::getDaysBetweenDates($dates[$i], $dates[$i + 1]);
             }
         }
+
         return $days;
     }
 
-    function get_release_dates_and_development_time()
+    public function get_release_dates_and_development_time()
     {
         $releaseDates = self::get_release_dates($this->releases);
         $versions = array_keys($releaseDates);
@@ -159,13 +167,14 @@ class GithubReleaseStats implements ArrayAccess
         $dateDiff = self::calculate_days_between_releases($releaseDates);
         array_unshift($dateDiff, 'Started using Github Releases'); // push the rest of the stack down
 
-        $r = []; $i = 0;
-        foreach($versions as $version) {
-            $r[$version] = array(
+        $r = [];
+        $i = 0;
+        foreach ($versions as $version) {
+            $r[$version] = [
                 'release_date' => $releaseDates[$version],
-                'days_since_last_release' => $dateDiff[$i]  // "development_time_taken / days cost"
-            );
-            $i++;
+                'days_since_last_release' => $dateDiff[$i],  // "development_time_taken / days cost"
+            ];
+            ++$i;
         }
 
         // remove the date from "In Development Sice", because its not a release date and just "forward calculation".
@@ -174,33 +183,43 @@ class GithubReleaseStats implements ArrayAccess
         $this->stats['release_dates_and_development_time'] = $r;
     }
 
-    function calculate_project_age()
+    public function calculate_project_age()
     {
-        $startDate = '15.11.2011';  
-        $this->stats['project_started_date']    = DateTimeHelper::formatDate($startDate, 'd.m.Y', 'F d, Y');
-        $this->stats['project_age']             = DateTimeHelper::formatDateDiff($startDate);
-        $this->stats['project_birthday']        = DateTimeHelper::getNextBirthday($startDate, 'F d, Y');
-        $this->stats['project_daysto_birthday'] = ltrim(DateTimeHelper::getDaysBetweenDates(date('r'), $this->stats['project_birthday']),'+');
+        $startDate = '15.11.2011';
+        $this->stats['project_started_date'] = DateTimeHelper::formatDate($startDate, 'd.m.Y', 'F d, Y');
+        $this->stats['project_age'] = DateTimeHelper::formatDateDiff($startDate);
+        $this->stats['project_birthday'] = DateTimeHelper::getNextBirthday($startDate, 'F d, Y');
+        $this->stats['project_daysto_birthday'] = ltrim(DateTimeHelper::getDaysBetweenDates(date('r'), $this->stats['project_birthday']), '+');
         $this->stats['project_age_at_birthday'] = DateTimeHelper::getYearsBetweenDates($startDate, $this->stats['project_birthday']);
     }
 
     /**
-     * ArrayAccess
+     * ArrayAccess.
+     *
+     * @param mixed $offset
+     * @param mixed $value
      */
-    function offsetSet($offset, $value) {
-        if (is_null($offset)) {
+    public function offsetSet($offset, $value)
+    {
+        if (null === $offset) {
             $this->stats[] = $value;
         } else {
             $this->stats[$offset] = $value;
         }
     }
-    function offsetExists($offset) {
+
+    public function offsetExists($offset)
+    {
         return isset($this->stats[$offset]);
     }
-    function offsetUnset($offset) {
+
+    public function offsetUnset($offset)
+    {
         unset($this->stats[$offset]);
     }
-    function offsetGet($offset) {
+
+    public function offsetGet($offset)
+    {
         return isset($this->stats[$offset]) ? $this->stats[$offset] : null;
     }
 }
@@ -215,14 +234,18 @@ class DateTimeHelper
     public static function formatGithubDate($githubDate)
     {
         $date = DateTime::createFromFormat('Y-m-d\TH:i:s\Z', $githubDate);
+
         return $date->format('Y-m-d');
     }
 
     public static function usort_helper_sort_by_utc_time($a, $b)
     {
-        $adate = date_create_from_format("Y-m-d", $a);
-        $bdate = date_create_from_format("Y-m-d", $b);
-        if ($adate === $bdate) { return 0; }
+        $adate = date_create_from_format('Y-m-d', $a);
+        $bdate = date_create_from_format('Y-m-d', $b);
+        if ($adate === $bdate) {
+            return 0;
+        }
+
         return ($adate < $bdate) ? -1 : 1;
     }
 
@@ -231,6 +254,7 @@ class DateTimeHelper
         $datetime1 = new DateTime($date1);
         $datetime2 = new DateTime($date2);
         $interval = $datetime1->diff($datetime2);
+
         return $interval->format($intervalFormat);
     }
 
@@ -241,114 +265,118 @@ class DateTimeHelper
 
     public static function getYearsBetweenDates($date1, $date2)
     {
-        return self::getInterval($date1, $date2, '%y years');       
+        return self::getInterval($date1, $date2, '%y years');
     }
 
-    /** 
+    /**
      * Format a date difference interval.
-     * Uses the two biggest interval parts automatically. 
-     * 
-     * @param DateTime $start 
-     * @param DateTime|null $end 
-     * @return string 
-     */ 
+     * Uses the two biggest interval parts automatically.
+     *
+     * @param DateTime      $start
+     * @param null|DateTime $end
+     *
+     * @return string
+     */
     public static function formatDateDiff($start, $end = null)
-    { 
-        if(!($start instanceof DateTime)) { 
-            $start = new DateTime($start); 
-        } 
-        
-        if($end === null) { 
-            $end = new DateTime(); 
-        } 
-        
-        if(!($end instanceof DateTime)) { 
-            $end = new DateTime($start); 
-        } 
-        
-        $interval = $end->diff($start); 
-        $usePlural = function($nb,$str) {
-            return $nb > 1 ? $str . 's' : $str;
+    {
+        if (!($start instanceof DateTime)) {
+            $start = new DateTime($start);
+        }
+
+        if (null === $end) {
+            $end = new DateTime();
+        }
+
+        if (!($end instanceof DateTime)) {
+            $end = new DateTime($start);
+        }
+
+        $interval = $end->diff($start);
+        $usePlural = function ($nb, $str) {
+            return $nb > 1 ? $str.'s' : $str;
         };
-        
-        $format = array(); 
-        if($interval->y !== 0) { 
-            $format[] = '%y ' . $usePlural($interval->y, 'year'); 
-        } 
-        if($interval->m !== 0) { 
-            $format[] = '%m ' . $usePlural($interval->m, 'month'); 
-        } 
-        if($interval->d !== 0) { 
-            $format[] = '%d ' . $usePlural($interval->d, 'day'); 
-        } 
-        if($interval->h !== 0) { 
-            $format[] = '%h ' . $usePlural($interval->h, 'hour'); 
-        } 
-        if($interval->i !== 0) { 
-            $format[] = '%i ' . $usePlural($interval->i, 'minute'); 
-        } 
-        if($interval->s !== 0) { 
-            if(!count($format)) { 
-                return 'less than a minute ago'; 
-            } else { 
-                $format[] = '%s ' . $usePlural($interval->s, 'second'); 
-            } 
-        } 
-        
-        // use the two biggest parts 
-        if(count($format) > 1) { 
-            $format = array_shift($format) . ' and ' . array_shift($format); 
-        } else { 
-            $format = array_pop($format); 
-        } 
-        
-        return $interval->format($format); 
-    } 
+
+        $format = [];
+        if (0 !== $interval->y) {
+            $format[] = '%y '.$usePlural($interval->y, 'year');
+        }
+        if (0 !== $interval->m) {
+            $format[] = '%m '.$usePlural($interval->m, 'month');
+        }
+        if (0 !== $interval->d) {
+            $format[] = '%d '.$usePlural($interval->d, 'day');
+        }
+        if (0 !== $interval->h) {
+            $format[] = '%h '.$usePlural($interval->h, 'hour');
+        }
+        if (0 !== $interval->i) {
+            $format[] = '%i '.$usePlural($interval->i, 'minute');
+        }
+        if (0 !== $interval->s) {
+            if (!count($format)) {
+                return 'less than a minute ago';
+            }
+            $format[] = '%s '.$usePlural($interval->s, 'second');
+        }
+
+        // use the two biggest parts
+        if (count($format) > 1) {
+            $format = array_shift($format).' and '.array_shift($format);
+        } else {
+            $format = array_pop($format);
+        }
+
+        return $interval->format($format);
+    }
 
     /**
      * Get next birthday.
      *
      * @param birthday
      * @param DateTime format, e.g. 'd.m.Y'. Returns DateTime object, when false.
-     * @return string|object Formatted date or DateTime object.
+     * @param mixed $birthday
+     * @param mixed $format
+     *
+     * @return object|string formatted date or DateTime object
      */
     public static function getNextBirthday($birthday, $format = 'Y-m-d')
     {
         $date = new DateTime($birthday);
-        $date->modify('+' . date('Y') - $date->format('Y') . ' years');
-        if($date < new DateTime()) {
+        $date->modify('+'.date('Y') - $date->format('Y').' years');
+        if ($date < new DateTime()) {
             $date->modify('+1 year');
         }
-        if($format === false) {
+        if (false === $format) {
             return $date;
-        }       
+        }
+
         return $date->format($format);
     }
 }
 
 class GithubReleaseStatsHelpers
 {
-    static function fix_version_name($tag_name)
+    public static function fix_version_name($tag_name)
     {
-        return ($tag_name === '0.7.0' || $tag_name === '0.2.0') ? ('v'. $tag_name) : $tag_name;
+        return ('0.7.0' === $tag_name || '0.2.0' === $tag_name) ? ('v'.$tag_name) : $tag_name;
     }
 }
 
 class StatsTable
 {
-    static function render($table_id, $array)
+    public static function render($table_id, $array)
     {
-        $html = '<table id="' . $table_id . '" class="table table-bordered table-condensed table-hover">';
+        $html = '<table id="'.$table_id.'" class="table table-bordered table-condensed table-hover">';
         //$html .= '<caption>'.ucwords(str_replace('-', ' ', $table_id)).'</caption>';
         $html .= '<thead><tr>';
-        foreach($array as $key => $value) {
-            $html .= '<th scope="col">' . $key . '</th>';
+        foreach ($array as $key => $value) {
+            $html .= '<th scope="col">'.$key.'</th>';
         }
         $html .= '</tr></thead>';
 
         $html .= '<tbody><tr>';
-        foreach($array as $key => $value) {
-            $html .= '<td>' . $value . '</td>';
+        foreach ($array as $key => $value) {
+            $html .= '<td>'.$value.'</td>';
         }
         $html .= '</tr></tbody>';
 
@@ -357,26 +385,25 @@ class StatsTable
         return $html;
     }
 
-    static function renderMatrix($table_id, $array)
+    public static function renderMatrix($table_id, $array)
     {
         $php_versions = array_keys($array['v0.8.6']);
 
-        $html = '<table id="' . $table_id . '" class="table table-bordered table-hover table-condensed">';
+        $html = '<table id="'.$table_id.'" class="table table-bordered table-hover table-condensed">';
 
-        $html .= '<thead><tr><th>Installer Version</th>';#<th>Total Downloads</th>
-        foreach($php_versions as $phpversion) {
-            $html .= '<th>' . $phpversion . '</th>';
+        $html .= '<thead><tr><th>Installer Version</th>'; //<th>Total Downloads</th>
+        foreach ($php_versions as $phpversion) {
+            $html .= '<th>'.$phpversion.'</th>';
         }
         $html .= '</tr></thead>';
         $html .= '<tbody>';
 
-        foreach($array as $key => $values)
-        {
+        foreach ($array as $key => $values) {
             // possible array_sum($values) to display total downloads per version
             $html .= '<tr>';
-            $html .= '<th>' . $key . '</th>';
-            foreach($values as $php => $dls) {
-                $html .= '<td>' . $dls . '</td>';
+            $html .= '<th>'.$key.'</th>';
+            foreach ($values as $php => $dls) {
+                $html .= '<td>'.$dls.'</td>';
             }
             $html .= '</tr>';
         }
@@ -391,10 +418,11 @@ class HighchartHelper
     public static function render_json_for_phpversions_piechart($dls_per_phpversion)
     {
         $html = '';
-        foreach($dls_per_phpversion as $version => $downloads) {
-            $html .= "{name: \"$version\", y: $downloads},";
+        foreach ($dls_per_phpversion as $version => $downloads) {
+            $html .= "{name: \"${version}\", y: ${downloads}},";
         }
-        return $html . PHP_EOL;
+
+        return $html.PHP_EOL;
     }
 
     public static function render_json_for_serverstack_downloads_comparison_chart()
@@ -403,15 +431,13 @@ class HighchartHelper
     }
 }
 
-/**
- * ---------- cut here ----------
- */
+// ---------- cut here ----------
 define('RENDER_WPNXM_PAGE_TITLE', 'WPN-XM - Project Statistics');
 define('RENDER_WPNXM_HEADER_LOGO', true);
-require_once __DIR__ . '/view/header.php';
-require_once __DIR__ . '/view/topnav.php';
-require_once __DIR__ . '/src/DownloadsGetServerStacks.php';
-$sf = new DownloadsGetServerStacks;
+require_once __DIR__.'/view/header.php';
+require_once __DIR__.'/view/topnav.php';
+require_once __DIR__.'/src/DownloadsGetServerStacks.php';
+$sf = new DownloadsGetServerStacks();
 $sf->fetch();
 $s = new GithubReleaseStats();
 ?>
@@ -420,15 +446,19 @@ $s = new GithubReleaseStats();
     <div class="panel-heading"><h4>Project Statistics</h4></div>
     <table class="table table-bordered table-condensed">
         <tr>
-            <td>The project was started on <?=$s['project_started_date']?>. That was <?=$s['project_age']?> ago.</td>
+            <td>The project was started on <?php echo $s['project_started_date']; ?>. That was <?php echo $s['project_age']; ?> ago.</td>
         </tr>
         <tr>
             <td>
-            <?php if($s['project_daysto_birthday'] === '0 days') { ?>
-                <h3 style="text-align:center">Hooray! It's my birthday. I just turned <?=$s['project_age_at_birthday']?>.<img src="images/birthday.jpg"/></h3>
-            <?php } else { ?>
-                The project will turn <?=$s['project_age_at_birthday']?> old on <?=$s['project_birthday']?>. That's in <?=$s['project_daysto_birthday']?>.
-            <?php } ?> 
+            <?php if ('0 days' === $s['project_daysto_birthday']) {
+    ?>
+                <h3 style="text-align:center">Hooray! It's my birthday. I just turned <?php echo $s['project_age_at_birthday']; ?>.<img src="images/birthday.jpg"/></h3>
+            <?php
+} else {
+        ?>
+                The project will turn <?php echo $s['project_age_at_birthday']; ?> old on <?php echo $s['project_birthday']; ?>. That's in <?php echo $s['project_daysto_birthday']; ?>.
+            <?php
+    } ?> 
             </td>      
         </tr>
     </table>
@@ -439,35 +469,35 @@ $s = new GithubReleaseStats();
     <table class="table table-bordered table-condensed">
         <tr>
             <td>Number of Releases</td>
-            <td><?=$s['total_releases']?></td>
+            <td><?php echo $s['total_releases']; ?></td>
         </tr>
         <tr>
             <td>Number of Released Installers</td>
-            <td><?=$s['total_installers_released']?></td>
+            <td><?php echo $s['total_installers_released']; ?></td>
         </tr>
         <tr>
             <td>Number of Installers Released by Installer Version</td>
-            <td><?=StatsTable::render('installers-released-per-version-datatable', $s['installers_released_per_version'])?></td>
+            <td><?php echo StatsTable::render('installers-released-per-version-datatable', $s['installers_released_per_version']); ?></td>
         </tr>
         <tr>
             <td>Total number of Downloads</td>
-            <td><strong><?=$s['total_downloads']?></strong></td>
+            <td><strong><?php echo $s['total_downloads']; ?></strong></td>
         </tr>
         <tr>
             <td>Total Downloads by PHP Version</td>
-            <td><?=StatsTable::render('total-downloads-per-phpversion', $s['downloads_by_php_version'])?></td>
+            <td><?php echo StatsTable::render('total-downloads-per-phpversion', $s['downloads_by_php_version']); ?></td>
         </tr>
         <tr>
             <td>Total Downloads by Installer Version</td>
-            <td><?=StatsTable::render('total-downloads-by-installer-version', $s['downloads_by_installer_version'])?></td>
+            <td><?php echo StatsTable::render('total-downloads-by-installer-version', $s['downloads_by_installer_version']); ?></td>
         </tr>
         <tr>
             <td>Number of Installer Downloads by PHP Version</td>
-            <td><?=StatsTable::renderMatrix('downloads-by-installer-and-php-version', $s['downloads_per_installer_version']);?></td>
+            <td><?php echo StatsTable::renderMatrix('downloads-by-installer-and-php-version', $s['downloads_per_installer_version']); ?></td>
         </tr>
         <tr>
             <td>Release Dates and Development times</td>
-            <td><?=StatsTable::renderMatrix('release-dates-and-dev-times', $s['release_dates_and_development_time']);?></td>
+            <td><?php echo StatsTable::renderMatrix('release-dates-and-dev-times', $s['release_dates_and_development_time']); ?></td>
         </tr>
     </table>
 </div> <!-- close panel -->
@@ -497,8 +527,8 @@ $s = new GithubReleaseStats();
 </div>
 
 <?php
-require __DIR__ . '/view/footer_scripts.php';
-require __DIR__ . '/view/highchart_scripts.php';
+require __DIR__.'/view/footer_scripts.php';
+require __DIR__.'/view/highchart_scripts.php';
 ?>
 
 </div><!-- container -->
