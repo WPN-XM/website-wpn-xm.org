@@ -65,7 +65,7 @@ class GithubDownloadStatsDatabase
 
     public function insertDownload($assetname, $downloads)
     {
-        $query = "INSERT INTO downloads (date, assetname, downloads)
+        $query = "INSERT INTO daily_downloads (date, assetname, downloads)
           VALUES ((strftime('%Y-%m-%d','now','localtime')), :assetname, :downloads)";
 
         $stmt = $this->db->prepare($query);
