@@ -59,7 +59,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_phalcon&p=5.4');
 
         $this->assertRegExp(
-            '#https://static.phalconphp.com/www/files/phalcon_x86_VC9_php5.4.0_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
+            '#https://static.phalconphp.com/www/files/phalcon_x64_VC9_php5.4.0_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
             $this->response->url
         );
     }
@@ -69,7 +69,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_phalcon&p=5.4.0');
 
         $this->assertRegExp(
-            '#https://static.phalconphp.com/www/files/phalcon_x86_VC9_php5.4.0_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
+            '#https://static.phalconphp.com/www/files/phalcon_x64_VC9_php5.4.0_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
             $this->response->url
         );
     }
@@ -79,7 +79,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_phalcon&p=5.5');
 
         $this->assertRegExp(
-            '#https://static.phalconphp.com/www/files/phalcon_x86_vc11_php5.5.0_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
+            '#https://static.phalconphp.com/www/files/phalcon_x64_vc11_php5.5.0_(\d+\.\d+\.\d+(.RC\d+)?)_nts.zip#i',
             $this->response->url
         );
     }
@@ -112,7 +112,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php-qa&v=7.0.1RC1');
 
         $this->assertEquals(
-            'http://windows.php.net/downloads/qa/archives/php-7.0.1RC1-nts-Win32-VC14-x86.zip',
+            'http://windows.php.net/downloads/qa/archives/php-7.0.1RC1-nts-Win32-VC14-x64.zip',
             $this->response->url
         );
     }
@@ -123,7 +123,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=php-qa&p=5.6');
 
         $this->assertEquals(
-            'http://windows.php.net/downloads/qa/archives/php-5.6.11RC1-nts-Win32-VC11-x86.zip',
+            'http://windows.php.net/downloads/qa/archives/php-5.6.11RC1-nts-Win32-VC11-x64.zip',
             $this->response->url
         );
     }
@@ -133,7 +133,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_trader&p=5.6');
 
         $this->assertEquals(
-            'http://windows.php.net/downloads/pecl/releases/trader/0.4.0/php_trader-0.4.0-5.6-nts-vc11-x86.zip',
+            'http://windows.php.net/downloads/pecl/releases/trader/0.4.0/php_trader-0.4.0-5.6-nts-vc11-x64.zip',
             $this->response->url
         );
     }
@@ -196,7 +196,7 @@ class GetTest extends TestCase
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_xdebug&p=99');
 
         $this->assertContains("http://windows.php.net/downloads/pecl/releases/xdebug/", $this->response->url);
-        $this->assertEquals(1, preg_match('#php_xdebug-(.*)-5.6-nts-VC11-x86.zip#i', $this->response->url));
+        $this->assertEquals(1, preg_match('#php_xdebug-(.*)-5.6-nts-VC11-x64.zip#i', $this->response->url));
         $this->assertContains("5.6", $this->response->url);
     }
 
@@ -204,8 +204,8 @@ class GetTest extends TestCase
     {
         $this->setGetRequest('http://wpn-xm.org/get.php?s=phpext_ice&p=5.6');
 
-        $this->assertContains("http://www.iceframework.org/dll/ice-1.1.2-php-5.6-nts-vc11-x86.zip", $this->response->url);
-        $this->assertEquals(1, preg_match('#ice-(.*)-5.6-nts-VC11-x86.zip#i', $this->response->url));
+        $this->assertContains("http://www.iceframework.org/dll/ice-1.1.2-php-5.6-nts-vc11-x64.zip", $this->response->url);
+        $this->assertEquals(1, preg_match('#ice-(.*)-5.6-nts-VC11-x64.zip#i', $this->response->url));
         $this->assertContains("5.6", $this->response->url);
     }
 
