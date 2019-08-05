@@ -80,9 +80,9 @@ echo render_header();
                     <p>
                         You might also discuss WPN-XM or PHP related issues in our community forums.
                     </p>
-                    <p>
-                        <a href="https://forum.wpn-xm.org/" class="btn btn-default button-link" target="_blank" role="button">
-                            <i class="fa fa-comments"></i>&nbsp;&nbsp;Community Forums</a>
+                    <p>                        
+                        <a href="https://www.youtube.com/watch?v=W8_Kfjo3VjU" class="btn btn-default button-link" target="_blank" role="button">
+                            <i class="fa fa-comments"></i>&nbsp;&nbsp;Community Forums (or maybe not =)</a>
                     </p>
                 </div>
             </div>
