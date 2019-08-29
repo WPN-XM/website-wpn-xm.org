@@ -1,7 +1,7 @@
 #
 # .travis.yml - configuration file for the travis continuous integration service
 #
-# see http://about.travis-ci.org/docs/user/languages/php for more hints
+# see https://docs.travis-ci.com/user/languages/php for more hints
 #
 language: php
 
