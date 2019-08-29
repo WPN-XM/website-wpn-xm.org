@@ -30,4 +30,4 @@ notifications:
     skip_join: true
 
 git:
-  depth: 10
+  depth: 2
