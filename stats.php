@@ -342,7 +342,8 @@ class DateTimeHelper
     public static function getNextBirthday($birthday, $format = 'Y-m-d')
     {
         $date = new DateTime($birthday);
-        $date->modify('+'.date('Y') - $date->format('Y').' years');
+        $years = date('Y') - $date->format('Y');
+        $date->modify('+'.$years.' years');
         if ($date < new DateTime()) {
             $date->modify('+1 year');
         }
