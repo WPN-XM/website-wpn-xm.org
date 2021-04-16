@@ -14,6 +14,9 @@ sudo: false
 cache:
   directory:
     - $HOME/.composer/cache/files
+    
+before_script:
+  - echo 'xdebug.mode = coverage' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 script:
   # lint (parallel)
